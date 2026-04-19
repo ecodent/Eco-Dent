@@ -104,16 +104,21 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
   // Carousel offsets for side-peeking cards
   const offsets = [-1, 0, 1];
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => {
+      const w = window.innerWidth;
+      setIsMobile(w < 768);
+      setIsTablet(w >= 768 && w < 1280);
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const CARD_W = isMobile ? 90 : 60; // vw for center card
-  const SIDE_W = isMobile ? 0 : 18; // vw for side peek cards
+  const CARD_W = isMobile ? 90 : isTablet ? 65 : 60; // vw for center card
+  const SIDE_W = isMobile ? 0 : isTablet ? 14 : 18; // vw for side peek cards
   const SIDE_GAP = isMobile ? 0 : 1.5; // vw
 
   if (total === 0) return null;
@@ -123,12 +128,13 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
       style={{
         position: "relative",
         zIndex: 10,
-        minHeight: isMobile ? "500px" : "800px",
+        minHeight: isMobile ? "560px" : "800px",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#F8F8F8",
-        overflow: "hidden",
+        overflow: isMobile ? "visible" : "hidden",
+        paddingBottom: isMobile ? "70px" : "0",
       }}
     >
       {/* Header */}
@@ -286,7 +292,7 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
           // Center card — with before/after slider
           return (
             <div
-              key="center"
+              key={`center-${idx}`}
               ref={containerRef}
               style={{
                 position: "relative",
@@ -424,8 +430,10 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
           onClick={next}
           style={{
             position: "absolute",
-            top: "12px",
-            right: `calc(${SIDE_W + SIDE_GAP}vw - 60px)`,
+            top: isMobile ? "auto" : "12px",
+            bottom: isMobile ? "-50px" : "auto",
+            right: isMobile ? "auto" : `calc(${SIDE_W + SIDE_GAP}vw - 60px)`,
+            left: isMobile ? "calc(50% + 8px)" : "auto",
             width: "52px",
             height: "52px",
             borderRadius: "50%",
@@ -466,8 +474,9 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
           onClick={prev}
           style={{
             position: "absolute",
-            bottom: "52px",
-            left: `calc(${SIDE_W + SIDE_GAP}vw - 56px)`,
+            bottom: isMobile ? "-48px" : "52px",
+            left: isMobile ? "auto" : `calc(${SIDE_W + SIDE_GAP}vw - 56px)`,
+            right: isMobile ? "calc(50% + 8px)" : "auto",
             width: "48px",
             height: "48px",
             borderRadius: "50%",

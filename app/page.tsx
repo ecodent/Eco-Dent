@@ -163,24 +163,22 @@ export default async function Home() {
       <div className="relative flex flex-col lg:block lg:min-h-screen">
         {/* Hero Image — behind navbar on desktop */}
         <div
-          className="relative lg:absolute w-full lg:w-[55%] h-[50vh] md:h-[60vh] lg:h-[calc(100vh-16px)] order-2 lg:order-none"
+          className="relative lg:absolute w-full lg:w-[50%] xl:w-[55%] h-[50vh] md:h-[60vh] lg:h-[calc(100vh-16px)] order-2 lg:order-none lg:right-[16px] lg:top-[8px]"
           style={{
-            right: "16px",
-            top: "8px",
             zIndex: 1,
           }}
         >
-          <div className="relative w-full h-full overflow-hidden rounded-[20px] lg:rounded-[40px]">
+          <div className="relative w-full h-full overflow-hidden rounded-none lg:rounded-[40px]">
             <HeroSlider images={heroImageUrls} />
 
             {/* Stats Cards */}
             <div
               className="absolute flex-col sm:flex-row hidden md:flex"
               style={{
-                bottom: "32px",
-                left: "32px",
-                right: "32px",
-                gap: "12px",
+                bottom: "24px",
+                left: "24px",
+                right: "24px",
+                gap: "10px",
               }}
             >
               {/* 100% Card */}
@@ -328,19 +326,17 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* Sticky Navbar — on top of hero image */}
-        <div className="relative order-first" style={{ zIndex: 50 }}>
-          <Navbar />
-        </div>
+        {/* Fixed Navbar — on top of hero image */}
+        <Navbar />
 
         {/* Left Content */}
         <main
           className="relative z-10 section-px order-1 lg:order-none"
-          style={{ paddingTop: "40px", paddingBottom: "40px" }}
+          style={{ paddingTop: "100px", paddingBottom: "40px" }}
         >
           <div className="max-w-[480px]">
             <h1
-              className="text-[36px] sm:text-[48px] lg:text-[64px]"
+              className="text-[36px] sm:text-[48px] lg:text-[52px] xl:text-[64px]"
               style={{
                 lineHeight: 1.05,
                 fontWeight: 300,
@@ -398,7 +394,7 @@ export default async function Home() {
 
             {/* Partners */}
             <div
-              className="hidden lg:flex items-center"
+              className="hidden xl:flex items-center"
               style={{ marginTop: "100px", gap: "36px", opacity: 0.4 }}
             >
               {partners.map((partner) => (
@@ -560,7 +556,7 @@ export default async function Home() {
                   </p>
                 </div>
                 <div
-                  className="min-h-[280px] sm:min-h-[240px]"
+                  className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
                   style={{
                     flex: 1,
                     position: "relative",
@@ -613,7 +609,7 @@ export default async function Home() {
                   </p>
                 </div>
                 <div
-                  className="min-h-[280px] sm:min-h-[240px]"
+                  className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
                   style={{
                     flex: 1,
                     position: "relative",
@@ -649,7 +645,7 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                className="min-h-[280px] sm:min-h-[240px]"
+                className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
                 style={{ flex: 1, position: "relative" }}
               >
                 <Image
@@ -719,7 +715,7 @@ export default async function Home() {
                 </p>
               </div>
               <div
-                className="min-h-[280px] sm:min-h-[240px]"
+                className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
                 style={{
                   flex: 1,
                   position: "relative",
@@ -751,7 +747,7 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                className="min-h-[280px] sm:min-h-[240px]"
+                className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
                 style={{ flex: 1, position: "relative" }}
               >
                 <Image
@@ -800,7 +796,7 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                className="min-h-[280px] sm:min-h-[240px]"
+                className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
                 style={{ flex: 1, position: "relative" }}
               >
                 <Image

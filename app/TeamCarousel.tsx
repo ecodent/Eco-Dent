@@ -15,22 +15,27 @@ interface TeamCarouselProps {
 
 // Card sizing — responsive
 const CARD_W_DESKTOP = 20; // vw per card
-const CARD_W_MOBILE = 70; // vw on mobile
+const CARD_W_MOBILE = 75; // vw on mobile
 const GAP = 1.5; // vw gap between cards
 
 export default function TeamCarousel({ doctors }: TeamCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const total = doctors.length;
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => {
+      const w = window.innerWidth;
+      setIsMobile(w < 768);
+      setIsTablet(w >= 768 && w < 1280);
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const CARD_W = isMobile ? CARD_W_MOBILE : CARD_W_DESKTOP;
+  const CARD_W = isMobile ? CARD_W_MOBILE : isTablet ? 25 : CARD_W_DESKTOP;
   const STEP = CARD_W + GAP;
 
   const goTo = useCallback(
@@ -51,7 +56,7 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
     return () => clearInterval(timer);
   }, [currentIndex, total]);
 
-  const offsets = isMobile ? [-1, 0, 1] : [-2, -1, 0, 1, 2];
+  const offsets = isMobile ? [-1, 0, 1] : isTablet ? [-1, 0, 1] : [-2, -1, 0, 1, 2];
 
   if (total === 0) return null;
 
@@ -60,7 +65,7 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
       style={{
         position: "relative",
         zIndex: 10,
-        minHeight: isMobile ? "500px" : "800px",
+        minHeight: isMobile ? "750px" : "800px",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
@@ -117,11 +122,11 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
         style={{
           flex: 1,
           position: "relative",
-          marginTop: "48px",
+          marginTop: isMobile ? "24px" : "48px",
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "center",
-          paddingBottom: "100px", // room for dots + name
+          paddingBottom: isMobile ? "120px" : "100px", // room for dots + buttons
         }}
       >
         {offsets.map((offset) => {
@@ -148,13 +153,17 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
               style={{
                 position: "absolute",
                 left: `${leftPercent}vw`,
-                bottom: "100px",
+                bottom: isMobile ? "120px" : "100px",
                 width: `${CARD_W}vw`,
-                height: isCenter
-                  ? "calc(100% - 30px)"
-                  : isNear
-                    ? "calc(100% - 70px)"
-                    : "calc(100% - 110px)",
+                height: isMobile
+                  ? isCenter
+                    ? "380px"
+                    : "340px"
+                  : isCenter
+                    ? "calc(100% - 30px)"
+                    : isNear
+                      ? "calc(100% - 70px)"
+                      : "calc(100% - 110px)",
                 transform: `scale(${scale})`,
                 opacity,
                 zIndex,
@@ -231,11 +240,12 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
           onClick={prev}
           style={{
             position: "absolute",
-            left: isMobile ? "12px" : "72px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: isMobile ? "40px" : "56px",
-            height: isMobile ? "40px" : "56px",
+            left: isMobile ? "calc(50% - 60px)" : "72px",
+            top: isMobile ? "auto" : "50%",
+            bottom: isMobile ? "50px" : "auto",
+            transform: isMobile ? "none" : "translateY(-50%)",
+            width: isMobile ? "48px" : "56px",
+            height: isMobile ? "48px" : "56px",
             borderRadius: "50%",
             backgroundColor: "rgba(255,255,255,0.95)",
             border: "none",
@@ -248,10 +258,14 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
             transition: "transform 0.2s, box-shadow 0.2s",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "translateY(-50%) scale(1.08)";
+            e.currentTarget.style.transform = isMobile
+              ? "scale(1.08)"
+              : "translateY(-50%) scale(1.08)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "translateY(-50%) scale(1)";
+            e.currentTarget.style.transform = isMobile
+              ? "none"
+              : "translateY(-50%) scale(1)";
           }}
           aria-label="Previous doctor"
         >
@@ -272,11 +286,13 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
           onClick={next}
           style={{
             position: "absolute",
-            right: isMobile ? "12px" : "72px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: isMobile ? "40px" : "56px",
-            height: isMobile ? "40px" : "56px",
+            right: isMobile ? "auto" : "72px",
+            left: isMobile ? "calc(50% + 12px)" : "auto",
+            top: isMobile ? "auto" : "50%",
+            bottom: isMobile ? "50px" : "auto",
+            transform: isMobile ? "none" : "translateY(-50%)",
+            width: isMobile ? "48px" : "56px",
+            height: isMobile ? "48px" : "56px",
             borderRadius: "50%",
             backgroundColor: "rgba(255,255,255,0.95)",
             border: "none",
@@ -289,10 +305,14 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
             transition: "transform 0.2s, box-shadow 0.2s",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "translateY(-50%) scale(1.08)";
+            e.currentTarget.style.transform = isMobile
+              ? "scale(1.08)"
+              : "translateY(-50%) scale(1.08)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "translateY(-50%) scale(1)";
+            e.currentTarget.style.transform = isMobile
+              ? "none"
+              : "translateY(-50%) scale(1)";
           }}
           aria-label="Next doctor"
         >
@@ -315,7 +335,7 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
       <div
         style={{
           position: "absolute",
-          bottom: "40px",
+          bottom: isMobile ? "16px" : "40px",
           left: "50%",
           transform: "translateX(-50%)",
           display: "flex",

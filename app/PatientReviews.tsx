@@ -53,16 +53,21 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
   const total = reviews.length;
 
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => {
+      const w = window.innerWidth;
+      setIsMobile(w < 768);
+      setIsTablet(w >= 768 && w < 1280);
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const CARD_W = isMobile ? 90 : 60;
-  const SIDE_W = isMobile ? 0 : 18;
+  const CARD_W = isMobile ? 90 : isTablet ? 65 : 60;
+  const SIDE_W = isMobile ? 0 : isTablet ? 14 : 18;
   const SIDE_GAP = isMobile ? 0 : 1.5;
 
   const goTo = useCallback(
@@ -97,7 +102,8 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#F8F8F8",
-        overflow: "hidden",
+        overflow: isMobile ? "visible" : "hidden",
+        paddingBottom: isMobile ? "70px" : "0",
       }}
     >
       {/* Header */}
@@ -526,10 +532,12 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
           onClick={prev}
           style={{
             position: "absolute",
-            top: "12px",
-            left: isMobile ? "12px" : `calc(${SIDE_W + SIDE_GAP}vw - 56px)`,
-            width: isMobile ? "40px" : "48px",
-            height: isMobile ? "40px" : "48px",
+            top: isMobile ? "auto" : "12px",
+            bottom: isMobile ? "-50px" : "auto",
+            left: isMobile ? "auto" : `calc(${SIDE_W + SIDE_GAP}vw - 56px)`,
+            right: isMobile ? "calc(50% + 8px)" : "auto",
+            width: "48px",
+            height: "48px",
             borderRadius: "50%",
             backgroundColor: "rgba(255,255,255,0.9)",
             border: "1px solid #E5E7EB",
@@ -569,10 +577,12 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
           onClick={next}
           style={{
             position: "absolute",
-            bottom: "52px",
-            right: isMobile ? "12px" : `calc(${SIDE_W + SIDE_GAP}vw - 60px)`,
-            width: isMobile ? "44px" : "52px",
-            height: isMobile ? "44px" : "52px",
+            top: isMobile ? "auto" : "auto",
+            bottom: isMobile ? "-50px" : "52px",
+            right: isMobile ? "auto" : `calc(${SIDE_W + SIDE_GAP}vw - 60px)`,
+            left: isMobile ? "calc(50% + 8px)" : "auto",
+            width: "52px",
+            height: "52px",
             borderRadius: "50%",
             backgroundColor: "#0168FF",
             border: "none",

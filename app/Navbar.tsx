@@ -45,8 +45,10 @@ export default function Navbar() {
         style={{
           paddingTop: "20px",
           paddingBottom: "20px",
-          position: "sticky",
+          position: "fixed",
           top: 0,
+          left: 0,
+          right: 0,
           zIndex: 50,
           backgroundColor: scrolled ? "#F8F8F8" : "transparent",
           boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.06)" : "none",
@@ -65,7 +67,7 @@ export default function Navbar() {
 
         <div
           className="hidden md:flex items-center"
-          style={{ gap: "40px", marginLeft: "64px" }}
+          style={{ gap: "28px", marginLeft: "40px" }}
         >
           <a
             href="#"
@@ -199,7 +201,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden flex items-center justify-center"
+          className="md:hidden flex items-center justify-center"
           onClick={() => setMenuOpen(true)}
           style={{
             width: "44px",

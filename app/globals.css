@@ -40,8 +40,15 @@ body {
   .section-py { padding-top: 64px; padding-bottom: 64px; }
 }
 @media (min-width: 1024px) {
-  .section-px { padding-left: 72px; padding-right: 72px; }
+  .section-px { padding-left: 56px; padding-right: 56px; }
   .section-py { padding-top: 72px; padding-bottom: 72px; }
+}
+@media (min-width: 1280px) {
+  .section-px { padding-left: 72px; padding-right: 72px; }
+}
+@media (min-width: 1440px) {
+  .section-px { padding-left: 96px; padding-right: 96px; }
+  .section-py { padding-top: 88px; padding-bottom: 88px; }
 }
 
 /* Hide on mobile, show on tablet+ */
