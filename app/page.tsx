@@ -159,14 +159,16 @@ export default async function Home() {
 
   return (
     <div style={{ backgroundColor: "#F8F8F8" }}>
-      {/* Sticky Navbar */}
-      <Navbar />
-
       {/* Hero Section — full viewport */}
       <div className="relative flex flex-col lg:block lg:min-h-screen">
-        {/* Hero Image */}
+        {/* Hero Image — behind navbar on desktop */}
         <div
-          className="relative lg:absolute w-full lg:w-[55%] h-[50vh] md:h-[60vh] lg:h-[calc(100vh-32px)] order-2 lg:order-none lg:right-[16px] lg:top-[16px]"
+          className="relative lg:absolute w-full lg:w-[55%] h-[50vh] md:h-[60vh] lg:h-[calc(100vh-16px)] order-2 lg:order-none"
+          style={{
+            right: "16px",
+            top: "8px",
+            zIndex: 1,
+          }}
         >
           <div className="relative w-full h-full overflow-hidden rounded-[20px] lg:rounded-[40px]">
             <HeroSlider images={heroImageUrls} />
@@ -324,6 +326,11 @@ export default async function Home() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Sticky Navbar — on top of hero image */}
+        <div className="relative order-first" style={{ zIndex: 50 }}>
+          <Navbar />
         </div>
 
         {/* Left Content */}
