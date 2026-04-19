@@ -163,16 +163,10 @@ export default async function Home() {
       <Navbar />
 
       {/* Hero Section — full viewport */}
-      <div
-        className="relative flex flex-col lg:block lg:min-h-screen"
-      >
+      <div className="relative flex flex-col lg:block lg:min-h-screen">
         {/* Hero Image */}
         <div
-          className="relative lg:absolute w-full lg:w-[55%] h-[50vh] md:h-[60vh] lg:h-[calc(100vh-32px)] order-2 lg:order-none"
-          style={{
-            right: "16px",
-            top: "0px",
-          }}
+          className="relative lg:absolute w-full lg:w-[55%] h-[50vh] md:h-[60vh] lg:h-[calc(100vh-32px)] order-2 lg:order-none lg:right-[16px] lg:top-[16px]"
         >
           <div className="relative w-full h-full overflow-hidden rounded-[20px] lg:rounded-[40px]">
             <HeroSlider images={heroImageUrls} />
@@ -633,9 +627,7 @@ export default async function Home() {
           </div>
 
           {/* ===== RIGHT COLUMN: 4 Service Cards (2x2, equal rows) ===== */}
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Teeth Whitening — top left, dark */}
             <Link
               href="/services/teeth-whitening"
