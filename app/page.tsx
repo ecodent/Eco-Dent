@@ -560,7 +560,7 @@ export default async function Home() {
                   </p>
                 </div>
                 <div
-                  className="min-h-[180px] sm:min-h-[100px]"
+                  className="min-h-[200px] sm:min-h-[160px]"
                   style={{
                     flex: 1,
                     position: "relative",
@@ -613,7 +613,7 @@ export default async function Home() {
                   </p>
                 </div>
                 <div
-                  className="min-h-[180px] sm:min-h-[100px]"
+                  className="min-h-[200px] sm:min-h-[160px]"
                   style={{
                     flex: 1,
                     position: "relative",
@@ -649,7 +649,7 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                className="min-h-[200px] sm:min-h-[140px]"
+                className="min-h-[200px] sm:min-h-[180px]"
                 style={{ flex: 1, position: "relative" }}
               >
                 <Image
@@ -719,7 +719,7 @@ export default async function Home() {
                 </p>
               </div>
               <div
-                className="min-h-[200px] sm:min-h-[140px]"
+                className="min-h-[200px] sm:min-h-[180px]"
                 style={{
                   flex: 1,
                   position: "relative",
@@ -751,7 +751,7 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                className="min-h-[200px] sm:min-h-[110px]"
+                className="min-h-[200px] sm:min-h-[160px]"
                 style={{ flex: 1, position: "relative" }}
               >
                 <Image
@@ -800,7 +800,7 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                className="min-h-[200px] sm:min-h-[110px]"
+                className="min-h-[200px] sm:min-h-[160px]"
                 style={{ flex: 1, position: "relative" }}
               >
                 <Image
