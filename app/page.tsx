@@ -560,7 +560,7 @@ export default async function Home() {
                   </p>
                 </div>
                 <div
-                  className="min-h-[280px] sm:min-h-[220px]"
+                  className="min-h-[280px] sm:min-h-[240px]"
                   style={{
                     flex: 1,
                     position: "relative",
@@ -613,7 +613,7 @@ export default async function Home() {
                   </p>
                 </div>
                 <div
-                  className="min-h-[280px] sm:min-h-[220px]"
+                  className="min-h-[280px] sm:min-h-[240px]"
                   style={{
                     flex: 1,
                     position: "relative",
@@ -751,7 +751,7 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                className="min-h-[280px] sm:min-h-[220px]"
+                className="min-h-[280px] sm:min-h-[240px]"
                 style={{ flex: 1, position: "relative" }}
               >
                 <Image
@@ -800,7 +800,7 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                className="min-h-[280px] sm:min-h-[220px]"
+                className="min-h-[280px] sm:min-h-[240px]"
                 style={{ flex: 1, position: "relative" }}
               >
                 <Image
