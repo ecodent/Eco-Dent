@@ -22,7 +22,7 @@ export async function PUT(request: NextRequest) {
   await dbConnect();
   const body = await request.json();
   const { _id, ...data } = body;
-  const member = await TeamMember.findByIdAndUpdate(_id, data, { new: true });
+  const member = await TeamMember.findByIdAndUpdate(_id, data, { new: true } as any);
   return NextResponse.json(member);
 }
 
@@ -31,6 +31,6 @@ export async function DELETE(request: NextRequest) {
   await dbConnect();
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
-  await TeamMember.findByIdAndDelete(id);
+  await (TeamMember as any).findByIdAndDelete(id);
   return NextResponse.json({ success: true });
 }

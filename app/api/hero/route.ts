@@ -22,6 +22,6 @@ export async function DELETE(request: NextRequest) {
   await dbConnect();
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
-  await HeroImage.findByIdAndDelete(id);
+  await (HeroImage as any).findByIdAndDelete(id);
   return NextResponse.json({ success: true });
 }

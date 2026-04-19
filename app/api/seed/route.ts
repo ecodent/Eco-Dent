@@ -13,7 +13,7 @@ export async function POST() {
   // Seed only if empty
   const teamCount = await TeamMember.countDocuments();
   if (teamCount === 0) {
-    await TeamMember.insertMany([
+    await (TeamMember as any).insertMany([
       { name: "Dr. Emilia Rossi", role: "Cosmetic Dentist", image: "/medic1.png", order: 0 },
       { name: "Dr. Adrian Novak", role: "Implantologist", image: "/medic2.png", order: 1 },
       { name: "Dr. Lukas Meyer", role: "Lead Dentist", image: "/medic3.jpg", order: 2 },
@@ -24,7 +24,7 @@ export async function POST() {
 
   const serviceCount = await Service.countDocuments();
   if (serviceCount === 0) {
-    await Service.insertMany([
+    await (Service as any).insertMany([
       {
         slug: "examinations", title: "Examinations", subtitle: "Radiografie & Tomografie Dentară",
         description: "Diagnosticare precisă cu tehnologie digitală de ultimă generație. Radiografii panoramice și tomografii CBCT 3D pentru un plan de tratament perfect.",
@@ -102,7 +102,7 @@ export async function POST() {
 
   const reviewCount = await Review.countDocuments();
   if (reviewCount === 0) {
-    await Review.insertMany([
+    await (Review as any).insertMany([
       { name: "Sherri K.", image: "/patient-1.jpg", grade: 5.0, text: '"Wonderful experience from start to finish. The staff was incredibly warm and the procedure was completely painless. I finally feel confident about my smile."', order: 0 },
       { name: "Anna M.", image: "/patient-2.jpg", grade: 5.0, text: '"I used to feel anxious before dental visits. Here everything **felt calm** and clearly explained. The treatment was **gentle**, and I\'m really happy with **how natural** my smile looks now."', order: 1 },
       { name: "Ron B.", image: "/patient-3.jpg", grade: 4.5, text: '"Professional team with great attention to detail. The results exceeded my expectations and the whole process was smooth and well-organized."', order: 2 },
@@ -112,7 +112,7 @@ export async function POST() {
 
   const baCount = await BeforeAfterCase.countDocuments();
   if (baCount === 0) {
-    await BeforeAfterCase.insertMany([
+    await (BeforeAfterCase as any).insertMany([
       { before: "/before11.png", after: "/after11.png", label: "Teeth Whitening", order: 0 },
       { before: "/smile-2.jpg", after: "/smile-2.jpg", label: "Dental Veneers", order: 1 },
       { before: "/smile-3.jpg", after: "/smile-3.jpg", label: "Full Restoration", order: 2 },
@@ -121,7 +121,7 @@ export async function POST() {
 
   const heroCount = await HeroImage.countDocuments();
   if (heroCount === 0) {
-    await HeroImage.insertMany([
+    await (HeroImage as any).insertMany([
       { url: "/clinica1.jpg", order: 0 },
       { url: "/clinica222.png", order: 1 },
       { url: "/clinica33.png", order: 2 },
