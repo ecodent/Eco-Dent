@@ -91,7 +91,8 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
       style={{
         position: "relative",
         zIndex: 10,
-        minHeight: isMobile ? "500px" : "800px",
+        height: isMobile ? "auto" : "100vh",
+        minHeight: isMobile ? "600px" : "800px",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
@@ -357,7 +358,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
             style={{
               position: "relative",
               width: isMobile ? "100%" : "45%",
-              height: isMobile ? "200px" : "auto",
+              height: isMobile ? "250px" : "auto",
               flexShrink: 0,
               overflow: "hidden",
             }}
@@ -464,7 +465,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
             <div
               style={{
                 position: "relative",
-                height: "320px",
+                height: "280px",
                 flexShrink: 0,
                 overflow: "hidden",
               }}
