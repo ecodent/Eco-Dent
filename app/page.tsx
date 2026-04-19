@@ -164,10 +164,7 @@ export default async function Home() {
 
       {/* Hero Section — full viewport */}
       <div
-        className="relative flex flex-col lg:block"
-        style={{
-          minHeight: "auto",
-        }}
+        className="relative flex flex-col lg:block lg:min-h-screen"
       >
         {/* Hero Image */}
         <div
@@ -524,7 +521,6 @@ export default async function Home() {
             <div
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               style={{
-                minHeight: "260px",
                 flexShrink: 0,
               }}
             >
@@ -563,11 +559,11 @@ export default async function Home() {
                   </p>
                 </div>
                 <div
+                  className="min-h-[180px] sm:min-h-[100px]"
                   style={{
                     flex: 1,
                     position: "relative",
                     marginTop: "10px",
-                    minHeight: "100px",
                   }}
                 >
                   <Image
@@ -616,11 +612,11 @@ export default async function Home() {
                   </p>
                 </div>
                 <div
+                  className="min-h-[180px] sm:min-h-[100px]"
                   style={{
                     flex: 1,
                     position: "relative",
                     marginTop: "10px",
-                    minHeight: "100px",
                   }}
                 >
                   <Image
@@ -639,9 +635,6 @@ export default async function Home() {
           {/* ===== RIGHT COLUMN: 4 Service Cards (2x2, equal rows) ===== */}
           <div
             className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-            style={{
-              minHeight: "auto",
-            }}
           >
             {/* Teeth Whitening — top left, dark */}
             <Link
@@ -657,7 +650,8 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                style={{ flex: 1, position: "relative", minHeight: "140px" }}
+                className="min-h-[200px] sm:min-h-[140px]"
+                style={{ flex: 1, position: "relative" }}
               >
                 <Image
                   src="/albire dentară.jpg"
@@ -726,11 +720,11 @@ export default async function Home() {
                 </p>
               </div>
               <div
+                className="min-h-[200px] sm:min-h-[140px]"
                 style={{
                   flex: 1,
                   position: "relative",
                   marginTop: "14px",
-                  minHeight: "140px",
                 }}
               >
                 <Image
@@ -758,7 +752,8 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                style={{ flex: 1, position: "relative", minHeight: "110px" }}
+                className="min-h-[200px] sm:min-h-[110px]"
+                style={{ flex: 1, position: "relative" }}
               >
                 <Image
                   src="/terapie și endodonție.png"
@@ -806,7 +801,8 @@ export default async function Home() {
               className="service-card"
             >
               <div
-                style={{ flex: 1, position: "relative", minHeight: "110px" }}
+                className="min-h-[200px] sm:min-h-[110px]"
+                style={{ flex: 1, position: "relative" }}
               >
                 <Image
                   src="/dantura fixa pe implanturi.jpg"
