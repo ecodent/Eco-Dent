@@ -29,6 +29,24 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
+/* Services grid cards */
+.svc-grid-card {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.svc-grid-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.13);
+}
+
+.svc-grid-img {
+  transition: transform 0.4s ease-out;
+}
+
+.svc-grid-card:hover .svc-grid-img {
+  transform: scale(1.04);
+}
+
 /* ═══════════════════════════════════════ */
 /*          RESPONSIVE UTILITIES          */
 /* ═══════════════════════════════════════ */

@@ -58,7 +58,11 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
     return () => clearInterval(timer);
   }, [currentIndex, total]);
 
-  const offsets = isMobile ? [-1, 0, 1] : isTablet ? [-1, 0, 1] : [-2, -1, 0, 1, 2];
+  const offsets = isMobile
+    ? [-1, 0, 1]
+    : isTablet
+      ? [-1, 0, 1]
+      : [-2, -1, 0, 1, 2];
 
   if (total === 0) return null;
 
@@ -67,7 +71,7 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
       style={{
         position: "relative",
         zIndex: 10,
-        minHeight: isMobile ? "750px" : "800px",
+        minHeight: isMobile ? "750px" : isTablet ? "680px" : "800px",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
@@ -98,7 +102,9 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
           }}
         >
           {t("team.title")}{" "}
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("team.title.italic")}</span>
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            {t("team.title.italic")}
+          </span>
         </h2>
         <p
           style={{
@@ -110,9 +116,13 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
           }}
         >
           {t("team.description.start")}
-          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("team.description.bold1")}</span>
+          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+            {t("team.description.bold1")}
+          </span>
           {t("team.description.mid")}
-          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("team.description.bold2")}</span>
+          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+            {t("team.description.bold2")}
+          </span>
           {t("team.description.end")}
         </p>
       </div>
@@ -160,10 +170,16 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
                     ? "380px"
                     : "340px"
                   : isCenter
-                    ? "calc(100% - 30px)"
+                    ? isTablet
+                      ? "calc(100% - 60px)"
+                      : "calc(100% - 30px)"
                     : isNear
-                      ? "calc(100% - 70px)"
-                      : "calc(100% - 110px)",
+                      ? isTablet
+                        ? "calc(100% - 100px)"
+                        : "calc(100% - 70px)"
+                      : isTablet
+                        ? "calc(100% - 140px)"
+                        : "calc(100% - 110px)",
                 transform: `scale(${scale})`,
                 opacity,
                 zIndex,

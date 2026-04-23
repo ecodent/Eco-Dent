@@ -134,7 +134,9 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
             }}
           >
             {t("reviews.title")}{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("reviews.title.italic")}</span>
+            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+              {t("reviews.title.italic")}
+            </span>
           </h2>
           <div
             style={{
@@ -162,13 +164,25 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
             }}
           >
             {t("reviews.description.start")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("reviews.description.bold1")}</span>
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+              {t("reviews.description.bold1")}
+            </span>
             {t("reviews.description.mid1")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}>{t("reviews.description.bold2")}</span>
+            <span
+              style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}
+            >
+              {t("reviews.description.bold2")}
+            </span>
             {t("reviews.description.mid2")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("reviews.description.bold3")}</span>
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+              {t("reviews.description.bold3")}
+            </span>
             {t("reviews.description.mid3")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}>{t("reviews.description.bold4")}</span>
+            <span
+              style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}
+            >
+              {t("reviews.description.bold4")}
+            </span>
             {t("reviews.description.end")}
           </p>
         </div>
@@ -477,7 +491,9 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
                 flexShrink: 0,
               }}
             >
-              <span style={{ fontSize: "11px", color: "#878C96" }}>{t("reviews.grade")}</span>
+              <span style={{ fontSize: "11px", color: "#878C96" }}>
+                {t("reviews.grade")}
+              </span>
               <div
                 style={{
                   display: "flex",

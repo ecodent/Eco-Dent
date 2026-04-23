@@ -139,7 +139,9 @@ export default function Contact() {
           }}
         >
           {t("contact.title")}{" "}
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("contact.title.italic")}</span>
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            {t("contact.title.italic")}
+          </span>
         </h2>
       </div>
 

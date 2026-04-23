@@ -22,11 +22,128 @@ interface ServiceItem {
   cardColor: string;
 }
 
+const fallbackServices: ServiceItem[] = [
+  {
+    slug: "examinations",
+    title: "Examin\u0103ri & Diagnostic",
+    subtitle: "Preven\u021bie",
+    description:
+      "Radiografie digital\u0103, tomografie CBCT \u015fi consulta\u021bii complete pentru un diagnostic precis.",
+    image: "/radiografie-tomografie dentar\u0103.jpg",
+    imagePosition: "center 30%",
+    features: [
+      { title: "Radiografie digital\u0103", description: "" },
+      { title: "Tomografie CBCT", description: "" },
+      { title: "Consulta\u021bie complet\u0103", description: "" },
+      { title: "Plan de tratament", description: "" },
+    ],
+    cardColor: "#ECEEF1",
+  },
+  {
+    slug: "preventive-care",
+    title: "Igienizare Profesional\u0103",
+    subtitle: "Profilaxie",
+    description:
+      "Cur\u0103\u021bare, detartraj \u015fi periaj profesional pentru s\u0103n\u0103tatea gingiilor.",
+    image: "/Igienizare profesionala.jpg",
+    imagePosition: "center 30%",
+    features: [
+      { title: "Detartraj ultrasonic", description: "" },
+      { title: "Airflow", description: "" },
+      { title: "Periaj profesional", description: "" },
+      { title: "Fluorizare", description: "" },
+    ],
+    cardColor: "#0F1A2D",
+  },
+  {
+    slug: "teeth-whitening",
+    title: "Albire Dentar\u0103",
+    subtitle: "Estetic\u0103",
+    description:
+      "Albire profesional\u0103 pentru un z\u00e2mbet luminos \u015fi natural.",
+    image: "/albire dentara.jpg",
+    imagePosition: "center 40%",
+    features: [
+      { title: "Albire \u00een cabinet", description: "" },
+      { title: "Gutiere personalizate", description: "" },
+      { title: "Rezultate vizibile", description: "" },
+      { title: "Tratament sigur", description: "" },
+    ],
+    cardColor: "#0168FF",
+  },
+  {
+    slug: "orthodontics",
+    title: "Coroane & Pun\u021bi",
+    subtitle: "Restaurare",
+    description:
+      "Restaur\u0103ri protetice de calitate pentru un z\u00e2mbet complet \u015fi func\u021bional.",
+    image: "/service-coroane,punti.png",
+    imagePosition: "center 30%",
+    features: [
+      { title: "Coroane ceramice", description: "" },
+      { title: "Pun\u021bi dentare", description: "" },
+      { title: "Fa\u021bete", description: "" },
+      { title: "Inlay / Onlay", description: "" },
+    ],
+    cardColor: "#ECEEF1",
+  },
+  {
+    slug: "oral-surgery",
+    title: "Terapie & Endodon\u021bie",
+    subtitle: "Tratament",
+    description:
+      "Tratamente de canal moderne pentru salvarea din\u021bilor \u015fi eliminarea durerii.",
+    image: "/terapie si endodontie.png",
+    imagePosition: "center 30%",
+    features: [
+      { title: "Tratament de canal", description: "" },
+      { title: "Microscop dentar", description: "" },
+      { title: "Obtura\u021bii estetice", description: "" },
+      { title: "Tratament parodontal", description: "" },
+    ],
+    cardColor: "#0F1A2D",
+  },
+  {
+    slug: "dental-implants",
+    title: "Dantur\u0103 Fix\u0103 pe Implanturi",
+    subtitle: "Implantologie",
+    description:
+      "Implanturi dentare de calitate premium pentru o dantur\u0103 fix\u0103 \u015fi natural\u0103.",
+    image: "/dantura fixa pe implanturi.jpg",
+    imagePosition: "center 30%",
+    features: [
+      { title: "Implanturi premium", description: "" },
+      { title: "Protetic\u0103 pe implanturi", description: "" },
+      { title: "All-on-4 / All-on-6", description: "" },
+      { title: "Garan\u021bie pe via\u021b\u0103", description: "" },
+    ],
+    cardColor: "#ECEEF1",
+  },
+];
+
+function CheckIcon({ dark }: { dark: boolean }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={dark ? "rgba(255,255,255,0.7)" : "#0168FF"}
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{ flexShrink: 0 }}
+    >
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
 function ArrowIcon() {
   return (
     <svg
-      width="20"
-      height="20"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -47,67 +164,130 @@ export default async function ServicesPage() {
   } catch {
     services = [];
   }
+  if (!services || services.length === 0) services = fallbackServices;
 
   return (
     <div style={{ backgroundColor: "#F8F8F8", minHeight: "100vh" }}>
       <Navbar />
 
-      {/* Hero Header */}
-      <section className="section-px" style={{ paddingTop: "60px" }}>
-        <p
+      {/* ── Hero ── */}
+      <section
+        className="section-px"
+        style={{ paddingTop: "130px", paddingBottom: "0" }}
+      >
+        <div
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between"
+          style={{ gap: "32px" }}
+        >
+          <div>
+            <span
+              style={{
+                display: "inline-block",
+                fontSize: "12px",
+                fontWeight: 700,
+                color: "#0168FF",
+                textTransform: "uppercase",
+                letterSpacing: "3px",
+                marginBottom: "20px",
+              }}
+            >
+              Serviciile Noastre
+            </span>
+            <h1
+              className="text-[40px] md:text-[56px] lg:text-[72px]"
+              style={{
+                fontWeight: 300,
+                color: "#0F1A2D",
+                margin: 0,
+                lineHeight: 1.0,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              Totul pentru <br className="hidden md:block" />
+              <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+                {"z\u00e2mbetul t\u0103u."}
+              </span>
+            </h1>
+          </div>
+          <p
+            style={{
+              fontSize: "16px",
+              color: "#878C96",
+              maxWidth: "380px",
+              lineHeight: 1.75,
+              margin: 0,
+              flexShrink: 0,
+            }}
+          >
+            {
+              "De la preven\u021bie la implantologie avansat\u0103 \u2014 o gam\u0103 complet\u0103 de servicii stomatologice cu echipamente moderne."
+            }
+          </p>
+        </div>
+
+        {/* Stats bar */}
+        <div
+          className="flex flex-wrap"
           style={{
-            fontSize: "14px",
-            fontWeight: 600,
-            color: "#0168FF",
-            textTransform: "uppercase",
-            letterSpacing: "2px",
-            marginBottom: "12px",
+            marginTop: "56px",
+            borderTop: "1px solid #E5E7EB",
+            borderBottom: "1px solid #E5E7EB",
+            paddingTop: "28px",
+            paddingBottom: "28px",
           }}
         >
-          Serviciile Noastre
-        </p>
-        <h1
-          className="text-[36px] md:text-[44px] lg:text-[52px]"
-          style={{
-            fontWeight: 300,
-            color: "#0F1A2D",
-            margin: "0 0 16px 0",
-            lineHeight: 1.15,
-          }}
-        >
-          Totul pentru{" "}
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-            zâmbetul tău.
-          </span>
-        </h1>
-        <p
-          style={{
-            fontSize: "16px",
-            color: "#878C96",
-            maxWidth: "600px",
-            lineHeight: 1.7,
-            margin: 0,
-          }}
-        >
-          De la prevenție la implantologie avansată — oferim o gamă completă de
-          servicii stomatologice cu echipamente moderne și o echipă dedicată.
-        </p>
+          {[
+            { num: "6+", label: "Specialit\u0103\u021bi" },
+            { num: "5K+", label: "Pacien\u021bi trata\u021bi" },
+            { num: "10+", label: "Ani experien\u021b\u0103" },
+            { num: "100%", label: "Diagnostic digital" },
+          ].map((s, i) => (
+            <div
+              key={i}
+              className="flex-1"
+              style={{
+                minWidth: "120px",
+                paddingRight: "24px",
+                paddingLeft: i > 0 ? "24px" : "0",
+                borderRight: i < 3 ? "1px solid #E5E7EB" : "none",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "clamp(28px, 3vw, 40px)",
+                  fontWeight: 700,
+                  color: "#0F1A2D",
+                  margin: 0,
+                  lineHeight: 1,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {s.num}
+              </p>
+              <p
+                style={{
+                  fontSize: "13px",
+                  color: "#878C96",
+                  margin: "6px 0 0",
+                }}
+              >
+                {s.label}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Services Grid */}
+      {/* ── Services Grid ── */}
       <section
         className="section-px"
         style={{ paddingTop: "48px", paddingBottom: "80px" }}
       >
         <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "24px",
-          }}
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+          style={{ gap: "16px" }}
         >
-          {services.map((service, index) => {
-            const isEven = index % 2 === 0;
+          {services.map((service) => {
             const isDark =
               service.cardColor === "#0F1A2D" ||
               service.cardColor === "#0168FF";
@@ -115,34 +295,61 @@ export default async function ServicesPage() {
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="service-card"
+                className="svc-grid-card"
                 style={{
                   display: "flex",
-                  flexDirection: isEven ? "row" : "row-reverse",
+                  flexDirection: "column",
                   backgroundColor: service.cardColor,
-                  borderRadius: "32px",
+                  borderRadius: "28px",
                   overflow: "hidden",
                   textDecoration: "none",
-                  height: "70vh",
-                  minHeight: "500px",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
                 }}
               >
                 {/* Image */}
                 <div
                   style={{
-                    flex: 1,
                     position: "relative",
-                    minHeight: "250px",
+                    height: "240px",
+                    flexShrink: 0,
+                    overflow: "hidden",
                   }}
                 >
                   <Image
                     src={service.image}
                     alt={service.title}
                     fill
-                    className="object-cover"
+                    className="object-cover svc-grid-img"
                     style={{ objectPosition: service.imagePosition }}
-                    sizes="50vw"
+                    sizes="(max-width:768px) 100vw, (max-width:1280px) 50vw, 33vw"
                   />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.22) 100%)",
+                    }}
+                  />
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "16px",
+                      left: "16px",
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: "2px",
+                      color: "#FFFFFF",
+                      backgroundColor: "rgba(0,0,0,0.32)",
+                      backdropFilter: "blur(8px)",
+                      WebkitBackdropFilter: "blur(8px)",
+                      padding: "5px 12px",
+                      borderRadius: "9999px",
+                    }}
+                  >
+                    {service.subtitle}
+                  </span>
                 </div>
 
                 {/* Content */}
@@ -151,99 +358,203 @@ export default async function ServicesPage() {
                     flex: 1,
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center",
-                    padding: "32px 24px",
+                    padding: "24px",
+                    gap: "10px",
                   }}
                 >
-                  <p
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      color: isDark ? "rgba(255,255,255,0.5)" : "#0168FF",
-                      textTransform: "uppercase",
-                      letterSpacing: "2px",
-                      marginBottom: "12px",
-                    }}
-                  >
-                    {service.subtitle}
-                  </p>
                   <h2
                     style={{
-                      fontSize: "32px",
+                      fontSize: "19px",
                       fontWeight: 700,
                       color: isDark ? "#FFFFFF" : "#0F1A2D",
-                      margin: "0 0 16px 0",
-                      lineHeight: 1.2,
+                      margin: 0,
+                      lineHeight: 1.25,
                     }}
                   >
                     {service.title}
                   </h2>
                   <p
                     style={{
-                      fontSize: "15px",
-                      color: isDark ? "rgba(255,255,255,0.6)" : "#878C96",
-                      lineHeight: 1.7,
-                      margin: "0 0 24px 0",
+                      fontSize: "14px",
+                      color: isDark ? "rgba(255,255,255,0.58)" : "#878C96",
+                      lineHeight: 1.65,
+                      margin: 0,
                     }}
                   >
                     {service.description}
                   </p>
 
-                  {/* Features list */}
+                  {/* Feature chips */}
                   <div
-                    className="grid grid-cols-1 sm:grid-cols-2"
                     style={{
-                      gap: "12px",
-                      marginBottom: "32px",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "7px",
+                      marginTop: "4px",
                     }}
                   >
-                    {service.features.map((feature, i) => {
-                      return (
-                        <div
-                          key={i}
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
-                            fontSize: "13px",
-                            color: isDark ? "rgba(255,255,255,0.8)" : "#0F1A2D",
-                          }}
-                        >
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke={isDark ? "#FFFFFF" : "#0168FF"}
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
-                          {feature.title}
-                        </div>
-                      );
-                    })}
+                    {service.features.slice(0, 4).map((f, i) => (
+                      <span
+                        key={i}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "5px",
+                          fontSize: "12px",
+                          fontWeight: 500,
+                          color: isDark ? "rgba(255,255,255,0.85)" : "#0F1A2D",
+                          backgroundColor: isDark
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
+                          padding: "4px 10px",
+                          borderRadius: "9999px",
+                        }}
+                      >
+                        <CheckIcon dark={isDark} />
+                        {f.title}
+                      </span>
+                    ))}
                   </div>
 
+                  {/* CTA row */}
                   <div
                     style={{
-                      display: "inline-flex",
+                      marginTop: "auto",
+                      paddingTop: "16px",
+                      display: "flex",
                       alignItems: "center",
-                      gap: "8px",
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      color: isDark ? "#FFFFFF" : "#0168FF",
+                      justifyContent: "space-between",
+                      borderTop: isDark
+                        ? "1px solid rgba(255,255,255,0.1)"
+                        : "1px solid rgba(0,0,0,0.07)",
                     }}
                   >
-                    Află mai multe
-                    <ArrowIcon />
+                    <span
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: 600,
+                        color: isDark ? "#FFFFFF" : "#0168FF",
+                      }}
+                    >
+                      {"Afl\u0103 mai multe"}
+                    </span>
+                    <div
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "50%",
+                        backgroundColor: isDark
+                          ? "rgba(255,255,255,0.15)"
+                          : "#0168FF",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      <ArrowIcon />
+                    </div>
                   </div>
                 </div>
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      {/* ── CTA Banner ── */}
+      <section className="section-px" style={{ paddingBottom: "100px" }}>
+        <div
+          style={{
+            backgroundColor: "#0F1A2D",
+            borderRadius: "32px",
+            padding: "clamp(40px, 5vw, 72px) clamp(24px, 5vw, 64px)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            gap: "24px",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "12px",
+              fontWeight: 700,
+              color: "rgba(255,255,255,0.35)",
+              textTransform: "uppercase",
+              letterSpacing: "3px",
+              margin: 0,
+            }}
+          >
+            {"Program\u0103-te acum"}
+          </p>
+          <h2
+            className="text-[28px] md:text-[44px]"
+            style={{
+              fontWeight: 300,
+              color: "#FFFFFF",
+              margin: 0,
+              lineHeight: 1.15,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {"Primul pas spre un "}
+            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+              {"z\u00e2mbet s\u0103n\u0103tos."}
+            </span>
+          </h2>
+          <p
+            style={{
+              fontSize: "15px",
+              color: "rgba(255,255,255,0.45)",
+              maxWidth: "480px",
+              lineHeight: 1.75,
+              margin: 0,
+            }}
+          >
+            {
+              "Contacteaz\u0103-ne pentru o consulta\u021bie gratuit\u0103. Echipa noastr\u0103 \u00ee\u021bi va r\u0103spunde \u00een cel mai scurt timp."
+            }
+          </p>
+          <div className="flex flex-col sm:flex-row" style={{ gap: "12px" }}>
+            <a
+              href="tel:+37369221112"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                padding: "16px 36px",
+                borderRadius: "9999px",
+                backgroundColor: "#0168FF",
+                color: "#FFFFFF",
+                fontSize: "15px",
+                fontWeight: 600,
+                textDecoration: "none",
+              }}
+            >
+              +373 69 221 112
+            </a>
+            <Link
+              href="/#contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                padding: "16px 36px",
+                borderRadius: "9999px",
+                border: "1px solid rgba(255,255,255,0.18)",
+                color: "#FFFFFF",
+                fontSize: "15px",
+                fontWeight: 500,
+                textDecoration: "none",
+              }}
+            >
+              {"Trimite un mesaj"}
+              <ArrowIcon />
+            </Link>
+          </div>
         </div>
       </section>
 

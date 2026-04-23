@@ -165,7 +165,9 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
             }}
           >
             {t("ba.title")}{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("ba.title.italic")}</span>
+            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+              {t("ba.title.italic")}
+            </span>
           </h2>
           <div
             style={{
@@ -193,13 +195,23 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
             }}
           >
             {t("ba.description.start")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold1")}</span>
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+              {t("ba.description.bold1")}
+            </span>
             {t("ba.description.mid1")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold2")}</span>
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+              {t("ba.description.bold2")}
+            </span>
             {t("ba.description.mid2")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold3")}</span>
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+              {t("ba.description.bold3")}
+            </span>
             {t("ba.description.mid3")}
-            <span style={{ fontStyle: "italic", fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold4")}</span>
+            <span
+              style={{ fontStyle: "italic", fontWeight: 600, color: "#0F1A2D" }}
+            >
+              {t("ba.description.bold4")}
+            </span>
             {t("ba.description.end")}
           </p>
         </div>
