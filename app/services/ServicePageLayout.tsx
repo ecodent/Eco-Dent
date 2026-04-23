@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
+import { useT } from "../i18n/LanguageProvider";
 
 interface ServiceFeature {
   title: string;
@@ -29,8 +30,10 @@ export default function ServicePageLayout({
   imagePosition = "center 35%",
   features,
   benefits,
-  ctaText = "Program\u0103-te acum",
+  ctaText,
 }: ServicePageLayoutProps) {
+  const { t } = useT();
+  const resolvedCta = ctaText || t("svcDetail.cta");
   return (
     <div style={{ backgroundColor: "#F8F8F8", minHeight: "100vh" }}>
       <Navbar />
@@ -76,7 +79,7 @@ export default function ServicePageLayout({
             >
               <polyline points="15 18 9 12 15 6" />
             </svg>
-            Toate serviciile
+            {t("svcDetail.breadcrumb")}
           </Link>
           <span style={{ fontSize: "13px", color: "#D1D5DB" }}>/</span>
           <span style={{ fontSize: "13px", color: "#0F1A2D", fontWeight: 500 }}>
@@ -166,7 +169,7 @@ export default function ServicePageLayout({
                   textDecoration: "none",
                 }}
               >
-                {ctaText}
+                {resolvedCta}
                 <svg
                   width="16"
                   height="16"
@@ -259,9 +262,9 @@ export default function ServicePageLayout({
               letterSpacing: "-0.02em",
             }}
           >
-            Ce include{" "}
+            {t("svcDetail.features.title")}{" "}
             <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-              acest serviciu
+              {t("svcDetail.features.title.italic")}
             </span>
           </h2>
           <p
@@ -273,7 +276,7 @@ export default function ServicePageLayout({
               textAlign: "right",
             }}
           >
-            {"O gam\u0103 complet\u0103 de proceduri pentru rezultate optime."}
+            {t("svcDetail.features.subtitle")}
           </p>
         </div>
 
@@ -347,14 +350,12 @@ export default function ServicePageLayout({
       {benefits && benefits.length > 0 && (
         <section className="section-px" style={{ paddingTop: "72px" }}>
           <div
+            className="flex flex-col lg:flex-row"
             style={{
               backgroundColor: "#0F1A2D",
               borderRadius: "32px",
               overflow: "hidden",
-              display: "flex",
-              flexDirection: "column" as const,
             }}
-            className="lg:flex-row"
           >
             {/* Image side */}
             <div
@@ -396,7 +397,7 @@ export default function ServicePageLayout({
                   marginBottom: "16px",
                 }}
               >
-                {"Avantaje"}
+                {t("svcDetail.benefits.kicker")}
               </p>
               <h2
                 className="text-[26px] md:text-[34px]"
@@ -408,9 +409,9 @@ export default function ServicePageLayout({
                   letterSpacing: "-0.02em",
                 }}
               >
-                {"De ce s\u0103 alegi "}
+                {t("svcDetail.benefits.title")}{" "}
                 <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-                  {"ECODENT?"}
+                  {t("svcDetail.benefits.title.italic")}
                 </span>
               </h2>
               <div
@@ -498,7 +499,7 @@ export default function ServicePageLayout({
               margin: 0,
             }}
           >
-            {"Program\u0103-te"}
+            {t("svcDetail.bottom.kicker")}
           </p>
           <h2
             className="text-[24px] md:text-[36px]"
@@ -510,9 +511,9 @@ export default function ServicePageLayout({
               letterSpacing: "-0.02em",
             }}
           >
-            {"E\u015fti gata s\u0103 faci "}
+            {t("svcDetail.bottom.heading")}{" "}
             <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-              {"primul pas?"}
+              {t("svcDetail.bottom.heading.italic")}
             </span>
           </h2>
           <p
@@ -525,7 +526,7 @@ export default function ServicePageLayout({
             }}
           >
             {
-              "Contacteaz\u0103-ne pentru o programare sau pentru mai multe detalii despre acest serviciu."
+              t("svcDetail.bottom.description")
             }
           </p>
           <div
@@ -548,7 +549,7 @@ export default function ServicePageLayout({
                 textDecoration: "none",
               }}
             >
-              {ctaText}
+              {resolvedCta}
               <svg
                 width="16"
                 height="16"

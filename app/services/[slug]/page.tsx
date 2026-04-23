@@ -133,7 +133,41 @@ const fallbackServices: ServiceItem[] = [
     ],
   },
   {
-    slug: "orthodontics",
+    slug: "imagistica-dentara",
+    title: "Imagistic\u0103 Dentar\u0103",
+    subtitle: "Diagnostic",
+    description:
+      "Radiografie digital\u0103 \u015fi tomografie CBCT 3D pentru un diagnostic complet \u015fi precis, f\u0103r\u0103 iradiere excesiv\u0103.",
+    image: "/radiografie-tomografie dentar\u0103.jpg",
+    imagePosition: "center 30%",
+    cardColor: "#ECEEF1",
+    features: [
+      {
+        title: "Radiografie digital\u0103",
+        description: "Imagini de \u00eenalt\u0103 rezolu\u021bie cu doz\u0103 redus\u0103 de radia\u021bii.",
+      },
+      {
+        title: "Tomografie CBCT 3D",
+        description: "Reconstruc\u021bie 3D a structurilor dentare \u015fi osoase.",
+      },
+      {
+        title: "OPG Panoramic",
+        description: "Vizualizarea complet\u0103 a arcadei dentare \u015fi sinusurilor.",
+      },
+      {
+        title: "Planificare digital\u0103",
+        description: "Ghidaj chirurgical digital pentru implanturi \u015fi tratamente complexe.",
+      },
+    ],
+    benefits: [
+      "Echipamente CBCT de ultim\u0103 genera\u021bie",
+      "Rezultate instant, f\u0103r\u0103 a\u015fteptare",
+      "Doz\u0103 minim\u0103 de radia\u021bii",
+      "Compatibil cu planificarea implantologic\u0103",
+    ],
+  },
+  {
+    slug: "coroane-punti",
     title: "Coroane & Pun\u021bi",
     subtitle: "Restaurare",
     description:

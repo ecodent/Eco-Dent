@@ -131,6 +131,36 @@ export const translations = {
     "footer.svc.crowns": "Coroane & Punți",
     "footer.svc.endo": "Terapie & Endodonție",
     "footer.svc.implants": "Dantura Fixă pe Implanturi",
+
+    // Services listing page
+    "svcPage.kicker": "Serviciile Noastre",
+    "svcPage.heading": "Totul pentru",
+    "svcPage.heading.italic": "zâmbetul tău.",
+    "svcPage.description": "De la prevenție la implantologie avansată — o gamă completă de servicii stomatologice cu echipamente moderne.",
+    "svcPage.stats.specialties": "Specialități",
+    "svcPage.stats.patients": "Pacienți tratați",
+    "svcPage.stats.years": "Ani experiență",
+    "svcPage.stats.digital": "Diagnostic digital",
+    "svcPage.card.cta": "Află mai multe",
+    "svcPage.cta.kicker": "Programează-te acum",
+    "svcPage.cta.heading": "Primul pas spre un",
+    "svcPage.cta.heading.italic": "zâmbet sănătos.",
+    "svcPage.cta.description": "Contactează-ne pentru o consultație gratuită. Echipa noastră îți va răspunde în cel mai scurt timp.",
+    "svcPage.cta.message": "Trimite un mesaj",
+
+    // Service detail page
+    "svcDetail.breadcrumb": "Toate serviciile",
+    "svcDetail.cta": "Programează-te acum",
+    "svcDetail.features.title": "Ce include",
+    "svcDetail.features.title.italic": "acest serviciu",
+    "svcDetail.features.subtitle": "O gamă completă de proceduri pentru rezultate optime.",
+    "svcDetail.benefits.kicker": "Avantaje",
+    "svcDetail.benefits.title": "De ce să alegi",
+    "svcDetail.benefits.title.italic": "ECODENT?",
+    "svcDetail.bottom.kicker": "Programează-te",
+    "svcDetail.bottom.heading": "Ești gata să faci",
+    "svcDetail.bottom.heading.italic": "primul pas?",
+    "svcDetail.bottom.description": "Contactează-ne pentru o programare sau pentru mai multe detalii despre acest serviciu.",
   },
 
   ru: {
@@ -263,6 +293,36 @@ export const translations = {
     "footer.svc.crowns": "Коронки и Мосты",
     "footer.svc.endo": "Терапия и Эндодонтия",
     "footer.svc.implants": "Несъёмное протезирование на имплантах",
+
+    // Services listing page
+    "svcPage.kicker": "Наши Услуги",
+    "svcPage.heading": "Всё для",
+    "svcPage.heading.italic": "вашей улыбки.",
+    "svcPage.description": "От профилактики до современной имплантологии — полный спектр стоматологических услуг с современным оборудованием.",
+    "svcPage.stats.specialties": "Специализаций",
+    "svcPage.stats.patients": "Пациентов пролечено",
+    "svcPage.stats.years": "Лет опыта",
+    "svcPage.stats.digital": "Цифровая диагностика",
+    "svcPage.card.cta": "Подробнее",
+    "svcPage.cta.kicker": "Записаться",
+    "svcPage.cta.heading": "Первый шаг к",
+    "svcPage.cta.heading.italic": "здоровой улыбке.",
+    "svcPage.cta.description": "Свяжитесь с нами для бесплатной консультации. Наша команда ответит вам в кратчайшие сроки.",
+    "svcPage.cta.message": "Написать нам",
+
+    // Service detail page
+    "svcDetail.breadcrumb": "Все услуги",
+    "svcDetail.cta": "Записаться",
+    "svcDetail.features.title": "Что включает",
+    "svcDetail.features.title.italic": "эта услуга",
+    "svcDetail.features.subtitle": "Полный спектр процедур для оптимальных результатов.",
+    "svcDetail.benefits.kicker": "Преимущества",
+    "svcDetail.benefits.title": "Почему выбирают",
+    "svcDetail.benefits.title.italic": "ECODENT?",
+    "svcDetail.bottom.kicker": "Записаться",
+    "svcDetail.bottom.heading": "Готовы сделать",
+    "svcDetail.bottom.heading.italic": "первый шаг?",
+    "svcDetail.bottom.description": "Свяжитесь с нами для записи или для получения дополнительной информации об этой услуге.",
   },
 } as const;
 

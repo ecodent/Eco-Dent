@@ -187,7 +187,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
           </p>
         </div>
 
-        {/* Right: reviews count */}
+        {/* Right: reviews count + nav buttons */}
         <div style={{ textAlign: "right" }}>
           <span
             style={{
@@ -232,6 +232,59 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               <polyline points="12 5 19 12 12 19" />
             </svg>
           </div>
+          {/* Nav buttons — visible on desktop only */}
+          {!isMobile && (
+            <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", marginTop: "20px" }}>
+              <button
+                onClick={prev}
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  borderRadius: "50%",
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #E5E7EB",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+                  transition: "transform 0.2s",
+                  flexShrink: 0,
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.08)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+                aria-label="Previous review"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F1A2D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button
+                onClick={next}
+                style={{
+                  width: "52px",
+                  height: "52px",
+                  borderRadius: "50%",
+                  backgroundColor: "#0168FF",
+                  border: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  boxShadow: "0 6px 24px rgba(1,104,255,0.35)",
+                  transition: "transform 0.2s",
+                  flexShrink: 0,
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.1)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+                aria-label="Next review"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -527,94 +580,52 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
           </div>
         )}
 
-        {/* < white button — top-left, outside center card (inverted from BA's > at top-right) */}
-        <button
-          onClick={prev}
-          style={{
-            position: "absolute",
-            top: isMobile ? "auto" : "12px",
-            bottom: isMobile ? "-50px" : "auto",
-            left: isMobile ? "auto" : `calc(${SIDE_W + SIDE_GAP}vw - 56px)`,
-            right: isMobile ? "calc(50% + 8px)" : "auto",
-            width: "48px",
-            height: "48px",
-            borderRadius: "50%",
-            backgroundColor: "rgba(255,255,255,0.9)",
-            border: "1px solid #E5E7EB",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            zIndex: 20,
-            boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-            transition: "transform 0.2s",
-            backdropFilter: "blur(8px)",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.08)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-          }}
-          aria-label="Previous review"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#0F1A2D"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
-
-        {/* > blue button — bottom-right, outside center card (inverted from BA's < at bottom-left) */}
-        <button
-          onClick={next}
-          style={{
-            position: "absolute",
-            top: isMobile ? "auto" : "auto",
-            bottom: isMobile ? "-50px" : "52px",
-            right: isMobile ? "auto" : `calc(${SIDE_W + SIDE_GAP}vw - 60px)`,
-            left: isMobile ? "calc(50% + 8px)" : "auto",
-            width: "52px",
-            height: "52px",
-            borderRadius: "50%",
-            backgroundColor: "#0168FF",
-            border: "none",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            zIndex: 20,
-            boxShadow: "0 6px 24px rgba(1,104,255,0.4)",
-            transition: "transform 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.1)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-          }}
-          aria-label="Next review"
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#FFFFFF"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
+        {/* Mobile nav buttons — centered below cards */}
+        {isMobile && (
+          <div style={{ position: "absolute", bottom: "-50px", left: 0, right: 0, display: "flex", justifyContent: "center", gap: "12px" }}>
+            <button
+              onClick={prev}
+              style={{
+                width: "48px",
+                height: "48px",
+                borderRadius: "50%",
+                backgroundColor: "rgba(255,255,255,0.9)",
+                border: "1px solid #E5E7EB",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+                backdropFilter: "blur(8px)",
+              }}
+              aria-label="Previous review"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F1A2D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button
+              onClick={next}
+              style={{
+                width: "52px",
+                height: "52px",
+                borderRadius: "50%",
+                backgroundColor: "#0168FF",
+                border: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                boxShadow: "0 6px 24px rgba(1,104,255,0.4)",
+              }}
+              aria-label="Next review"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

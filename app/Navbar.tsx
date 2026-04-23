@@ -73,7 +73,7 @@ export default function Navbar() {
           style={{ gap: "20px", marginLeft: "28px" }}
         >
           <a
-            href="#"
+            href="/"
             className="font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#0F1A2D" }}
           >
@@ -87,11 +87,11 @@ export default function Navbar() {
             {t("nav.services")}
           </a>
           <a
-            href="#"
+            href="/services/imagistica-dentara"
             className="hidden xl:inline font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#878C96" }}
           >
-            {t("nav.team")}
+            Imagistică Dentară
           </a>
         </div>
 
@@ -276,7 +276,7 @@ export default function Navbar() {
           </button>
         </div>
         <a
-          href="#"
+          href="/"
           onClick={() => setMenuOpen(false)}
           style={{
             padding: "14px 0",
@@ -304,7 +304,7 @@ export default function Navbar() {
           {t("nav.services")}
         </a>
         <a
-          href="#"
+          href="/services/imagistica-dentara"
           onClick={() => setMenuOpen(false)}
           style={{
             padding: "14px 0",
@@ -315,21 +315,7 @@ export default function Navbar() {
             borderBottom: "1px solid #F3F4F6",
           }}
         >
-          {t("nav.team")}
-        </a>
-        <a
-          href="#contact"
-          onClick={() => setMenuOpen(false)}
-          style={{
-            padding: "14px 0",
-            fontSize: "17px",
-            fontWeight: 500,
-            color: "#878C96",
-            textDecoration: "none",
-            borderBottom: "1px solid #F3F4F6",
-          }}
-        >
-          {t("nav.contact")}
+          Imagistică Dentară
         </a>
         <div style={{ marginTop: "20px" }}>
           <LangSwitcher lang={lang} setLang={setLang} />
