@@ -7,6 +7,7 @@ import HeroSlider from "./HeroSlider";
 import Footer from "./Footer";
 import Contact from "./Contact";
 import Navbar from "./Navbar";
+import { T } from "./i18n/LanguageProvider";
 import {
   getTeamMembers,
   getServices,
@@ -160,12 +161,14 @@ export default async function Home() {
   return (
     <div style={{ backgroundColor: "#F8F8F8" }}>
       {/* Hero Section — full viewport */}
-      <div className="relative flex flex-col lg:block lg:min-h-screen">
+      <div className="relative flex flex-col lg:block lg:min-h-[92vh] xl:min-h-screen">
         {/* Hero Image — behind navbar on desktop */}
         <div
-          className="relative lg:absolute w-full lg:w-[50%] xl:w-[55%] h-[50vh] md:h-[60vh] lg:h-[calc(100vh-16px)] order-2 lg:order-none lg:right-[16px] lg:top-[8px]"
+          className="relative lg:absolute w-full lg:w-[35%] xl:w-[40%] h-[42vh] md:h-[52vh] lg:h-auto lg:aspect-[0.9/1] xl:h-[80vh] xl:aspect-auto order-2 lg:order-none lg:left-[79%] lg:-translate-x-1/2 lg:top-1/2 lg:-translate-y-1/2 xl:left-[72.5%] xl:-translate-x-1/2 xl:top-1/2 xl:-translate-y-1/2"
           style={{
             zIndex: 1,
+            marginTop: "8px",
+            marginBottom: "4px",
           }}
         >
           <div className="relative w-full h-full overflow-hidden rounded-none lg:rounded-[40px]">
@@ -173,7 +176,7 @@ export default async function Home() {
 
             {/* Stats Cards */}
             <div
-              className="absolute flex-col sm:flex-row hidden md:flex"
+              className="absolute flex-col sm:flex-row hidden xl:flex"
               style={{
                 bottom: "24px",
                 left: "24px",
@@ -209,9 +212,7 @@ export default async function Home() {
                     lineHeight: 1.4,
                   }}
                 >
-                  Digital
-                  <br />
-                  X-Ray &amp; Diagnostics
+                  <T k="hero.stats.digital" />
                 </p>
               </div>
 
@@ -283,9 +284,7 @@ export default async function Home() {
                     lineHeight: 1.4,
                   }}
                 >
-                  Patients
-                  <br />
-                  Treated With Care
+                  <T k="hero.stats.patients" />
                 </p>
               </div>
 
@@ -317,9 +316,7 @@ export default async function Home() {
                     lineHeight: 1.4,
                   }}
                 >
-                  Years
-                  <br />
-                  Clinical Experience
+                  <T k="hero.stats.years" />
                 </p>
               </div>
             </div>
@@ -331,12 +328,12 @@ export default async function Home() {
 
         {/* Left Content */}
         <main
-          className="relative z-10 section-px order-1 lg:order-none"
+          className="relative z-10 section-px order-1 lg:order-none lg:w-[58%] xl:w-[45%] lg:min-h-[92vh] xl:min-h-screen lg:flex lg:items-center"
           style={{ paddingTop: "100px", paddingBottom: "40px" }}
         >
-          <div className="max-w-[480px]">
+          <div className="max-w-[480px] lg:max-w-[560px] xl:max-w-[480px]">
             <h1
-              className="text-[36px] sm:text-[48px] lg:text-[52px] xl:text-[64px]"
+              className="text-[36px] sm:text-[48px] lg:text-[46px] xl:text-[64px]"
               style={{
                 lineHeight: 1.05,
                 fontWeight: 300,
@@ -344,14 +341,14 @@ export default async function Home() {
                 letterSpacing: "-0.02em",
               }}
             >
-              Advanced
+              <T k="hero.title.line1" />
               <br />
               <span style={{ fontWeight: 700, fontStyle: "italic" }}>
-                Dental Care
+                <T k="hero.title.italic" />
               </span>{" "}
-              You
+              <T k="hero.title.line2" />
               <br />
-              Can Trust.
+              <T k="hero.title.line3" />
             </h1>
 
             <p
@@ -363,19 +360,19 @@ export default async function Home() {
                 maxWidth: "420px",
               }}
             >
-              Digital{" "}
+              <T k="hero.description.start" />
               <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                diagnostics
+                <T k="hero.description.bold1" />
               </span>
-              , minimally invasive procedures, and predictable outcomes at{" "}
+              <T k="hero.description.middle" />
               <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                every stage
-              </span>{" "}
-              of treatment.
+                <T k="hero.description.bold2" />
+              </span>
+              <T k="hero.description.end" />
             </p>
 
             <a
-              href="#"
+              href="#contact"
               className="inline-flex items-center hover:opacity-90 transition-opacity"
               style={{
                 marginTop: "40px",
@@ -388,7 +385,7 @@ export default async function Home() {
                 fontWeight: 500,
               }}
             >
-              Get A Consultation
+              <T k="hero.cta" />
               <ArrowIcon />
             </a>
 
@@ -458,9 +455,9 @@ export default async function Home() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                Our{" "}
+                <T k="services.title" />{" "}
                 <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-                  Services.
+                  <T k="services.title.italic" />
                 </span>
               </h2>
               <p
@@ -472,30 +469,30 @@ export default async function Home() {
                   maxWidth: "400px",
                 }}
               >
-                We combine{" "}
+                <T k="services.description.start" />
                 <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  clinical experience
+                  <T k="services.description.bold1" />
                 </span>
-                , modern{" "}
+                <T k="services.description.mid1" />
                 <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  technology
+                  <T k="services.description.bold2" />
                 </span>
-                , and a thoughtful{" "}
+                <T k="services.description.mid2" />
                 <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  approach
-                </span>{" "}
-                to deliver reliable{" "}
+                  <T k="services.description.bold3" />
+                </span>
+                <T k="services.description.mid3" />
                 <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  results
-                </span>{" "}
-                across preventive, restorative, and{" "}
+                  <T k="services.description.bold4" />
+                </span>
+                <T k="services.description.mid4" />
                 <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  aesthetic
-                </span>{" "}
-                dentistry.
+                  <T k="services.description.bold5" />
+                </span>
+                <T k="services.description.end" />
               </p>
               <a
-                href="#"
+                href="/services"
                 className="inline-flex items-center hover:opacity-80 transition-opacity"
                 style={{
                   marginTop: "32px",
@@ -509,7 +506,7 @@ export default async function Home() {
                   width: "fit-content",
                 }}
               >
-                Learn More
+                <T k="services.cta" />
                 <ArrowIcon />
               </a>
             </div>
@@ -542,7 +539,7 @@ export default async function Home() {
                       color: "#0F1A2D",
                     }}
                   >
-                    Examinations
+                    <T k="services.examinations" />
                   </h3>
                   <p
                     style={{
@@ -552,7 +549,7 @@ export default async function Home() {
                       lineHeight: 1.4,
                     }}
                   >
-                    Accurate diagnostics and regular checkups.
+                    <T k="services.examinations.desc" />
                   </p>
                 </div>
                 <div
@@ -595,7 +592,7 @@ export default async function Home() {
                       color: "#0F1A2D",
                     }}
                   >
-                    Preventive Care
+                    <T k="services.preventive" />
                   </h3>
                   <p
                     style={{
@@ -605,7 +602,7 @@ export default async function Home() {
                       lineHeight: 1.4,
                     }}
                   >
-                    Cleaning, scaling and gum protection.
+                    <T k="services.preventive.desc" />
                   </p>
                 </div>
                 <div
@@ -665,7 +662,7 @@ export default async function Home() {
                     color: "#FFFFFF",
                   }}
                 >
-                  Teeth Whitening
+                  <T k="services.whitening" />
                 </h3>
                 <p
                   style={{
@@ -675,7 +672,7 @@ export default async function Home() {
                     lineHeight: 1.5,
                   }}
                 >
-                  Safe whitening for a brighter smile.
+                  <T k="services.whitening.desc" />
                 </p>
               </div>
             </Link>
@@ -701,7 +698,7 @@ export default async function Home() {
                     color: "#0F1A2D",
                   }}
                 >
-                  Orthodontics
+                  <T k="services.orthodontics" />
                 </h3>
                 <p
                   style={{
@@ -711,7 +708,7 @@ export default async function Home() {
                     lineHeight: 1.5,
                   }}
                 >
-                  Teeth alignment for lasting results.
+                  <T k="services.orthodontics.desc" />
                 </p>
               </div>
               <div
@@ -767,7 +764,7 @@ export default async function Home() {
                     color: "#FFFFFF",
                   }}
                 >
-                  Oral Surgery
+                  <T k="services.surgery" />
                 </h3>
                 <p
                   style={{
@@ -777,7 +774,7 @@ export default async function Home() {
                     lineHeight: 1.4,
                   }}
                 >
-                  Modern surgical care.
+                  <T k="services.surgery.desc" />
                 </p>
               </div>
             </Link>
@@ -816,7 +813,7 @@ export default async function Home() {
                     color: "#0F1A2D",
                   }}
                 >
-                  Dental Implants
+                  <T k="services.implants" />
                 </h3>
                 <p
                   style={{
@@ -826,7 +823,7 @@ export default async function Home() {
                     lineHeight: 1.4,
                   }}
                 >
-                  Permanent tooth solutions.
+                  <T k="services.implants.desc" />
                 </p>
               </div>
             </Link>

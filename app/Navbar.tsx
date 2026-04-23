@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useT } from "./i18n/LanguageProvider";
+import type { Lang } from "./i18n/translations";
 
 function PhoneIcon() {
   return (
@@ -23,6 +25,7 @@ function PhoneIcon() {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t, lang, setLang } = useT();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -67,28 +70,28 @@ export default function Navbar() {
 
         <div
           className="hidden md:flex items-center"
-          style={{ gap: "28px", marginLeft: "40px" }}
+          style={{ gap: "20px", marginLeft: "28px" }}
         >
           <a
             href="#"
             className="font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#0F1A2D" }}
           >
-            Home
+            {t("nav.home")}
           </a>
           <a
             href="/services"
             className="font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#878C96" }}
           >
-            Dental Services
+            {t("nav.services")}
           </a>
           <a
             href="#"
-            className="font-medium hover:opacity-70 transition-opacity"
+            className="hidden xl:inline font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#878C96" }}
           >
-            Our Team
+            {t("nav.team")}
           </a>
         </div>
 
@@ -195,8 +198,9 @@ export default function Navbar() {
             }}
           >
             <PhoneIcon />
-            Contact
+            {t("nav.contact")}
           </a>
+          <LangSwitcher lang={lang} setLang={setLang} />
         </div>
 
         {/* Mobile hamburger */}
@@ -283,7 +287,7 @@ export default function Navbar() {
             borderBottom: "1px solid #F3F4F6",
           }}
         >
-          Home
+          {t("nav.home")}
         </a>
         <a
           href="/services"
@@ -297,7 +301,7 @@ export default function Navbar() {
             borderBottom: "1px solid #F3F4F6",
           }}
         >
-          Dental Services
+          {t("nav.services")}
         </a>
         <a
           href="#"
@@ -311,7 +315,7 @@ export default function Navbar() {
             borderBottom: "1px solid #F3F4F6",
           }}
         >
-          Our Team
+          {t("nav.team")}
         </a>
         <a
           href="#contact"
@@ -325,8 +329,11 @@ export default function Navbar() {
             borderBottom: "1px solid #F3F4F6",
           }}
         >
-          Contact
+          {t("nav.contact")}
         </a>
+        <div style={{ marginTop: "20px" }}>
+          <LangSwitcher lang={lang} setLang={setLang} />
+        </div>
         <div
           style={{
             marginTop: "auto",
@@ -357,5 +364,55 @@ export default function Navbar() {
         </div>
       </div>
     </>
+  );
+}
+
+function LangSwitcher({
+  lang,
+  setLang,
+}: {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+}) {
+  const opts: Lang[] = ["ro", "ru"];
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "2px",
+        padding: "4px",
+        borderRadius: "9999px",
+        border: "1px solid #E5E7EB",
+        backgroundColor: "#FFFFFF",
+      }}
+    >
+      {opts.map((o) => {
+        const active = o === lang;
+        return (
+          <button
+            key={o}
+            type="button"
+            onClick={() => setLang(o)}
+            style={{
+              padding: "6px 12px",
+              fontSize: "12px",
+              fontWeight: 600,
+              borderRadius: "9999px",
+              border: "none",
+              cursor: "pointer",
+              backgroundColor: active ? "#0F1A2D" : "transparent",
+              color: active ? "#FFFFFF" : "#878C96",
+              transition: "all 0.2s",
+              textTransform: "uppercase",
+              letterSpacing: "0.04em",
+            }}
+            aria-pressed={active}
+          >
+            {o}
+          </button>
+        );
+      })}
+    </div>
   );
 }

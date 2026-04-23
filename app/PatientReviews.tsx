@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useCallback, useEffect } from "react";
+import { useT } from "./i18n/LanguageProvider";
 
 interface ReviewItem {
   name: string;
@@ -51,6 +52,7 @@ function renderBoldText(text: string) {
 export default function PatientReviews({ reviews }: PatientReviewsProps) {
   const [current, setCurrent] = useState(0);
   const total = reviews.length;
+  const { t } = useT();
 
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
@@ -96,21 +98,21 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
       style={{
         position: "relative",
         zIndex: 10,
-        height: isMobile ? "auto" : "100vh",
-        minHeight: isMobile ? "600px" : "800px",
+        height: isMobile ? "auto" : "auto",
+        minHeight: isMobile ? "560px" : "640px",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#F8F8F8",
         overflow: isMobile ? "visible" : "hidden",
-        paddingBottom: isMobile ? "70px" : "0",
+        paddingBottom: isMobile ? "70px" : "56px",
       }}
     >
       {/* Header */}
       <div
         className="section-px"
         style={{
-          paddingTop: isMobile ? "40px" : "72px",
+          paddingTop: isMobile ? "40px" : "56px",
           paddingBottom: 0,
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
@@ -123,7 +125,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
         {/* Left: title + counter + description */}
         <div>
           <h2
-            className="text-[32px] md:text-[42px] lg:text-[52px]"
+            className="text-[32px] md:text-[42px] lg:text-[48px]"
             style={{
               fontWeight: 400,
               lineHeight: 1.1,
@@ -131,10 +133,8 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               letterSpacing: "-0.02em",
             }}
           >
-            Patient{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-              Reviews.
-            </span>
+            {t("reviews.title")}{" "}
+            <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("reviews.title.italic")}</span>
           </h2>
           <div
             style={{
@@ -161,31 +161,15 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               marginTop: "12px",
             }}
           >
-            Experiences from{" "}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>people</span>{" "}
-            who completed treatment with our team. Clear{" "}
-            <span
-              style={{
-                fontWeight: 600,
-                color: "#0F1A2D",
-                fontStyle: "italic",
-              }}
-            >
-              communication
-            </span>
-            , careful work, and{" "}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>results</span>{" "}
-            that look natural in{" "}
-            <span
-              style={{
-                fontWeight: 600,
-                color: "#0F1A2D",
-                fontStyle: "italic",
-              }}
-            >
-              everyday
-            </span>{" "}
-            life.
+            {t("reviews.description.start")}
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("reviews.description.bold1")}</span>
+            {t("reviews.description.mid1")}
+            <span style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}>{t("reviews.description.bold2")}</span>
+            {t("reviews.description.mid2")}
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("reviews.description.bold3")}</span>
+            {t("reviews.description.mid3")}
+            <span style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}>{t("reviews.description.bold4")}</span>
+            {t("reviews.description.end")}
           </p>
         </div>
 
@@ -198,7 +182,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               letterSpacing: "0.04em",
             }}
           >
-            reviews/
+            {t("reviews.label")}
           </span>
           <div
             style={{
@@ -281,7 +265,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               {/* Left: Grade info */}
               <div style={{ flex: 1 }}>
                 <span style={{ fontSize: "11px", color: "#878C96" }}>
-                  Grade
+                  {t("reviews.grade")}
                 </span>
                 <div
                   style={{
@@ -398,7 +382,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
                   letterSpacing: "0.04em",
                 }}
               >
-                Grade
+                {t("reviews.grade")}
               </span>
               <div
                 style={{
@@ -471,7 +455,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
             <div
               style={{
                 position: "relative",
-                height: "280px",
+                height: "220px",
                 flexShrink: 0,
                 overflow: "hidden",
               }}
@@ -493,7 +477,7 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
                 flexShrink: 0,
               }}
             >
-              <span style={{ fontSize: "11px", color: "#878C96" }}>Grade</span>
+              <span style={{ fontSize: "11px", color: "#878C96" }}>{t("reviews.grade")}</span>
               <div
                 style={{
                   display: "flex",

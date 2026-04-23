@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useT } from "./i18n/LanguageProvider";
 
 function LocationIcon() {
   return (
@@ -92,6 +93,7 @@ function SendIcon() {
 }
 
 export default function Contact() {
+  const { t } = useT();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -101,8 +103,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    alert("Mesajul a fost trimis! Vă vom contacta în curând.");
+    alert(t("contact.form.success"));
     setFormData({ name: "", phone: "", email: "", message: "" });
   };
 
@@ -126,7 +127,7 @@ export default function Contact() {
             marginBottom: "12px",
           }}
         >
-          Contact
+          {t("contact.kicker")}
         </p>
         <h2
           className="text-[32px] md:text-[42px]"
@@ -137,8 +138,8 @@ export default function Contact() {
             lineHeight: 1.2,
           }}
         >
-          Ne găsești{" "}
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>ușor.</span>
+          {t("contact.title")}{" "}
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("contact.title.italic")}</span>
         </h2>
       </div>
 
@@ -200,7 +201,7 @@ export default function Contact() {
                     margin: "0 0 4px 0",
                   }}
                 >
-                  Adresă
+                  {t("contact.address")}
                 </h4>
                 <p
                   style={{
@@ -208,11 +209,10 @@ export default function Contact() {
                     color: "#878C96",
                     margin: 0,
                     lineHeight: 1.5,
+                    whiteSpace: "pre-line",
                   }}
                 >
-                  Str. Grigore Vieru 11,
-                  <br />
-                  Ștefan Vodă, Moldova
+                  {t("contact.address.value")}
                 </p>
               </div>
             </div>
@@ -243,7 +243,7 @@ export default function Contact() {
                     margin: "0 0 4px 0",
                   }}
                 >
-                  Telefon
+                  {t("contact.phone")}
                 </h4>
                 <span
                   style={{
@@ -283,7 +283,7 @@ export default function Contact() {
                     margin: "0 0 4px 0",
                   }}
                 >
-                  Email
+                  {t("contact.email")}
                 </h4>
                 <span
                   style={{
@@ -319,7 +319,7 @@ export default function Contact() {
                     margin: "0 0 4px 0",
                   }}
                 >
-                  Program
+                  {t("contact.hours")}
                 </h4>
                 <p
                   style={{
@@ -327,11 +327,10 @@ export default function Contact() {
                     color: "#878C96",
                     margin: 0,
                     lineHeight: 1.5,
+                    whiteSpace: "pre-line",
                   }}
                 >
-                  Luni – Vineri: 09:00 – 19:00
-                  <br />
-                  Sâmbătă: 09:00 – 14:00
+                  {t("contact.hours.value")}
                 </p>
               </div>
             </div>
@@ -355,7 +354,7 @@ export default function Contact() {
               margin: "0 0 8px 0",
             }}
           >
-            Trimite-ne un mesaj
+            {t("contact.form.title")}
           </h3>
           <p
             style={{
@@ -365,7 +364,7 @@ export default function Contact() {
               lineHeight: 1.6,
             }}
           >
-            Completează formularul și te vom contacta în cel mai scurt timp.
+            {t("contact.form.subtitle")}
           </p>
 
           <form
@@ -382,7 +381,7 @@ export default function Contact() {
                   marginBottom: "8px",
                 }}
               >
-                Nume complet
+                {t("contact.form.name")}
               </label>
               <input
                 type="text"
@@ -390,7 +389,7 @@ export default function Contact() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                placeholder="Introdu numele tău"
+                placeholder={t("contact.form.name.placeholder")}
                 required
                 style={{
                   width: "100%",
@@ -417,7 +416,7 @@ export default function Contact() {
                     marginBottom: "8px",
                   }}
                 >
-                  Telefon
+                  {t("contact.form.phone")}
                 </label>
                 <input
                   type="tel"
@@ -425,7 +424,7 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  placeholder="+373 ..."
+                  placeholder={t("contact.form.phone.placeholder")}
                   required
                   style={{
                     width: "100%",
@@ -450,7 +449,7 @@ export default function Contact() {
                     marginBottom: "8px",
                   }}
                 >
-                  Email
+                  {t("contact.form.email")}
                 </label>
                 <input
                   type="email"
@@ -458,7 +457,7 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  placeholder="email@exemplu.com"
+                  placeholder={t("contact.form.email.placeholder")}
                   style={{
                     width: "100%",
                     padding: "14px 16px",
@@ -484,14 +483,14 @@ export default function Contact() {
                   marginBottom: "8px",
                 }}
               >
-                Mesaj
+                {t("contact.form.message")}
               </label>
               <textarea
                 value={formData.message}
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
-                placeholder="Descrie-ne problema sau serviciul dorit..."
+                placeholder={t("contact.form.message.placeholder")}
                 required
                 rows={5}
                 style={{
@@ -530,7 +529,7 @@ export default function Contact() {
               }}
             >
               <SendIcon />
-              Trimite mesajul
+              {t("contact.form.submit")}
             </button>
           </form>
         </div>

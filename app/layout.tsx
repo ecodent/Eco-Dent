@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Rethink_Sans } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "./i18n/LanguageProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -15,9 +16,9 @@ const rethinkSans = Rethink_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Ecodent – Advanced Dental Care You Can Trust",
+  title: "Ecodent – Îngrijire dentară avansată în care poți avea încredere",
   description:
-    "Digital diagnostics, minimally invasive procedures, and predictable outcomes at every stage of treatment.",
+    "Diagnostic digital, proceduri minim invazive și rezultate predictibile la fiecare etapă a tratamentului.",
 };
 
 export default function RootLayout({
@@ -27,11 +28,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="ro"
       className={`${poppins.variable} ${rethinkSans.variable} h-full antialiased`}
     >
       <body className={`min-h-full flex flex-col ${poppins.className}`}>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useT } from "./i18n/LanguageProvider";
 
 interface Case {
   before: string;
@@ -58,6 +59,7 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const total = cases.length;
+  const { t } = useT();
 
   const goTo = useCallback(
     (index: number) => {
@@ -162,8 +164,8 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
               letterSpacing: "-0.02em",
             }}
           >
-            Before &{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>After.</span>
+            {t("ba.title")}{" "}
+            <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("ba.title.italic")}</span>
           </h2>
           <div
             style={{
@@ -190,25 +192,24 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
               marginTop: "12px",
             }}
           >
-            Each <span style={{ fontWeight: 600, color: "#0F1A2D" }}>case</span>{" "}
-            reflects a{" "}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-              carefully planned
-            </span>{" "}
-            approach focused on long-term dental{" "}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>health</span>{" "}
-            and{" "}
-            <span
-              style={{ fontStyle: "italic", fontWeight: 600, color: "#0F1A2D" }}
-            >
-              aesthetics
-            </span>
-            .
+            {t("ba.description.start")}
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold1")}</span>
+            {t("ba.description.mid1")}
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold2")}</span>
+            {t("ba.description.mid2")}
+            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold3")}</span>
+            {t("ba.description.mid3")}
+            <span style={{ fontStyle: "italic", fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold4")}</span>
+            {t("ba.description.end")}
           </p>
         </div>
 
         {/* Right: Book an appointment button */}
         <button
+          onClick={() => {
+            const el = document.getElementById("contact");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }}
           style={{
             display: isMobile ? "none" : "flex",
             alignItems: "center",
@@ -224,7 +225,7 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
             whiteSpace: "nowrap",
           }}
         >
-          Book an appointment
+          {t("ba.cta")}
           <CalendarIcon />
         </button>
       </div>

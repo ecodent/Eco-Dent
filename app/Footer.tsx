@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useT } from "./i18n/LanguageProvider";
 
 export default function Footer() {
+  const { t } = useT();
   return (
     <footer
       className="section-px"
@@ -41,8 +45,7 @@ export default function Footer() {
               maxWidth: "280px",
             }}
           >
-            Îngrijire dentară avansată în care poți avea încredere. Diagnostic
-            digital, proceduri minim invazive și rezultate predictibile.
+            {t("footer.description")}
           </p>
           <div style={{ display: "flex", gap: "12px", marginTop: "24px" }}>
             <a
@@ -112,7 +115,7 @@ export default function Footer() {
               marginBottom: "24px",
             }}
           >
-            Servicii
+            {t("footer.services")}
           </h4>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "14px" }}
@@ -125,7 +128,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Radiografie & Tomografie
+              {t("footer.svc.exam")}
             </Link>
             <Link
               href="/services/preventive-care"
@@ -135,7 +138,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Igienizare Profesională
+              {t("footer.svc.preventive")}
             </Link>
             <Link
               href="/services/teeth-whitening"
@@ -145,7 +148,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Albire Dentară
+              {t("footer.svc.whitening")}
             </Link>
             <Link
               href="/services/orthodontics"
@@ -155,7 +158,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Coroane & Punți
+              {t("footer.svc.crowns")}
             </Link>
             <Link
               href="/services/oral-surgery"
@@ -165,7 +168,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Terapie & Endodonție
+              {t("footer.svc.endo")}
             </Link>
             <Link
               href="/services/dental-implants"
@@ -175,7 +178,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Dantura Fixă pe Implanturi
+              {t("footer.svc.implants")}
             </Link>
           </div>
         </div>
@@ -190,7 +193,7 @@ export default function Footer() {
               marginBottom: "24px",
             }}
           >
-            Clinica
+            {t("footer.clinic")}
           </h4>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "14px" }}
@@ -203,7 +206,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Despre Noi
+              {t("footer.about")}
             </a>
             <a
               href="/#team"
@@ -213,7 +216,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Echipa
+              {t("footer.team")}
             </a>
             <a
               href="/#"
@@ -223,7 +226,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Galerie
+              {t("footer.gallery")}
             </a>
             <a
               href="/#"
@@ -233,7 +236,7 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Recenzii
+              {t("footer.reviews")}
             </a>
           </div>
         </div>
@@ -248,7 +251,7 @@ export default function Footer() {
               marginBottom: "24px",
             }}
           >
-            Contact
+            {t("footer.contact")}
           </h4>
           <div
             style={{ display: "flex", flexDirection: "column", gap: "14px" }}
@@ -358,7 +361,7 @@ export default function Footer() {
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
-              Luni - Vineri: 09:00 - 19:00
+              {t("footer.hours.short")}
             </p>
           </div>
         </div>
@@ -384,7 +387,7 @@ export default function Footer() {
             margin: 0,
           }}
         >
-          © 2026 ECODENT. Toate drepturile rezervate.
+          {t("footer.copyright")}
         </p>
         <div style={{ display: "flex", gap: "24px" }}>
           <a
@@ -395,7 +398,7 @@ export default function Footer() {
               textDecoration: "none",
             }}
           >
-            Politica de Confidențialitate
+            {t("footer.privacy")}
           </a>
           <a
             href="#"
@@ -405,7 +408,7 @@ export default function Footer() {
               textDecoration: "none",
             }}
           >
-            Termeni și Condiții
+            {t("footer.terms")}
           </a>
         </div>
       </div>

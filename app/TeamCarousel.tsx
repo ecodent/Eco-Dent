@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
+import { useT } from "./i18n/LanguageProvider";
 
 interface Doctor {
   name: string;
@@ -23,6 +24,7 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const total = doctors.length;
+  const { t } = useT();
 
   useEffect(() => {
     const check = () => {
@@ -95,8 +97,8 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
             letterSpacing: "-0.02em",
           }}
         >
-          Our Medical{" "}
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>Team.</span>
+          {t("team.title")}{" "}
+          <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("team.title.italic")}</span>
         </h2>
         <p
           style={{
@@ -104,16 +106,14 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
             lineHeight: 1.7,
             color: "#878C96",
             maxWidth: "320px",
-            textAlign: "right",
+            textAlign: isMobile ? "left" : "right",
           }}
         >
-          A team of{" "}
-          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>experienced</span>{" "}
-          dentists focused on precise treatment and{" "}
-          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-            long-term results
-          </span>
-          .
+          {t("team.description.start")}
+          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("team.description.bold1")}</span>
+          {t("team.description.mid")}
+          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("team.description.bold2")}</span>
+          {t("team.description.end")}
         </p>
       </div>
 
