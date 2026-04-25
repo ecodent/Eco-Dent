@@ -138,13 +138,30 @@ const fallbackServices: ServiceItem[] = [
 ];
 
 export default async function ServicesPage() {
-  let services: ServiceItem[] = [];
+  let rawServices: any[] = [];
   try {
-    services = await getServices();
+    rawServices = await getServices();
   } catch {
-    services = [];
+    rawServices = [];
   }
-  if (!services || services.length === 0) services = fallbackServices;
+
+  const cookieLang = (await cookies()).get("ecodent.lang")?.value ?? "ro";
+
+  let services: ServiceItem[] = (rawServices.length > 0 ? rawServices : fallbackServices).map((svc: any) => {
+    if (cookieLang === "ru") {
+      return {
+        ...svc,
+        title: svc.title_ru || svc.title,
+        subtitle: svc.subtitle_ru || svc.subtitle,
+        description: svc.description_ru || svc.description,
+        features: (svc.features || []).map((f: any) => ({
+          title: f.title_ru || f.title,
+          description: f.description_ru || f.description,
+        })),
+      };
+    }
+    return svc;
+  });
 
   let s: Record<string, string> = {};
   try {
@@ -153,7 +170,6 @@ export default async function ServicesPage() {
     /* ignore */
   }
 
-  const cookieLang = (await cookies()).get("ecodent.lang")?.value ?? "ro";
   const sr = s as Record<string, string>;
 
   const svcStats =
