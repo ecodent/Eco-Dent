@@ -24,12 +24,23 @@ function PhoneIcon() {
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, lang, setLang } = useT();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    let lastY = window.scrollY;
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 50);
+      if (currentY > lastY && currentY > 80) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      lastY = currentY;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -55,6 +66,8 @@ export default function Navbar() {
           zIndex: 50,
           backgroundColor: scrolled ? "#F8F8F8" : "transparent",
           boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.06)" : "none",
+          transform: hidden && !menuOpen ? "translateY(-100%)" : "translateY(0)",
+          transition: "transform 0.3s ease, background-color 0.3s, box-shadow 0.3s",
         }}
       >
         <div className="flex items-center flex-shrink-0">
