@@ -12,6 +12,9 @@ interface Doctor {
 
 interface TeamCarouselProps {
   doctors: Doctor[];
+  title?: string;
+  titleItalic?: string;
+  description?: string;
 }
 
 // Card sizing — responsive
@@ -19,7 +22,7 @@ const CARD_W_DESKTOP = 20; // vw per card
 const CARD_W_MOBILE = 75; // vw on mobile
 const GAP = 1.5; // vw gap between cards
 
-export default function TeamCarousel({ doctors }: TeamCarouselProps) {
+export default function TeamCarousel({ doctors, title, titleItalic, description }: TeamCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
@@ -101,9 +104,9 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
             letterSpacing: "-0.02em",
           }}
         >
-          {t("team.title")}{" "}
+          {title || t("team.title")}{" "}
           <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-            {t("team.title.italic")}
+            {titleItalic || t("team.title.italic")}
           </span>
         </h2>
         <p
@@ -115,15 +118,9 @@ export default function TeamCarousel({ doctors }: TeamCarouselProps) {
             textAlign: isMobile ? "left" : "right",
           }}
         >
-          {t("team.description.start")}
-          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-            {t("team.description.bold1")}
-          </span>
-          {t("team.description.mid")}
-          <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-            {t("team.description.bold2")}
-          </span>
-          {t("team.description.end")}
+          {description
+            ? description
+            : (<>{t("team.description.start")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("team.description.bold1")}</span>{t("team.description.mid")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("team.description.bold2")}</span>{t("team.description.end")}</>)}
         </p>
       </div>
 

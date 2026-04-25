@@ -58,12 +58,22 @@ function ArrowIcon() {
 
 export default function ServicesPageClient({
   services,
+  kicker,
+  heading,
+  headingItalic,
+  description,
+  stats: statsProp,
 }: {
   services: ServiceItem[];
+  kicker?: string;
+  heading?: string;
+  headingItalic?: string;
+  description?: string;
+  stats?: { num: string; label: string }[];
 }) {
   const { t } = useT();
 
-  const stats = [
+  const stats = statsProp ?? [
     { num: "6+", label: t("svcPage.stats.specialties") },
     { num: "5K+", label: t("svcPage.stats.patients") },
     { num: "10+", label: t("svcPage.stats.years") },
@@ -93,7 +103,7 @@ export default function ServicesPageClient({
                 marginBottom: "20px",
               }}
             >
-              {t("svcPage.kicker")}
+              {kicker || t("svcPage.kicker")}
             </span>
             <h1
               className="text-[40px] md:text-[56px] lg:text-[72px]"
@@ -105,9 +115,9 @@ export default function ServicesPageClient({
                 letterSpacing: "-0.03em",
               }}
             >
-              {t("svcPage.heading")} <br className="hidden md:block" />
+              {heading || t("svcPage.heading")} <br className="hidden md:block" />
               <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-                {t("svcPage.heading.italic")}
+                {headingItalic || t("svcPage.heading.italic")}
               </span>
             </h1>
           </div>
@@ -121,7 +131,7 @@ export default function ServicesPageClient({
               flexShrink: 0,
             }}
           >
-            {t("svcPage.description")}
+            {description || t("svcPage.description")}
           </p>
         </div>
 

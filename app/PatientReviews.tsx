@@ -13,6 +13,9 @@ interface ReviewItem {
 
 interface PatientReviewsProps {
   reviews: ReviewItem[];
+  title?: string;
+  titleItalic?: string;
+  description?: string;
 }
 
 function Stars({ rating }: { rating: number }) {
@@ -49,7 +52,7 @@ function renderBoldText(text: string) {
   });
 }
 
-export default function PatientReviews({ reviews }: PatientReviewsProps) {
+export default function PatientReviews({ reviews, title, titleItalic, description }: PatientReviewsProps) {
   const [current, setCurrent] = useState(0);
   const total = reviews.length;
   const { t } = useT();
@@ -133,9 +136,9 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               letterSpacing: "-0.02em",
             }}
           >
-            {t("reviews.title")}{" "}
+            {title || t("reviews.title")}{" "}
             <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-              {t("reviews.title.italic")}
+              {titleItalic || t("reviews.title.italic")}
             </span>
           </h2>
           <div
@@ -163,27 +166,9 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               marginTop: "12px",
             }}
           >
-            {t("reviews.description.start")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-              {t("reviews.description.bold1")}
-            </span>
-            {t("reviews.description.mid1")}
-            <span
-              style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}
-            >
-              {t("reviews.description.bold2")}
-            </span>
-            {t("reviews.description.mid2")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-              {t("reviews.description.bold3")}
-            </span>
-            {t("reviews.description.mid3")}
-            <span
-              style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}
-            >
-              {t("reviews.description.bold4")}
-            </span>
-            {t("reviews.description.end")}
+            {description
+              ? description
+              : (<>{t("reviews.description.start")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("reviews.description.bold1")}</span>{t("reviews.description.mid1")}<span style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}>{t("reviews.description.bold2")}</span>{t("reviews.description.mid2")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("reviews.description.bold3")}</span>{t("reviews.description.mid3")}<span style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}>{t("reviews.description.bold4")}</span>{t("reviews.description.end")}</>)}
           </p>
         </div>
 

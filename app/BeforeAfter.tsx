@@ -12,6 +12,10 @@ interface Case {
 
 interface BeforeAfterProps {
   cases: Case[];
+  title?: string;
+  titleItalic?: string;
+  description?: string;
+  cta?: string;
 }
 
 function CalendarIcon() {
@@ -53,7 +57,7 @@ function CompareIcon() {
   );
 }
 
-export default function BeforeAfter({ cases }: BeforeAfterProps) {
+export default function BeforeAfter({ cases, title, titleItalic, description, cta }: BeforeAfterProps) {
   const [currentCase, setCurrentCase] = useState(0);
   const [sliderPos, setSliderPos] = useState(50); // percentage
   const [isDragging, setIsDragging] = useState(false);
@@ -164,9 +168,9 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
               letterSpacing: "-0.02em",
             }}
           >
-            {t("ba.title")}{" "}
+            {title || t("ba.title")}{" "}
             <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-              {t("ba.title.italic")}
+              {titleItalic || t("ba.title.italic")}
             </span>
           </h2>
           <div
@@ -194,25 +198,9 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
               marginTop: "12px",
             }}
           >
-            {t("ba.description.start")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-              {t("ba.description.bold1")}
-            </span>
-            {t("ba.description.mid1")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-              {t("ba.description.bold2")}
-            </span>
-            {t("ba.description.mid2")}
-            <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-              {t("ba.description.bold3")}
-            </span>
-            {t("ba.description.mid3")}
-            <span
-              style={{ fontStyle: "italic", fontWeight: 600, color: "#0F1A2D" }}
-            >
-              {t("ba.description.bold4")}
-            </span>
-            {t("ba.description.end")}
+            {description
+              ? description
+              : (<>{t("ba.description.start")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold1")}</span>{t("ba.description.mid1")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold2")}</span>{t("ba.description.mid2")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold3")}</span>{t("ba.description.mid3")}<span style={{ fontStyle: "italic", fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold4")}</span>{t("ba.description.end")}</>)}
           </p>
         </div>
 
@@ -237,7 +225,7 @@ export default function BeforeAfter({ cases }: BeforeAfterProps) {
             whiteSpace: "nowrap",
           }}
         >
-          {t("ba.cta")}
+          {cta || t("ba.cta")}
           <CalendarIcon />
         </button>
       </div>

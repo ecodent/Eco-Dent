@@ -127,17 +127,28 @@ export default async function Home() {
     },
   ];
 
-  let teamMembers, reviews, beforeAfterCases, heroImages, services, siteSettings;
+  let teamMembers,
+    reviews,
+    beforeAfterCases,
+    heroImages,
+    services,
+    siteSettings;
   try {
-    [teamMembers, reviews, beforeAfterCases, heroImages, services, siteSettings] =
-      await Promise.all([
-        getTeamMembers(),
-        getReviews(),
-        getBeforeAfterCases(),
-        getHeroImages(),
-        getServices(),
-        getSiteSettings(),
-      ]);
+    [
+      teamMembers,
+      reviews,
+      beforeAfterCases,
+      heroImages,
+      services,
+      siteSettings,
+    ] = await Promise.all([
+      getTeamMembers(),
+      getReviews(),
+      getBeforeAfterCases(),
+      getHeroImages(),
+      getServices(),
+      getSiteSettings(),
+    ]);
   } catch {
     teamMembers = [];
     reviews = [];
@@ -472,9 +483,9 @@ export default async function Home() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                <T k="services.title" />{" "}
+                {s.servicesTitle || "Serviciile"}{" "}
                 <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-                  <T k="services.title.italic" />
+                  {s.servicesTitleItalic || "Noastre."}
                 </span>
               </h2>
               <p
@@ -486,27 +497,7 @@ export default async function Home() {
                   maxWidth: "400px",
                 }}
               >
-                <T k="services.description.start" />
-                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  <T k="services.description.bold1" />
-                </span>
-                <T k="services.description.mid1" />
-                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  <T k="services.description.bold2" />
-                </span>
-                <T k="services.description.mid2" />
-                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  <T k="services.description.bold3" />
-                </span>
-                <T k="services.description.mid3" />
-                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  <T k="services.description.bold4" />
-                </span>
-                <T k="services.description.mid4" />
-                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                  <T k="services.description.bold5" />
-                </span>
-                <T k="services.description.end" />
+                {s.servicesDescription || "Combinăm experiența clinică, tehnologia modernă și o abordare atentă pentru a oferi rezultate de încredere în stomatologia preventivă, restaurativă și estetică."}
               </p>
               <a
                 href="/services"
@@ -523,7 +514,7 @@ export default async function Home() {
                   width: "fit-content",
                 }}
               >
-                <T k="services.cta" />
+                {s.servicesCta || "Află Mai Multe"}
                 <ArrowIcon />
               </a>
             </div>
@@ -740,13 +731,29 @@ export default async function Home() {
       </section>
 
       {/* Team Section */}
-      <TeamCarousel doctors={teamMembers} />
+      <TeamCarousel
+        doctors={teamMembers}
+        title={s.teamTitle}
+        titleItalic={s.teamTitleItalic}
+        description={s.teamDescription}
+      />
 
       {/* Before & After Section */}
-      <BeforeAfter cases={beforeAfterCases} />
+      <BeforeAfter
+        cases={beforeAfterCases}
+        title={s.baTitle}
+        titleItalic={s.baTitleItalic}
+        description={s.baDescription}
+        cta={s.baCta}
+      />
 
       {/* Patient Reviews Section */}
-      <PatientReviews reviews={reviews} />
+      <PatientReviews
+        reviews={reviews}
+        title={s.reviewsTitle}
+        titleItalic={s.reviewsTitleItalic}
+        description={s.reviewsDescription}
+      />
 
       {/* Contact Section */}
       <Contact />

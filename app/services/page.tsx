@@ -1,6 +1,6 @@
 ﻿import Navbar from "../Navbar";
 import Footer from "../Footer";
-import { getServices } from "@/lib/data";
+import { getServices, getSiteSettings } from "@/lib/data";
 import ServicesPageClient from "./ServicesPageClient";
 
 export const dynamic = "force-dynamic";
@@ -145,10 +145,29 @@ export default async function ServicesPage() {
   }
   if (!services || services.length === 0) services = fallbackServices;
 
+  let s: Record<string, string> = {};
+  try {
+    s = await getSiteSettings();
+  } catch { /* ignore */ }
+
+  const svcStats = [
+    { num: s.svcStat1Value || "6+", label: s.svcStat1Label || "Specialități" },
+    { num: s.svcStat2Value || "5K+", label: s.svcStat2Label || "Pacienți tratați" },
+    { num: s.svcStat3Value || "10+", label: s.svcStat3Label || "Ani experiență" },
+    { num: s.svcStat4Value || "100%", label: s.svcStat4Label || "Diagnostic digital" },
+  ];
+
   return (
     <div style={{ backgroundColor: "#F8F8F8", minHeight: "100vh" }}>
       <Navbar />
-      <ServicesPageClient services={services} />
+      <ServicesPageClient
+        services={services}
+        kicker={s.svcKicker}
+        heading={s.svcHeading}
+        headingItalic={s.svcHeadingItalic}
+        description={s.svcDescription}
+        stats={svcStats}
+      />
       <Footer />
     </div>
   );
