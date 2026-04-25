@@ -83,7 +83,7 @@ export default function TeamCarousel({
       style={{
         position: "relative",
         zIndex: 10,
-        minHeight: isMobile ? "750px" : isTablet ? "680px" : "800px",
+        minHeight: isMobile ? "800px" : isTablet ? "760px" : "880px",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
@@ -150,7 +150,7 @@ export default function TeamCarousel({
         style={{
           flex: 1,
           position: "relative",
-          marginTop: isMobile ? "24px" : "48px",
+          marginTop: isMobile ? "40px" : "80px",
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "center",
