@@ -8,7 +8,9 @@ interface HeroSliderProps {
 }
 
 export default function HeroSlider({ images }: HeroSliderProps) {
-  const [current, setCurrent] = useState(0);
+  // Start at -1 (nothing visible) — static first image from server is shown instead.
+  // After first interval, switch to image index 1, then cycle.
+  const [current, setCurrent] = useState(-1);
 
   useEffect(() => {
     if (images.length <= 1) return;
@@ -27,12 +29,12 @@ export default function HeroSlider({ images }: HeroSliderProps) {
           alt="ECODENT Dental Clinic"
           fill
           className="object-cover"
-          priority={i === 0}
+          loading="lazy"
           sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 35vw, 100vw"
           quality={85}
           style={{
             opacity: current === i ? 1 : 0,
-            transition: i === 0 ? "none" : "opacity 1s ease-in-out",
+            transition: "opacity 1s ease-in-out",
           }}
         />
       ))}

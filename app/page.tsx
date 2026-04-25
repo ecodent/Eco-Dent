@@ -257,18 +257,6 @@ export default async function Home() {
 
   return (
     <div style={{ backgroundColor: "#F8F8F8" }}>
-      {/* Preload first hero image for LCP */}
-      {firstHeroUrl && (
-        <link
-          rel="preload"
-          as="image"
-          href={firstHeroUrl}
-          // @ts-expect-error fetchpriority is valid HTML but not in TS types yet
-          fetchpriority="high"
-          imageSrcSet={`/_next/image?url=${encodeURIComponent(firstHeroUrl)}&w=828&q=85 828w, /_next/image?url=${encodeURIComponent(firstHeroUrl)}&w=1080&q=85 1080w`}
-          imageSizes="(min-width: 1280px) 40vw, (min-width: 1024px) 35vw, 100vw"
-        />
-      )}
       {/* Hero Section — full viewport */}
       <div className="relative flex flex-col lg:block lg:min-h-[92vh] xl:min-h-screen">
         {/* Hero Image — behind navbar on desktop */}
@@ -281,7 +269,23 @@ export default async function Home() {
           }}
         >
           <div className="relative w-full h-full overflow-hidden rounded-none lg:rounded-[40px]">
-            <HeroSlider images={heroImageUrls} />
+            {/* First image rendered server-side — no JS needed, LCP element */}
+            {firstHeroUrl && (
+              <Image
+                src={firstHeroUrl}
+                alt="ECODENT Dental Clinic"
+                fill
+                priority
+                fetchPriority="high"
+                className="object-cover"
+                sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 35vw, 100vw"
+                quality={85}
+              />
+            )}
+            {/* Slider handles transitions for images 2+ and eventually overlays image 1 */}
+            {heroImageUrls.length > 1 && (
+              <HeroSlider images={heroImageUrls} />
+            )}
 
             {/* Stats Cards */}
             <div
