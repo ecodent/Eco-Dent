@@ -64,6 +64,40 @@ interface Settings {
   contactPhone: string;
   contactEmail: string;
   contactHours: string;
+  // RU variants
+  heroTitle_ru: string;
+  heroTitleItalic_ru: string;
+  heroTitle2_ru: string;
+  heroTitle3_ru: string;
+  heroDescription_ru: string;
+  heroCta_ru: string;
+  stat1Label_ru: string;
+  stat2Label_ru: string;
+  stat3Label_ru: string;
+  servicesTitle_ru: string;
+  servicesTitleItalic_ru: string;
+  servicesDescription_ru: string;
+  servicesCta_ru: string;
+  teamTitle_ru: string;
+  teamTitleItalic_ru: string;
+  teamDescription_ru: string;
+  baTitle_ru: string;
+  baTitleItalic_ru: string;
+  baDescription_ru: string;
+  baCta_ru: string;
+  reviewsTitle_ru: string;
+  reviewsTitleItalic_ru: string;
+  reviewsDescription_ru: string;
+  svcKicker_ru: string;
+  svcHeading_ru: string;
+  svcHeadingItalic_ru: string;
+  svcDescription_ru: string;
+  svcStat1Label_ru: string;
+  svcStat2Label_ru: string;
+  svcStat3Label_ru: string;
+  svcStat4Label_ru: string;
+  contactAddress_ru: string;
+  contactHours_ru: string;
 }
 
 const DEFAULTS: Settings = {
@@ -116,6 +150,47 @@ const DEFAULTS: Settings = {
   contactPhone: "+373 69 100 200",
   contactEmail: "ecodentclinic@gmail.com",
   contactHours: "Luni – Vineri: 09:00 – 19:00\nSâmbătă: 09:00 – 14:00",
+  // RU
+  heroTitle_ru: "Современная",
+  heroTitleItalic_ru: "Стоматология",
+  heroTitle2_ru: "которой Вы",
+  heroTitle3_ru: "Можете Доверять.",
+  heroDescription_ru:
+    "Цифровая диагностика, малоинвазивные процедуры и предсказуемые результаты на каждом этапе лечения.",
+  heroCta_ru: "Записаться на консультацию",
+  stat1Label_ru: "Цифровая Диагностика & Рентген",
+  stat2Label_ru: "Пациентов с Заботой",
+  stat3Label_ru: "Лет Клинического Опыта",
+  servicesTitle_ru: "Наши",
+  servicesTitleItalic_ru: "Услуги.",
+  servicesDescription_ru:
+    "Сочетаем клинический опыт, современные технологии и внимательный подход для надёжных результатов в профилактической, восстановительной и эстетической стоматологии.",
+  servicesCta_ru: "Подробнее",
+  teamTitle_ru: "Наша медицинская",
+  teamTitleItalic_ru: "Команда.",
+  teamDescription_ru:
+    "Команда опытных стоматологов, ориентированных на точное лечение и долгосрочные результаты.",
+  baTitle_ru: "До и",
+  baTitleItalic_ru: "После.",
+  baDescription_ru:
+    "Каждый случай отражает тщательно спланированный подход, ориентированный на долгосрочное здоровье зубов и эстетику.",
+  baCta_ru: "Записаться на приём",
+  reviewsTitle_ru: "Отзывы",
+  reviewsTitleItalic_ru: "Пациентов.",
+  reviewsDescription_ru:
+    "Опыт людей, прошедших лечение в нашей клинике. Чёткая коммуникация, аккуратная работа и результаты, естественно выглядящие в повседневной жизни.",
+  svcKicker_ru: "Наши Услуги",
+  svcHeading_ru: "Всё для",
+  svcHeadingItalic_ru: "вашей улыбки.",
+  svcDescription_ru:
+    "От профилактики до современной имплантологии — полный спектр стоматологических услуг с современным оборудованием.",
+  svcStat1Label_ru: "Специализаций",
+  svcStat2Label_ru: "Пациентов пролечено",
+  svcStat3Label_ru: "Лет опыта",
+  svcStat4Label_ru: "Цифровая диагностика",
+  contactAddress_ru: "ул. Григоре Виеру 11,\nШтефан Водэ, Молдова",
+  contactHours_ru:
+    "Понедельник – Пятница: 09:00 – 19:00\nСуббота: 09:00 – 14:00",
 };
 
 function Field({
@@ -230,6 +305,7 @@ function Section({
 
 export default function SetariPage() {
   const [settings, setSettings] = useState<Settings>(DEFAULTS);
+  const [lang, setLang] = useState<"ro" | "ru">("ro");
   const [loading, setLoading] = useState(true);
   const [globalSaving, setGlobalSaving] = useState(false);
   const [globalSaved, setGlobalSaved] = useState(false);
@@ -323,6 +399,30 @@ export default function SetariPage() {
         </div>
       </div>
 
+      {/* Language Tabs */}
+      <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
+        {(["ro", "ru"] as const).map((l) => (
+          <button
+            key={l}
+            onClick={() => setLang(l)}
+            style={{
+              padding: "8px 20px",
+              borderRadius: "10px",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "13px",
+              fontWeight: 600,
+              backgroundColor: lang === l ? "#0F1A2D" : "#E5E7EB",
+              color: lang === l ? "#FFF" : "#878C96",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+            }}
+          >
+            {l === "ro" ? "🇷🇴 Română" : "🇷🇺 Русский"}
+          </button>
+        ))}
+      </div>
+
       <div
         style={{
           display: "flex",
@@ -331,6 +431,7 @@ export default function SetariPage() {
           paddingBottom: "80px",
         }}
       >
+        {lang === "ro" && <>
         {/* Hero Title */}
         <Section title="Hero — Titlu & Conținut" icon={<IconImage />}>
           <div
@@ -714,6 +815,111 @@ export default function SetariPage() {
             {...fs("contactHours")}
           />
         </Section>
+        </>
+        }
+
+        {lang === "ru" && <>
+          <Section title="Hero — Заголовок & Содержание" icon={<IconImage />}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <Field label="Строка 1 (обычная)" value={settings.heroTitle_ru} onChange={set("heroTitle_ru")} {...fs("heroTitle_ru")} />
+              <Field label="Строка 1 курсив" value={settings.heroTitleItalic_ru} onChange={set("heroTitleItalic_ru")} {...fs("heroTitleItalic_ru")} />
+              <Field label="Строка 2" value={settings.heroTitle2_ru} onChange={set("heroTitle2_ru")} {...fs("heroTitle2_ru")} />
+              <Field label="Строка 3" value={settings.heroTitle3_ru} onChange={set("heroTitle3_ru")} {...fs("heroTitle3_ru")} />
+            </div>
+            <Field label="Описание" multiline value={settings.heroDescription_ru} onChange={set("heroDescription_ru")} {...fs("heroDescription_ru")} />
+            <Field label="Текст кнопки" value={settings.heroCta_ru} onChange={set("heroCta_ru")} {...fs("heroCta_ru")} />
+          </Section>
+
+          <Section title="Статистика Hero (карточки)" icon={<IconBarChart />}>
+            {([
+              { v: "stat1Value" as const, l: "stat1Label_ru" as const, n: "1" },
+              { v: "stat2Value" as const, l: "stat2Label_ru" as const, n: "2" },
+              { v: "stat3Value" as const, l: "stat3Label_ru" as const, n: "3" },
+            ]).map((row) => (
+              <div key={row.n} style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px" }}>
+                <Field label={`Значение ${row.n}`} value={settings[row.v]} onChange={set(row.v)} {...fs(row.v)} />
+                <Field label={`Подпись ${row.n}`} value={settings[row.l]} onChange={set(row.l)} {...fs(row.l)} />
+              </div>
+            ))}
+          </Section>
+
+          <Section title="Главная — Секция Услуги" icon={<IconBriefcase />}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <Field label="Заголовок" value={settings.servicesTitle_ru} onChange={set("servicesTitle_ru")} {...fs("servicesTitle_ru")} />
+              <Field label="Заголовок курсив" value={settings.servicesTitleItalic_ru} onChange={set("servicesTitleItalic_ru")} {...fs("servicesTitleItalic_ru")} />
+            </div>
+            <Field label="Описание" multiline value={settings.servicesDescription_ru} onChange={set("servicesDescription_ru")} {...fs("servicesDescription_ru")} />
+            <Field label="Текст кнопки" value={settings.servicesCta_ru} onChange={set("servicesCta_ru")} {...fs("servicesCta_ru")} />
+          </Section>
+
+          <Section title="Главная — Секция Команда" icon={<IconUsers />}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <Field label="Заголовок" value={settings.teamTitle_ru} onChange={set("teamTitle_ru")} {...fs("teamTitle_ru")} />
+              <Field label="Заголовок курсив" value={settings.teamTitleItalic_ru} onChange={set("teamTitleItalic_ru")} {...fs("teamTitleItalic_ru")} />
+            </div>
+            <Field label="Описание" multiline value={settings.teamDescription_ru} onChange={set("teamDescription_ru")} {...fs("teamDescription_ru")} />
+          </Section>
+
+          <Section title="Главная — До и После" icon={<IconCompare />}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <Field label="Заголовок" value={settings.baTitle_ru} onChange={set("baTitle_ru")} {...fs("baTitle_ru")} />
+              <Field label="Заголовок курсив" value={settings.baTitleItalic_ru} onChange={set("baTitleItalic_ru")} {...fs("baTitleItalic_ru")} />
+            </div>
+            <Field label="Описание" multiline value={settings.baDescription_ru} onChange={set("baDescription_ru")} {...fs("baDescription_ru")} />
+            <Field label="Текст кнопки" value={settings.baCta_ru} onChange={set("baCta_ru")} {...fs("baCta_ru")} />
+          </Section>
+
+          <Section title="Главная — Отзывы" icon={<IconMessageSquare />}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <Field label="Заголовок" value={settings.reviewsTitle_ru} onChange={set("reviewsTitle_ru")} {...fs("reviewsTitle_ru")} />
+              <Field label="Заголовок курсив" value={settings.reviewsTitleItalic_ru} onChange={set("reviewsTitleItalic_ru")} {...fs("reviewsTitleItalic_ru")} />
+            </div>
+            <Field label="Описание" multiline value={settings.reviewsDescription_ru} onChange={set("reviewsDescription_ru")} {...fs("reviewsDescription_ru")} />
+          </Section>
+
+          <Section title="Страница /services — Hero" icon={<IconFileText />}>
+            <Field label="Kicker" value={settings.svcKicker_ru} onChange={set("svcKicker_ru")} {...fs("svcKicker_ru")} />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+              <Field label="Заголовок" value={settings.svcHeading_ru} onChange={set("svcHeading_ru")} {...fs("svcHeading_ru")} />
+              <Field label="Заголовок курсив" value={settings.svcHeadingItalic_ru} onChange={set("svcHeadingItalic_ru")} {...fs("svcHeadingItalic_ru")} />
+            </div>
+            <Field label="Описание" multiline value={settings.svcDescription_ru} onChange={set("svcDescription_ru")} {...fs("svcDescription_ru")} />
+          </Section>
+
+          <Section title="Страница /services — Статистика" icon={<IconBarChart />}>
+            {([
+              { v: "svcStat1Value" as const, l: "svcStat1Label_ru" as const, n: "1" },
+              { v: "svcStat2Value" as const, l: "svcStat2Label_ru" as const, n: "2" },
+              { v: "svcStat3Value" as const, l: "svcStat3Label_ru" as const, n: "3" },
+              { v: "svcStat4Value" as const, l: "svcStat4Label_ru" as const, n: "4" },
+            ]).map((row) => (
+              <div key={row.n} style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px" }}>
+                <Field label={`Значение ${row.n}`} value={settings[row.v]} onChange={set(row.v)} {...fs(row.v)} />
+                <Field label={`Подпись ${row.n}`} value={settings[row.l]} onChange={set(row.l)} {...fs(row.l)} />
+              </div>
+            ))}
+          </Section>
+
+          <Section title="Контакты" icon={<IconMapPin />}>
+            <Field
+              label="Адрес"
+              multiline
+              hint="Каждая строка = новая строка на сайте"
+              value={settings.contactAddress_ru}
+              onChange={set("contactAddress_ru")}
+              {...fs("contactAddress_ru")}
+            />
+            <Field
+              label="График работы"
+              multiline
+              hint="Каждая строка = новая строка на сайте"
+              value={settings.contactHours_ru}
+              onChange={set("contactHours_ru")}
+              {...fs("contactHours_ru")}
+            />
+          </Section>
+        </>
+        }
       </div>
 
       {/* Sticky save bar */}

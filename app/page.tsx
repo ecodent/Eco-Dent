@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import TeamCarousel from "./TeamCarousel";
 import BeforeAfter from "./BeforeAfter";
 import PatientReviews from "./PatientReviews";
@@ -163,13 +164,16 @@ export default async function Home() {
   if (!heroImages || heroImages.length === 0) heroImages = defaultHero;
   if (!services || services.length === 0) services = [];
 
-  const s = {
+  const cookieLang = (await cookies()).get("ecodent.lang")?.value ?? "ro";
+  const sr = siteSettings as Record<string, string> | null;
+
+  const sBase = {
     heroTitle: "Îngrijire Dentară",
     heroTitleItalic: "Avansată",
     heroTitle2: "în care",
     heroTitle3: "Poți Avea Încredere.",
     heroDescription:
-      "Diagnostic digital, proceduri minim invazive și rezultate predictibile la fiecare etapă a tratamentului.",
+      "Diagnostic digital, proceduri minim invazive şi rezultate predictibile la fiecare etapă a tratamentului.",
     heroCta: "Programează o Consultație",
     heroPhone: "+373 69 100 200",
     stat1Value: "100%",
@@ -180,6 +184,35 @@ export default async function Home() {
     stat3Label: "Ani Experiență Clinică",
     ...siteSettings,
   };
+
+  const s = cookieLang === "ru" ? {
+    ...sBase,
+    heroTitle: sr?.heroTitle_ru || "Современная",
+    heroTitleItalic: sr?.heroTitleItalic_ru || "Стоматология",
+    heroTitle2: sr?.heroTitle2_ru || "которой Вы",
+    heroTitle3: sr?.heroTitle3_ru || "Можете Доверять.",
+    heroDescription: sr?.heroDescription_ru || "Цифровая диагностика, малоинвазивные процедуры и предсказуемые результаты на каждом этапе лечения.",
+    heroCta: sr?.heroCta_ru || "Записаться на консультацию",
+    stat1Label: sr?.stat1Label_ru || "Цифровая Диагностика & Рентген",
+    stat2Label: sr?.stat2Label_ru || "Пациентов с Заботой",
+    stat3Label: sr?.stat3Label_ru || "Лет Клинического Опыта",
+    servicesTitle: sr?.servicesTitle_ru || "Наши",
+    servicesTitleItalic: sr?.servicesTitleItalic_ru || "Услуги.",
+    servicesDescription: sr?.servicesDescription_ru || "Сочетаем клинический опыт, современные технологии и внимательный подход.",
+    servicesCta: sr?.servicesCta_ru || "Подробнее",
+    teamTitle: sr?.teamTitle_ru || "Наша медицинская",
+    teamTitleItalic: sr?.teamTitleItalic_ru || "Команда.",
+    teamDescription: sr?.teamDescription_ru || "Команда опытных стоматологов, ориентированных на точное лечение и долгосрочные результаты.",
+    baTitle: sr?.baTitle_ru || "До и",
+    baTitleItalic: sr?.baTitleItalic_ru || "После.",
+    baDescription: sr?.baDescription_ru || "Каждый случай отражает тщательно спланированный подход.",
+    baCta: sr?.baCta_ru || "Записаться на приём",
+    reviewsTitle: sr?.reviewsTitle_ru || "Отзывы",
+    reviewsTitleItalic: sr?.reviewsTitleItalic_ru || "Пациентов.",
+    reviewsDescription: sr?.reviewsDescription_ru || "Опыт людей, прошедших лечение в нашей клинике.",
+    contactAddress: sr?.contactAddress_ru || "ул. Григоре Виеру 11,\nШтефан Водэ, Молдова",
+    contactHours: sr?.contactHours_ru || "Понедельник – Пятница: 09:00 – 19:00\nСуббота: 09:00 – 14:00",
+  } : sBase;
   if (!reviews || reviews.length === 0) reviews = defaultReviews;
   if (!beforeAfterCases || beforeAfterCases.length === 0)
     beforeAfterCases = defaultCases;

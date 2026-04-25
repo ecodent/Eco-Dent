@@ -34,6 +34,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     } catch {}
     if (typeof document !== "undefined") {
       document.documentElement.lang = l;
+      document.cookie = `ecodent.lang=${l}; path=/; max-age=31536000; SameSite=Lax`;
     }
   };
 

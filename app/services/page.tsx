@@ -1,5 +1,6 @@
 ﻿import Navbar from "../Navbar";
 import Footer from "../Footer";
+import { cookies } from "next/headers";
 import { getServices, getSiteSettings } from "@/lib/data";
 import ServicesPageClient from "./ServicesPageClient";
 
@@ -152,7 +153,15 @@ export default async function ServicesPage() {
     /* ignore */
   }
 
-  const svcStats = [
+  const cookieLang = (await cookies()).get("ecodent.lang")?.value ?? "ro";
+  const sr = s as Record<string, string>;
+
+  const svcStats = cookieLang === "ru" ? [
+    { num: sr.svcStat1Value || "6+", label: sr.svcStat1Label_ru || "Специализаций" },
+    { num: sr.svcStat2Value || "5K+", label: sr.svcStat2Label_ru || "Пациентов пролечено" },
+    { num: sr.svcStat3Value || "10+", label: sr.svcStat3Label_ru || "Лет опыта" },
+    { num: sr.svcStat4Value || "100%", label: sr.svcStat4Label_ru || "Цифровая диагностика" },
+  ] : [
     { num: s.svcStat1Value || "6+", label: s.svcStat1Label || "Specialități" },
     {
       num: s.svcStat2Value || "5K+",
@@ -168,15 +177,20 @@ export default async function ServicesPage() {
     },
   ];
 
+  const svcKicker = cookieLang === "ru" ? (sr.svcKicker_ru || "Наши Услуги") : s.svcKicker;
+  const svcHeading = cookieLang === "ru" ? (sr.svcHeading_ru || "Всё для") : s.svcHeading;
+  const svcHeadingItalic = cookieLang === "ru" ? (sr.svcHeadingItalic_ru || "вашей улыбки.") : s.svcHeadingItalic;
+  const svcDescription = cookieLang === "ru" ? (sr.svcDescription_ru || "От профилактики до имплантологии — полный спектр стоматологических услуг.") : s.svcDescription;
+
   return (
     <div style={{ backgroundColor: "#F8F8F8", minHeight: "100vh" }}>
       <Navbar />
       <ServicesPageClient
         services={services}
-        kicker={s.svcKicker}
-        heading={s.svcHeading}
-        headingItalic={s.svcHeadingItalic}
-        description={s.svcDescription}
+        kicker={svcKicker}
+        heading={svcHeading}
+        headingItalic={svcHeadingItalic}
+        description={svcDescription}
         stats={svcStats}
       />
       <Footer />

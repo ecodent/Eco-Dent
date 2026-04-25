@@ -90,6 +90,71 @@ const SiteSettingsSchema = new Schema(
       type: String,
       default: "Luni – Vineri: 09:00 – 19:00\nSâmbătă: 09:00 – 14:00",
     },
+
+    // ─── Russian (RU) variants ───
+    heroTitle_ru: { type: String, default: "Современная" },
+    heroTitleItalic_ru: { type: String, default: "Стоматология" },
+    heroTitle2_ru: { type: String, default: "которой Вы" },
+    heroTitle3_ru: { type: String, default: "Можете Доверять." },
+    heroDescription_ru: {
+      type: String,
+      default:
+        "Цифровая диагностика, малоинвазивные процедуры и предсказуемые результаты на каждом этапе лечения.",
+    },
+    heroCta_ru: { type: String, default: "Записаться на консультацию" },
+    stat1Label_ru: { type: String, default: "Цифровая Диагностика & Рентген" },
+    stat2Label_ru: { type: String, default: "Пациентов с Заботой" },
+    stat3Label_ru: { type: String, default: "Лет Клинического Опыта" },
+    servicesTitle_ru: { type: String, default: "Наши" },
+    servicesTitleItalic_ru: { type: String, default: "Услуги." },
+    servicesDescription_ru: {
+      type: String,
+      default:
+        "Сочетаем клинический опыт, современные технологии и внимательный подход для надёжных результатов в профилактической, восстановительной и эстетической стоматологии.",
+    },
+    servicesCta_ru: { type: String, default: "Подробнее" },
+    teamTitle_ru: { type: String, default: "Наша медицинская" },
+    teamTitleItalic_ru: { type: String, default: "Команда." },
+    teamDescription_ru: {
+      type: String,
+      default:
+        "Команда опытных стоматологов, ориентированных на точное лечение и долгосрочные результаты.",
+    },
+    baTitle_ru: { type: String, default: "До и" },
+    baTitleItalic_ru: { type: String, default: "После." },
+    baDescription_ru: {
+      type: String,
+      default:
+        "Каждый случай отражает тщательно спланированный подход, ориентированный на долгосрочное здоровье зубов и эстетику.",
+    },
+    baCta_ru: { type: String, default: "Записаться на приём" },
+    reviewsTitle_ru: { type: String, default: "Отзывы" },
+    reviewsTitleItalic_ru: { type: String, default: "Пациентов." },
+    reviewsDescription_ru: {
+      type: String,
+      default:
+        "Опыт людей, прошедших лечение в нашей клинике. Чёткая коммуникация, аккуратная работа и результаты, естественно выглядящие в повседневной жизни.",
+    },
+    svcKicker_ru: { type: String, default: "Наши Услуги" },
+    svcHeading_ru: { type: String, default: "Всё для" },
+    svcHeadingItalic_ru: { type: String, default: "вашей улыбки." },
+    svcDescription_ru: {
+      type: String,
+      default:
+        "От профилактики до современной имплантологии — полный спектр стоматологических услуг с современным оборудованием.",
+    },
+    svcStat1Label_ru: { type: String, default: "Специализаций" },
+    svcStat2Label_ru: { type: String, default: "Пациентов пролечено" },
+    svcStat3Label_ru: { type: String, default: "Лет опыта" },
+    svcStat4Label_ru: { type: String, default: "Цифровая диагностика" },
+    contactAddress_ru: {
+      type: String,
+      default: "ул. Григоре Виеру 11,\nШтефан Водэ, Молдова",
+    },
+    contactHours_ru: {
+      type: String,
+      default: "Понедельник – Пятница: 09:00 – 19:00\nСуббота: 09:00 – 14:00",
+    },
   },
   { timestamps: true },
 );
