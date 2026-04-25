@@ -11,8 +11,8 @@ export interface TeamMember {
 export interface ServiceFeature {
   title: string;
   description: string;
-  title_ru: string;
-  description_ru: string;
+  title_ru?: string;
+  description_ru?: string;
 }
 export interface Service {
   _id?: string;
