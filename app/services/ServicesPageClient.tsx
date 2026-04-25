@@ -56,7 +56,11 @@ function ArrowIcon() {
   );
 }
 
-export default function ServicesPageClient({ services }: { services: ServiceItem[] }) {
+export default function ServicesPageClient({
+  services,
+}: {
+  services: ServiceItem[];
+}) {
   const { t } = useT();
 
   const stats = [
@@ -69,8 +73,14 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
   return (
     <>
       {/* ── Hero ── */}
-      <section className="section-px" style={{ paddingTop: "130px", paddingBottom: "0" }}>
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between" style={{ gap: "32px" }}>
+      <section
+        className="section-px"
+        style={{ paddingTop: "130px", paddingBottom: "0" }}
+      >
+        <div
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between"
+          style={{ gap: "32px" }}
+        >
           <div>
             <span
               style={{
@@ -149,7 +159,13 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
               >
                 {s.num}
               </p>
-              <p style={{ fontSize: "13px", color: "#878C96", margin: "6px 0 0" }}>
+              <p
+                style={{
+                  fontSize: "13px",
+                  color: "#878C96",
+                  margin: "6px 0 0",
+                }}
+              >
                 {s.label}
               </p>
             </div>
@@ -158,11 +174,18 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
       </section>
 
       {/* ── Services Grid ── */}
-      <section className="section-px" style={{ paddingTop: "48px", paddingBottom: "80px" }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3" style={{ gap: "16px" }}>
+      <section
+        className="section-px"
+        style={{ paddingTop: "48px", paddingBottom: "80px" }}
+      >
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+          style={{ gap: "16px" }}
+        >
           {services.map((service) => {
             const isDark =
-              service.cardColor === "#0F1A2D" || service.cardColor === "#0168FF";
+              service.cardColor === "#0F1A2D" ||
+              service.cardColor === "#0168FF";
             return (
               <Link
                 key={service.slug}
@@ -179,7 +202,14 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
                 }}
               >
                 {/* Image */}
-                <div style={{ position: "relative", height: "240px", flexShrink: 0, overflow: "hidden" }}>
+                <div
+                  style={{
+                    position: "relative",
+                    height: "240px",
+                    flexShrink: 0,
+                    overflow: "hidden",
+                  }}
+                >
                   <Image
                     src={service.image}
                     alt={service.title}
@@ -192,7 +222,8 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background: "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.22) 100%)",
+                      background:
+                        "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.22) 100%)",
                     }}
                   />
                   <span
@@ -249,7 +280,14 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
                   </p>
 
                   {/* Feature chips */}
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "7px", marginTop: "4px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "7px",
+                      marginTop: "4px",
+                    }}
+                  >
                     {service.features.slice(0, 4).map((f, i) => (
                       <span
                         key={i}
@@ -260,7 +298,9 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
                           fontSize: "12px",
                           fontWeight: 500,
                           color: isDark ? "rgba(255,255,255,0.85)" : "#0F1A2D",
-                          backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
+                          backgroundColor: isDark
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
                           padding: "4px 10px",
                           borderRadius: "9999px",
                         }}
@@ -279,10 +319,18 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      borderTop: isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.07)",
+                      borderTop: isDark
+                        ? "1px solid rgba(255,255,255,0.1)"
+                        : "1px solid rgba(0,0,0,0.07)",
                     }}
                   >
-                    <span style={{ fontSize: "14px", fontWeight: 600, color: isDark ? "#FFFFFF" : "#0168FF" }}>
+                    <span
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: 600,
+                        color: isDark ? "#FFFFFF" : "#0168FF",
+                      }}
+                    >
                       {t("svcPage.card.cta")}
                     </span>
                     <div
@@ -290,7 +338,9 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
                         width: "36px",
                         height: "36px",
                         borderRadius: "50%",
-                        backgroundColor: isDark ? "rgba(255,255,255,0.15)" : "#0168FF",
+                        backgroundColor: isDark
+                          ? "rgba(255,255,255,0.15)"
+                          : "#0168FF",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -321,17 +371,42 @@ export default function ServicesPageClient({ services }: { services: ServiceItem
             gap: "24px",
           }}
         >
-          <p style={{ fontSize: "12px", fontWeight: 700, color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "3px", margin: 0 }}>
+          <p
+            style={{
+              fontSize: "12px",
+              fontWeight: 700,
+              color: "rgba(255,255,255,0.35)",
+              textTransform: "uppercase",
+              letterSpacing: "3px",
+              margin: 0,
+            }}
+          >
             {t("svcPage.cta.kicker")}
           </p>
           <h2
             className="text-[28px] md:text-[44px]"
-            style={{ fontWeight: 300, color: "#FFFFFF", margin: 0, lineHeight: 1.15, letterSpacing: "-0.02em" }}
+            style={{
+              fontWeight: 300,
+              color: "#FFFFFF",
+              margin: 0,
+              lineHeight: 1.15,
+              letterSpacing: "-0.02em",
+            }}
           >
             {t("svcPage.cta.heading")}{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>{t("svcPage.cta.heading.italic")}</span>
+            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+              {t("svcPage.cta.heading.italic")}
+            </span>
           </h2>
-          <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.45)", maxWidth: "480px", lineHeight: 1.75, margin: 0 }}>
+          <p
+            style={{
+              fontSize: "15px",
+              color: "rgba(255,255,255,0.45)",
+              maxWidth: "480px",
+              lineHeight: 1.75,
+              margin: 0,
+            }}
+          >
             {t("svcPage.cta.description")}
           </p>
           <div className="flex flex-col sm:flex-row" style={{ gap: "12px" }}>

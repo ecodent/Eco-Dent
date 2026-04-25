@@ -26,7 +26,8 @@ const fallbackServices: ServiceItem[] = [
     slug: "imagistica-dentara",
     title: "Imagistic\u0103 Dentar\u0103",
     subtitle: "Diagnostic",
-    description: "Radiografie digital\u0103 \u015fi tomografie CBCT 3D pentru un diagnostic complet \u015fi precis.",
+    description:
+      "Radiografie digital\u0103 \u015fi tomografie CBCT 3D pentru un diagnostic complet \u015fi precis.",
     image: "/radiografie-tomografie dentar\u0103.jpg",
     imagePosition: "center 30%",
     features: [

@@ -144,19 +144,23 @@ const fallbackServices: ServiceItem[] = [
     features: [
       {
         title: "Radiografie digital\u0103",
-        description: "Imagini de \u00eenalt\u0103 rezolu\u021bie cu doz\u0103 redus\u0103 de radia\u021bii.",
+        description:
+          "Imagini de \u00eenalt\u0103 rezolu\u021bie cu doz\u0103 redus\u0103 de radia\u021bii.",
       },
       {
         title: "Tomografie CBCT 3D",
-        description: "Reconstruc\u021bie 3D a structurilor dentare \u015fi osoase.",
+        description:
+          "Reconstruc\u021bie 3D a structurilor dentare \u015fi osoase.",
       },
       {
         title: "OPG Panoramic",
-        description: "Vizualizarea complet\u0103 a arcadei dentare \u015fi sinusurilor.",
+        description:
+          "Vizualizarea complet\u0103 a arcadei dentare \u015fi sinusurilor.",
       },
       {
         title: "Planificare digital\u0103",
-        description: "Ghidaj chirurgical digital pentru implanturi \u015fi tratamente complexe.",
+        description:
+          "Ghidaj chirurgical digital pentru implanturi \u015fi tratamente complexe.",
       },
     ],
     benefits: [

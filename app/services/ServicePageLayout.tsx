@@ -525,9 +525,7 @@ export default function ServicePageLayout({
               margin: 0,
             }}
           >
-            {
-              t("svcDetail.bottom.description")
-            }
+            {t("svcDetail.bottom.description")}
           </p>
           <div
             className="flex flex-col sm:flex-row"

@@ -234,7 +234,14 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
           </div>
           {/* Nav buttons — visible on desktop only */}
           {!isMobile && (
-            <div style={{ display: "flex", gap: "10px", justifyContent: "flex-end", marginTop: "20px" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                justifyContent: "flex-end",
+                marginTop: "20px",
+              }}
+            >
               <button
                 onClick={prev}
                 style={{
@@ -251,11 +258,24 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
                   transition: "transform 0.2s",
                   flexShrink: 0,
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.08)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.08)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
                 aria-label="Previous review"
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F1A2D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#0F1A2D"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
               </button>
@@ -275,11 +295,24 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
                   transition: "transform 0.2s",
                   flexShrink: 0,
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.1)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
                 aria-label="Next review"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </button>
@@ -582,7 +615,17 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
 
         {/* Mobile nav buttons — centered below cards */}
         {isMobile && (
-          <div style={{ position: "absolute", bottom: "-50px", left: 0, right: 0, display: "flex", justifyContent: "center", gap: "12px" }}>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-50px",
+              left: 0,
+              right: 0,
+              display: "flex",
+              justifyContent: "center",
+              gap: "12px",
+            }}
+          >
             <button
               onClick={prev}
               style={{
@@ -600,7 +643,16 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               }}
               aria-label="Previous review"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F1A2D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#0F1A2D"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
@@ -620,7 +672,16 @@ export default function PatientReviews({ reviews }: PatientReviewsProps) {
               }}
               aria-label="Next review"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </button>
