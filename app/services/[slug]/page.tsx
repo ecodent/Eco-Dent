@@ -301,14 +301,16 @@ export default async function DynamicServicePage({
 }) {
   const { slug } = await params;
   let service: ServiceItem | null = null;
+  let dbAvailable = true;
   try {
     service = await getServiceBySlug(slug);
   } catch {
+    dbAvailable = false;
     service = null;
   }
 
-  // Fall back to static data if DB is unavailable
-  if (!service) {
+  // Fall back to static data ONLY if DB is completely unavailable (connection error)
+  if (!service && !dbAvailable) {
     service = fallbackServices.find((s) => s.slug === slug) ?? null;
   }
 

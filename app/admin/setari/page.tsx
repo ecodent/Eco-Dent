@@ -441,430 +441,644 @@ export default function SetariPage() {
           paddingBottom: "80px",
         }}
       >
-        {lang === "ro" && <>
-        {/* Hero Title */}
-        <Section title="Hero — Titlu & Conținut" icon={<IconImage />}>
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Rând 1 (normal)"
-              value={settings.heroTitle}
-              onChange={set("heroTitle")}
-              {...fs("heroTitle")}
-            />
-            <Field
-              label="Rând 1 italic bold"
-              value={settings.heroTitleItalic}
-              onChange={set("heroTitleItalic")}
-              {...fs("heroTitleItalic")}
-            />
-            <Field
-              label="Rând 2 (normal)"
-              value={settings.heroTitle2}
-              onChange={set("heroTitle2")}
-              {...fs("heroTitle2")}
-            />
-            <Field
-              label="Rând 3 (normal)"
-              value={settings.heroTitle3}
-              onChange={set("heroTitle3")}
-              {...fs("heroTitle3")}
-            />
-          </div>
-          <Field
-            label="Paragraf descriere"
-            multiline
-            value={settings.heroDescription}
-            onChange={set("heroDescription")}
-            {...fs("heroDescription")}
-          />
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Text buton principal"
-              value={settings.heroCta}
-              onChange={set("heroCta")}
-              {...fs("heroCta")}
-            />
-            <Field
-              label="Număr telefon (hero)"
-              value={settings.heroPhone}
-              onChange={set("heroPhone")}
-              {...fs("heroPhone")}
-            />
-          </div>
-        </Section>
-
-        {/* Stats */}
-        <Section
-          title="Statistici Hero (carduri peste imagine)"
-          icon={<IconBarChart />}
-        >
-          {(
-            [
-              { v: "stat1Value", l: "stat1Label", n: "1" },
-              { v: "stat2Value", l: "stat2Label", n: "2" },
-              { v: "stat3Value", l: "stat3Label", n: "3" },
-            ] as const
-          ).map((row) => (
-            <div
-              key={row.v} className="s-grid-stat"
-            >
-              <Field
-                label={`Valoare ${row.n}`}
-                value={settings[row.v]}
-                onChange={set(row.v)}
-                {...fs(row.v)}
-              />
-              <Field
-                label={`Etichetă ${row.n}`}
-                value={settings[row.l]}
-                onChange={set(row.l)}
-                {...fs(row.l)}
-              />
-            </div>
-          ))}
-        </Section>
-
-        {/* Services section (home) */}
-        <Section
-          title="Pagina principală — Secțiunea Servicii"
-          icon={<IconBriefcase />}
-        >
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Titlu (normal)"
-              value={settings.servicesTitle}
-              onChange={set("servicesTitle")}
-              {...fs("servicesTitle")}
-            />
-            <Field
-              label="Titlu italic"
-              value={settings.servicesTitleItalic}
-              onChange={set("servicesTitleItalic")}
-              {...fs("servicesTitleItalic")}
-            />
-          </div>
-          <Field
-            label="Descriere"
-            multiline
-            value={settings.servicesDescription}
-            onChange={set("servicesDescription")}
-            {...fs("servicesDescription")}
-          />
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Text buton"
-              value={settings.servicesCta}
-              onChange={set("servicesCta")}
-              {...fs("servicesCta")}
-            />
-          </div>
-        </Section>
-
-        {/* Team */}
-        <Section
-          title="Pagina principală — Secțiunea Echipă"
-          icon={<IconUsers />}
-        >
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Titlu (normal)"
-              value={settings.teamTitle}
-              onChange={set("teamTitle")}
-              {...fs("teamTitle")}
-            />
-            <Field
-              label="Titlu italic"
-              value={settings.teamTitleItalic}
-              onChange={set("teamTitleItalic")}
-              {...fs("teamTitleItalic")}
-            />
-          </div>
-          <Field
-            label="Descriere"
-            multiline
-            value={settings.teamDescription}
-            onChange={set("teamDescription")}
-            {...fs("teamDescription")}
-          />
-        </Section>
-
-        {/* Before & After */}
-        <Section
-          title="Pagina principală — Secțiunea Înainte & După"
-          icon={<IconCompare />}
-        >
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Titlu (normal)"
-              value={settings.baTitle}
-              onChange={set("baTitle")}
-              {...fs("baTitle")}
-            />
-            <Field
-              label="Titlu italic"
-              value={settings.baTitleItalic}
-              onChange={set("baTitleItalic")}
-              {...fs("baTitleItalic")}
-            />
-          </div>
-          <Field
-            label="Descriere"
-            multiline
-            value={settings.baDescription}
-            onChange={set("baDescription")}
-            {...fs("baDescription")}
-          />
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Text buton"
-              value={settings.baCta}
-              onChange={set("baCta")}
-              {...fs("baCta")}
-            />
-          </div>
-        </Section>
-
-        {/* Reviews */}
-        <Section
-          title="Pagina principală — Secțiunea Recenzii"
-          icon={<IconMessageSquare />}
-        >
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Titlu (normal)"
-              value={settings.reviewsTitle}
-              onChange={set("reviewsTitle")}
-              {...fs("reviewsTitle")}
-            />
-            <Field
-              label="Titlu italic"
-              value={settings.reviewsTitleItalic}
-              onChange={set("reviewsTitleItalic")}
-              {...fs("reviewsTitleItalic")}
-            />
-          </div>
-          <Field
-            label="Descriere"
-            multiline
-            value={settings.reviewsDescription}
-            onChange={set("reviewsDescription")}
-            {...fs("reviewsDescription")}
-          />
-        </Section>
-
-        {/* /services page */}
-        <Section title="Pagina /services — Hero" icon={<IconFileText />}>
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Kicker (text mic albastru)"
-              value={settings.svcKicker}
-              onChange={set("svcKicker")}
-              {...fs("svcKicker")}
-            />
-          </div>
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Titlu (normal)"
-              value={settings.svcHeading}
-              onChange={set("svcHeading")}
-              {...fs("svcHeading")}
-            />
-            <Field
-              label="Titlu italic bold"
-              value={settings.svcHeadingItalic}
-              onChange={set("svcHeadingItalic")}
-              {...fs("svcHeadingItalic")}
-            />
-          </div>
-          <Field
-            label="Descriere"
-            multiline
-            value={settings.svcDescription}
-            onChange={set("svcDescription")}
-            {...fs("svcDescription")}
-          />
-        </Section>
-
-        <Section
-          title="Pagina /services — Statistici (4 carduri)"
-          icon={<IconBarChart />}
-        >
-          {(
-            [
-              { v: "svcStat1Value", l: "svcStat1Label", n: "1" },
-              { v: "svcStat2Value", l: "svcStat2Label", n: "2" },
-              { v: "svcStat3Value", l: "svcStat3Label", n: "3" },
-              { v: "svcStat4Value", l: "svcStat4Label", n: "4" },
-            ] as const
-          ).map((row) => (
-            <div
-              key={row.v} className="s-grid-stat"
-            >
-              <Field
-                label={`Valoare ${row.n}`}
-                value={settings[row.v]}
-                onChange={set(row.v)}
-                {...fs(row.v)}
-              />
-              <Field
-                label={`Etichetă ${row.n}`}
-                value={settings[row.l]}
-                onChange={set(row.l)}
-                {...fs(row.l)}
-              />
-            </div>
-          ))}
-        </Section>
-
-        {/* Contact */}
-        <Section title="Contact" icon={<IconMapPin />}>
-          <div className="s-grid-2"
-          >
-            <Field
-              label="Telefon"
-              value={settings.contactPhone}
-              onChange={set("contactPhone")}
-              {...fs("contactPhone")}
-            />
-            <Field
-              label="Email"
-              value={settings.contactEmail}
-              onChange={set("contactEmail")}
-              {...fs("contactEmail")}
-            />
-          </div>
-          <Field
-            label="Adresă"
-            multiline
-            hint="Fiecare rând nou = rând nou pe site"
-            value={settings.contactAddress}
-            onChange={set("contactAddress")}
-            {...fs("contactAddress")}
-          />
-          <Field
-            label="Program de lucru"
-            multiline
-            hint="Fiecare rând nou = rând nou pe site"
-            value={settings.contactHours}
-            onChange={set("contactHours")}
-            {...fs("contactHours")}
-          />
-        </Section>
-        </>
-        }
-
-        {lang === "ru" && <>
-          <Section title="Hero — Заголовок & Содержание" icon={<IconImage />}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-              <Field label="Строка 1 (обычная)" value={settings.heroTitle_ru} onChange={set("heroTitle_ru")} {...fs("heroTitle_ru")} />
-              <Field label="Строка 1 курсив" value={settings.heroTitleItalic_ru} onChange={set("heroTitleItalic_ru")} {...fs("heroTitleItalic_ru")} />
-              <Field label="Строка 2" value={settings.heroTitle2_ru} onChange={set("heroTitle2_ru")} {...fs("heroTitle2_ru")} />
-              <Field label="Строка 3" value={settings.heroTitle3_ru} onChange={set("heroTitle3_ru")} {...fs("heroTitle3_ru")} />
-            </div>
-            <Field label="Описание" multiline value={settings.heroDescription_ru} onChange={set("heroDescription_ru")} {...fs("heroDescription_ru")} />
-            <Field label="Текст кнопки" value={settings.heroCta_ru} onChange={set("heroCta_ru")} {...fs("heroCta_ru")} />
-          </Section>
-
-          <Section title="Статистика Hero (карточки)" icon={<IconBarChart />}>
-            {([
-              { v: "stat1Value" as const, l: "stat1Label_ru" as const, n: "1" },
-              { v: "stat2Value" as const, l: "stat2Label_ru" as const, n: "2" },
-              { v: "stat3Value" as const, l: "stat3Label_ru" as const, n: "3" },
-            ]).map((row) => (
-              <div key={row.n} style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px" }}>
-                <Field label={`Значение ${row.n}`} value={settings[row.v]} onChange={set(row.v)} {...fs(row.v)} />
-                <Field label={`Подпись ${row.n}`} value={settings[row.l]} onChange={set(row.l)} {...fs(row.l)} />
+        {lang === "ro" && (
+          <>
+            {/* Hero Title */}
+            <Section title="Hero — Titlu & Conținut" icon={<IconImage />}>
+              <div className="s-grid-2">
+                <Field
+                  label="Rând 1 (normal)"
+                  value={settings.heroTitle}
+                  onChange={set("heroTitle")}
+                  {...fs("heroTitle")}
+                />
+                <Field
+                  label="Rând 1 italic bold"
+                  value={settings.heroTitleItalic}
+                  onChange={set("heroTitleItalic")}
+                  {...fs("heroTitleItalic")}
+                />
+                <Field
+                  label="Rând 2 (normal)"
+                  value={settings.heroTitle2}
+                  onChange={set("heroTitle2")}
+                  {...fs("heroTitle2")}
+                />
+                <Field
+                  label="Rând 3 (normal)"
+                  value={settings.heroTitle3}
+                  onChange={set("heroTitle3")}
+                  {...fs("heroTitle3")}
+                />
               </div>
-            ))}
-          </Section>
-
-          <Section title="Главная — Секция Услуги" icon={<IconBriefcase />}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-              <Field label="Заголовок" value={settings.servicesTitle_ru} onChange={set("servicesTitle_ru")} {...fs("servicesTitle_ru")} />
-              <Field label="Заголовок курсив" value={settings.servicesTitleItalic_ru} onChange={set("servicesTitleItalic_ru")} {...fs("servicesTitleItalic_ru")} />
-            </div>
-            <Field label="Описание" multiline value={settings.servicesDescription_ru} onChange={set("servicesDescription_ru")} {...fs("servicesDescription_ru")} />
-            <Field label="Текст кнопки" value={settings.servicesCta_ru} onChange={set("servicesCta_ru")} {...fs("servicesCta_ru")} />
-          </Section>
-
-          <Section title="Главная — Секция Команда" icon={<IconUsers />}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-              <Field label="Заголовок" value={settings.teamTitle_ru} onChange={set("teamTitle_ru")} {...fs("teamTitle_ru")} />
-              <Field label="Заголовок курсив" value={settings.teamTitleItalic_ru} onChange={set("teamTitleItalic_ru")} {...fs("teamTitleItalic_ru")} />
-            </div>
-            <Field label="Описание" multiline value={settings.teamDescription_ru} onChange={set("teamDescription_ru")} {...fs("teamDescription_ru")} />
-          </Section>
-
-          <Section title="Главная — До и После" icon={<IconCompare />}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-              <Field label="Заголовок" value={settings.baTitle_ru} onChange={set("baTitle_ru")} {...fs("baTitle_ru")} />
-              <Field label="Заголовок курсив" value={settings.baTitleItalic_ru} onChange={set("baTitleItalic_ru")} {...fs("baTitleItalic_ru")} />
-            </div>
-            <Field label="Описание" multiline value={settings.baDescription_ru} onChange={set("baDescription_ru")} {...fs("baDescription_ru")} />
-            <Field label="Текст кнопки" value={settings.baCta_ru} onChange={set("baCta_ru")} {...fs("baCta_ru")} />
-          </Section>
-
-          <Section title="Главная — Отзывы" icon={<IconMessageSquare />}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-              <Field label="Заголовок" value={settings.reviewsTitle_ru} onChange={set("reviewsTitle_ru")} {...fs("reviewsTitle_ru")} />
-              <Field label="Заголовок курсив" value={settings.reviewsTitleItalic_ru} onChange={set("reviewsTitleItalic_ru")} {...fs("reviewsTitleItalic_ru")} />
-            </div>
-            <Field label="Описание" multiline value={settings.reviewsDescription_ru} onChange={set("reviewsDescription_ru")} {...fs("reviewsDescription_ru")} />
-          </Section>
-
-          <Section title="Страница /services — Hero" icon={<IconFileText />}>
-            <Field label="Kicker" value={settings.svcKicker_ru} onChange={set("svcKicker_ru")} {...fs("svcKicker_ru")} />
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-              <Field label="Заголовок" value={settings.svcHeading_ru} onChange={set("svcHeading_ru")} {...fs("svcHeading_ru")} />
-              <Field label="Заголовок курсив" value={settings.svcHeadingItalic_ru} onChange={set("svcHeadingItalic_ru")} {...fs("svcHeadingItalic_ru")} />
-            </div>
-            <Field label="Описание" multiline value={settings.svcDescription_ru} onChange={set("svcDescription_ru")} {...fs("svcDescription_ru")} />
-          </Section>
-
-          <Section title="Страница /services — Статистика" icon={<IconBarChart />}>
-            {([
-              { v: "svcStat1Value" as const, l: "svcStat1Label_ru" as const, n: "1" },
-              { v: "svcStat2Value" as const, l: "svcStat2Label_ru" as const, n: "2" },
-              { v: "svcStat3Value" as const, l: "svcStat3Label_ru" as const, n: "3" },
-              { v: "svcStat4Value" as const, l: "svcStat4Label_ru" as const, n: "4" },
-            ]).map((row) => (
-              <div key={row.n} style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px" }}>
-                <Field label={`Значение ${row.n}`} value={settings[row.v]} onChange={set(row.v)} {...fs(row.v)} />
-                <Field label={`Подпись ${row.n}`} value={settings[row.l]} onChange={set(row.l)} {...fs(row.l)} />
+              <Field
+                label="Paragraf descriere"
+                multiline
+                value={settings.heroDescription}
+                onChange={set("heroDescription")}
+                {...fs("heroDescription")}
+              />
+              <div className="s-grid-2">
+                <Field
+                  label="Text buton principal"
+                  value={settings.heroCta}
+                  onChange={set("heroCta")}
+                  {...fs("heroCta")}
+                />
+                <Field
+                  label="Număr telefon (hero)"
+                  value={settings.heroPhone}
+                  onChange={set("heroPhone")}
+                  {...fs("heroPhone")}
+                />
               </div>
-            ))}
-          </Section>
+            </Section>
 
-          <Section title="Контакты" icon={<IconMapPin />}>
-            <Field
-              label="Адрес"
-              multiline
-              hint="Каждая строка = новая строка на сайте"
-              value={settings.contactAddress_ru}
-              onChange={set("contactAddress_ru")}
-              {...fs("contactAddress_ru")}
-            />
-            <Field
-              label="График работы"
-              multiline
-              hint="Каждая строка = новая строка на сайте"
-              value={settings.contactHours_ru}
-              onChange={set("contactHours_ru")}
-              {...fs("contactHours_ru")}
-            />
-          </Section>
-        </>
-        }
+            {/* Stats */}
+            <Section
+              title="Statistici Hero (carduri peste imagine)"
+              icon={<IconBarChart />}
+            >
+              {(
+                [
+                  { v: "stat1Value", l: "stat1Label", n: "1" },
+                  { v: "stat2Value", l: "stat2Label", n: "2" },
+                  { v: "stat3Value", l: "stat3Label", n: "3" },
+                ] as const
+              ).map((row) => (
+                <div key={row.v} className="s-grid-stat">
+                  <Field
+                    label={`Valoare ${row.n}`}
+                    value={settings[row.v]}
+                    onChange={set(row.v)}
+                    {...fs(row.v)}
+                  />
+                  <Field
+                    label={`Etichetă ${row.n}`}
+                    value={settings[row.l]}
+                    onChange={set(row.l)}
+                    {...fs(row.l)}
+                  />
+                </div>
+              ))}
+            </Section>
+
+            {/* Services section (home) */}
+            <Section
+              title="Pagina principală — Secțiunea Servicii"
+              icon={<IconBriefcase />}
+            >
+              <div className="s-grid-2">
+                <Field
+                  label="Titlu (normal)"
+                  value={settings.servicesTitle}
+                  onChange={set("servicesTitle")}
+                  {...fs("servicesTitle")}
+                />
+                <Field
+                  label="Titlu italic"
+                  value={settings.servicesTitleItalic}
+                  onChange={set("servicesTitleItalic")}
+                  {...fs("servicesTitleItalic")}
+                />
+              </div>
+              <Field
+                label="Descriere"
+                multiline
+                value={settings.servicesDescription}
+                onChange={set("servicesDescription")}
+                {...fs("servicesDescription")}
+              />
+              <div className="s-grid-2">
+                <Field
+                  label="Text buton"
+                  value={settings.servicesCta}
+                  onChange={set("servicesCta")}
+                  {...fs("servicesCta")}
+                />
+              </div>
+            </Section>
+
+            {/* Team */}
+            <Section
+              title="Pagina principală — Secțiunea Echipă"
+              icon={<IconUsers />}
+            >
+              <div className="s-grid-2">
+                <Field
+                  label="Titlu (normal)"
+                  value={settings.teamTitle}
+                  onChange={set("teamTitle")}
+                  {...fs("teamTitle")}
+                />
+                <Field
+                  label="Titlu italic"
+                  value={settings.teamTitleItalic}
+                  onChange={set("teamTitleItalic")}
+                  {...fs("teamTitleItalic")}
+                />
+              </div>
+              <Field
+                label="Descriere"
+                multiline
+                value={settings.teamDescription}
+                onChange={set("teamDescription")}
+                {...fs("teamDescription")}
+              />
+            </Section>
+
+            {/* Before & After */}
+            <Section
+              title="Pagina principală — Secțiunea Înainte & După"
+              icon={<IconCompare />}
+            >
+              <div className="s-grid-2">
+                <Field
+                  label="Titlu (normal)"
+                  value={settings.baTitle}
+                  onChange={set("baTitle")}
+                  {...fs("baTitle")}
+                />
+                <Field
+                  label="Titlu italic"
+                  value={settings.baTitleItalic}
+                  onChange={set("baTitleItalic")}
+                  {...fs("baTitleItalic")}
+                />
+              </div>
+              <Field
+                label="Descriere"
+                multiline
+                value={settings.baDescription}
+                onChange={set("baDescription")}
+                {...fs("baDescription")}
+              />
+              <div className="s-grid-2">
+                <Field
+                  label="Text buton"
+                  value={settings.baCta}
+                  onChange={set("baCta")}
+                  {...fs("baCta")}
+                />
+              </div>
+            </Section>
+
+            {/* Reviews */}
+            <Section
+              title="Pagina principală — Secțiunea Recenzii"
+              icon={<IconMessageSquare />}
+            >
+              <div className="s-grid-2">
+                <Field
+                  label="Titlu (normal)"
+                  value={settings.reviewsTitle}
+                  onChange={set("reviewsTitle")}
+                  {...fs("reviewsTitle")}
+                />
+                <Field
+                  label="Titlu italic"
+                  value={settings.reviewsTitleItalic}
+                  onChange={set("reviewsTitleItalic")}
+                  {...fs("reviewsTitleItalic")}
+                />
+              </div>
+              <Field
+                label="Descriere"
+                multiline
+                value={settings.reviewsDescription}
+                onChange={set("reviewsDescription")}
+                {...fs("reviewsDescription")}
+              />
+            </Section>
+
+            {/* /services page */}
+            <Section title="Pagina /services — Hero" icon={<IconFileText />}>
+              <div className="s-grid-2">
+                <Field
+                  label="Kicker (text mic albastru)"
+                  value={settings.svcKicker}
+                  onChange={set("svcKicker")}
+                  {...fs("svcKicker")}
+                />
+              </div>
+              <div className="s-grid-2">
+                <Field
+                  label="Titlu (normal)"
+                  value={settings.svcHeading}
+                  onChange={set("svcHeading")}
+                  {...fs("svcHeading")}
+                />
+                <Field
+                  label="Titlu italic bold"
+                  value={settings.svcHeadingItalic}
+                  onChange={set("svcHeadingItalic")}
+                  {...fs("svcHeadingItalic")}
+                />
+              </div>
+              <Field
+                label="Descriere"
+                multiline
+                value={settings.svcDescription}
+                onChange={set("svcDescription")}
+                {...fs("svcDescription")}
+              />
+            </Section>
+
+            <Section
+              title="Pagina /services — Statistici (4 carduri)"
+              icon={<IconBarChart />}
+            >
+              {(
+                [
+                  { v: "svcStat1Value", l: "svcStat1Label", n: "1" },
+                  { v: "svcStat2Value", l: "svcStat2Label", n: "2" },
+                  { v: "svcStat3Value", l: "svcStat3Label", n: "3" },
+                  { v: "svcStat4Value", l: "svcStat4Label", n: "4" },
+                ] as const
+              ).map((row) => (
+                <div key={row.v} className="s-grid-stat">
+                  <Field
+                    label={`Valoare ${row.n}`}
+                    value={settings[row.v]}
+                    onChange={set(row.v)}
+                    {...fs(row.v)}
+                  />
+                  <Field
+                    label={`Etichetă ${row.n}`}
+                    value={settings[row.l]}
+                    onChange={set(row.l)}
+                    {...fs(row.l)}
+                  />
+                </div>
+              ))}
+            </Section>
+
+            {/* Contact */}
+            <Section title="Contact" icon={<IconMapPin />}>
+              <div className="s-grid-2">
+                <Field
+                  label="Telefon"
+                  value={settings.contactPhone}
+                  onChange={set("contactPhone")}
+                  {...fs("contactPhone")}
+                />
+                <Field
+                  label="Email"
+                  value={settings.contactEmail}
+                  onChange={set("contactEmail")}
+                  {...fs("contactEmail")}
+                />
+              </div>
+              <Field
+                label="Adresă"
+                multiline
+                hint="Fiecare rând nou = rând nou pe site"
+                value={settings.contactAddress}
+                onChange={set("contactAddress")}
+                {...fs("contactAddress")}
+              />
+              <Field
+                label="Program de lucru"
+                multiline
+                hint="Fiecare rând nou = rând nou pe site"
+                value={settings.contactHours}
+                onChange={set("contactHours")}
+                {...fs("contactHours")}
+              />
+            </Section>
+          </>
+        )}
+
+        {lang === "ru" && (
+          <>
+            <Section title="Hero — Заголовок & Содержание" icon={<IconImage />}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "12px",
+                }}
+              >
+                <Field
+                  label="Строка 1 (обычная)"
+                  value={settings.heroTitle_ru}
+                  onChange={set("heroTitle_ru")}
+                  {...fs("heroTitle_ru")}
+                />
+                <Field
+                  label="Строка 1 курсив"
+                  value={settings.heroTitleItalic_ru}
+                  onChange={set("heroTitleItalic_ru")}
+                  {...fs("heroTitleItalic_ru")}
+                />
+                <Field
+                  label="Строка 2"
+                  value={settings.heroTitle2_ru}
+                  onChange={set("heroTitle2_ru")}
+                  {...fs("heroTitle2_ru")}
+                />
+                <Field
+                  label="Строка 3"
+                  value={settings.heroTitle3_ru}
+                  onChange={set("heroTitle3_ru")}
+                  {...fs("heroTitle3_ru")}
+                />
+              </div>
+              <Field
+                label="Описание"
+                multiline
+                value={settings.heroDescription_ru}
+                onChange={set("heroDescription_ru")}
+                {...fs("heroDescription_ru")}
+              />
+              <Field
+                label="Текст кнопки"
+                value={settings.heroCta_ru}
+                onChange={set("heroCta_ru")}
+                {...fs("heroCta_ru")}
+              />
+            </Section>
+
+            <Section title="Статистика Hero (карточки)" icon={<IconBarChart />}>
+              {[
+                {
+                  v: "stat1Value" as const,
+                  l: "stat1Label_ru" as const,
+                  n: "1",
+                },
+                {
+                  v: "stat2Value" as const,
+                  l: "stat2Label_ru" as const,
+                  n: "2",
+                },
+                {
+                  v: "stat3Value" as const,
+                  l: "stat3Label_ru" as const,
+                  n: "3",
+                },
+              ].map((row) => (
+                <div
+                  key={row.n}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "140px 1fr",
+                    gap: "12px",
+                  }}
+                >
+                  <Field
+                    label={`Значение ${row.n}`}
+                    value={settings[row.v]}
+                    onChange={set(row.v)}
+                    {...fs(row.v)}
+                  />
+                  <Field
+                    label={`Подпись ${row.n}`}
+                    value={settings[row.l]}
+                    onChange={set(row.l)}
+                    {...fs(row.l)}
+                  />
+                </div>
+              ))}
+            </Section>
+
+            <Section title="Главная — Секция Услуги" icon={<IconBriefcase />}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "12px",
+                }}
+              >
+                <Field
+                  label="Заголовок"
+                  value={settings.servicesTitle_ru}
+                  onChange={set("servicesTitle_ru")}
+                  {...fs("servicesTitle_ru")}
+                />
+                <Field
+                  label="Заголовок курсив"
+                  value={settings.servicesTitleItalic_ru}
+                  onChange={set("servicesTitleItalic_ru")}
+                  {...fs("servicesTitleItalic_ru")}
+                />
+              </div>
+              <Field
+                label="Описание"
+                multiline
+                value={settings.servicesDescription_ru}
+                onChange={set("servicesDescription_ru")}
+                {...fs("servicesDescription_ru")}
+              />
+              <Field
+                label="Текст кнопки"
+                value={settings.servicesCta_ru}
+                onChange={set("servicesCta_ru")}
+                {...fs("servicesCta_ru")}
+              />
+            </Section>
+
+            <Section title="Главная — Секция Команда" icon={<IconUsers />}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "12px",
+                }}
+              >
+                <Field
+                  label="Заголовок"
+                  value={settings.teamTitle_ru}
+                  onChange={set("teamTitle_ru")}
+                  {...fs("teamTitle_ru")}
+                />
+                <Field
+                  label="Заголовок курсив"
+                  value={settings.teamTitleItalic_ru}
+                  onChange={set("teamTitleItalic_ru")}
+                  {...fs("teamTitleItalic_ru")}
+                />
+              </div>
+              <Field
+                label="Описание"
+                multiline
+                value={settings.teamDescription_ru}
+                onChange={set("teamDescription_ru")}
+                {...fs("teamDescription_ru")}
+              />
+            </Section>
+
+            <Section title="Главная — До и После" icon={<IconCompare />}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "12px",
+                }}
+              >
+                <Field
+                  label="Заголовок"
+                  value={settings.baTitle_ru}
+                  onChange={set("baTitle_ru")}
+                  {...fs("baTitle_ru")}
+                />
+                <Field
+                  label="Заголовок курсив"
+                  value={settings.baTitleItalic_ru}
+                  onChange={set("baTitleItalic_ru")}
+                  {...fs("baTitleItalic_ru")}
+                />
+              </div>
+              <Field
+                label="Описание"
+                multiline
+                value={settings.baDescription_ru}
+                onChange={set("baDescription_ru")}
+                {...fs("baDescription_ru")}
+              />
+              <Field
+                label="Текст кнопки"
+                value={settings.baCta_ru}
+                onChange={set("baCta_ru")}
+                {...fs("baCta_ru")}
+              />
+            </Section>
+
+            <Section title="Главная — Отзывы" icon={<IconMessageSquare />}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "12px",
+                }}
+              >
+                <Field
+                  label="Заголовок"
+                  value={settings.reviewsTitle_ru}
+                  onChange={set("reviewsTitle_ru")}
+                  {...fs("reviewsTitle_ru")}
+                />
+                <Field
+                  label="Заголовок курсив"
+                  value={settings.reviewsTitleItalic_ru}
+                  onChange={set("reviewsTitleItalic_ru")}
+                  {...fs("reviewsTitleItalic_ru")}
+                />
+              </div>
+              <Field
+                label="Описание"
+                multiline
+                value={settings.reviewsDescription_ru}
+                onChange={set("reviewsDescription_ru")}
+                {...fs("reviewsDescription_ru")}
+              />
+            </Section>
+
+            <Section title="Страница /services — Hero" icon={<IconFileText />}>
+              <Field
+                label="Kicker"
+                value={settings.svcKicker_ru}
+                onChange={set("svcKicker_ru")}
+                {...fs("svcKicker_ru")}
+              />
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "12px",
+                }}
+              >
+                <Field
+                  label="Заголовок"
+                  value={settings.svcHeading_ru}
+                  onChange={set("svcHeading_ru")}
+                  {...fs("svcHeading_ru")}
+                />
+                <Field
+                  label="Заголовок курсив"
+                  value={settings.svcHeadingItalic_ru}
+                  onChange={set("svcHeadingItalic_ru")}
+                  {...fs("svcHeadingItalic_ru")}
+                />
+              </div>
+              <Field
+                label="Описание"
+                multiline
+                value={settings.svcDescription_ru}
+                onChange={set("svcDescription_ru")}
+                {...fs("svcDescription_ru")}
+              />
+            </Section>
+
+            <Section
+              title="Страница /services — Статистика"
+              icon={<IconBarChart />}
+            >
+              {[
+                {
+                  v: "svcStat1Value" as const,
+                  l: "svcStat1Label_ru" as const,
+                  n: "1",
+                },
+                {
+                  v: "svcStat2Value" as const,
+                  l: "svcStat2Label_ru" as const,
+                  n: "2",
+                },
+                {
+                  v: "svcStat3Value" as const,
+                  l: "svcStat3Label_ru" as const,
+                  n: "3",
+                },
+                {
+                  v: "svcStat4Value" as const,
+                  l: "svcStat4Label_ru" as const,
+                  n: "4",
+                },
+              ].map((row) => (
+                <div
+                  key={row.n}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "140px 1fr",
+                    gap: "12px",
+                  }}
+                >
+                  <Field
+                    label={`Значение ${row.n}`}
+                    value={settings[row.v]}
+                    onChange={set(row.v)}
+                    {...fs(row.v)}
+                  />
+                  <Field
+                    label={`Подпись ${row.n}`}
+                    value={settings[row.l]}
+                    onChange={set(row.l)}
+                    {...fs(row.l)}
+                  />
+                </div>
+              ))}
+            </Section>
+
+            <Section title="Контакты" icon={<IconMapPin />}>
+              <Field
+                label="Адрес"
+                multiline
+                hint="Каждая строка = новая строка на сайте"
+                value={settings.contactAddress_ru}
+                onChange={set("contactAddress_ru")}
+                {...fs("contactAddress_ru")}
+              />
+              <Field
+                label="График работы"
+                multiline
+                hint="Каждая строка = новая строка на сайте"
+                value={settings.contactHours_ru}
+                onChange={set("contactHours_ru")}
+                {...fs("contactHours_ru")}
+              />
+            </Section>
+          </>
+        )}
       </div>
 
       {/* Sticky save bar */}
