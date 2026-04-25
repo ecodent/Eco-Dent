@@ -52,12 +52,21 @@ export default function EchipaPage() {
     load();
   };
 
-  const handleImage = async (file: File, item: TeamMember, index: number) => {
+  const handleImage = async (file: File, index: number) => {
     const url = await uploadImage(file);
-    setItems((prev) =>
-      prev.map((p, i) => (i === index ? { ...p, image: url } : p)),
-    );
-    handleSave({ ...item, image: url });
+    setItems((prev) => {
+      const updated = prev.map((p, i) =>
+        i === index ? { ...p, image: url } : p,
+      );
+      const item = updated[index];
+      const method = item._id ? "PUT" : "POST";
+      fetch("/api/team", {
+        method,
+        headers: authHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify(item),
+      }).then(() => load());
+      return updated;
+    });
   };
 
   if (loading) {
@@ -157,7 +166,7 @@ export default function EchipaPage() {
                   style={{ display: "none" }}
                   onChange={(e) =>
                     e.target.files?.[0] &&
-                    handleImage(e.target.files[0], item, i)
+                    handleImage(e.target.files[0], i)
                   }
                 />
               </label>

@@ -190,7 +190,8 @@ export default function AdminLayout({
     <div
       style={{
         display: "flex",
-        minHeight: "100vh",
+        height: "100vh",
+        overflow: "hidden",
         backgroundColor: "#F0F2F5",
       }}
     >

@@ -55,9 +55,20 @@ export default function BeforeAfterPage() {
     field: "before" | "after",
   ) => {
     const url = await uploadImage(file);
-    setItems((prev) =>
-      prev.map((p, i) => (i === index ? { ...p, [field]: url } : p)),
-    );
+    setItems((prev) => {
+      const updated = prev.map((p, i) =>
+        i === index ? { ...p, [field]: url } : p,
+      );
+      // auto-save immediately after upload
+      const item = updated[index];
+      const method = item._id ? "PUT" : "POST";
+      fetch("/api/before-after", {
+        method,
+        headers: authHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify(item),
+      }).then(() => load());
+      return updated;
+    });
   };
 
   if (loading) {
