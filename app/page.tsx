@@ -14,6 +14,7 @@ import {
   getReviews,
   getBeforeAfterCases,
   getHeroImages,
+  getSiteSettings,
 } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -126,27 +127,48 @@ export default async function Home() {
     },
   ];
 
-  let teamMembers, reviews, beforeAfterCases, heroImages, services;
+  let teamMembers, reviews, beforeAfterCases, heroImages, services, siteSettings;
   try {
-    [teamMembers, reviews, beforeAfterCases, heroImages, services] = await Promise.all([
-      getTeamMembers(),
-      getReviews(),
-      getBeforeAfterCases(),
-      getHeroImages(),
-      getServices(),
-    ]);
+    [teamMembers, reviews, beforeAfterCases, heroImages, services, siteSettings] =
+      await Promise.all([
+        getTeamMembers(),
+        getReviews(),
+        getBeforeAfterCases(),
+        getHeroImages(),
+        getServices(),
+        getSiteSettings(),
+      ]);
   } catch {
     teamMembers = [];
     reviews = [];
     beforeAfterCases = [];
     heroImages = [];
     services = [];
+    siteSettings = {};
   }
 
   // Use fallback if DB returned empty
   if (!teamMembers || teamMembers.length === 0) teamMembers = defaultTeam;
   if (!heroImages || heroImages.length === 0) heroImages = defaultHero;
   if (!services || services.length === 0) services = [];
+
+  const s = {
+    heroTitle: "Îngrijire Dentară",
+    heroTitleItalic: "Avansată",
+    heroTitle2: "în care",
+    heroTitle3: "Poți Avea Încredere.",
+    heroDescription:
+      "Diagnostic digital, proceduri minim invazive și rezultate predictibile la fiecare etapă a tratamentului.",
+    heroCta: "Programează o Consultație",
+    heroPhone: "+373 69 100 200",
+    stat1Value: "100%",
+    stat1Label: "Diagnostic Digital & Radiologie",
+    stat2Value: "5K+",
+    stat2Label: "Pacienți Tratați cu Grijă",
+    stat3Value: "10+",
+    stat3Label: "Ani Experiență Clinică",
+    ...siteSettings,
+  };
   if (!reviews || reviews.length === 0) reviews = defaultReviews;
   if (!beforeAfterCases || beforeAfterCases.length === 0)
     beforeAfterCases = defaultCases;
@@ -205,7 +227,7 @@ export default async function Home() {
                     color: "#0168FF",
                   }}
                 >
-                  100%
+                  {s.stat1Value}
                 </p>
                 <p
                   style={{
@@ -215,7 +237,7 @@ export default async function Home() {
                     lineHeight: 1.4,
                   }}
                 >
-                  <T k="hero.stats.digital" />
+                  {s.stat1Label}
                 </p>
               </div>
 
@@ -238,7 +260,7 @@ export default async function Home() {
                       color: "#0F1A2D",
                     }}
                   >
-                    5K+
+                    {s.stat2Value}
                   </p>
                   <div className="flex">
                     <Image
@@ -287,7 +309,7 @@ export default async function Home() {
                     lineHeight: 1.4,
                   }}
                 >
-                  <T k="hero.stats.patients" />
+                  {s.stat2Label}
                 </p>
               </div>
 
@@ -309,7 +331,7 @@ export default async function Home() {
                     color: "#0F1A2D",
                   }}
                 >
-                  10+
+                  {s.stat3Value}
                 </p>
                 <p
                   style={{
@@ -319,7 +341,7 @@ export default async function Home() {
                     lineHeight: 1.4,
                   }}
                 >
-                  <T k="hero.stats.years" />
+                  {s.stat3Label}
                 </p>
               </div>
             </div>
@@ -344,14 +366,14 @@ export default async function Home() {
                 letterSpacing: "-0.02em",
               }}
             >
-              <T k="hero.title.line1" />
+              {s.heroTitle}
               <br />
               <span style={{ fontWeight: 700, fontStyle: "italic" }}>
-                <T k="hero.title.italic" />
+                {s.heroTitleItalic}
               </span>{" "}
-              <T k="hero.title.line2" />
+              {s.heroTitle2}
               <br />
-              <T k="hero.title.line3" />
+              {s.heroTitle3}
             </h1>
 
             <p
@@ -363,15 +385,7 @@ export default async function Home() {
                 maxWidth: "420px",
               }}
             >
-              <T k="hero.description.start" />
-              <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                <T k="hero.description.bold1" />
-              </span>
-              <T k="hero.description.middle" />
-              <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
-                <T k="hero.description.bold2" />
-              </span>
-              <T k="hero.description.end" />
+              {s.heroDescription}
             </p>
 
             <a
@@ -388,7 +402,7 @@ export default async function Home() {
                 fontWeight: 500,
               }}
             >
-              <T k="hero.cta" />
+              {s.heroCta}
               <ArrowIcon />
             </a>
 
@@ -519,138 +533,208 @@ export default async function Home() {
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               style={{ flexShrink: 0 }}
             >
-              {services.slice(0, 2).map((svc: { slug: string; title: string; subtitle: string; image: string; imagePosition?: string; cardColor: string }) => {
-                const isDark = svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
-                return (
-                  <Link
-                    key={svc.slug}
-                    href={`/services/${svc.slug}`}
-                    style={{
-                      backgroundColor: svc.cardColor || "#ECEEF1",
-                      borderRadius: "24px",
-                      overflow: "hidden",
-                      display: "flex",
-                      flexDirection: "column",
-                      textDecoration: "none",
-                    }}
-                    className="service-card"
-                  >
-                    <div style={{ padding: "20px 20px 0" }}>
-                      <h3
+              {services
+                .slice(0, 2)
+                .map(
+                  (svc: {
+                    slug: string;
+                    title: string;
+                    subtitle: string;
+                    image: string;
+                    imagePosition?: string;
+                    cardColor: string;
+                  }) => {
+                    const isDark =
+                      svc.cardColor === "#0F1A2D" ||
+                      svc.cardColor === "#0168FF";
+                    return (
+                      <Link
+                        key={svc.slug}
+                        href={`/services/${svc.slug}`}
                         style={{
-                          fontSize: "16px",
-                          fontWeight: 700,
-                          color: isDark ? "#FFFFFF" : "#0F1A2D",
+                          backgroundColor: svc.cardColor || "#ECEEF1",
+                          borderRadius: "24px",
+                          overflow: "hidden",
+                          display: "flex",
+                          flexDirection: "column",
+                          textDecoration: "none",
                         }}
+                        className="service-card"
                       >
-                        {svc.title}
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: "11px",
-                          color: isDark ? "rgba(255,255,255,0.65)" : "#878C96",
-                          marginTop: "4px",
-                          lineHeight: 1.4,
-                        }}
-                      >
-                        {svc.subtitle}
-                      </p>
-                    </div>
-                    {svc.image && (
-                      <div
-                        className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                        style={{ flex: 1, position: "relative", marginTop: "10px" }}
-                      >
-                        <Image
-                          src={svc.image}
-                          alt={svc.title}
-                          fill
-                          className="object-cover"
-                          style={{ objectPosition: svc.imagePosition || "center 30%" }}
-                          sizes="15vw"
-                        />
-                      </div>
-                    )}
-                  </Link>
-                );
-              })}
+                        <div style={{ padding: "20px 20px 0" }}>
+                          <h3
+                            style={{
+                              fontSize: "16px",
+                              fontWeight: 700,
+                              color: isDark ? "#FFFFFF" : "#0F1A2D",
+                            }}
+                          >
+                            {svc.title}
+                          </h3>
+                          <p
+                            style={{
+                              fontSize: "11px",
+                              color: isDark
+                                ? "rgba(255,255,255,0.65)"
+                                : "#878C96",
+                              marginTop: "4px",
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            {svc.subtitle}
+                          </p>
+                        </div>
+                        {svc.image && (
+                          <div
+                            className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
+                            style={{
+                              flex: 1,
+                              position: "relative",
+                              marginTop: "10px",
+                            }}
+                          >
+                            <Image
+                              src={svc.image}
+                              alt={svc.title}
+                              fill
+                              className="object-cover"
+                              style={{
+                                objectPosition:
+                                  svc.imagePosition || "center 30%",
+                              }}
+                              sizes="15vw"
+                            />
+                          </div>
+                        )}
+                      </Link>
+                    );
+                  },
+                )}
             </div>
           </div>
 
           {/* ===== RIGHT COLUMN: next 4 services from DB ===== */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {services.slice(2, 6).map((svc: { slug: string; title: string; subtitle: string; image: string; imagePosition?: string; cardColor: string }) => {
-              const isDark = svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
-              return (
-                <Link
-                  key={svc.slug}
-                  href={`/services/${svc.slug}`}
-                  style={{
-                    backgroundColor: svc.cardColor || "#ECEEF1",
-                    borderRadius: "24px",
-                    overflow: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
-                    textDecoration: "none",
-                  }}
-                  className="service-card"
-                >
-                  {isDark ? (
-                    <>
-                      {svc.image && (
-                        <div
-                          className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                          style={{ flex: 1, position: "relative" }}
-                        >
-                          <Image
-                            src={svc.image}
-                            alt={svc.title}
-                            fill
-                            className="object-cover"
-                            style={{ objectPosition: svc.imagePosition || "center 30%" }}
-                            sizes="20vw"
-                          />
-                        </div>
+            {services
+              .slice(2, 6)
+              .map(
+                (svc: {
+                  slug: string;
+                  title: string;
+                  subtitle: string;
+                  image: string;
+                  imagePosition?: string;
+                  cardColor: string;
+                }) => {
+                  const isDark =
+                    svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
+                  return (
+                    <Link
+                      key={svc.slug}
+                      href={`/services/${svc.slug}`}
+                      style={{
+                        backgroundColor: svc.cardColor || "#ECEEF1",
+                        borderRadius: "24px",
+                        overflow: "hidden",
+                        display: "flex",
+                        flexDirection: "column",
+                        textDecoration: "none",
+                      }}
+                      className="service-card"
+                    >
+                      {isDark ? (
+                        <>
+                          {svc.image && (
+                            <div
+                              className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
+                              style={{ flex: 1, position: "relative" }}
+                            >
+                              <Image
+                                src={svc.image}
+                                alt={svc.title}
+                                fill
+                                className="object-cover"
+                                style={{
+                                  objectPosition:
+                                    svc.imagePosition || "center 30%",
+                                }}
+                                sizes="20vw"
+                              />
+                            </div>
+                          )}
+                          <div style={{ padding: "16px 20px 20px" }}>
+                            <h3
+                              style={{
+                                fontSize: "16px",
+                                fontWeight: 700,
+                                color: "#FFFFFF",
+                              }}
+                            >
+                              {svc.title}
+                            </h3>
+                            <p
+                              style={{
+                                fontSize: "11px",
+                                color: "rgba(255,255,255,0.65)",
+                                marginTop: "4px",
+                                lineHeight: 1.4,
+                              }}
+                            >
+                              {svc.subtitle}
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div style={{ padding: "20px 20px 0" }}>
+                            <h3
+                              style={{
+                                fontSize: "16px",
+                                fontWeight: 700,
+                                color: "#0F1A2D",
+                              }}
+                            >
+                              {svc.title}
+                            </h3>
+                            <p
+                              style={{
+                                fontSize: "11px",
+                                color: "#878C96",
+                                marginTop: "4px",
+                                lineHeight: 1.4,
+                              }}
+                            >
+                              {svc.subtitle}
+                            </p>
+                          </div>
+                          {svc.image && (
+                            <div
+                              className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
+                              style={{
+                                flex: 1,
+                                position: "relative",
+                                marginTop: "10px",
+                              }}
+                            >
+                              <Image
+                                src={svc.image}
+                                alt={svc.title}
+                                fill
+                                className="object-cover"
+                                style={{
+                                  objectPosition:
+                                    svc.imagePosition || "center 30%",
+                                }}
+                                sizes="20vw"
+                              />
+                            </div>
+                          )}
+                        </>
                       )}
-                      <div style={{ padding: "16px 20px 20px" }}>
-                        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#FFFFFF" }}>
-                          {svc.title}
-                        </h3>
-                        <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.65)", marginTop: "4px", lineHeight: 1.4 }}>
-                          {svc.subtitle}
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div style={{ padding: "20px 20px 0" }}>
-                        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0F1A2D" }}>
-                          {svc.title}
-                        </h3>
-                        <p style={{ fontSize: "11px", color: "#878C96", marginTop: "4px", lineHeight: 1.4 }}>
-                          {svc.subtitle}
-                        </p>
-                      </div>
-                      {svc.image && (
-                        <div
-                          className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                          style={{ flex: 1, position: "relative", marginTop: "10px" }}
-                        >
-                          <Image
-                            src={svc.image}
-                            alt={svc.title}
-                            fill
-                            className="object-cover"
-                            style={{ objectPosition: svc.imagePosition || "center 30%" }}
-                            sizes="20vw"
-                          />
-                        </div>
-                      )}
-                    </>
-                  )}
-                </Link>
-              );
-            })}
+                    </Link>
+                  );
+                },
+              )}
           </div>
         </div>
       </section>

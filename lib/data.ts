@@ -4,6 +4,7 @@ import Service from "./models/Service";
 import Review from "./models/Review";
 import BeforeAfterCase from "./models/BeforeAfterCase";
 import HeroImage from "./models/HeroImage";
+import SiteSettings from "./models/SiteSettings";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const _Team = TeamMember as any;
@@ -11,6 +12,7 @@ const _Service = Service as any;
 const _Review = Review as any;
 const _BA = BeforeAfterCase as any;
 const _Hero = HeroImage as any;
+const _Settings = SiteSettings as any;
 
 export async function getTeamMembers() {
   await dbConnect();
@@ -46,4 +48,13 @@ export async function getHeroImages() {
   await dbConnect();
   const docs = await _Hero.find().sort({ order: 1 }).lean();
   return JSON.parse(JSON.stringify(docs));
+}
+
+export async function getSiteSettings() {
+  await dbConnect();
+  let doc = await _Settings.findOne().lean();
+  if (!doc) {
+    doc = await _Settings.create({});
+  }
+  return JSON.parse(JSON.stringify(doc));
 }

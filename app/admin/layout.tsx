@@ -13,6 +13,7 @@ import {
   IconImage,
   IconHome,
   IconExternalLink,
+  IconSettings,
 } from "./icons";
 import { btnPrimary, labelStyle, inputStyle } from "./lib";
 
@@ -27,6 +28,7 @@ const NAV = [
     icon: <IconLayers />,
   },
   { href: "/admin/hero", label: "Hero", icon: <IconImage /> },
+  { href: "/admin/setari", label: "Texte Site", icon: <IconSettings /> },
 ];
 
 export default function AdminLayout({
