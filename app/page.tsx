@@ -10,7 +10,6 @@ import Navbar from "./Navbar";
 import { T } from "./i18n/LanguageProvider";
 import {
   getTeamMembers,
-  getServices,
   getReviews,
   getBeforeAfterCases,
   getHeroImages,
