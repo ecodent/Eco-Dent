@@ -18,7 +18,7 @@ import {
   getSiteSettings,
 } from "@/lib/data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60; // ISR: rebuild page at most every 60 seconds
 
 function PhoneIcon() {
   return (

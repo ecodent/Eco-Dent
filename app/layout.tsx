@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Rethink_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
 import { cookies } from "next/headers";
@@ -9,14 +9,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = Poppins({
   variable: "--font-poppins",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500", "600", "700"],
-});
-
-const rethinkSans = Rethink_Sans({
-  variable: "--font-rethink-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -35,7 +31,7 @@ export default async function RootLayout({
   return (
     <html
       lang={cookieLang}
-      className={`${poppins.variable} ${rethinkSans.variable} h-full antialiased`}
+      className={`${poppins.variable} h-full antialiased`}
     >
       <body className={`min-h-full flex flex-col ${poppins.className}`}>
         <LanguageProvider initialLang={cookieLang}>{children}</LanguageProvider>
