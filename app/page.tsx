@@ -749,6 +749,7 @@ export default async function Home() {
         title={s.teamTitle}
         titleItalic={s.teamTitleItalic}
         description={s.teamDescription}
+        lang={cookieLang}
       />
 
       {/* Before & After Section */}

@@ -5,6 +5,8 @@ export interface TeamMember {
   _id?: string;
   name: string;
   role: string;
+  name_ru?: string;
+  role_ru?: string;
   image: string;
   order: number;
 }

@@ -279,7 +279,10 @@ export default function BeforeAfter({
         {offsets.map((offset) => {
           const idx = (((currentCase + offset) % total) + total) % total;
           const caseData = cases[idx];
-          const caseLabel = (lang === "ru" && caseData.label_ru) ? caseData.label_ru : caseData.label;
+          const caseLabel =
+            lang === "ru" && caseData.label_ru
+              ? caseData.label_ru
+              : caseData.label;
           const isCenter = offset === 0;
 
           if (!isCenter) {

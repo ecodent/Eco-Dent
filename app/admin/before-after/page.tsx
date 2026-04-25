@@ -113,7 +113,13 @@ export default function BeforeAfterPage() {
           onClick={() =>
             setItems([
               ...items,
-              { before: "", after: "", label: "", label_ru: "", order: items.length },
+              {
+                before: "",
+                after: "",
+                label: "",
+                label_ru: "",
+                order: items.length,
+              },
             ])
           }
           style={btnPrimary}

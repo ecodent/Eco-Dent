@@ -322,17 +322,22 @@ export default async function DynamicServicePage({
 
   // Resolve RU fields if language is Russian
   const s = service as Record<string, any>;
-  const title = (cookieLang === "ru" && s.title_ru) ? s.title_ru : service.title;
-  const subtitle = (cookieLang === "ru" && s.subtitle_ru) ? s.subtitle_ru : service.subtitle;
-  const description = (cookieLang === "ru" && s.description_ru) ? s.description_ru : service.description;
+  const title = cookieLang === "ru" && s.title_ru ? s.title_ru : service.title;
+  const subtitle =
+    cookieLang === "ru" && s.subtitle_ru ? s.subtitle_ru : service.subtitle;
+  const description =
+    cookieLang === "ru" && s.description_ru
+      ? s.description_ru
+      : service.description;
   const features = service.features.map((f: any) =>
     cookieLang === "ru" && f.title_ru
       ? { title: f.title_ru, description: f.description_ru || f.description }
-      : { title: f.title, description: f.description }
+      : { title: f.title, description: f.description },
   );
-  const benefits = (cookieLang === "ru" && s.benefits_ru?.length)
-    ? s.benefits_ru
-    : (service.benefits || []);
+  const benefits =
+    cookieLang === "ru" && s.benefits_ru?.length
+      ? s.benefits_ru
+      : service.benefits || [];
 
   return (
     <ServicePageLayout

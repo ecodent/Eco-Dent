@@ -4,6 +4,8 @@ const TeamMemberSchema = new Schema(
   {
     name: { type: String, default: "" },
     role: { type: String, default: "" },
+    name_ru: { type: String, default: "" },
+    role_ru: { type: String, default: "" },
     image: { type: String, default: "" },
     order: { type: Number, default: 0 },
   },

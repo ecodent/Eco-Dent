@@ -181,7 +181,7 @@ export default function EchipaPage() {
             >
               <div className="echipa-fields-grid">
                 <div>
-                  <label style={labelStyle}>Nume</label>
+                  <label style={labelStyle}>Nume (RO)</label>
                   <input
                     style={inputStyle}
                     value={item.name}
@@ -196,7 +196,7 @@ export default function EchipaPage() {
                   />
                 </div>
                 <div>
-                  <label style={labelStyle}>Rol</label>
+                  <label style={labelStyle}>Rol (RO)</label>
                   <input
                     style={inputStyle}
                     value={item.role}
@@ -208,6 +208,36 @@ export default function EchipaPage() {
                       )
                     }
                     placeholder="Specialist..."
+                  />
+                </div>
+                <div>
+                  <label style={labelStyle}>Nume (RU)</label>
+                  <input
+                    style={inputStyle}
+                    value={item.name_ru || ""}
+                    onChange={(e) =>
+                      setItems((prev) =>
+                        prev.map((p, idx) =>
+                          idx === i ? { ...p, name_ru: e.target.value } : p,
+                        ),
+                      )
+                    }
+                    placeholder="Др. Имя Фамилия"
+                  />
+                </div>
+                <div>
+                  <label style={labelStyle}>Rol (RU)</label>
+                  <input
+                    style={inputStyle}
+                    value={item.role_ru || ""}
+                    onChange={(e) =>
+                      setItems((prev) =>
+                        prev.map((p, idx) =>
+                          idx === i ? { ...p, role_ru: e.target.value } : p,
+                        ),
+                      )
+                    }
+                    placeholder="Специалист..."
                   />
                 </div>
               </div>

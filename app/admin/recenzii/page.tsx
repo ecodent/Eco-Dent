@@ -101,7 +101,15 @@ export default function RecenziiPage() {
           onClick={() =>
             setItems([
               ...items,
-              { name: "", image: "", grade: 5, text: "", name_ru: "", text_ru: "", order: items.length },
+              {
+                name: "",
+                image: "",
+                grade: 5,
+                text: "",
+                name_ru: "",
+                text_ru: "",
+                order: items.length,
+              },
             ])
           }
           style={btnPrimary}

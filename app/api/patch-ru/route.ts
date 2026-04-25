@@ -3,6 +3,15 @@ import dbConnect from "@/lib/mongodb";
 import Service from "@/lib/models/Service";
 import Review from "@/lib/models/Review";
 import BeforeAfterCase from "@/lib/models/BeforeAfterCase";
+import TeamMember from "@/lib/models/TeamMember";
+
+const teamRU: { name: string; name_ru: string; role_ru: string }[] = [
+  { name: "Dr. Emilia Rossi", name_ru: "Др. Эмилия Росси", role_ru: "Косметический стоматолог" },
+  { name: "Dr. Adrian Novak", name_ru: "Др. Адриан Новак", role_ru: "Имплантолог" },
+  { name: "Dr. Lukas Meyer", name_ru: "Др. Лукас Майер", role_ru: "Главный стоматолог" },
+  { name: "Dr. Sofia Chen", name_ru: "Др. София Чен", role_ru: "Ортодонт" },
+  { name: "Dr. Marcus Reid", name_ru: "Др. Маркус Рейд", role_ru: "Хирург-стоматолог" },
+];
 
 const serviceRU: Record<string, {
   title_ru: string; subtitle_ru: string; description_ru: string;
@@ -157,6 +166,15 @@ export async function POST() {
         { $set: { label_ru: b.label_ru } }
       );
       results.push(res ? `✓ ba: ${b.label}` : `ba not found: ${b.label}`);
+    }
+
+    // Patch team members
+    for (const m of teamRU) {
+      const res = await (TeamMember as any).findOneAndUpdate(
+        { name: m.name },
+        { $set: { name_ru: m.name_ru, role_ru: m.role_ru } }
+      );
+      results.push(res ? `✓ team: ${m.name}` : `team not found: ${m.name}`);
     }
 
     return NextResponse.json({ ok: true, results });

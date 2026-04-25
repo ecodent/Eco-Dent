@@ -104,8 +104,10 @@ export default function PatientReviews({
   const rightReview = reviews[rightIdx];
 
   // Resolve name/text based on lang
-  const resolveName = (r: ReviewItem) => (lang === "ru" && r.name_ru) ? r.name_ru : r.name;
-  const resolveText = (r: ReviewItem) => (lang === "ru" && r.text_ru) ? r.text_ru : r.text;
+  const resolveName = (r: ReviewItem) =>
+    lang === "ru" && r.name_ru ? r.name_ru : r.name;
+  const resolveText = (r: ReviewItem) =>
+    lang === "ru" && r.text_ru ? r.text_ru : r.text;
 
   if (total === 0) return null;
 

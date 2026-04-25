@@ -7,6 +7,8 @@ import { useT } from "./i18n/LanguageProvider";
 interface Doctor {
   name: string;
   role: string;
+  name_ru?: string;
+  role_ru?: string;
   image: string;
 }
 
@@ -15,6 +17,7 @@ interface TeamCarouselProps {
   title?: string;
   titleItalic?: string;
   description?: string;
+  lang?: string;
 }
 
 // Card sizing — responsive
@@ -27,6 +30,7 @@ export default function TeamCarousel({
   title,
   titleItalic,
   description,
+  lang,
 }: TeamCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -247,7 +251,7 @@ export default function TeamCarousel({
                       color: "#FFFFFF",
                     }}
                   >
-                    {doctor.name}
+                    {lang === "ru" && doctor.name_ru ? doctor.name_ru : doctor.name}
                   </p>
                   <p
                     style={{
@@ -257,7 +261,7 @@ export default function TeamCarousel({
                       fontStyle: "italic",
                     }}
                   >
-                    {doctor.role}
+                    {lang === "ru" && doctor.role_ru ? doctor.role_ru : doctor.role}
                   </p>
                 </div>
               </div>
