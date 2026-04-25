@@ -18,7 +18,7 @@ import {
   getSiteSettings,
 } from "@/lib/data";
 
-export const revalidate = 60; // ISR: rebuild page at most every 60 seconds
+export const dynamic = "force-dynamic"; // layout reads cookies → route is dynamic; data is cached via unstable_cache in lib/data.ts
 
 function PhoneIcon() {
   return (
