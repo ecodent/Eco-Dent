@@ -21,7 +21,11 @@ const NAV = [
   { href: "/admin/echipa", label: "Echipă", icon: <IconUsers /> },
   { href: "/admin/servicii", label: "Servicii", icon: <IconBriefcase /> },
   { href: "/admin/recenzii", label: "Recenzii", icon: <IconStar /> },
-  { href: "/admin/before-after", label: "Before & After", icon: <IconLayers /> },
+  {
+    href: "/admin/before-after",
+    label: "Before & After",
+    icon: <IconLayers />,
+  },
   { href: "/admin/hero", label: "Hero", icon: <IconImage /> },
 ];
 
@@ -109,7 +113,9 @@ export default function AdminLayout({
             }}
           >
             <IconShield />
-            <span style={{ fontSize: "22px", fontWeight: 700, color: "#0F1A2D" }}>
+            <span
+              style={{ fontSize: "22px", fontWeight: 700, color: "#0F1A2D" }}
+            >
               ECODENT Admin
             </span>
           </div>
@@ -179,7 +185,13 @@ export default function AdminLayout({
   }
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#F0F2F5" }}>
+    <div
+      style={{
+        display: "flex",
+        minHeight: "100vh",
+        backgroundColor: "#F0F2F5",
+      }}
+    >
       {/* ── Sidebar ── */}
       <aside
         style={{

@@ -1,7 +1,13 @@
 ﻿"use client";
 
 import Link from "next/link";
-import { IconUsers, IconBriefcase, IconStar, IconLayers, IconImage } from "./icons";
+import {
+  IconUsers,
+  IconBriefcase,
+  IconStar,
+  IconLayers,
+  IconImage,
+} from "./icons";
 
 const SECTIONS = [
   {

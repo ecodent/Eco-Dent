@@ -14,6 +14,7 @@ import {
   labelStyle,
 } from "../lib";
 import { IconCamera, IconSave, IconTrash } from "../icons";
+import { CopyUrlBar } from "../components";
 
 export default function RecenziiPage() {
   const [items, setItems] = useState<Review[]>([]);
@@ -155,6 +156,7 @@ export default function RecenziiPage() {
                   }
                 />
               </label>
+              {item.image && <CopyUrlBar url={item.image} />}
             </div>
 
             {/* Fields column */}
@@ -208,7 +210,11 @@ export default function RecenziiPage() {
               <div>
                 <label style={labelStyle}>Text recenzie</label>
                 <textarea
-                  style={{ ...inputStyle, minHeight: "90px", resize: "vertical" }}
+                  style={{
+                    ...inputStyle,
+                    minHeight: "90px",
+                    resize: "vertical",
+                  }}
                   value={item.text}
                   onChange={(e) =>
                     setItems((prev) =>

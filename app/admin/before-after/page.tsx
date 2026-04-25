@@ -14,6 +14,7 @@ import {
   btnSecondary,
 } from "../lib";
 import { IconCamera, IconSave, IconTrash } from "../icons";
+import { CopyUrlBar } from "../components";
 
 export default function BeforeAfterPage() {
   const [items, setItems] = useState<BeforeAfterCase[]>([]);
@@ -179,6 +180,7 @@ export default function BeforeAfterPage() {
                       }
                     />
                   </label>
+                  {item[field] && <CopyUrlBar url={item[field]} />}
                 </div>
               ))}
             </div>

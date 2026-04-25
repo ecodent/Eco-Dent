@@ -15,6 +15,7 @@ import {
   labelStyle,
 } from "../lib";
 import { IconCamera, IconSave, IconTrash } from "../icons";
+import { CopyUrlBar } from "../components";
 
 export default function EchipaPage() {
   const [items, setItems] = useState<TeamMember[]>([]);
@@ -160,6 +161,7 @@ export default function EchipaPage() {
                   }
                 />
               </label>
+              {item.image && <CopyUrlBar url={item.image} />}
             </div>
 
             {/* Fields column */}

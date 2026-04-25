@@ -14,6 +14,7 @@ import {
   labelStyle,
 } from "../lib";
 import { IconCamera, IconSave, IconTrash, IconEdit, IconX } from "../icons";
+import { CopyUrlBar } from "../components";
 
 export default function ServiciiPage() {
   const [items, setItems] = useState<Service[]>([]);
@@ -174,7 +175,11 @@ export default function ServiciiPage() {
               <div>
                 <label style={labelStyle}>Descriere</label>
                 <textarea
-                  style={{ ...inputStyle, minHeight: "80px", resize: "vertical" }}
+                  style={{
+                    ...inputStyle,
+                    minHeight: "80px",
+                    resize: "vertical",
+                  }}
                   value={item.description}
                   onChange={(e) =>
                     updateItem(i, { description: e.target.value })
@@ -182,7 +187,9 @@ export default function ServiciiPage() {
                 />
               </div>
 
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "12px" }}
+              >
                 {item.image && (
                   <div
                     style={{
@@ -223,6 +230,7 @@ export default function ServiciiPage() {
                   />
                 </label>
               </div>
+              {item.image && <CopyUrlBar url={item.image} />}
 
               {/* Features */}
               <div>
@@ -243,7 +251,10 @@ export default function ServiciiPage() {
                       placeholder="Titlu feature"
                       onChange={(e) => {
                         const features = [...item.features];
-                        features[fi] = { ...features[fi], title: e.target.value };
+                        features[fi] = {
+                          ...features[fi],
+                          title: e.target.value,
+                        };
                         updateItem(i, { features });
                       }}
                     />
@@ -253,13 +264,18 @@ export default function ServiciiPage() {
                       placeholder="Descriere"
                       onChange={(e) => {
                         const features = [...item.features];
-                        features[fi] = { ...features[fi], description: e.target.value };
+                        features[fi] = {
+                          ...features[fi],
+                          description: e.target.value,
+                        };
                         updateItem(i, { features });
                       }}
                     />
                     <button
                       onClick={() => {
-                        const features = item.features.filter((_, idx) => idx !== fi);
+                        const features = item.features.filter(
+                          (_, idx) => idx !== fi,
+                        );
                         updateItem(i, { features });
                       }}
                       style={{
@@ -277,10 +293,17 @@ export default function ServiciiPage() {
                 <button
                   onClick={() =>
                     updateItem(i, {
-                      features: [...item.features, { title: "", description: "" }],
+                      features: [
+                        ...item.features,
+                        { title: "", description: "" },
+                      ],
                     })
                   }
-                  style={{ ...btnSecondary, fontSize: "12px", padding: "6px 12px" }}
+                  style={{
+                    ...btnSecondary,
+                    fontSize: "12px",
+                    padding: "6px 12px",
+                  }}
                 >
                   + Feature
                 </button>
@@ -307,7 +330,9 @@ export default function ServiciiPage() {
                     <button
                       onClick={() =>
                         updateItem(i, {
-                          benefits: item.benefits.filter((_, idx) => idx !== bi),
+                          benefits: item.benefits.filter(
+                            (_, idx) => idx !== bi,
+                          ),
                         })
                       }
                       style={{
@@ -326,7 +351,11 @@ export default function ServiciiPage() {
                   onClick={() =>
                     updateItem(i, { benefits: [...item.benefits, ""] })
                   }
-                  style={{ ...btnSecondary, fontSize: "12px", padding: "6px 12px" }}
+                  style={{
+                    ...btnSecondary,
+                    fontSize: "12px",
+                    padding: "6px 12px",
+                  }}
                 >
                   + Beneficiu
                 </button>
@@ -345,7 +374,10 @@ export default function ServiciiPage() {
                   <IconSave /> Salvează
                 </button>
                 <button
-                  onClick={() => { setEditing(null); load(); }}
+                  onClick={() => {
+                    setEditing(null);
+                    load();
+                  }}
                   style={btnSecondary}
                 >
                   Anulează
@@ -361,7 +393,9 @@ export default function ServiciiPage() {
                 justifyContent: "space-between",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "16px" }}
+              >
                 {item.image && (
                   <div
                     style={{
@@ -383,10 +417,27 @@ export default function ServiciiPage() {
                   </div>
                 )}
                 <div>
-                  <p style={{ fontSize: "15px", fontWeight: 700, color: "#0F1A2D", margin: 0 }}>
-                    {item.title || <span style={{ color: "#C0C7D0" }}>Titlu necompletat</span>}
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      fontWeight: 700,
+                      color: "#0F1A2D",
+                      margin: 0,
+                    }}
+                  >
+                    {item.title || (
+                      <span style={{ color: "#C0C7D0" }}>
+                        Titlu necompletat
+                      </span>
+                    )}
                   </p>
-                  <p style={{ fontSize: "12px", color: "#878C96", margin: "2px 0 0" }}>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#878C96",
+                      margin: "2px 0 0",
+                    }}
+                  >
                     /{item.slug}
                   </p>
                 </div>
