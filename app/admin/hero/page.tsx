@@ -66,6 +66,8 @@ export default function HeroPage() {
           justifyContent: "space-between",
           alignItems: "center",
           marginBottom: "24px",
+          flexWrap: "wrap",
+          gap: "12px",
         }}
       >
         <div>
@@ -110,7 +112,7 @@ export default function HeroPage() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
           gap: "16px",
         }}
       >

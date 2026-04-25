@@ -64,12 +64,22 @@ export default function RecenziiPage() {
 
   return (
     <div>
+      <style>{`
+        .rev-card-grid { display: grid; grid-template-columns: 110px 1fr; gap: 20px; align-items: start; }
+        .rev-fields-grid { display: grid; grid-template-columns: 1fr 120px; gap: 12px; }
+        @media (max-width: 500px) {
+          .rev-card-grid { grid-template-columns: 1fr; }
+          .rev-fields-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           marginBottom: "24px",
+          flexWrap: "wrap",
+          gap: "12px",
         }}
       >
         <div>
@@ -102,14 +112,7 @@ export default function RecenziiPage() {
 
       {items.map((item, i) => (
         <div key={item._id || `new-${i}`} style={cardStyle}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "110px 1fr",
-              gap: "24px",
-              alignItems: "start",
-            }}
-          >
+          <div className="rev-card-grid">
             {/* Photo column */}
             <div>
               <div
@@ -163,13 +166,7 @@ export default function RecenziiPage() {
             <div
               style={{ display: "flex", flexDirection: "column", gap: "12px" }}
             >
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 120px",
-                  gap: "12px",
-                }}
-              >
+              <div className="rev-fields-grid">
                 <div>
                   <label style={labelStyle}>Nume</label>
                   <input

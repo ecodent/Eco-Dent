@@ -373,6 +373,14 @@ export default function SetariPage() {
 
   return (
     <div>
+      <style>{`
+        .s-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .s-grid-stat { display: grid; grid-template-columns: 140px 1fr; gap: 12px; }
+        @media (max-width: 560px) {
+          .s-grid-2 { grid-template-columns: 1fr; }
+          .s-grid-stat { grid-template-columns: 1fr; }
+        }
+      `}</style>
       {/* Header */}
       <div
         style={{
@@ -380,6 +388,8 @@ export default function SetariPage() {
           justifyContent: "space-between",
           alignItems: "center",
           marginBottom: "24px",
+          flexWrap: "wrap",
+          gap: "12px",
         }}
       >
         <div>
@@ -434,12 +444,7 @@ export default function SetariPage() {
         {lang === "ro" && <>
         {/* Hero Title */}
         <Section title="Hero — Titlu & Conținut" icon={<IconImage />}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Rând 1 (normal)"
@@ -473,12 +478,7 @@ export default function SetariPage() {
             onChange={set("heroDescription")}
             {...fs("heroDescription")}
           />
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Text buton principal"
@@ -508,12 +508,7 @@ export default function SetariPage() {
             ] as const
           ).map((row) => (
             <div
-              key={row.v}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "140px 1fr",
-                gap: "12px",
-              }}
+              key={row.v} className="s-grid-stat"
             >
               <Field
                 label={`Valoare ${row.n}`}
@@ -536,12 +531,7 @@ export default function SetariPage() {
           title="Pagina principală — Secțiunea Servicii"
           icon={<IconBriefcase />}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Titlu (normal)"
@@ -563,12 +553,7 @@ export default function SetariPage() {
             onChange={set("servicesDescription")}
             {...fs("servicesDescription")}
           />
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Text buton"
@@ -584,12 +569,7 @@ export default function SetariPage() {
           title="Pagina principală — Secțiunea Echipă"
           icon={<IconUsers />}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Titlu (normal)"
@@ -618,12 +598,7 @@ export default function SetariPage() {
           title="Pagina principală — Secțiunea Înainte & După"
           icon={<IconCompare />}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Titlu (normal)"
@@ -645,12 +620,7 @@ export default function SetariPage() {
             onChange={set("baDescription")}
             {...fs("baDescription")}
           />
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Text buton"
@@ -666,12 +636,7 @@ export default function SetariPage() {
           title="Pagina principală — Secțiunea Recenzii"
           icon={<IconMessageSquare />}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Titlu (normal)"
@@ -697,12 +662,7 @@ export default function SetariPage() {
 
         {/* /services page */}
         <Section title="Pagina /services — Hero" icon={<IconFileText />}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Kicker (text mic albastru)"
@@ -711,12 +671,7 @@ export default function SetariPage() {
               {...fs("svcKicker")}
             />
           </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Titlu (normal)"
@@ -753,12 +708,7 @@ export default function SetariPage() {
             ] as const
           ).map((row) => (
             <div
-              key={row.v}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "140px 1fr",
-                gap: "12px",
-              }}
+              key={row.v} className="s-grid-stat"
             >
               <Field
                 label={`Valoare ${row.n}`}
@@ -778,12 +728,7 @@ export default function SetariPage() {
 
         {/* Contact */}
         <Section title="Contact" icon={<IconMapPin />}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "12px",
-            }}
+          <div className="s-grid-2"
           >
             <Field
               label="Telefon"

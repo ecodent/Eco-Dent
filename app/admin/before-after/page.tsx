@@ -79,12 +79,18 @@ export default function BeforeAfterPage() {
 
   return (
     <div>
+      <style>{`
+        .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 600px) { .ba-grid { grid-template-columns: 1fr; } }
+      `}</style>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           marginBottom: "24px",
+          flexWrap: "wrap",
+          gap: "12px",
         }}
       >
         <div>
@@ -136,13 +142,7 @@ export default function BeforeAfterPage() {
               />
             </div>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "20px",
-              }}
-            >
+            <div className="ba-grid">
               {(["before", "after"] as const).map((field) => (
                 <div key={field}>
                   <label style={labelStyle}>
