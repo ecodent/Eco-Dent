@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   authHeaders,
   cardStyle,
@@ -124,25 +124,36 @@ function Field({
   multiline,
   value,
   onChange,
+  onBlur,
+  saving,
+  saved,
 }: {
   label: string;
   hint?: string;
   multiline?: boolean;
   value: string;
   onChange: (v: string) => void;
+  onBlur?: () => void;
+  saving?: boolean;
+  saved?: boolean;
 }) {
   return (
     <div>
-      <label style={labelStyle}>{label}</label>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
+        <label style={{ ...labelStyle, margin: 0 }}>{label}</label>
+        <span style={{
+          fontSize: "11px",
+          fontWeight: 500,
+          color: saved ? "#059669" : saving ? "#0168FF" : "transparent",
+          transition: "color 0.2s",
+          minWidth: "60px",
+          textAlign: "right",
+        }}>
+          {saved ? "✓ Salvat" : saving ? "Salvează..." : "·"}
+        </span>
+      </div>
       {hint && (
-        <p
-          style={{
-            fontSize: "11px",
-            color: "#878C96",
-            marginBottom: "6px",
-            marginTop: "2px",
-          }}
-        >
+        <p style={{ fontSize: "11px", color: "#878C96", marginBottom: "6px", marginTop: "-2px" }}>
           {hint}
         </p>
       )}
@@ -151,12 +162,14 @@ function Field({
           style={{ ...inputStyle, minHeight: "80px", resize: "vertical" }}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
         />
       ) : (
         <input
           style={inputStyle}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
         />
       )}
     </div>
@@ -202,13 +215,17 @@ function Section({
 export default function SetariPage() {
   const [settings, setSettings] = useState<Settings>(DEFAULTS);
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [globalSaving, setGlobalSaving] = useState(false);
+  const [globalSaved, setGlobalSaved] = useState(false);
+  const [fieldStatus, setFieldStatus] = useState<Record<string, "idle" | "saving" | "saved">>({});
+  const settingsRef = useRef<Settings>(DEFAULTS);
 
   const load = useCallback(async () => {
     const res = await fetch("/api/settings");
     const data = await res.json();
-    setSettings({ ...DEFAULTS, ...data });
+    const merged = { ...DEFAULTS, ...data };
+    setSettings(merged);
+    settingsRef.current = merged;
     setLoading(false);
   }, []);
 
@@ -216,20 +233,40 @@ export default function SetariPage() {
     load();
   }, [load]);
 
-  const set = (key: keyof Settings) => (value: string) =>
-    setSettings((prev) => ({ ...prev, [key]: value }));
+  const set = (key: keyof Settings) => (value: string) => {
+    const next = { ...settingsRef.current, [key]: value };
+    settingsRef.current = next;
+    setSettings(next);
+  };
 
-  const handleSave = async () => {
-    setSaving(true);
+  const saveField = useCallback(async (key: keyof Settings) => {
+    setFieldStatus((prev) => ({ ...prev, [key]: "saving" }));
     await fetch("/api/settings", {
       method: "PUT",
       headers: authHeaders({ "Content-Type": "application/json" }),
-      body: JSON.stringify(settings),
+      body: JSON.stringify(settingsRef.current),
     });
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
+    setFieldStatus((prev) => ({ ...prev, [key]: "saved" }));
+    setTimeout(() => setFieldStatus((prev) => ({ ...prev, [key]: "idle" })), 2000);
+  }, []);
+
+  const handleSaveAll = async () => {
+    setGlobalSaving(true);
+    await fetch("/api/settings", {
+      method: "PUT",
+      headers: authHeaders({ "Content-Type": "application/json" }),
+      body: JSON.stringify(settingsRef.current),
+    });
+    setGlobalSaving(false);
+    setGlobalSaved(true);
+    setTimeout(() => setGlobalSaved(false), 2500);
   };
+
+  const fs = (key: keyof Settings) => ({
+    saving: fieldStatus[key] === "saving",
+    saved: fieldStatus[key] === "saved",
+    onBlur: () => saveField(key),
+  });
 
   if (loading) {
     return (
@@ -265,7 +302,14 @@ export default function SetariPage() {
         </div>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingBottom: "80px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          paddingBottom: "80px",
+        }}
+      >
         {/* Hero Title */}
         <Section title="Hero — Titlu & Conținut" icon={<IconImage />}>
           <div
@@ -279,21 +323,25 @@ export default function SetariPage() {
               label="Rând 1 (normal)"
               value={settings.heroTitle}
               onChange={set("heroTitle")}
+              {...fs("heroTitle")}
             />
             <Field
               label="Rând 1 italic bold"
               value={settings.heroTitleItalic}
               onChange={set("heroTitleItalic")}
+              {...fs("heroTitleItalic")}
             />
             <Field
               label="Rând 2 (normal)"
               value={settings.heroTitle2}
               onChange={set("heroTitle2")}
+              {...fs("heroTitle2")}
             />
             <Field
               label="Rând 3 (normal)"
               value={settings.heroTitle3}
               onChange={set("heroTitle3")}
+              {...fs("heroTitle3")}
             />
           </div>
           <Field
@@ -301,6 +349,7 @@ export default function SetariPage() {
             multiline
             value={settings.heroDescription}
             onChange={set("heroDescription")}
+            {...fs("heroDescription")}
           />
           <div
             style={{
@@ -313,17 +362,22 @@ export default function SetariPage() {
               label="Text buton principal"
               value={settings.heroCta}
               onChange={set("heroCta")}
+              {...fs("heroCta")}
             />
             <Field
               label="Număr telefon (hero)"
               value={settings.heroPhone}
               onChange={set("heroPhone")}
+              {...fs("heroPhone")}
             />
           </div>
         </Section>
 
         {/* Stats */}
-        <Section title="Statistici Hero (carduri peste imagine)" icon={<IconBarChart />}>
+        <Section
+          title="Statistici Hero (carduri peste imagine)"
+          icon={<IconBarChart />}
+        >
           {(
             [
               { v: "stat1Value", l: "stat1Label", n: "1" },
@@ -343,18 +397,23 @@ export default function SetariPage() {
                 label={`Valoare ${row.n}`}
                 value={settings[row.v]}
                 onChange={set(row.v)}
+                {...fs(row.v)}
               />
               <Field
                 label={`Etichetă ${row.n}`}
                 value={settings[row.l]}
                 onChange={set(row.l)}
+                {...fs(row.l)}
               />
             </div>
           ))}
         </Section>
 
         {/* Services section (home) */}
-        <Section title="Pagina principală — Secțiunea Servicii" icon={<IconBriefcase />}>
+        <Section
+          title="Pagina principală — Secțiunea Servicii"
+          icon={<IconBriefcase />}
+        >
           <div
             style={{
               display: "grid",
@@ -366,11 +425,13 @@ export default function SetariPage() {
               label="Titlu (normal)"
               value={settings.servicesTitle}
               onChange={set("servicesTitle")}
+              {...fs("servicesTitle")}
             />
             <Field
               label="Titlu italic"
               value={settings.servicesTitleItalic}
               onChange={set("servicesTitleItalic")}
+              {...fs("servicesTitleItalic")}
             />
           </div>
           <Field
@@ -378,6 +439,7 @@ export default function SetariPage() {
             multiline
             value={settings.servicesDescription}
             onChange={set("servicesDescription")}
+            {...fs("servicesDescription")}
           />
           <div
             style={{
@@ -390,12 +452,16 @@ export default function SetariPage() {
               label="Text buton"
               value={settings.servicesCta}
               onChange={set("servicesCta")}
+              {...fs("servicesCta")}
             />
           </div>
         </Section>
 
         {/* Team */}
-        <Section title="Pagina principală — Secțiunea Echipă" icon={<IconUsers />}>
+        <Section
+          title="Pagina principală — Secțiunea Echipă"
+          icon={<IconUsers />}
+        >
           <div
             style={{
               display: "grid",
@@ -407,11 +473,13 @@ export default function SetariPage() {
               label="Titlu (normal)"
               value={settings.teamTitle}
               onChange={set("teamTitle")}
+              {...fs("teamTitle")}
             />
             <Field
               label="Titlu italic"
               value={settings.teamTitleItalic}
               onChange={set("teamTitleItalic")}
+              {...fs("teamTitleItalic")}
             />
           </div>
           <Field
@@ -419,11 +487,15 @@ export default function SetariPage() {
             multiline
             value={settings.teamDescription}
             onChange={set("teamDescription")}
+            {...fs("teamDescription")}
           />
         </Section>
 
         {/* Before & After */}
-        <Section title="Pagina principală — Secțiunea Înainte & După" icon={<IconCompare />}>
+        <Section
+          title="Pagina principală — Secțiunea Înainte & După"
+          icon={<IconCompare />}
+        >
           <div
             style={{
               display: "grid",
@@ -435,11 +507,13 @@ export default function SetariPage() {
               label="Titlu (normal)"
               value={settings.baTitle}
               onChange={set("baTitle")}
+              {...fs("baTitle")}
             />
             <Field
               label="Titlu italic"
               value={settings.baTitleItalic}
               onChange={set("baTitleItalic")}
+              {...fs("baTitleItalic")}
             />
           </div>
           <Field
@@ -447,6 +521,7 @@ export default function SetariPage() {
             multiline
             value={settings.baDescription}
             onChange={set("baDescription")}
+            {...fs("baDescription")}
           />
           <div
             style={{
@@ -459,12 +534,16 @@ export default function SetariPage() {
               label="Text buton"
               value={settings.baCta}
               onChange={set("baCta")}
+              {...fs("baCta")}
             />
           </div>
         </Section>
 
         {/* Reviews */}
-        <Section title="Pagina principală — Secțiunea Recenzii" icon={<IconMessageSquare />}>
+        <Section
+          title="Pagina principală — Secțiunea Recenzii"
+          icon={<IconMessageSquare />}
+        >
           <div
             style={{
               display: "grid",
@@ -476,11 +555,13 @@ export default function SetariPage() {
               label="Titlu (normal)"
               value={settings.reviewsTitle}
               onChange={set("reviewsTitle")}
+              {...fs("reviewsTitle")}
             />
             <Field
               label="Titlu italic"
               value={settings.reviewsTitleItalic}
               onChange={set("reviewsTitleItalic")}
+              {...fs("reviewsTitleItalic")}
             />
           </div>
           <Field
@@ -488,6 +569,7 @@ export default function SetariPage() {
             multiline
             value={settings.reviewsDescription}
             onChange={set("reviewsDescription")}
+            {...fs("reviewsDescription")}
           />
         </Section>
 
@@ -504,6 +586,7 @@ export default function SetariPage() {
               label="Kicker (text mic albastru)"
               value={settings.svcKicker}
               onChange={set("svcKicker")}
+              {...fs("svcKicker")}
             />
           </div>
           <div
@@ -517,11 +600,13 @@ export default function SetariPage() {
               label="Titlu (normal)"
               value={settings.svcHeading}
               onChange={set("svcHeading")}
+              {...fs("svcHeading")}
             />
             <Field
               label="Titlu italic bold"
               value={settings.svcHeadingItalic}
               onChange={set("svcHeadingItalic")}
+              {...fs("svcHeadingItalic")}
             />
           </div>
           <Field
@@ -529,10 +614,14 @@ export default function SetariPage() {
             multiline
             value={settings.svcDescription}
             onChange={set("svcDescription")}
+            {...fs("svcDescription")}
           />
         </Section>
 
-        <Section title="Pagina /services — Statistici (4 carduri)" icon={<IconBarChart />}>
+        <Section
+          title="Pagina /services — Statistici (4 carduri)"
+          icon={<IconBarChart />}
+        >
           {(
             [
               { v: "svcStat1Value", l: "svcStat1Label", n: "1" },
@@ -553,11 +642,13 @@ export default function SetariPage() {
                 label={`Valoare ${row.n}`}
                 value={settings[row.v]}
                 onChange={set(row.v)}
+                {...fs(row.v)}
               />
               <Field
                 label={`Etichetă ${row.n}`}
                 value={settings[row.l]}
                 onChange={set(row.l)}
+                {...fs(row.l)}
               />
             </div>
           ))}
@@ -576,11 +667,13 @@ export default function SetariPage() {
               label="Telefon"
               value={settings.contactPhone}
               onChange={set("contactPhone")}
+              {...fs("contactPhone")}
             />
             <Field
               label="Email"
               value={settings.contactEmail}
               onChange={set("contactEmail")}
+              {...fs("contactEmail")}
             />
           </div>
           <Field
@@ -589,6 +682,7 @@ export default function SetariPage() {
             hint="Fiecare rând nou = rând nou pe site"
             value={settings.contactAddress}
             onChange={set("contactAddress")}
+            {...fs("contactAddress")}
           />
           <Field
             label="Program de lucru"
@@ -596,6 +690,7 @@ export default function SetariPage() {
             hint="Fiecare rând nou = rând nou pe site"
             value={settings.contactHours}
             onChange={set("contactHours")}
+            {...fs("contactHours")}
           />
         </Section>
       </div>
@@ -618,28 +713,28 @@ export default function SetariPage() {
           marginTop: "8px",
         }}
       >
-        {saved && (
+        {globalSaved && (
           <span style={{ fontSize: "13px", color: "#059669", fontWeight: 500 }}>
             ✓ Salvat cu succes!
           </span>
         )}
         <button
-          onClick={handleSave}
-          disabled={saving}
+          onClick={handleSaveAll}
+          disabled={globalSaving}
           style={{
             ...btnPrimary,
             display: "flex",
             alignItems: "center",
             gap: "8px",
-            opacity: saving ? 0.7 : 1,
-            backgroundColor: saved ? "#059669" : undefined,
+            opacity: globalSaving ? 0.7 : 1,
+            backgroundColor: globalSaved ? "#059669" : undefined,
             transition: "background-color 0.3s",
             minWidth: "140px",
             justifyContent: "center",
           }}
         >
           <IconSave />
-          {saved ? "Salvat!" : saving ? "Se salvează..." : "Salvează tot"}
+          {globalSaved ? "Salvat!" : globalSaving ? "Se salvează..." : "Salvează tot"}
         </button>
       </div>
     </div>
