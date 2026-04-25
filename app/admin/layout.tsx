@@ -474,10 +474,16 @@ export default function AdminLayout({
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <IconShield />
-            <span style={{ color: "#FFF", fontSize: "15px", fontWeight: 700 }}>
-              ECODENT
-            </span>
+            <Link href="/" style={{ display: "flex", lineHeight: 0 }}>
+              <Image
+                src="/logo.footer.png"
+                alt="ECODENT"
+                width={110}
+                height={46}
+                unoptimized
+                style={{ width: "110px", height: "auto" }}
+              />
+            </Link>
           </div>
           <button
             onClick={() => setDrawerOpen(true)}
