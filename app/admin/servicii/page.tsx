@@ -192,7 +192,12 @@ export default function ServiciiPage() {
               </div>
 
               <div
-                style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  flexWrap: "wrap",
+                }}
               >
                 {item.image && (
                   <div
@@ -248,7 +253,10 @@ export default function ServiciiPage() {
                       placeholder="Titlu feature"
                       onChange={(e) => {
                         const features = [...item.features];
-                        features[fi] = { ...features[fi], title: e.target.value };
+                        features[fi] = {
+                          ...features[fi],
+                          title: e.target.value,
+                        };
                         updateItem(i, { features });
                       }}
                     />
@@ -258,13 +266,18 @@ export default function ServiciiPage() {
                       placeholder="Descriere"
                       onChange={(e) => {
                         const features = [...item.features];
-                        features[fi] = { ...features[fi], description: e.target.value };
+                        features[fi] = {
+                          ...features[fi],
+                          description: e.target.value,
+                        };
                         updateItem(i, { features });
                       }}
                     />
                     <button
                       onClick={() => {
-                        const features = item.features.filter((_, idx) => idx !== fi);
+                        const features = item.features.filter(
+                          (_, idx) => idx !== fi,
+                        );
                         updateItem(i, { features });
                       }}
                       style={{
@@ -282,10 +295,17 @@ export default function ServiciiPage() {
                 <button
                   onClick={() =>
                     updateItem(i, {
-                      features: [...item.features, { title: "", description: "" }],
+                      features: [
+                        ...item.features,
+                        { title: "", description: "" },
+                      ],
                     })
                   }
-                  style={{ ...btnSecondary, fontSize: "12px", padding: "6px 12px" }}
+                  style={{
+                    ...btnSecondary,
+                    fontSize: "12px",
+                    padding: "6px 12px",
+                  }}
                 >
                   + Feature
                 </button>
@@ -295,7 +315,10 @@ export default function ServiciiPage() {
               <div>
                 <label style={labelStyle}>Beneficii</label>
                 {item.benefits.map((b, bi) => (
-                  <div key={bi} style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
+                  <div
+                    key={bi}
+                    style={{ display: "flex", gap: "8px", marginBottom: "8px" }}
+                  >
                     <input
                       style={inputStyle}
                       value={b}
@@ -309,7 +332,9 @@ export default function ServiciiPage() {
                     <button
                       onClick={() =>
                         updateItem(i, {
-                          benefits: item.benefits.filter((_, idx) => idx !== bi),
+                          benefits: item.benefits.filter(
+                            (_, idx) => idx !== bi,
+                          ),
                         })
                       }
                       style={{
@@ -325,8 +350,14 @@ export default function ServiciiPage() {
                   </div>
                 ))}
                 <button
-                  onClick={() => updateItem(i, { benefits: [...item.benefits, ""] })}
-                  style={{ ...btnSecondary, fontSize: "12px", padding: "6px 12px" }}
+                  onClick={() =>
+                    updateItem(i, { benefits: [...item.benefits, ""] })
+                  }
+                  style={{
+                    ...btnSecondary,
+                    fontSize: "12px",
+                    padding: "6px 12px",
+                  }}
                 >
                   + Beneficiu
                 </button>
@@ -345,7 +376,10 @@ export default function ServiciiPage() {
                   <IconSave /> Salvează
                 </button>
                 <button
-                  onClick={() => { setEditing(null); load(); }}
+                  onClick={() => {
+                    setEditing(null);
+                    load();
+                  }}
                   style={btnSecondary}
                 >
                   Anulează
@@ -368,7 +402,13 @@ export default function ServiciiPage() {
                       flexShrink: 0,
                     }}
                   >
-                    <Image src={item.image} alt="" fill className="object-cover" sizes="56px" />
+                    <Image
+                      src={item.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="56px"
+                    />
                   </div>
                 )}
                 <div style={{ minWidth: 0 }}>
@@ -383,9 +423,19 @@ export default function ServiciiPage() {
                       textOverflow: "ellipsis",
                     }}
                   >
-                    {item.title || <span style={{ color: "#C0C7D0" }}>Titlu necompletat</span>}
+                    {item.title || (
+                      <span style={{ color: "#C0C7D0" }}>
+                        Titlu necompletat
+                      </span>
+                    )}
                   </p>
-                  <p style={{ fontSize: "12px", color: "#878C96", margin: "2px 0 0" }}>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#878C96",
+                      margin: "2px 0 0",
+                    }}
+                  >
                     /{item.slug}
                   </p>
                 </div>

@@ -38,6 +38,7 @@ export interface BeforeAfterCase {
   before: string;
   after: string;
   label: string;
+  label_ru: string;
   order: number;
 }
 export interface HeroImage {

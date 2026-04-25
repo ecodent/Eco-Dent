@@ -758,6 +758,7 @@ export default async function Home() {
         titleItalic={s.baTitleItalic}
         description={s.baDescription}
         cta={s.baCta}
+        lang={cookieLang}
       />
 
       {/* Patient Reviews Section */}

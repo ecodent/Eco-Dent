@@ -8,6 +8,7 @@ interface Case {
   before: string;
   after: string;
   label: string;
+  label_ru?: string;
 }
 
 interface BeforeAfterProps {
@@ -16,6 +17,7 @@ interface BeforeAfterProps {
   titleItalic?: string;
   description?: string;
   cta?: string;
+  lang?: string;
 }
 
 function CalendarIcon() {
@@ -63,6 +65,7 @@ export default function BeforeAfter({
   titleItalic,
   description,
   cta,
+  lang,
 }: BeforeAfterProps) {
   const [currentCase, setCurrentCase] = useState(0);
   const [sliderPos, setSliderPos] = useState(50); // percentage
@@ -276,6 +279,7 @@ export default function BeforeAfter({
         {offsets.map((offset) => {
           const idx = (((currentCase + offset) % total) + total) % total;
           const caseData = cases[idx];
+          const caseLabel = (lang === "ru" && caseData.label_ru) ? caseData.label_ru : caseData.label;
           const isCenter = offset === 0;
 
           if (!isCenter) {
@@ -302,7 +306,7 @@ export default function BeforeAfter({
               >
                 <Image
                   src={caseData.after}
-                  alt={caseData.label}
+                  alt={caseLabel}
                   fill
                   className="object-cover"
                   sizes="20vw"
@@ -347,7 +351,7 @@ export default function BeforeAfter({
               <div style={{ position: "absolute", inset: 0 }}>
                 <Image
                   src={caseData.after}
-                  alt={`${caseData.label} - After`}
+                  alt={`${caseLabel} - After`}
                   fill
                   className="object-cover"
                   sizes="65vw"
@@ -365,7 +369,7 @@ export default function BeforeAfter({
               >
                 <Image
                   src={caseData.before}
-                  alt={`${caseData.label} - Before`}
+                  alt={`${caseLabel} - Before`}
                   fill
                   className="object-cover"
                   sizes="65vw"

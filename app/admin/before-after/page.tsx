@@ -81,7 +81,8 @@ export default function BeforeAfterPage() {
     <div>
       <style>{`
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media (max-width: 600px) { .ba-grid { grid-template-columns: 1fr; } }
+        .ba-label-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 600px) { .ba-grid { grid-template-columns: 1fr; } .ba-label-grid { grid-template-columns: 1fr; } }
       `}</style>
       <div
         style={{
@@ -112,7 +113,7 @@ export default function BeforeAfterPage() {
           onClick={() =>
             setItems([
               ...items,
-              { before: "", after: "", label: "", order: items.length },
+              { before: "", after: "", label: "", label_ru: "", order: items.length },
             ])
           }
           style={btnPrimary}
@@ -126,20 +127,37 @@ export default function BeforeAfterPage() {
           <div
             style={{ display: "flex", flexDirection: "column", gap: "16px" }}
           >
-            <div>
-              <label style={labelStyle}>Etichetă</label>
-              <input
-                style={inputStyle}
-                value={item.label}
-                onChange={(e) =>
-                  setItems((prev) =>
-                    prev.map((p, idx) =>
-                      idx === i ? { ...p, label: e.target.value } : p,
-                    ),
-                  )
-                }
-                placeholder="ex: Albire Dentară"
-              />
+            <div className="ba-label-grid">
+              <div>
+                <label style={labelStyle}>Etichetă (RO)</label>
+                <input
+                  style={inputStyle}
+                  value={item.label}
+                  onChange={(e) =>
+                    setItems((prev) =>
+                      prev.map((p, idx) =>
+                        idx === i ? { ...p, label: e.target.value } : p,
+                      ),
+                    )
+                  }
+                  placeholder="ex: Albire Dentară"
+                />
+              </div>
+              <div>
+                <label style={labelStyle}>Etichetă (RU)</label>
+                <input
+                  style={inputStyle}
+                  value={item.label_ru || ""}
+                  onChange={(e) =>
+                    setItems((prev) =>
+                      prev.map((p, idx) =>
+                        idx === i ? { ...p, label_ru: e.target.value } : p,
+                      ),
+                    )
+                  }
+                  placeholder="ex: Отбеливание Зубов"
+                />
+              </div>
             </div>
 
             <div className="ba-grid">
