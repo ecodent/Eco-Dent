@@ -1081,24 +1081,28 @@ export default function SetariPage() {
         )}
       </div>
 
-      {/* Sticky save bar */}
+      {/* Fixed save bar */}
       <div
+        className="setari-save-bar"
         style={{
-          position: "sticky",
+          position: "fixed",
           bottom: 0,
-          left: 0,
           right: 0,
-          backgroundColor: "rgba(240,242,245,0.95)",
-          backdropFilter: "blur(8px)",
+          left: 220,
+          backgroundColor: "rgba(240,242,245,0.97)",
+          backdropFilter: "blur(10px)",
           borderTop: "1px solid #E2E6EA",
-          padding: "14px 0",
+          padding: "12px 24px",
           display: "flex",
           justifyContent: "flex-end",
           gap: "12px",
           alignItems: "center",
-          marginTop: "8px",
+          zIndex: 100,
         }}
       >
+        <style>{`
+          @media(max-width:768px){ .setari-save-bar { left: 0 !important; } }
+        `}</style>
         {globalSaved && (
           <span style={{ fontSize: "13px", color: "#059669", fontWeight: 500 }}>
             ✓ Salvat cu succes!
@@ -1127,6 +1131,8 @@ export default function SetariPage() {
               : "Salvează tot"}
         </button>
       </div>
+      {/* Spacer so content isn't hidden behind fixed bar */}
+      <div style={{ height: "64px" }} />
     </div>
   );
 }
