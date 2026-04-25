@@ -31,6 +31,8 @@ export interface Review {
   image: string;
   grade: number;
   text: string;
+  name_ru: string;
+  text_ru: string;
   order: number;
 }
 export interface BeforeAfterCase {

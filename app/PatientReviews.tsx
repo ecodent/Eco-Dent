@@ -9,6 +9,8 @@ interface ReviewItem {
   image: string;
   grade: number;
   text: string;
+  name_ru?: string;
+  text_ru?: string;
 }
 
 interface PatientReviewsProps {
@@ -16,6 +18,7 @@ interface PatientReviewsProps {
   title?: string;
   titleItalic?: string;
   description?: string;
+  lang?: string;
 }
 
 function Stars({ rating }: { rating: number }) {
@@ -57,6 +60,7 @@ export default function PatientReviews({
   title,
   titleItalic,
   description,
+  lang,
 }: PatientReviewsProps) {
   const [current, setCurrent] = useState(0);
   const total = reviews.length;
@@ -98,6 +102,10 @@ export default function PatientReviews({
   const leftReview = reviews[leftIdx];
   const centerReview = reviews[centerIdx];
   const rightReview = reviews[rightIdx];
+
+  // Resolve name/text based on lang
+  const resolveName = (r: ReviewItem) => (lang === "ru" && r.name_ru) ? r.name_ru : r.name;
+  const resolveText = (r: ReviewItem) => (lang === "ru" && r.text_ru) ? r.text_ru : r.text;
 
   if (total === 0) return null;
 
@@ -420,7 +428,7 @@ export default function PatientReviews({
                       color: "#0F1A2D",
                     }}
                   >
-                    {leftReview.name}
+                    {resolveName(leftReview)}
                   </span>
                 </div>
               </div>
@@ -533,7 +541,7 @@ export default function PatientReviews({
                   marginTop: "24px",
                 }}
               >
-                {renderBoldText(centerReview.text)}
+                {renderBoldText(resolveText(centerReview))}
               </p>
             </div>
             {/* Bottom: name */}
@@ -548,7 +556,7 @@ export default function PatientReviews({
               <span
                 style={{ fontSize: "16px", fontWeight: 500, color: "#0F1A2D" }}
               >
-                {centerReview.name}
+                {resolveName(centerReview)}
               </span>
             </div>
           </div>

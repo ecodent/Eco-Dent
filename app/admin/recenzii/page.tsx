@@ -101,7 +101,7 @@ export default function RecenziiPage() {
           onClick={() =>
             setItems([
               ...items,
-              { name: "", image: "", grade: 5, text: "", order: items.length },
+              { name: "", image: "", grade: 5, text: "", name_ru: "", text_ru: "", order: items.length },
             ])
           }
           style={btnPrimary}
@@ -217,6 +217,44 @@ export default function RecenziiPage() {
                     setItems((prev) =>
                       prev.map((p, idx) =>
                         idx === i ? { ...p, text: e.target.value } : p,
+                      ),
+                    )
+                  }
+                />
+              </div>
+
+              <div className="rev-fields-grid">
+                <div>
+                  <label style={labelStyle}>Nume (RU)</label>
+                  <input
+                    style={inputStyle}
+                    value={item.name_ru || ""}
+                    onChange={(e) =>
+                      setItems((prev) =>
+                        prev.map((p, idx) =>
+                          idx === i ? { ...p, name_ru: e.target.value } : p,
+                        ),
+                      )
+                    }
+                    placeholder="Пациент..."
+                  />
+                </div>
+                <div style={{ opacity: 0 }} />
+              </div>
+
+              <div>
+                <label style={labelStyle}>Text recenzie (RU)</label>
+                <textarea
+                  style={{
+                    ...inputStyle,
+                    minHeight: "90px",
+                    resize: "vertical",
+                  }}
+                  value={item.text_ru || ""}
+                  onChange={(e) =>
+                    setItems((prev) =>
+                      prev.map((p, idx) =>
+                        idx === i ? { ...p, text_ru: e.target.value } : p,
                       ),
                     )
                   }

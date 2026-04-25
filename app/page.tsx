@@ -767,6 +767,7 @@ export default async function Home() {
         title={s.reviewsTitle}
         titleItalic={s.reviewsTitleItalic}
         description={s.reviewsDescription}
+        lang={cookieLang}
       />
 
       {/* Contact Section */}
