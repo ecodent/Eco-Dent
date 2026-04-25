@@ -4,6 +4,8 @@ import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
 import { cookies } from "next/headers";
 import type { Lang } from "./i18n/translations";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -37,6 +39,8 @@ export default async function RootLayout({
     >
       <body className={`min-h-full flex flex-col ${poppins.className}`}>
         <LanguageProvider initialLang={cookieLang}>{children}</LanguageProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
