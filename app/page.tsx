@@ -657,7 +657,9 @@ export default async function Home() {
                       className="service-card"
                     >
                       {isDark ? (
-                        <>                          {svc.image && (
+                        <>
+                          {" "}
+                          {svc.image && (
                             <div
                               className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
                               style={{ flex: 1, position: "relative" }}

@@ -74,14 +74,16 @@ export default function Navbar() {
         }}
       >
         <div className="flex items-center flex-shrink-0">
-          <Image
-            src="/logo.png"
-            alt="ECODENT"
-            width={160}
-            height={67}
-            unoptimized
-            className="w-[120px] md:w-[160px] h-auto"
-          />
+          <a href={`/${lang}`} style={{ display: "flex", lineHeight: 0 }}>
+            <Image
+              src="/logo.png"
+              alt="ECODENT"
+              width={160}
+              height={67}
+              unoptimized
+              className="w-[120px] md:w-[160px] h-auto"
+            />
+          </a>
         </div>
 
         <div
@@ -258,14 +260,16 @@ export default function Navbar() {
           className="flex justify-between items-center"
           style={{ marginBottom: "32px" }}
         >
-          <Image
-            src="/logo.png"
-            alt="ECODENT"
-            width={120}
-            height={50}
-            unoptimized
-            style={{ width: "120px", height: "auto" }}
-          />
+          <a href={`/${lang}`} style={{ display: "flex", lineHeight: 0 }}>
+            <Image
+              src="/logo.png"
+              alt="ECODENT"
+              width={120}
+              height={50}
+              unoptimized
+              style={{ width: "120px", height: "auto" }}
+            />
+          </a>
           <button
             onClick={() => setMenuOpen(false)}
             style={{

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   IconShield,
@@ -79,16 +80,13 @@ function SidebarContent({
       {/* Logo */}
       <div
         style={{
-          padding: "24px 20px 18px",
+          padding: "16px 20px",
           borderBottom: "1px solid rgba(255,255,255,0.07)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <IconShield />
-          <span style={{ color: "#FFF", fontSize: "16px", fontWeight: 700 }}>
-            ECODENT
-          </span>
-        </div>
+        <Link href="/" style={{ display: "flex", lineHeight: 0 }}>
+          <Image src="/logo.footer.png" alt="ECODENT" width={140} height={59} unoptimized style={{ width: "140px", height: "auto" }} />
+        </Link>
         <span
           style={{
             fontSize: "11px",
@@ -293,12 +291,9 @@ export default function AdminLayout({
               marginBottom: "8px",
             }}
           >
-            <IconShield />
-            <span
-              style={{ fontSize: "22px", fontWeight: 700, color: "#0F1A2D" }}
-            >
-              ECODENT Admin
-            </span>
+            <Link href="/" style={{ display: "flex", lineHeight: 0 }}>
+              <Image src="/logo.png" alt="ECODENT" width={160} height={67} unoptimized style={{ width: "160px", height: "auto" }} />
+            </Link>
           </div>
           <p
             style={{
