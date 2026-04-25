@@ -147,7 +147,9 @@ export default async function ServicesPage() {
 
   const cookieLang = (await cookies()).get("ecodent.lang")?.value ?? "ro";
 
-  let services: ServiceItem[] = (rawServices.length > 0 ? rawServices : fallbackServices).map((svc: any) => {
+  let services: ServiceItem[] = (
+    rawServices.length > 0 ? rawServices : fallbackServices
+  ).map((svc: any) => {
     if (cookieLang === "ru") {
       return {
         ...svc,

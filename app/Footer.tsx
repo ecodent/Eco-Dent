@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useT } from "./i18n/LanguageProvider";
 
 export default function Footer() {
-  const { t } = useT();
+  const { t, lang } = useT();
   return (
     <footer
       className="section-px"
@@ -26,7 +26,7 @@ export default function Footer() {
       >
         {/* Logo & Description */}
         <div>
-          <Link href="/">
+          <Link href={`/${lang}`}>
             <Image
               src="/logo.footer.png"
               alt="ECODENT"
@@ -121,7 +121,7 @@ export default function Footer() {
             style={{ display: "flex", flexDirection: "column", gap: "14px" }}
           >
             <Link
-              href="/servicii/examinations"
+              href={`/${lang}/servicii/examinations`}
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -131,7 +131,7 @@ export default function Footer() {
               {t("footer.svc.exam")}
             </Link>
             <Link
-              href="/servicii/preventive-care"
+              href={`/${lang}/servicii/preventive-care`}
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -141,7 +141,7 @@ export default function Footer() {
               {t("footer.svc.preventive")}
             </Link>
             <Link
-              href="/servicii/teeth-whitening"
+              href={`/${lang}/servicii/teeth-whitening`}
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -151,7 +151,7 @@ export default function Footer() {
               {t("footer.svc.whitening")}
             </Link>
             <Link
-              href="/servicii/orthodontics"
+              href={`/${lang}/servicii/orthodontics`}
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -161,7 +161,7 @@ export default function Footer() {
               {t("footer.svc.crowns")}
             </Link>
             <Link
-              href="/servicii/oral-surgery"
+              href={`/${lang}/servicii/oral-surgery`}
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -171,7 +171,7 @@ export default function Footer() {
               {t("footer.svc.endo")}
             </Link>
             <Link
-              href="/servicii/dental-implants"
+              href={`/${lang}/servicii/dental-implants`}
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",

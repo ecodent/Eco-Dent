@@ -251,7 +251,9 @@ export default function TeamCarousel({
                       color: "#FFFFFF",
                     }}
                   >
-                    {lang === "ru" && doctor.name_ru ? doctor.name_ru : doctor.name}
+                    {lang === "ru" && doctor.name_ru
+                      ? doctor.name_ru
+                      : doctor.name}
                   </p>
                   <p
                     style={{
@@ -261,7 +263,9 @@ export default function TeamCarousel({
                       fontStyle: "italic",
                     }}
                   >
-                    {lang === "ru" && doctor.role_ru ? doctor.role_ru : doctor.role}
+                    {lang === "ru" && doctor.role_ru
+                      ? doctor.role_ru
+                      : doctor.role}
                   </p>
                 </div>
               </div>

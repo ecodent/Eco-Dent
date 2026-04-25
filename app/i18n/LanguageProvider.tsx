@@ -17,21 +17,17 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("ro");
+export function LanguageProvider({ children, initialLang = "ro" }: { children: ReactNode; initialLang?: Lang }) {
+  const [lang, setLangState] = useState<Lang>(initialLang);
 
+  // Sync with URL lang prefix on client mount (handles any mismatch)
   useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem("ecodent.lang");
-      if (saved === "ro" || saved === "ru") setLangState(saved);
-    } catch {}
+    const pathLang = window.location.pathname.match(/^\/(ro|ru)(\/|$)/)?.[1];
+    if (pathLang === "ro" || pathLang === "ru") setLangState(pathLang);
   }, []);
 
   const setLang = (l: Lang) => {
     setLangState(l);
-    try {
-      window.localStorage.setItem("ecodent.lang", l);
-    } catch {}
     if (typeof document !== "undefined") {
       document.documentElement.lang = l;
       document.cookie = `ecodent.lang=${l}; path=/; max-age=31536000; SameSite=Lax`;

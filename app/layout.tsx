@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins, Rethink_Sans } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
+import { cookies } from "next/headers";
+import type { Lang } from "./i18n/translations";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -21,18 +23,19 @@ export const metadata: Metadata = {
     "Diagnostic digital, proceduri minim invazive și rezultate predictibile la fiecare etapă a tratamentului.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieLang = ((await cookies()).get("ecodent.lang")?.value ?? "ro") as Lang;
   return (
     <html
-      lang="ro"
+      lang={cookieLang}
       className={`${poppins.variable} ${rethinkSans.variable} h-full antialiased`}
     >
       <body className={`min-h-full flex flex-col ${poppins.className}`}>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider initialLang={cookieLang}>{children}</LanguageProvider>
       </body>
     </html>
   );

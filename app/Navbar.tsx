@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 import { useT } from "./i18n/LanguageProvider";
 import type { Lang } from "./i18n/translations";
 
@@ -88,21 +89,21 @@ export default function Navbar() {
           style={{ gap: "20px", marginLeft: "28px" }}
         >
           <a
-            href="/"
+            href={`/${lang}`}
             className="font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#0F1A2D" }}
           >
             {t("nav.home")}
           </a>
           <a
-            href="/servicii"
+            href={`/${lang}/servicii`}
             className="font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#878C96" }}
           >
             {t("nav.services")}
           </a>
           <a
-            href="/servicii/imagistica-dentara"
+            href={`/${lang}/servicii/imagistica-dentara`}
             className="hidden xl:inline font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#878C96" }}
           >
@@ -291,7 +292,7 @@ export default function Navbar() {
           </button>
         </div>
         <a
-          href="/"
+          href={`/${lang}`}
           onClick={() => setMenuOpen(false)}
           style={{
             padding: "14px 0",
@@ -305,7 +306,7 @@ export default function Navbar() {
           {t("nav.home")}
         </a>
         <a
-          href="/servicii"
+          href={`/${lang}/servicii`}
           onClick={() => setMenuOpen(false)}
           style={{
             padding: "14px 0",
@@ -319,7 +320,7 @@ export default function Navbar() {
           {t("nav.services")}
         </a>
         <a
-          href="/servicii/imagistica-dentara"
+          href={`/${lang}/servicii/imagistica-dentara`}
           onClick={() => setMenuOpen(false)}
           style={{
             padding: "14px 0",
@@ -375,7 +376,16 @@ function LangSwitcher({
   lang: Lang;
   setLang: (l: Lang) => void;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const opts: Lang[] = ["ro", "ru"];
+
+  const handleSwitch = (o: Lang) => {
+    setLang(o); // immediate UI feedback
+    const withoutLang = pathname.replace(/^\/(ro|ru)/, "") || "/";
+    router.push(`/${o}${withoutLang === "/" ? "" : withoutLang}`);
+  };
+
   return (
     <div
       style={{
@@ -394,7 +404,7 @@ function LangSwitcher({
           <button
             key={o}
             type="button"
-            onClick={() => setLang(o)}
+            onClick={() => handleSwitch(o)}
             style={{
               padding: "6px 12px",
               fontSize: "12px",
