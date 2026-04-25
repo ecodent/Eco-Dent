@@ -11,7 +11,7 @@ export default function HeroSlider({ images }: HeroSliderProps) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    if (images.length === 0) return;
+    if (images.length <= 1) return;
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
     }, 4000);
@@ -28,10 +28,11 @@ export default function HeroSlider({ images }: HeroSliderProps) {
           fill
           className="object-cover"
           priority={i === 0}
-          sizes="55vw"
+          sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 35vw, 100vw"
+          quality={85}
           style={{
             opacity: current === i ? 1 : 0,
-            transition: "opacity 1s ease-in-out",
+            transition: i === 0 ? "none" : "opacity 1s ease-in-out",
           }}
         />
       ))}

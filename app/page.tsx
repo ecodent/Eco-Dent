@@ -245,6 +245,7 @@ export default async function Home() {
     beforeAfterCases = defaultCases;
 
   const heroImageUrls = heroImages.map((h: { url: string }) => h.url);
+  const firstHeroUrl = heroImageUrls[0] ?? null;
 
   const partners = [
     { name: "dLab", icon: "◈" },
@@ -256,6 +257,18 @@ export default async function Home() {
 
   return (
     <div style={{ backgroundColor: "#F8F8F8" }}>
+      {/* Preload first hero image for LCP */}
+      {firstHeroUrl && (
+        <link
+          rel="preload"
+          as="image"
+          href={firstHeroUrl}
+          // @ts-expect-error fetchpriority is valid HTML but not in TS types yet
+          fetchpriority="high"
+          imageSrcSet={`/_next/image?url=${encodeURIComponent(firstHeroUrl)}&w=828&q=85 828w, /_next/image?url=${encodeURIComponent(firstHeroUrl)}&w=1080&q=85 1080w`}
+          imageSizes="(min-width: 1280px) 40vw, (min-width: 1024px) 35vw, 100vw"
+        />
+      )}
       {/* Hero Section — full viewport */}
       <div className="relative flex flex-col lg:block lg:min-h-[92vh] xl:min-h-screen">
         {/* Hero Image — behind navbar on desktop */}
