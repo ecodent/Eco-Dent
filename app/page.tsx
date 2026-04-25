@@ -10,6 +10,7 @@ import Navbar from "./Navbar";
 import { T } from "./i18n/LanguageProvider";
 import {
   getTeamMembers,
+  getServices,
   getReviews,
   getBeforeAfterCases,
   getHeroImages,
@@ -125,24 +126,27 @@ export default async function Home() {
     },
   ];
 
-  let teamMembers, reviews, beforeAfterCases, heroImages;
+  let teamMembers, reviews, beforeAfterCases, heroImages, services;
   try {
-    [teamMembers, reviews, beforeAfterCases, heroImages] = await Promise.all([
+    [teamMembers, reviews, beforeAfterCases, heroImages, services] = await Promise.all([
       getTeamMembers(),
       getReviews(),
       getBeforeAfterCases(),
       getHeroImages(),
+      getServices(),
     ]);
   } catch {
     teamMembers = [];
     reviews = [];
     beforeAfterCases = [];
     heroImages = [];
+    services = [];
   }
 
   // Use fallback if DB returned empty
   if (!teamMembers || teamMembers.length === 0) teamMembers = defaultTeam;
   if (!heroImages || heroImages.length === 0) heroImages = defaultHero;
+  if (!services || services.length === 0) services = [];
   if (!reviews || reviews.length === 0) reviews = defaultReviews;
   if (!beforeAfterCases || beforeAfterCases.length === 0)
     beforeAfterCases = defaultCases;
@@ -510,322 +514,143 @@ export default async function Home() {
               </a>
             </div>
 
-            {/* Two service cards side by side */}
+            {/* Service cards — left column bottom: first 2 from DB */}
             <div
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-              style={{
-                flexShrink: 0,
-              }}
+              style={{ flexShrink: 0 }}
             >
-              {/* Examinations */}
-              <Link
-                href="/services/examinations"
-                style={{
-                  backgroundColor: "#ECEEF1",
-                  borderRadius: "24px",
-                  overflow: "hidden",
-                  display: "flex",
-                  flexDirection: "column",
-                  textDecoration: "none",
-                }}
-                className="service-card"
-              >
-                <div style={{ padding: "20px 20px 0" }}>
-                  <h3
+              {services.slice(0, 2).map((svc: { slug: string; title: string; subtitle: string; image: string; imagePosition?: string; cardColor: string }) => {
+                const isDark = svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
+                return (
+                  <Link
+                    key={svc.slug}
+                    href={`/services/${svc.slug}`}
                     style={{
-                      fontSize: "16px",
-                      fontWeight: 700,
-                      color: "#0F1A2D",
+                      backgroundColor: svc.cardColor || "#ECEEF1",
+                      borderRadius: "24px",
+                      overflow: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                      textDecoration: "none",
                     }}
+                    className="service-card"
                   >
-                    <T k="services.examinations" />
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "11px",
-                      color: "#878C96",
-                      marginTop: "4px",
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    <T k="services.examinations.desc" />
-                  </p>
-                </div>
-                <div
-                  className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                  style={{
-                    flex: 1,
-                    position: "relative",
-                    marginTop: "10px",
-                  }}
-                >
-                  <Image
-                    src="/radiografie-tomografie dentară.jpg"
-                    alt="Examinations"
-                    fill
-                    className="object-cover"
-                    style={{ objectPosition: "center 30%" }}
-                    sizes="15vw"
-                  />
-                </div>
-              </Link>
-
-              {/* Preventive Care */}
-              <Link
-                href="/services/preventive-care"
-                style={{
-                  backgroundColor: "#ECEEF1",
-                  borderRadius: "24px",
-                  overflow: "hidden",
-                  display: "flex",
-                  flexDirection: "column",
-                  textDecoration: "none",
-                }}
-                className="service-card"
-              >
-                <div style={{ padding: "20px 20px 0" }}>
-                  <h3
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 700,
-                      color: "#0F1A2D",
-                    }}
-                  >
-                    <T k="services.preventive" />
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "11px",
-                      color: "#878C96",
-                      marginTop: "4px",
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    <T k="services.preventive.desc" />
-                  </p>
-                </div>
-                <div
-                  className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                  style={{
-                    flex: 1,
-                    position: "relative",
-                    marginTop: "10px",
-                  }}
-                >
-                  <Image
-                    src="/Igienizare profesională.jpg"
-                    alt="Preventive Care"
-                    fill
-                    className="object-cover"
-                    style={{ objectPosition: "center 30%" }}
-                    sizes="15vw"
-                  />
-                </div>
-              </Link>
+                    <div style={{ padding: "20px 20px 0" }}>
+                      <h3
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: 700,
+                          color: isDark ? "#FFFFFF" : "#0F1A2D",
+                        }}
+                      >
+                        {svc.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontSize: "11px",
+                          color: isDark ? "rgba(255,255,255,0.65)" : "#878C96",
+                          marginTop: "4px",
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {svc.subtitle}
+                      </p>
+                    </div>
+                    {svc.image && (
+                      <div
+                        className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
+                        style={{ flex: 1, position: "relative", marginTop: "10px" }}
+                      >
+                        <Image
+                          src={svc.image}
+                          alt={svc.title}
+                          fill
+                          className="object-cover"
+                          style={{ objectPosition: svc.imagePosition || "center 30%" }}
+                          sizes="15vw"
+                        />
+                      </div>
+                    )}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
-          {/* ===== RIGHT COLUMN: 4 Service Cards (2x2, equal rows) ===== */}
+          {/* ===== RIGHT COLUMN: next 4 services from DB ===== */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Teeth Whitening — top left, dark */}
-            <Link
-              href="/services/teeth-whitening"
-              style={{
-                backgroundColor: "#0F1A2D",
-                borderRadius: "24px",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-                textDecoration: "none",
-              }}
-              className="service-card"
-            >
-              <div
-                className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                style={{ flex: 1, position: "relative" }}
-              >
-                <Image
-                  src="/albire dentară.jpg"
-                  alt="Teeth Whitening"
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: "center 40%" }}
-                  sizes="20vw"
-                />
-              </div>
-              <div style={{ padding: "20px 24px 24px" }}>
-                <h3
+            {services.slice(2, 6).map((svc: { slug: string; title: string; subtitle: string; image: string; imagePosition?: string; cardColor: string }) => {
+              const isDark = svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
+              return (
+                <Link
+                  key={svc.slug}
+                  href={`/services/${svc.slug}`}
                   style={{
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    color: "#FFFFFF",
+                    backgroundColor: svc.cardColor || "#ECEEF1",
+                    borderRadius: "24px",
+                    overflow: "hidden",
+                    display: "flex",
+                    flexDirection: "column",
+                    textDecoration: "none",
                   }}
+                  className="service-card"
                 >
-                  <T k="services.whitening" />
-                </h3>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "rgba(255,255,255,0.6)",
-                    marginTop: "6px",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  <T k="services.whitening.desc" />
-                </p>
-              </div>
-            </Link>
-
-            {/* Orthodontics — top right, light */}
-            <Link
-              href="/services/orthodontics"
-              style={{
-                backgroundColor: "#ECEEF1",
-                borderRadius: "24px",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-                textDecoration: "none",
-              }}
-              className="service-card"
-            >
-              <div style={{ padding: "24px 24px 0" }}>
-                <h3
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    color: "#0F1A2D",
-                  }}
-                >
-                  <T k="services.orthodontics" />
-                </h3>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "#878C96",
-                    marginTop: "6px",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  <T k="services.orthodontics.desc" />
-                </p>
-              </div>
-              <div
-                className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                style={{
-                  flex: 1,
-                  position: "relative",
-                  marginTop: "14px",
-                }}
-              >
-                <Image
-                  src="/service-coroane,punti.png"
-                  alt="Orthodontics"
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: "center 30%" }}
-                  sizes="20vw"
-                />
-              </div>
-            </Link>
-
-            {/* Oral Surgery — bottom left, blue */}
-            <Link
-              href="/services/oral-surgery"
-              style={{
-                backgroundColor: "#0168FF",
-                borderRadius: "24px",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-                textDecoration: "none",
-              }}
-              className="service-card"
-            >
-              <div
-                className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                style={{ flex: 1, position: "relative" }}
-              >
-                <Image
-                  src="/terapie și endodonție.png"
-                  alt="Oral Surgery"
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: "center 30%" }}
-                  sizes="20vw"
-                />
-              </div>
-              <div style={{ padding: "16px 20px 20px" }}>
-                <h3
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: 700,
-                    color: "#FFFFFF",
-                  }}
-                >
-                  <T k="services.surgery" />
-                </h3>
-                <p
-                  style={{
-                    fontSize: "11px",
-                    color: "rgba(255,255,255,0.7)",
-                    marginTop: "4px",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  <T k="services.surgery.desc" />
-                </p>
-              </div>
-            </Link>
-
-            {/* Dental Implants — bottom right, light */}
-            <Link
-              href="/services/dental-implants"
-              style={{
-                backgroundColor: "#ECEEF1",
-                borderRadius: "24px",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
-                textDecoration: "none",
-              }}
-              className="service-card"
-            >
-              <div
-                className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                style={{ flex: 1, position: "relative" }}
-              >
-                <Image
-                  src="/dantura fixa pe implanturi.jpg"
-                  alt="Dental Implants"
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: "center 30%" }}
-                  sizes="20vw"
-                />
-              </div>
-              <div style={{ padding: "16px 20px 20px" }}>
-                <h3
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: 700,
-                    color: "#0F1A2D",
-                  }}
-                >
-                  <T k="services.implants" />
-                </h3>
-                <p
-                  style={{
-                    fontSize: "11px",
-                    color: "#878C96",
-                    marginTop: "4px",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  <T k="services.implants.desc" />
-                </p>
-              </div>
-            </Link>
+                  {isDark ? (
+                    <>
+                      {svc.image && (
+                        <div
+                          className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
+                          style={{ flex: 1, position: "relative" }}
+                        >
+                          <Image
+                            src={svc.image}
+                            alt={svc.title}
+                            fill
+                            className="object-cover"
+                            style={{ objectPosition: svc.imagePosition || "center 30%" }}
+                            sizes="20vw"
+                          />
+                        </div>
+                      )}
+                      <div style={{ padding: "16px 20px 20px" }}>
+                        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#FFFFFF" }}>
+                          {svc.title}
+                        </h3>
+                        <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.65)", marginTop: "4px", lineHeight: 1.4 }}>
+                          {svc.subtitle}
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{ padding: "20px 20px 0" }}>
+                        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#0F1A2D" }}>
+                          {svc.title}
+                        </h3>
+                        <p style={{ fontSize: "11px", color: "#878C96", marginTop: "4px", lineHeight: 1.4 }}>
+                          {svc.subtitle}
+                        </p>
+                      </div>
+                      {svc.image && (
+                        <div
+                          className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
+                          style={{ flex: 1, position: "relative", marginTop: "10px" }}
+                        >
+                          <Image
+                            src={svc.image}
+                            alt={svc.title}
+                            fill
+                            className="object-cover"
+                            style={{ objectPosition: svc.imagePosition || "center 30%" }}
+                            sizes="20vw"
+                          />
+                        </div>
+                      )}
+                    </>
+                  )}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
