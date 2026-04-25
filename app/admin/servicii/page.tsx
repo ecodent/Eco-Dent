@@ -85,14 +85,24 @@ export default function ServiciiPage() {
 
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "24px",
-        }}
-      >
+      <style>{`
+        .svc-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+        .svc-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        .svc-feat-row { display:grid; grid-template-columns:1fr 1fr 40px; gap:8px; margin-bottom:8px; }
+        .svc-actions { display:flex; gap:8px; flex-wrap:wrap; }
+        .svc-collapsed { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+        .svc-collapsed-left { display:flex; align-items:center; gap:12px; min-width:0; }
+        .svc-collapsed-btns { display:flex; gap:8px; flex-shrink:0; }
+        @media(max-width:520px) {
+          .svc-grid-2 { grid-template-columns:1fr; }
+          .svc-feat-row { grid-template-columns:1fr 40px; }
+          .svc-feat-row input:nth-child(2) { display:none; }
+          .svc-collapsed { flex-wrap:wrap; }
+          .svc-collapsed-btns button span { display:none; }
+        }
+      `}</style>
+
+      <div className="svc-header">
         <div>
           <h1
             style={{
@@ -115,7 +125,7 @@ export default function ServiciiPage() {
           }}
           style={btnPrimary}
         >
-          + Adaugă Serviciu
+          + Adaugă
         </button>
       </div>
 
@@ -126,13 +136,7 @@ export default function ServiciiPage() {
             <div
               style={{ display: "flex", flexDirection: "column", gap: "14px" }}
             >
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "12px",
-                }}
-              >
+              <div className="svc-grid-2">
                 <div>
                   <label style={labelStyle}>Slug (URL)</label>
                   <input
@@ -188,17 +192,18 @@ export default function ServiciiPage() {
               </div>
 
               <div
-                style={{ display: "flex", alignItems: "center", gap: "12px" }}
+                style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}
               >
                 {item.image && (
                   <div
                     style={{
                       position: "relative",
-                      width: "120px",
-                      height: "80px",
+                      width: "100px",
+                      height: "70px",
                       borderRadius: "10px",
                       overflow: "hidden",
                       border: "1px solid #E5E7EB",
+                      flexShrink: 0,
                     }}
                   >
                     <Image
@@ -206,7 +211,7 @@ export default function ServiciiPage() {
                       alt=""
                       fill
                       className="object-cover"
-                      sizes="120px"
+                      sizes="100px"
                     />
                   </div>
                 )}
@@ -219,7 +224,7 @@ export default function ServiciiPage() {
                     gap: "6px",
                   }}
                 >
-                  <IconCamera /> Imagine serviciu
+                  <IconCamera /> Imagine
                   <input
                     type="file"
                     accept="image/*"
@@ -236,25 +241,14 @@ export default function ServiciiPage() {
               <div>
                 <label style={labelStyle}>Features</label>
                 {item.features.map((f, fi) => (
-                  <div
-                    key={fi}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr 40px",
-                      gap: "8px",
-                      marginBottom: "8px",
-                    }}
-                  >
+                  <div key={fi} className="svc-feat-row">
                     <input
                       style={inputStyle}
                       value={f.title}
                       placeholder="Titlu feature"
                       onChange={(e) => {
                         const features = [...item.features];
-                        features[fi] = {
-                          ...features[fi],
-                          title: e.target.value,
-                        };
+                        features[fi] = { ...features[fi], title: e.target.value };
                         updateItem(i, { features });
                       }}
                     />
@@ -264,18 +258,13 @@ export default function ServiciiPage() {
                       placeholder="Descriere"
                       onChange={(e) => {
                         const features = [...item.features];
-                        features[fi] = {
-                          ...features[fi],
-                          description: e.target.value,
-                        };
+                        features[fi] = { ...features[fi], description: e.target.value };
                         updateItem(i, { features });
                       }}
                     />
                     <button
                       onClick={() => {
-                        const features = item.features.filter(
-                          (_, idx) => idx !== fi,
-                        );
+                        const features = item.features.filter((_, idx) => idx !== fi);
                         updateItem(i, { features });
                       }}
                       style={{
@@ -293,17 +282,10 @@ export default function ServiciiPage() {
                 <button
                   onClick={() =>
                     updateItem(i, {
-                      features: [
-                        ...item.features,
-                        { title: "", description: "" },
-                      ],
+                      features: [...item.features, { title: "", description: "" }],
                     })
                   }
-                  style={{
-                    ...btnSecondary,
-                    fontSize: "12px",
-                    padding: "6px 12px",
-                  }}
+                  style={{ ...btnSecondary, fontSize: "12px", padding: "6px 12px" }}
                 >
                   + Feature
                 </button>
@@ -313,10 +295,7 @@ export default function ServiciiPage() {
               <div>
                 <label style={labelStyle}>Beneficii</label>
                 {item.benefits.map((b, bi) => (
-                  <div
-                    key={bi}
-                    style={{ display: "flex", gap: "8px", marginBottom: "8px" }}
-                  >
+                  <div key={bi} style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
                     <input
                       style={inputStyle}
                       value={b}
@@ -330,9 +309,7 @@ export default function ServiciiPage() {
                     <button
                       onClick={() =>
                         updateItem(i, {
-                          benefits: item.benefits.filter(
-                            (_, idx) => idx !== bi,
-                          ),
+                          benefits: item.benefits.filter((_, idx) => idx !== bi),
                         })
                       }
                       style={{
@@ -348,20 +325,14 @@ export default function ServiciiPage() {
                   </div>
                 ))}
                 <button
-                  onClick={() =>
-                    updateItem(i, { benefits: [...item.benefits, ""] })
-                  }
-                  style={{
-                    ...btnSecondary,
-                    fontSize: "12px",
-                    padding: "6px 12px",
-                  }}
+                  onClick={() => updateItem(i, { benefits: [...item.benefits, ""] })}
+                  style={{ ...btnSecondary, fontSize: "12px", padding: "6px 12px" }}
                 >
                   + Beneficiu
                 </button>
               </div>
 
-              <div style={{ display: "flex", gap: "8px" }}>
+              <div className="svc-actions">
                 <button
                   onClick={() => handleSave(item)}
                   style={{
@@ -374,10 +345,7 @@ export default function ServiciiPage() {
                   <IconSave /> Salvează
                 </button>
                 <button
-                  onClick={() => {
-                    setEditing(null);
-                    load();
-                  }}
+                  onClick={() => { setEditing(null); load(); }}
                   style={btnSecondary}
                 >
                   Anulează
@@ -386,63 +354,43 @@ export default function ServiciiPage() {
             </div>
           ) : (
             /* ── Collapsed row ── */
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "16px" }}
-              >
+            <div className="svc-collapsed">
+              <div className="svc-collapsed-left">
                 {item.image && (
                   <div
                     style={{
                       position: "relative",
-                      width: "64px",
-                      height: "48px",
+                      width: "56px",
+                      height: "44px",
                       borderRadius: "8px",
                       overflow: "hidden",
                       border: "1px solid #E5E7EB",
+                      flexShrink: 0,
                     }}
                   >
-                    <Image
-                      src={item.image}
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="64px"
-                    />
+                    <Image src={item.image} alt="" fill className="object-cover" sizes="56px" />
                   </div>
                 )}
-                <div>
+                <div style={{ minWidth: 0 }}>
                   <p
                     style={{
                       fontSize: "15px",
                       fontWeight: 700,
                       color: "#0F1A2D",
                       margin: 0,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
                     }}
                   >
-                    {item.title || (
-                      <span style={{ color: "#C0C7D0" }}>
-                        Titlu necompletat
-                      </span>
-                    )}
+                    {item.title || <span style={{ color: "#C0C7D0" }}>Titlu necompletat</span>}
                   </p>
-                  <p
-                    style={{
-                      fontSize: "12px",
-                      color: "#878C96",
-                      margin: "2px 0 0",
-                    }}
-                  >
+                  <p style={{ fontSize: "12px", color: "#878C96", margin: "2px 0 0" }}>
                     /{item.slug}
                   </p>
                 </div>
               </div>
-              <div style={{ display: "flex", gap: "8px" }}>
+              <div className="svc-collapsed-btns">
                 <button
                   onClick={() => setEditing(i)}
                   style={{
@@ -452,7 +400,7 @@ export default function ServiciiPage() {
                     gap: "6px",
                   }}
                 >
-                  <IconEdit /> Editează
+                  <IconEdit /> <span>Editează</span>
                 </button>
                 {item._id && (
                   <button
