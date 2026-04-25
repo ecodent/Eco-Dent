@@ -1,6 +1,7 @@
 import { getServiceBySlug, getServices } from "@/lib/data";
 import ServicePageLayout from "../ServicePageLayout";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 
 export const dynamic = "force-dynamic";
 
@@ -300,6 +301,7 @@ export default async function DynamicServicePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const cookieLang = (await cookies()).get("ecodent.lang")?.value ?? "ro";
   let service: ServiceItem | null = null;
   let dbAvailable = true;
   try {
@@ -318,15 +320,29 @@ export default async function DynamicServicePage({
     notFound();
   }
 
+  // Resolve RU fields if language is Russian
+  const s = service as Record<string, any>;
+  const title = (cookieLang === "ru" && s.title_ru) ? s.title_ru : service.title;
+  const subtitle = (cookieLang === "ru" && s.subtitle_ru) ? s.subtitle_ru : service.subtitle;
+  const description = (cookieLang === "ru" && s.description_ru) ? s.description_ru : service.description;
+  const features = service.features.map((f: any) =>
+    cookieLang === "ru" && f.title_ru
+      ? { title: f.title_ru, description: f.description_ru || f.description }
+      : { title: f.title, description: f.description }
+  );
+  const benefits = (cookieLang === "ru" && s.benefits_ru?.length)
+    ? s.benefits_ru
+    : (service.benefits || []);
+
   return (
     <ServicePageLayout
-      title={service.title}
-      subtitle={service.subtitle}
-      description={service.description}
+      title={title}
+      subtitle={subtitle}
+      description={description}
       image={service.image}
       imagePosition={service.imagePosition}
-      features={service.features}
-      benefits={service.benefits || []}
+      features={features}
+      benefits={benefits}
     />
   );
 }

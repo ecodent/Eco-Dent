@@ -11,6 +11,8 @@ export interface TeamMember {
 export interface ServiceFeature {
   title: string;
   description: string;
+  title_ru: string;
+  description_ru: string;
 }
 export interface Service {
   _id?: string;
@@ -18,10 +20,14 @@ export interface Service {
   title: string;
   subtitle: string;
   description: string;
+  title_ru: string;
+  subtitle_ru: string;
+  description_ru: string;
   image: string;
   imagePosition: string;
   features: ServiceFeature[];
   benefits: string[];
+  benefits_ru: string[];
   cardColor: string;
   order: number;
 }
