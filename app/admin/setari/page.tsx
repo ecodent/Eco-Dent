@@ -8,7 +8,17 @@ import {
   btnPrimary,
   labelStyle,
 } from "../lib";
-import { IconSave } from "../icons";
+import {
+  IconSave,
+  IconImage,
+  IconBarChart,
+  IconBriefcase,
+  IconUsers,
+  IconCompare,
+  IconMessageSquare,
+  IconFileText,
+  IconMapPin,
+} from "../icons";
 
 interface Settings {
   heroTitle: string;
@@ -155,21 +165,31 @@ function Field({
 
 function Section({
   title,
+  icon,
   children,
 }: {
   title: string;
+  icon?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <div style={cardStyle}>
       <h2
         style={{
-          fontSize: "16px",
+          fontSize: "14px",
           fontWeight: 700,
           color: "#0F1A2D",
           margin: "0 0 20px",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          textTransform: "uppercase",
+          letterSpacing: "0.04em",
         }}
       >
+        {icon && (
+          <span style={{ color: "#0168FF", display: "flex" }}>{icon}</span>
+        )}
         {title}
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
@@ -237,32 +257,17 @@ export default function SetariPage() {
               margin: 0,
             }}
           >
-            Setări Conținut
+            Texte Site
           </h1>
           <p style={{ fontSize: "14px", color: "#878C96", marginTop: "4px" }}>
-            Textele principale afișate pe site
+            Toate textele afișate pe site, editabile din admin
           </p>
         </div>
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          style={{
-            ...btnPrimary,
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            opacity: saving ? 0.7 : 1,
-            backgroundColor: saved ? "#059669" : undefined,
-          }}
-        >
-          <IconSave />
-          {saved ? "Salvat!" : saving ? "Se salvează..." : "Salvează"}
-        </button>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingBottom: "80px" }}>
         {/* Hero Title */}
-        <Section title="🎯 Hero — Titlu">
+        <Section title="Hero — Titlu & Conținut" icon={<IconImage />}>
           <div
             style={{
               display: "grid",
@@ -318,7 +323,7 @@ export default function SetariPage() {
         </Section>
 
         {/* Stats */}
-        <Section title="📊 Statistici Hero (carduri peste imagine)">
+        <Section title="Statistici Hero (carduri peste imagine)" icon={<IconBarChart />}>
           {(
             [
               { v: "stat1Value", l: "stat1Label", n: "1" },
@@ -349,7 +354,7 @@ export default function SetariPage() {
         </Section>
 
         {/* Services section (home) */}
-        <Section title="🦷 Pagina principală — Secțiunea Servicii">
+        <Section title="Pagina principală — Secțiunea Servicii" icon={<IconBriefcase />}>
           <div
             style={{
               display: "grid",
@@ -390,7 +395,7 @@ export default function SetariPage() {
         </Section>
 
         {/* Team */}
-        <Section title="👨‍⚕️ Pagina principală — Secțiunea Echipă">
+        <Section title="Pagina principală — Secțiunea Echipă" icon={<IconUsers />}>
           <div
             style={{
               display: "grid",
@@ -418,7 +423,7 @@ export default function SetariPage() {
         </Section>
 
         {/* Before & After */}
-        <Section title="🔄 Pagina principală — Secțiunea Înainte & După">
+        <Section title="Pagina principală — Secțiunea Înainte & După" icon={<IconCompare />}>
           <div
             style={{
               display: "grid",
@@ -459,7 +464,7 @@ export default function SetariPage() {
         </Section>
 
         {/* Reviews */}
-        <Section title="⭐ Pagina principală — Secțiunea Recenzii">
+        <Section title="Pagina principală — Secțiunea Recenzii" icon={<IconMessageSquare />}>
           <div
             style={{
               display: "grid",
@@ -487,7 +492,7 @@ export default function SetariPage() {
         </Section>
 
         {/* /services page */}
-        <Section title="📋 Pagina /services — Hero">
+        <Section title="Pagina /services — Hero" icon={<IconFileText />}>
           <div
             style={{
               display: "grid",
@@ -527,7 +532,7 @@ export default function SetariPage() {
           />
         </Section>
 
-        <Section title="📊 Pagina /services — Statistici (4 carduri)">
+        <Section title="Pagina /services — Statistici (4 carduri)" icon={<IconBarChart />}>
           {(
             [
               { v: "svcStat1Value", l: "svcStat1Label", n: "1" },
@@ -559,7 +564,7 @@ export default function SetariPage() {
         </Section>
 
         {/* Contact */}
-        <Section title="📍 Contact">
+        <Section title="Contact" icon={<IconMapPin />}>
           <div
             style={{
               display: "grid",
@@ -593,6 +598,49 @@ export default function SetariPage() {
             onChange={set("contactHours")}
           />
         </Section>
+      </div>
+
+      {/* Sticky save bar */}
+      <div
+        style={{
+          position: "sticky",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: "rgba(240,242,245,0.95)",
+          backdropFilter: "blur(8px)",
+          borderTop: "1px solid #E2E6EA",
+          padding: "14px 0",
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: "12px",
+          alignItems: "center",
+          marginTop: "8px",
+        }}
+      >
+        {saved && (
+          <span style={{ fontSize: "13px", color: "#059669", fontWeight: 500 }}>
+            ✓ Salvat cu succes!
+          </span>
+        )}
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          style={{
+            ...btnPrimary,
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            opacity: saving ? 0.7 : 1,
+            backgroundColor: saved ? "#059669" : undefined,
+            transition: "background-color 0.3s",
+            minWidth: "140px",
+            justifyContent: "center",
+          }}
+        >
+          <IconSave />
+          {saved ? "Salvat!" : saving ? "Se salvează..." : "Salvează tot"}
+        </button>
       </div>
     </div>
   );
