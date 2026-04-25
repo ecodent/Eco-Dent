@@ -107,14 +107,12 @@ export default function Contact({
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    email: "",
-    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert(t("contact.form.success"));
-    setFormData({ name: "", phone: "", email: "", message: "" });
+    setFormData({ name: "", phone: "" });
   };
 
   return (
@@ -417,74 +415,6 @@ export default function Contact({
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row" style={{ gap: "16px" }}>
-              <div style={{ flex: 1 }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    color: "#0F1A2D",
-                    marginBottom: "8px",
-                  }}
-                >
-                  {t("contact.form.phone")}
-                </label>
-                <input
-                  type="tel"
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  placeholder={t("contact.form.phone.placeholder")}
-                  required
-                  style={{
-                    width: "100%",
-                    padding: "14px 16px",
-                    borderRadius: "12px",
-                    border: "1px solid #E5E7EB",
-                    backgroundColor: "#F8F8F8",
-                    fontSize: "14px",
-                    color: "#0F1A2D",
-                    outline: "none",
-                    boxSizing: "border-box",
-                  }}
-                />
-              </div>
-              <div style={{ flex: 1 }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    color: "#0F1A2D",
-                    marginBottom: "8px",
-                  }}
-                >
-                  {t("contact.form.email")}
-                </label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  placeholder={t("contact.form.email.placeholder")}
-                  style={{
-                    width: "100%",
-                    padding: "14px 16px",
-                    borderRadius: "12px",
-                    border: "1px solid #E5E7EB",
-                    backgroundColor: "#F8F8F8",
-                    fontSize: "14px",
-                    color: "#0F1A2D",
-                    outline: "none",
-                    boxSizing: "border-box",
-                  }}
-                />
-              </div>
-            </div>
-
             <div>
               <label
                 style={{
@@ -495,16 +425,16 @@ export default function Contact({
                   marginBottom: "8px",
                 }}
               >
-                {t("contact.form.message")}
+                {t("contact.form.phone")}
               </label>
-              <textarea
-                value={formData.message}
+              <input
+                type="tel"
+                value={formData.phone}
                 onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
+                  setFormData({ ...formData, phone: e.target.value })
                 }
-                placeholder={t("contact.form.message.placeholder")}
+                placeholder={t("contact.form.phone.placeholder")}
                 required
-                rows={5}
                 style={{
                   width: "100%",
                   padding: "14px 16px",
@@ -514,9 +444,7 @@ export default function Contact({
                   fontSize: "14px",
                   color: "#0F1A2D",
                   outline: "none",
-                  resize: "vertical",
                   boxSizing: "border-box",
-                  fontFamily: "inherit",
                 }}
               />
             </div>
