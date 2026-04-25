@@ -66,8 +66,10 @@ export default function Navbar() {
           zIndex: 50,
           backgroundColor: scrolled ? "#F8F8F8" : "transparent",
           boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.06)" : "none",
-          transform: hidden && !menuOpen ? "translateY(-100%)" : "translateY(0)",
-          transition: "transform 0.3s ease, background-color 0.3s, box-shadow 0.3s",
+          transform:
+            hidden && !menuOpen ? "translateY(-100%)" : "translateY(0)",
+          transition:
+            "transform 0.3s ease, background-color 0.3s, box-shadow 0.3s",
         }}
       >
         <div className="flex items-center flex-shrink-0">

@@ -165,8 +165,7 @@ export default function EchipaPage() {
                   accept="image/*"
                   style={{ display: "none" }}
                   onChange={(e) =>
-                    e.target.files?.[0] &&
-                    handleImage(e.target.files[0], i)
+                    e.target.files?.[0] && handleImage(e.target.files[0], i)
                   }
                 />
               </label>
