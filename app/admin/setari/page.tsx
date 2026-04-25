@@ -139,21 +139,37 @@ function Field({
 }) {
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "6px",
+        }}
+      >
         <label style={{ ...labelStyle, margin: 0 }}>{label}</label>
-        <span style={{
-          fontSize: "11px",
-          fontWeight: 500,
-          color: saved ? "#059669" : saving ? "#0168FF" : "transparent",
-          transition: "color 0.2s",
-          minWidth: "60px",
-          textAlign: "right",
-        }}>
+        <span
+          style={{
+            fontSize: "11px",
+            fontWeight: 500,
+            color: saved ? "#059669" : saving ? "#0168FF" : "transparent",
+            transition: "color 0.2s",
+            minWidth: "60px",
+            textAlign: "right",
+          }}
+        >
           {saved ? "✓ Salvat" : saving ? "Salvează..." : "·"}
         </span>
       </div>
       {hint && (
-        <p style={{ fontSize: "11px", color: "#878C96", marginBottom: "6px", marginTop: "-2px" }}>
+        <p
+          style={{
+            fontSize: "11px",
+            color: "#878C96",
+            marginBottom: "6px",
+            marginTop: "-2px",
+          }}
+        >
           {hint}
         </p>
       )}
@@ -217,7 +233,9 @@ export default function SetariPage() {
   const [loading, setLoading] = useState(true);
   const [globalSaving, setGlobalSaving] = useState(false);
   const [globalSaved, setGlobalSaved] = useState(false);
-  const [fieldStatus, setFieldStatus] = useState<Record<string, "idle" | "saving" | "saved">>({});
+  const [fieldStatus, setFieldStatus] = useState<
+    Record<string, "idle" | "saving" | "saved">
+  >({});
   const settingsRef = useRef<Settings>(DEFAULTS);
 
   const load = useCallback(async () => {
@@ -247,7 +265,10 @@ export default function SetariPage() {
       body: JSON.stringify(settingsRef.current),
     });
     setFieldStatus((prev) => ({ ...prev, [key]: "saved" }));
-    setTimeout(() => setFieldStatus((prev) => ({ ...prev, [key]: "idle" })), 2000);
+    setTimeout(
+      () => setFieldStatus((prev) => ({ ...prev, [key]: "idle" })),
+      2000,
+    );
   }, []);
 
   const handleSaveAll = async () => {
@@ -734,7 +755,11 @@ export default function SetariPage() {
           }}
         >
           <IconSave />
-          {globalSaved ? "Salvat!" : globalSaving ? "Se salvează..." : "Salvează tot"}
+          {globalSaved
+            ? "Salvat!"
+            : globalSaving
+              ? "Se salvează..."
+              : "Salvează tot"}
         </button>
       </div>
     </div>

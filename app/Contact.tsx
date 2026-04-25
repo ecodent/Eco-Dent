@@ -92,7 +92,17 @@ function SendIcon() {
   );
 }
 
-export default function Contact() {
+export default function Contact({
+  phone,
+  email,
+  address,
+  hours,
+}: {
+  phone?: string;
+  email?: string;
+  address?: string;
+  hours?: string;
+}) {
   const { t } = useT();
   const [formData, setFormData] = useState({
     name: "",
@@ -214,13 +224,13 @@ export default function Contact() {
                     whiteSpace: "pre-line",
                   }}
                 >
-                  {t("contact.address.value")}
+                  {address || t("contact.address.value")}
                 </p>
               </div>
             </div>
 
             <a
-              href="tel:+37369221112"
+              href={`tel:${phone || "+37369221112"}`}
               style={{
                 backgroundColor: "#FFFFFF",
                 borderRadius: "16px",
@@ -254,13 +264,13 @@ export default function Contact() {
                     fontWeight: 500,
                   }}
                 >
-                  +373 69 221 112
+                  {phone || "+373 69 221 112"}
                 </span>
               </div>
             </a>
 
             <a
-              href="mailto:ecodent.web@gmail.com"
+              href={`mailto:${email || "ecodent.web@gmail.com"}`}
               style={{
                 backgroundColor: "#FFFFFF",
                 borderRadius: "16px",
@@ -294,7 +304,7 @@ export default function Contact() {
                     fontWeight: 500,
                   }}
                 >
-                  ecodent.web@gmail.com
+                  {email || "ecodent.web@gmail.com"}
                 </span>
               </div>
             </a>
@@ -332,7 +342,7 @@ export default function Contact() {
                     whiteSpace: "pre-line",
                   }}
                 >
-                  {t("contact.hours.value")}
+                  {hours || t("contact.hours.value")}
                 </p>
               </div>
             </div>

@@ -719,7 +719,12 @@ export default async function Home() {
       />
 
       {/* Contact Section */}
-      <Contact />
+      <Contact
+        phone={s.contactPhone}
+        email={s.contactEmail}
+        address={s.contactAddress}
+        hours={s.contactHours}
+      />
 
       {/* Footer */}
       <Footer />
