@@ -57,7 +57,13 @@ function CompareIcon() {
   );
 }
 
-export default function BeforeAfter({ cases, title, titleItalic, description, cta }: BeforeAfterProps) {
+export default function BeforeAfter({
+  cases,
+  title,
+  titleItalic,
+  description,
+  cta,
+}: BeforeAfterProps) {
   const [currentCase, setCurrentCase] = useState(0);
   const [sliderPos, setSliderPos] = useState(50); // percentage
   const [isDragging, setIsDragging] = useState(false);
@@ -198,9 +204,35 @@ export default function BeforeAfter({ cases, title, titleItalic, description, ct
               marginTop: "12px",
             }}
           >
-            {description
-              ? description
-              : (<>{t("ba.description.start")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold1")}</span>{t("ba.description.mid1")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold2")}</span>{t("ba.description.mid2")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold3")}</span>{t("ba.description.mid3")}<span style={{ fontStyle: "italic", fontWeight: 600, color: "#0F1A2D" }}>{t("ba.description.bold4")}</span>{t("ba.description.end")}</>)}
+            {description ? (
+              description
+            ) : (
+              <>
+                {t("ba.description.start")}
+                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+                  {t("ba.description.bold1")}
+                </span>
+                {t("ba.description.mid1")}
+                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+                  {t("ba.description.bold2")}
+                </span>
+                {t("ba.description.mid2")}
+                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+                  {t("ba.description.bold3")}
+                </span>
+                {t("ba.description.mid3")}
+                <span
+                  style={{
+                    fontStyle: "italic",
+                    fontWeight: 600,
+                    color: "#0F1A2D",
+                  }}
+                >
+                  {t("ba.description.bold4")}
+                </span>
+                {t("ba.description.end")}
+              </>
+            )}
           </p>
         </div>
 

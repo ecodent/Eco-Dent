@@ -115,7 +115,8 @@ export default function ServicesPageClient({
                 letterSpacing: "-0.03em",
               }}
             >
-              {heading || t("svcPage.heading")} <br className="hidden md:block" />
+              {heading || t("svcPage.heading")}{" "}
+              <br className="hidden md:block" />
               <span style={{ fontStyle: "italic", fontWeight: 700 }}>
                 {headingItalic || t("svcPage.heading.italic")}
               </span>

@@ -52,7 +52,12 @@ function renderBoldText(text: string) {
   });
 }
 
-export default function PatientReviews({ reviews, title, titleItalic, description }: PatientReviewsProps) {
+export default function PatientReviews({
+  reviews,
+  title,
+  titleItalic,
+  description,
+}: PatientReviewsProps) {
   const [current, setCurrent] = useState(0);
   const total = reviews.length;
   const { t } = useT();
@@ -166,9 +171,41 @@ export default function PatientReviews({ reviews, title, titleItalic, descriptio
               marginTop: "12px",
             }}
           >
-            {description
-              ? description
-              : (<>{t("reviews.description.start")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("reviews.description.bold1")}</span>{t("reviews.description.mid1")}<span style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}>{t("reviews.description.bold2")}</span>{t("reviews.description.mid2")}<span style={{ fontWeight: 600, color: "#0F1A2D" }}>{t("reviews.description.bold3")}</span>{t("reviews.description.mid3")}<span style={{ fontWeight: 600, color: "#0F1A2D", fontStyle: "italic" }}>{t("reviews.description.bold4")}</span>{t("reviews.description.end")}</>)}
+            {description ? (
+              description
+            ) : (
+              <>
+                {t("reviews.description.start")}
+                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+                  {t("reviews.description.bold1")}
+                </span>
+                {t("reviews.description.mid1")}
+                <span
+                  style={{
+                    fontWeight: 600,
+                    color: "#0F1A2D",
+                    fontStyle: "italic",
+                  }}
+                >
+                  {t("reviews.description.bold2")}
+                </span>
+                {t("reviews.description.mid2")}
+                <span style={{ fontWeight: 600, color: "#0F1A2D" }}>
+                  {t("reviews.description.bold3")}
+                </span>
+                {t("reviews.description.mid3")}
+                <span
+                  style={{
+                    fontWeight: 600,
+                    color: "#0F1A2D",
+                    fontStyle: "italic",
+                  }}
+                >
+                  {t("reviews.description.bold4")}
+                </span>
+                {t("reviews.description.end")}
+              </>
+            )}
           </p>
         </div>
 

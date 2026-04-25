@@ -273,44 +273,6 @@ export default async function Home() {
                   >
                     {s.stat2Value}
                   </p>
-                  <div className="flex">
-                    <Image
-                      src="/hero-image.jpg"
-                      alt="Patient"
-                      width={28}
-                      height={28}
-                      className="object-cover"
-                      style={{
-                        borderRadius: "50%",
-                        border: "2px solid white",
-                        marginLeft: "-8px",
-                      }}
-                    />
-                    <Image
-                      src="/hero-image.jpg"
-                      alt="Patient"
-                      width={28}
-                      height={28}
-                      className="object-cover"
-                      style={{
-                        borderRadius: "50%",
-                        border: "2px solid white",
-                        marginLeft: "-8px",
-                      }}
-                    />
-                    <Image
-                      src="/hero-image.jpg"
-                      alt="Patient"
-                      width={28}
-                      height={28}
-                      className="object-cover"
-                      style={{
-                        borderRadius: "50%",
-                        border: "2px solid white",
-                        marginLeft: "-8px",
-                      }}
-                    />
-                  </div>
                 </div>
                 <p
                   style={{
@@ -497,7 +459,8 @@ export default async function Home() {
                   maxWidth: "400px",
                 }}
               >
-                {s.servicesDescription || "Combinăm experiența clinică, tehnologia modernă și o abordare atentă pentru a oferi rezultate de încredere în stomatologia preventivă, restaurativă și estetică."}
+                {s.servicesDescription ||
+                  "Combinăm experiența clinică, tehnologia modernă și o abordare atentă pentru a oferi rezultate de încredere în stomatologia preventivă, restaurativă și estetică."}
               </p>
               <a
                 href="/services"

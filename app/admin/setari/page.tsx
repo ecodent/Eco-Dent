@@ -263,16 +263,57 @@ export default function SetariPage() {
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         {/* Hero Title */}
         <Section title="🎯 Hero — Titlu">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Rând 1 (normal)" value={settings.heroTitle} onChange={set("heroTitle")} />
-            <Field label="Rând 1 italic bold" value={settings.heroTitleItalic} onChange={set("heroTitleItalic")} />
-            <Field label="Rând 2 (normal)" value={settings.heroTitle2} onChange={set("heroTitle2")} />
-            <Field label="Rând 3 (normal)" value={settings.heroTitle3} onChange={set("heroTitle3")} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Rând 1 (normal)"
+              value={settings.heroTitle}
+              onChange={set("heroTitle")}
+            />
+            <Field
+              label="Rând 1 italic bold"
+              value={settings.heroTitleItalic}
+              onChange={set("heroTitleItalic")}
+            />
+            <Field
+              label="Rând 2 (normal)"
+              value={settings.heroTitle2}
+              onChange={set("heroTitle2")}
+            />
+            <Field
+              label="Rând 3 (normal)"
+              value={settings.heroTitle3}
+              onChange={set("heroTitle3")}
+            />
           </div>
-          <Field label="Paragraf descriere" multiline value={settings.heroDescription} onChange={set("heroDescription")} />
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Text buton principal" value={settings.heroCta} onChange={set("heroCta")} />
-            <Field label="Număr telefon (hero)" value={settings.heroPhone} onChange={set("heroPhone")} />
+          <Field
+            label="Paragraf descriere"
+            multiline
+            value={settings.heroDescription}
+            onChange={set("heroDescription")}
+          />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Text buton principal"
+              value={settings.heroCta}
+              onChange={set("heroCta")}
+            />
+            <Field
+              label="Număr telefon (hero)"
+              value={settings.heroPhone}
+              onChange={set("heroPhone")}
+            />
           </div>
         </Section>
 
@@ -285,65 +326,205 @@ export default function SetariPage() {
               { v: "stat3Value", l: "stat3Label", n: "3" },
             ] as const
           ).map((row) => (
-            <div key={row.v} style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px" }}>
-              <Field label={`Valoare ${row.n}`} value={settings[row.v]} onChange={set(row.v)} />
-              <Field label={`Etichetă ${row.n}`} value={settings[row.l]} onChange={set(row.l)} />
+            <div
+              key={row.v}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "140px 1fr",
+                gap: "12px",
+              }}
+            >
+              <Field
+                label={`Valoare ${row.n}`}
+                value={settings[row.v]}
+                onChange={set(row.v)}
+              />
+              <Field
+                label={`Etichetă ${row.n}`}
+                value={settings[row.l]}
+                onChange={set(row.l)}
+              />
             </div>
           ))}
         </Section>
 
         {/* Services section (home) */}
         <Section title="🦷 Pagina principală — Secțiunea Servicii">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Titlu (normal)" value={settings.servicesTitle} onChange={set("servicesTitle")} />
-            <Field label="Titlu italic" value={settings.servicesTitleItalic} onChange={set("servicesTitleItalic")} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Titlu (normal)"
+              value={settings.servicesTitle}
+              onChange={set("servicesTitle")}
+            />
+            <Field
+              label="Titlu italic"
+              value={settings.servicesTitleItalic}
+              onChange={set("servicesTitleItalic")}
+            />
           </div>
-          <Field label="Descriere" multiline value={settings.servicesDescription} onChange={set("servicesDescription")} />
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Text buton" value={settings.servicesCta} onChange={set("servicesCta")} />
+          <Field
+            label="Descriere"
+            multiline
+            value={settings.servicesDescription}
+            onChange={set("servicesDescription")}
+          />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Text buton"
+              value={settings.servicesCta}
+              onChange={set("servicesCta")}
+            />
           </div>
         </Section>
 
         {/* Team */}
         <Section title="👨‍⚕️ Pagina principală — Secțiunea Echipă">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Titlu (normal)" value={settings.teamTitle} onChange={set("teamTitle")} />
-            <Field label="Titlu italic" value={settings.teamTitleItalic} onChange={set("teamTitleItalic")} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Titlu (normal)"
+              value={settings.teamTitle}
+              onChange={set("teamTitle")}
+            />
+            <Field
+              label="Titlu italic"
+              value={settings.teamTitleItalic}
+              onChange={set("teamTitleItalic")}
+            />
           </div>
-          <Field label="Descriere" multiline value={settings.teamDescription} onChange={set("teamDescription")} />
+          <Field
+            label="Descriere"
+            multiline
+            value={settings.teamDescription}
+            onChange={set("teamDescription")}
+          />
         </Section>
 
         {/* Before & After */}
         <Section title="🔄 Pagina principală — Secțiunea Înainte & După">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Titlu (normal)" value={settings.baTitle} onChange={set("baTitle")} />
-            <Field label="Titlu italic" value={settings.baTitleItalic} onChange={set("baTitleItalic")} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Titlu (normal)"
+              value={settings.baTitle}
+              onChange={set("baTitle")}
+            />
+            <Field
+              label="Titlu italic"
+              value={settings.baTitleItalic}
+              onChange={set("baTitleItalic")}
+            />
           </div>
-          <Field label="Descriere" multiline value={settings.baDescription} onChange={set("baDescription")} />
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Text buton" value={settings.baCta} onChange={set("baCta")} />
+          <Field
+            label="Descriere"
+            multiline
+            value={settings.baDescription}
+            onChange={set("baDescription")}
+          />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Text buton"
+              value={settings.baCta}
+              onChange={set("baCta")}
+            />
           </div>
         </Section>
 
         {/* Reviews */}
         <Section title="⭐ Pagina principală — Secțiunea Recenzii">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Titlu (normal)" value={settings.reviewsTitle} onChange={set("reviewsTitle")} />
-            <Field label="Titlu italic" value={settings.reviewsTitleItalic} onChange={set("reviewsTitleItalic")} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Titlu (normal)"
+              value={settings.reviewsTitle}
+              onChange={set("reviewsTitle")}
+            />
+            <Field
+              label="Titlu italic"
+              value={settings.reviewsTitleItalic}
+              onChange={set("reviewsTitleItalic")}
+            />
           </div>
-          <Field label="Descriere" multiline value={settings.reviewsDescription} onChange={set("reviewsDescription")} />
+          <Field
+            label="Descriere"
+            multiline
+            value={settings.reviewsDescription}
+            onChange={set("reviewsDescription")}
+          />
         </Section>
 
         {/* /services page */}
         <Section title="📋 Pagina /services — Hero">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Kicker (text mic albastru)" value={settings.svcKicker} onChange={set("svcKicker")} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Kicker (text mic albastru)"
+              value={settings.svcKicker}
+              onChange={set("svcKicker")}
+            />
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Titlu (normal)" value={settings.svcHeading} onChange={set("svcHeading")} />
-            <Field label="Titlu italic bold" value={settings.svcHeadingItalic} onChange={set("svcHeadingItalic")} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Titlu (normal)"
+              value={settings.svcHeading}
+              onChange={set("svcHeading")}
+            />
+            <Field
+              label="Titlu italic bold"
+              value={settings.svcHeadingItalic}
+              onChange={set("svcHeadingItalic")}
+            />
           </div>
-          <Field label="Descriere" multiline value={settings.svcDescription} onChange={set("svcDescription")} />
+          <Field
+            label="Descriere"
+            multiline
+            value={settings.svcDescription}
+            onChange={set("svcDescription")}
+          />
         </Section>
 
         <Section title="📊 Pagina /services — Statistici (4 carduri)">
@@ -355,21 +536,62 @@ export default function SetariPage() {
               { v: "svcStat4Value", l: "svcStat4Label", n: "4" },
             ] as const
           ).map((row) => (
-            <div key={row.v} style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "12px" }}>
-              <Field label={`Valoare ${row.n}`} value={settings[row.v]} onChange={set(row.v)} />
-              <Field label={`Etichetă ${row.n}`} value={settings[row.l]} onChange={set(row.l)} />
+            <div
+              key={row.v}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "140px 1fr",
+                gap: "12px",
+              }}
+            >
+              <Field
+                label={`Valoare ${row.n}`}
+                value={settings[row.v]}
+                onChange={set(row.v)}
+              />
+              <Field
+                label={`Etichetă ${row.n}`}
+                value={settings[row.l]}
+                onChange={set(row.l)}
+              />
             </div>
           ))}
         </Section>
 
         {/* Contact */}
         <Section title="📍 Contact">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            <Field label="Telefon" value={settings.contactPhone} onChange={set("contactPhone")} />
-            <Field label="Email" value={settings.contactEmail} onChange={set("contactEmail")} />
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "12px",
+            }}
+          >
+            <Field
+              label="Telefon"
+              value={settings.contactPhone}
+              onChange={set("contactPhone")}
+            />
+            <Field
+              label="Email"
+              value={settings.contactEmail}
+              onChange={set("contactEmail")}
+            />
           </div>
-          <Field label="Adresă" multiline hint="Fiecare rând nou = rând nou pe site" value={settings.contactAddress} onChange={set("contactAddress")} />
-          <Field label="Program de lucru" multiline hint="Fiecare rând nou = rând nou pe site" value={settings.contactHours} onChange={set("contactHours")} />
+          <Field
+            label="Adresă"
+            multiline
+            hint="Fiecare rând nou = rând nou pe site"
+            value={settings.contactAddress}
+            onChange={set("contactAddress")}
+          />
+          <Field
+            label="Program de lucru"
+            multiline
+            hint="Fiecare rând nou = rând nou pe site"
+            value={settings.contactHours}
+            onChange={set("contactHours")}
+          />
         </Section>
       </div>
     </div>

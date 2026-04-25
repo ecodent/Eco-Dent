@@ -148,13 +148,24 @@ export default async function ServicesPage() {
   let s: Record<string, string> = {};
   try {
     s = await getSiteSettings();
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 
   const svcStats = [
     { num: s.svcStat1Value || "6+", label: s.svcStat1Label || "Specialități" },
-    { num: s.svcStat2Value || "5K+", label: s.svcStat2Label || "Pacienți tratați" },
-    { num: s.svcStat3Value || "10+", label: s.svcStat3Label || "Ani experiență" },
-    { num: s.svcStat4Value || "100%", label: s.svcStat4Label || "Diagnostic digital" },
+    {
+      num: s.svcStat2Value || "5K+",
+      label: s.svcStat2Label || "Pacienți tratați",
+    },
+    {
+      num: s.svcStat3Value || "10+",
+      label: s.svcStat3Label || "Ani experiență",
+    },
+    {
+      num: s.svcStat4Value || "100%",
+      label: s.svcStat4Label || "Diagnostic digital",
+    },
   ];
 
   return (
