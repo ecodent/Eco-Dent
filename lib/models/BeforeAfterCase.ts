@@ -2,9 +2,9 @@ import mongoose, { Schema, models } from "mongoose";
 
 const BeforeAfterSchema = new Schema(
   {
-    before: { type: String, required: true },
-    after: { type: String, required: true },
-    label: { type: String, required: true },
+    before: { type: String, default: "" },
+    after: { type: String, default: "" },
+    label: { type: String, default: "" },
     order: { type: Number, default: 0 },
   },
   { timestamps: true }
