@@ -23,6 +23,7 @@ const ServiceSchema = new Schema(
     benefits_ru: [{ type: String }],
     cardColor: { type: String, default: "#ECEEF1" },
     order: { type: Number, default: 0 },
+    showInNavbar: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

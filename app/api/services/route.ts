@@ -3,9 +3,12 @@ import dbConnect from "@/lib/mongodb";
 import Service from "@/lib/models/Service";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   await dbConnect();
-  const services = await Service.find().sort({ order: 1 });
+  const { searchParams } = new URL(request.url);
+  const navbar = searchParams.get("navbar");
+  const filter = navbar === "true" ? { showInNavbar: true } : {};
+  const services = await (Service as any).find(filter).sort({ order: 1 });
   return NextResponse.json(services);
 }
 

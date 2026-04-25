@@ -82,6 +82,7 @@ export default function ServiciiPage() {
     benefits_ru: [""],
     cardColor: "#ECEEF1",
     order: items.length,
+    showInNavbar: false,
   });
 
   const tabBtn = (active: boolean) =>
@@ -191,6 +192,27 @@ export default function ServiciiPage() {
                   />
                 </div>
               </div>
+
+              {/* Show in Navbar toggle */}
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  cursor: "pointer",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "#374151",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={!!item.showInNavbar}
+                  onChange={(e) => updateItem(i, { showInNavbar: e.target.checked })}
+                  style={{ width: "16px", height: "16px", cursor: "pointer" }}
+                />
+                Afișează în Navigation Bar
+              </label>
 
               {lang === "ro" ? (
                 <>

@@ -32,6 +32,7 @@ export interface Service {
   benefits_ru: string[];
   cardColor: string;
   order: number;
+  showInNavbar?: boolean;
 }
 export interface Review {
   _id?: string;

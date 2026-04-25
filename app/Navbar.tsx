@@ -28,6 +28,14 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, lang, setLang } = useT();
+  const [navServices, setNavServices] = useState<{ slug: string; title: string; title_ru?: string }[]>([]);
+
+  useEffect(() => {
+    fetch("/api/services?navbar=true")
+      .then((r) => r.json())
+      .then((data) => Array.isArray(data) && setNavServices(data))
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -104,13 +112,16 @@ export default function Navbar() {
           >
             {t("nav.services")}
           </a>
-          <a
-            href={`/${lang}/servicii/imagistica-dentara`}
-            className="hidden xl:inline font-medium hover:opacity-70 transition-opacity"
-            style={{ fontSize: "15px", color: "#878C96" }}
-          >
-            Imagistică Dentară
-          </a>
+          {navServices.map((svc) => (
+            <a
+              key={svc.slug}
+              href={`/${lang}/servicii/${svc.slug}`}
+              className="hidden xl:inline font-medium hover:opacity-70 transition-opacity"
+              style={{ fontSize: "15px", color: "#878C96" }}
+            >
+              {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
+            </a>
+          ))}
         </div>
 
         <div
@@ -323,20 +334,23 @@ export default function Navbar() {
         >
           {t("nav.services")}
         </a>
-        <a
-          href={`/${lang}/servicii/imagistica-dentara`}
-          onClick={() => setMenuOpen(false)}
-          style={{
-            padding: "14px 0",
-            fontSize: "17px",
-            fontWeight: 500,
-            color: "#878C96",
-            textDecoration: "none",
-            borderBottom: "1px solid #F3F4F6",
-          }}
-        >
-          Imagistică Dentară
-        </a>
+        {navServices.map((svc) => (
+          <a
+            key={svc.slug}
+            href={`/${lang}/servicii/${svc.slug}`}
+            onClick={() => setMenuOpen(false)}
+            style={{
+              padding: "14px 0",
+              fontSize: "17px",
+              fontWeight: 500,
+              color: "#878C96",
+              textDecoration: "none",
+              borderBottom: "1px solid #F3F4F6",
+            }}
+          >
+            {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
+          </a>
+        ))}
         <div style={{ marginTop: "20px" }}>
           <LangSwitcher lang={lang} setLang={setLang} />
         </div>

@@ -85,7 +85,14 @@ function SidebarContent({
         }}
       >
         <Link href="/" style={{ display: "flex", lineHeight: 0 }}>
-          <Image src="/logo.footer.png" alt="ECODENT" width={140} height={59} unoptimized style={{ width: "140px", height: "auto" }} />
+          <Image
+            src="/logo.footer.png"
+            alt="ECODENT"
+            width={140}
+            height={59}
+            unoptimized
+            style={{ width: "140px", height: "auto" }}
+          />
         </Link>
         <span
           style={{
@@ -292,7 +299,14 @@ export default function AdminLayout({
             }}
           >
             <Link href="/" style={{ display: "flex", lineHeight: 0 }}>
-              <Image src="/logo.png" alt="ECODENT" width={160} height={67} unoptimized style={{ width: "160px", height: "auto" }} />
+              <Image
+                src="/logo.png"
+                alt="ECODENT"
+                width={160}
+                height={67}
+                unoptimized
+                style={{ width: "160px", height: "auto" }}
+              />
             </Link>
           </div>
           <p
