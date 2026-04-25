@@ -208,7 +208,9 @@ export default function ServiciiPage() {
                 <input
                   type="checkbox"
                   checked={!!item.showInNavbar}
-                  onChange={(e) => updateItem(i, { showInNavbar: e.target.checked })}
+                  onChange={(e) =>
+                    updateItem(i, { showInNavbar: e.target.checked })
+                  }
                   style={{ width: "16px", height: "16px", cursor: "pointer" }}
                 />
                 Afișează în Navigation Bar

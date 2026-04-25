@@ -389,7 +389,7 @@ export default async function Home() {
           className="relative z-10 section-px order-1 lg:order-none lg:w-[58%] xl:w-[45%] lg:min-h-[92vh] xl:min-h-screen lg:flex lg:items-center"
           style={{ paddingTop: "100px", paddingBottom: "40px" }}
         >
-          <div className="max-w-[480px] lg:max-w-[560px] xl:max-w-[480px]">
+          <div className="max-w-[480px] lg:max-w-[560px] xl:max-w-[640px]">
             <h1
               className="text-[36px] sm:text-[48px] lg:text-[46px] xl:text-[64px]"
               style={{

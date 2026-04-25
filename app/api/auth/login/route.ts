@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SignJWT } from "jose";
+import { sanitizeString } from "@/lib/auth";
 
 const secret = new TextEncoder().encode(
   process.env.JWT_SECRET || "ecodent_jwt_secret_key_2026_super_secure"
@@ -7,7 +8,18 @@ const secret = new TextEncoder().encode(
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json();
+    const body = await req.json();
+
+    // Sanitize inputs to prevent NoSQL injection / XSS
+    const email = sanitizeString(body?.email);
+    const password = sanitizeString(body?.password);
+
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: "Date lipsă" },
+        { status: 400 }
+      );
+    }
 
     const validEmail = process.env.ADMIN_EMAIL || "ecodent.md@gmail.com";
     const validPassword = process.env.ADMIN_PASSWORD || "ecodent2026";
@@ -29,3 +41,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
+

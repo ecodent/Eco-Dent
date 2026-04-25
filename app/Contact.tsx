@@ -108,11 +108,28 @@ export default function Contact({
     name: "",
     phone: "",
   });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(t("contact.form.success"));
-    setFormData({ name: "", phone: "" });
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error("error");
+      setSent(true);
+      setFormData({ name: "", phone: "" });
+    } catch {
+      setError("Eroare. Încearcă din nou.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -451,6 +468,7 @@ export default function Contact({
 
             <button
               type="submit"
+              disabled={sending || sent}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -458,19 +476,30 @@ export default function Contact({
                 gap: "10px",
                 padding: "16px 32px",
                 borderRadius: "9999px",
-                backgroundColor: "#0168FF",
+                backgroundColor: sent ? "#16a34a" : "#0168FF",
                 color: "#FFFFFF",
                 fontSize: "15px",
                 fontWeight: 600,
                 border: "none",
-                cursor: "pointer",
+                cursor: sending || sent ? "default" : "pointer",
                 marginTop: "8px",
                 transition: "background-color 0.2s",
+                opacity: sending ? 0.7 : 1,
               }}
             >
               <SendIcon />
-              {t("contact.form.submit")}
+              {sending
+                ? "Se trimite..."
+                : sent
+                  ? t("contact.form.success")
+                  : "Programează-te"}
             </button>
+
+            {error && (
+              <p style={{ color: "#dc2626", fontSize: "14px", margin: 0 }}>
+                {error}
+              </p>
+            )}
           </form>
         </div>
       </div>

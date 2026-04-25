@@ -28,7 +28,9 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, lang, setLang } = useT();
-  const [navServices, setNavServices] = useState<{ slug: string; title: string; title_ru?: string }[]>([]);
+  const [navServices, setNavServices] = useState<
+    { slug: string; title: string; title_ru?: string }[]
+  >([]);
 
   useEffect(() => {
     fetch("/api/services?navbar=true")
