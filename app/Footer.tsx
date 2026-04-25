@@ -121,7 +121,7 @@ export default function Footer() {
             style={{ display: "flex", flexDirection: "column", gap: "14px" }}
           >
             <Link
-              href="/services/examinations"
+              href="/servicii/examinations"
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -131,7 +131,7 @@ export default function Footer() {
               {t("footer.svc.exam")}
             </Link>
             <Link
-              href="/services/preventive-care"
+              href="/servicii/preventive-care"
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -141,7 +141,7 @@ export default function Footer() {
               {t("footer.svc.preventive")}
             </Link>
             <Link
-              href="/services/teeth-whitening"
+              href="/servicii/teeth-whitening"
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -151,7 +151,7 @@ export default function Footer() {
               {t("footer.svc.whitening")}
             </Link>
             <Link
-              href="/services/orthodontics"
+              href="/servicii/orthodontics"
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -161,7 +161,7 @@ export default function Footer() {
               {t("footer.svc.crowns")}
             </Link>
             <Link
-              href="/services/oral-surgery"
+              href="/servicii/oral-surgery"
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",
@@ -171,7 +171,7 @@ export default function Footer() {
               {t("footer.svc.endo")}
             </Link>
             <Link
-              href="/services/dental-implants"
+              href="/servicii/dental-implants"
               style={{
                 fontSize: "14px",
                 color: "rgba(255,255,255,0.5)",

@@ -95,14 +95,14 @@ export default function Navbar() {
             {t("nav.home")}
           </a>
           <a
-            href="/services"
+            href="/servicii"
             className="font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#878C96" }}
           >
             {t("nav.services")}
           </a>
           <a
-            href="/services/imagistica-dentara"
+            href="/servicii/imagistica-dentara"
             className="hidden xl:inline font-medium hover:opacity-70 transition-opacity"
             style={{ fontSize: "15px", color: "#878C96" }}
           >
@@ -305,7 +305,7 @@ export default function Navbar() {
           {t("nav.home")}
         </a>
         <a
-          href="/services"
+          href="/servicii"
           onClick={() => setMenuOpen(false)}
           style={{
             padding: "14px 0",
@@ -319,7 +319,7 @@ export default function Navbar() {
           {t("nav.services")}
         </a>
         <a
-          href="/services/imagistica-dentara"
+          href="/servicii/imagistica-dentara"
           onClick={() => setMenuOpen(false)}
           style={{
             padding: "14px 0",

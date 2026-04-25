@@ -513,7 +513,7 @@ export default async function Home() {
                   "Combinăm experiența clinică, tehnologia modernă și o abordare atentă pentru a oferi rezultate de încredere în stomatologia preventivă, restaurativă și estetică."}
               </p>
               <a
-                href="/services"
+                href="/servicii"
                 className="inline-flex items-center hover:opacity-80 transition-opacity"
                 style={{
                   marginTop: "32px",
@@ -554,7 +554,7 @@ export default async function Home() {
                     return (
                       <Link
                         key={svc.slug}
-                        href={`/services/${svc.slug}`}
+                        href={`/servicii/${svc.slug}`}
                         style={{
                           backgroundColor: svc.cardColor || "#ECEEF1",
                           borderRadius: "24px",
@@ -635,7 +635,7 @@ export default async function Home() {
                   return (
                     <Link
                       key={svc.slug}
-                      href={`/services/${svc.slug}`}
+                      href={`/servicii/${svc.slug}`}
                       style={{
                         backgroundColor: svc.cardColor || "#ECEEF1",
                         borderRadius: "24px",

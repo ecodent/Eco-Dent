@@ -56,7 +56,7 @@ export default function ServicePageLayout({
           }}
         >
           <Link
-            href="/services"
+            href="/servicii"
             style={{
               fontSize: "13px",
               fontWeight: 500,

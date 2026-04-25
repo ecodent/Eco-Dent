@@ -200,7 +200,7 @@ export default function ServicesPageClient({
             return (
               <Link
                 key={service.slug}
-                href={`/services/${service.slug}`}
+                href={`/servicii/${service.slug}`}
                 className="svc-grid-card"
                 style={{
                   display: "flex",
