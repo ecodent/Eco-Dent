@@ -28,7 +28,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieLang = ((await cookies()).get("ecodent.lang")?.value ?? "ro") as Lang;
+  const cookieLang = ((await cookies()).get("ecodent.lang")?.value ??
+    "ro") as Lang;
   return (
     <html
       lang={cookieLang}

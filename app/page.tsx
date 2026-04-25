@@ -165,6 +165,16 @@ export default async function Home() {
   if (!services || services.length === 0) services = [];
 
   const cookieLang = (await cookies()).get("ecodent.lang")?.value ?? "ro";
+
+  // Resolve RU fields for services when language is Russian
+  if (cookieLang === "ru") {
+    services = services.map((svc: any) => ({
+      ...svc,
+      title: svc.title_ru || svc.title,
+      subtitle: svc.subtitle_ru || svc.subtitle,
+    }));
+  }
+
   const sr = siteSettings as Record<string, string> | null;
 
   const sBase = {
@@ -554,7 +564,7 @@ export default async function Home() {
                     return (
                       <Link
                         key={svc.slug}
-                        href={`/servicii/${svc.slug}`}
+                        href={`/${cookieLang}/servicii/${svc.slug}`}
                         style={{
                           backgroundColor: svc.cardColor || "#ECEEF1",
                           borderRadius: "24px",
@@ -635,7 +645,7 @@ export default async function Home() {
                   return (
                     <Link
                       key={svc.slug}
-                      href={`/servicii/${svc.slug}`}
+                      href={`/${cookieLang}/servicii/${svc.slug}`}
                       style={{
                         backgroundColor: svc.cardColor || "#ECEEF1",
                         borderRadius: "24px",
@@ -647,8 +657,7 @@ export default async function Home() {
                       className="service-card"
                     >
                       {isDark ? (
-                        <>
-                          {svc.image && (
+                        <>                          {svc.image && (
                             <div
                               className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
                               style={{ flex: 1, position: "relative" }}

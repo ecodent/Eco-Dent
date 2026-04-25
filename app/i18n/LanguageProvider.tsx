@@ -17,7 +17,13 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-export function LanguageProvider({ children, initialLang = "ro" }: { children: ReactNode; initialLang?: Lang }) {
+export function LanguageProvider({
+  children,
+  initialLang = "ro",
+}: {
+  children: ReactNode;
+  initialLang?: Lang;
+}) {
   const [lang, setLangState] = useState<Lang>(initialLang);
 
   // Sync with URL lang prefix on client mount (handles any mismatch)
