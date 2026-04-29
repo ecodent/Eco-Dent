@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -38,7 +38,7 @@ export default function ServicePageLayout({
     <div style={{ backgroundColor: "#F8F8F8", minHeight: "100vh" }}>
       <Navbar />
 
-      {/* ── Hero ── */}
+      {/* -- Hero -- */}
       <section
         className="section-px"
         style={{
@@ -126,10 +126,7 @@ export default function ServicePageLayout({
               >
                 {title.split(" ").map((word, i, arr) =>
                   i === arr.length - 1 ? (
-                    <span
-                      key={i}
-                      style={{ fontStyle: "italic", fontWeight: 700 }}
-                    >
+                    <span key={i} style={{ fontWeight: 700 }}>
                       {word}
                     </span>
                   ) : (
@@ -154,7 +151,7 @@ export default function ServicePageLayout({
               style={{ gap: "12px", marginTop: "40px" }}
             >
               <Link
-                href="/#contact"
+                href="/#contact-form"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -237,7 +234,7 @@ export default function ServicePageLayout({
         </div>
       </section>
 
-      {/* ── Features ── */}
+      {/* -- Features -- */}
       <section
         className="section-px"
         style={{ paddingTop: "80px", paddingBottom: "0" }}
@@ -263,7 +260,7 @@ export default function ServicePageLayout({
             }}
           >
             {t("svcDetail.features.title")}{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            <span style={{ fontWeight: 700 }}>
               {t("svcDetail.features.title.italic")}
             </span>
           </h2>
@@ -346,7 +343,7 @@ export default function ServicePageLayout({
         </div>
       </section>
 
-      {/* ── Benefits ── */}
+      {/* -- Benefits -- */}
       {benefits && benefits.length > 0 && (
         <section className="section-px" style={{ paddingTop: "72px" }}>
           <div
@@ -410,7 +407,7 @@ export default function ServicePageLayout({
                 }}
               >
                 {t("svcDetail.benefits.title")}{" "}
-                <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+                <span style={{ fontWeight: 700 }}>
                   {t("svcDetail.benefits.title.italic")}
                 </span>
               </h2>
@@ -471,7 +468,7 @@ export default function ServicePageLayout({
         </section>
       )}
 
-      {/* ── CTA Banner ── */}
+      {/* -- CTA Banner -- */}
       <section
         className="section-px"
         style={{ paddingTop: "72px", paddingBottom: "100px" }}
@@ -512,7 +509,7 @@ export default function ServicePageLayout({
             }}
           >
             {t("svcDetail.bottom.heading")}{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            <span style={{ fontWeight: 700 }}>
               {t("svcDetail.bottom.heading.italic")}
             </span>
           </h2>
@@ -532,7 +529,7 @@ export default function ServicePageLayout({
             style={{ gap: "12px", marginTop: "8px" }}
           >
             <Link
-              href="/#contact"
+              href="/#contact-form"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

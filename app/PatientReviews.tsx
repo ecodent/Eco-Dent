@@ -152,7 +152,7 @@ export default function PatientReviews({
             }}
           >
             {title || t("reviews.title")}{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            <span style={{ fontWeight: 700 }}>
               {titleItalic || t("reviews.title.italic")}
             </span>
           </h2>
@@ -194,8 +194,7 @@ export default function PatientReviews({
                   style={{
                     fontWeight: 600,
                     color: "#0F1A2D",
-                    fontStyle: "italic",
-                  }}
+                                      }}
                 >
                   {t("reviews.description.bold2")}
                 </span>
@@ -208,8 +207,7 @@ export default function PatientReviews({
                   style={{
                     fontWeight: 600,
                     color: "#0F1A2D",
-                    fontStyle: "italic",
-                  }}
+                                      }}
                 >
                   {t("reviews.description.bold4")}
                 </span>

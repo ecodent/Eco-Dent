@@ -415,16 +415,14 @@ export default async function Home() {
               className="text-[36px] sm:text-[48px] lg:text-[46px] xl:text-[64px]"
               style={{
                 lineHeight: 1.05,
-                fontWeight: 300,
+                fontWeight: 900,
                 color: "#0F1A2D",
                 letterSpacing: "-0.02em",
               }}
             >
               {s.heroTitle}
               <br />
-              <span style={{ fontWeight: 700, fontStyle: "italic" }}>
-                {s.heroTitleItalic}
-              </span>{" "}
+              <span style={{ fontWeight: 700 }}>{s.heroTitleItalic}</span>{" "}
               {s.heroTitle2}
               <br />
               {s.heroTitle3}
@@ -444,7 +442,7 @@ export default async function Home() {
             </p>
 
             <a
-              href="#contact"
+              href="#contact-form"
               className="inline-flex items-center hover:opacity-90 transition-opacity"
               style={{
                 marginTop: "40px",
@@ -529,7 +527,7 @@ export default async function Home() {
               }}
             >
               {s.servicesTitle || "Serviciile"}{" "}
-              <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+              <span style={{ fontWeight: 700 }}>
                 {s.servicesTitleItalic || "Noastre."}
               </span>
             </h2>

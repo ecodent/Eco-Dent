@@ -117,7 +117,7 @@ export default function ServicesPageClient({
             >
               {heading || t("svcPage.heading")}{" "}
               <br className="hidden md:block" />
-              <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+              <span style={{ fontWeight: 700 }}>
                 {headingItalic || t("svcPage.heading.italic")}
               </span>
             </h1>
@@ -216,7 +216,7 @@ export default function ServicesPageClient({
                 <div
                   style={{
                     position: "relative",
-                    height: "240px",
+                    height: "320px",
                     flexShrink: 0,
                     overflow: "hidden",
                   }}
@@ -285,6 +285,10 @@ export default function ServicesPageClient({
                       color: isDark ? "rgba(255,255,255,0.58)" : "#878C96",
                       lineHeight: 1.65,
                       margin: 0,
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
                     }}
                   >
                     {service.description}
@@ -297,9 +301,11 @@ export default function ServicesPageClient({
                       flexWrap: "wrap",
                       gap: "7px",
                       marginTop: "4px",
+                      maxHeight: "62px",
+                      overflow: "hidden",
                     }}
                   >
-                    {service.features.slice(0, 4).map((f, i) => (
+                    {service.features.slice(0, 3).map((f, i) => (
                       <span
                         key={i}
                         style={{
@@ -314,12 +320,28 @@ export default function ServicesPageClient({
                             : "rgba(0,0,0,0.05)",
                           padding: "4px 10px",
                           borderRadius: "9999px",
+                          maxWidth: "100%",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         <CheckIcon dark={isDark} />
                         {f.title}
                       </span>
                     ))}
+                    {service.features.length > 3 && (
+                      <span
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: 500,
+                          color: isDark ? "rgba(255,255,255,0.5)" : "#878C96",
+                          padding: "4px 6px",
+                        }}
+                      >
+                        +{service.features.length - 3}
+                      </span>
+                    )}
                   </div>
 
                   {/* CTA row */}
@@ -405,7 +427,7 @@ export default function ServicesPageClient({
             }}
           >
             {t("svcPage.cta.heading")}{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            <span style={{ fontWeight: 700 }}>
               {t("svcPage.cta.heading.italic")}
             </span>
           </h2>
@@ -440,7 +462,7 @@ export default function ServicesPageClient({
               +373 69 221 112
             </a>
             <Link
-              href="/#contact"
+              href="/#contact-form"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

@@ -178,7 +178,7 @@ export default function BeforeAfter({
             }}
           >
             {title || t("ba.title")}{" "}
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+            <span style={{ fontWeight: 700 }}>
               {titleItalic || t("ba.title.italic")}
             </span>
           </h2>
@@ -226,8 +226,7 @@ export default function BeforeAfter({
                 {t("ba.description.mid3")}
                 <span
                   style={{
-                    fontStyle: "italic",
-                    fontWeight: 600,
+                                        fontWeight: 600,
                     color: "#0F1A2D",
                   }}
                 >

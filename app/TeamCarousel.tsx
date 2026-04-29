@@ -114,7 +114,7 @@ export default function TeamCarousel({
           }}
         >
           {title || t("team.title")}{" "}
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+          <span style={{ fontWeight: 700 }}>
             {titleItalic || t("team.title.italic")}
           </span>
         </h2>
@@ -260,8 +260,7 @@ export default function TeamCarousel({
                       fontSize: "16px",
                       color: "rgba(255,255,255,0.8)",
                       marginTop: "4px",
-                      fontStyle: "italic",
-                    }}
+                                          }}
                   >
                     {lang === "ru" && doctor.role_ru
                       ? doctor.role_ru

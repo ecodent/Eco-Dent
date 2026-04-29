@@ -164,9 +164,7 @@ export default function Contact({
           }}
         >
           {t("contact.title")}{" "}
-          <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-            {t("contact.title.italic")}
-          </span>
+          <span style={{ fontWeight: 700 }}>{t("contact.title.italic")}</span>
         </h2>
       </div>
 
@@ -371,6 +369,7 @@ export default function Contact({
 
         {/* Right — Form */}
         <div
+          id="contact-form"
           style={{
             flex: 1,
             backgroundColor: "#FFFFFF",
