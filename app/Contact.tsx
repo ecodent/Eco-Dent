@@ -207,13 +207,14 @@ export default function Contact({
             }}
           >
             <div
+              className="p-4 sm:p-5"
               style={{
                 backgroundColor: "#FFFFFF",
                 borderRadius: "16px",
-                padding: "20px 24px",
                 display: "flex",
                 alignItems: "flex-start",
-                gap: "12px",
+                gap: "10px",
+                minWidth: 0,
               }}
             >
               <div style={{ marginTop: "2px" }}>
@@ -246,16 +247,17 @@ export default function Contact({
 
             <a
               href={`tel:${phone || "+37369221112"}`}
+              className="p-4 sm:p-5"
               style={{
                 backgroundColor: "#FFFFFF",
                 borderRadius: "16px",
-                padding: "20px 24px",
                 display: "flex",
                 alignItems: "flex-start",
-                gap: "12px",
+                gap: "10px",
                 textDecoration: "none",
                 cursor: "pointer",
                 transition: "box-shadow 0.2s",
+                minWidth: 0,
               }}
             >
               <div style={{ marginTop: "2px" }}>
@@ -286,16 +288,17 @@ export default function Contact({
 
             <a
               href={`mailto:${email || "ecodent.web@gmail.com"}`}
+              className="p-4 sm:p-5"
               style={{
                 backgroundColor: "#FFFFFF",
                 borderRadius: "16px",
-                padding: "20px 24px",
                 display: "flex",
                 alignItems: "flex-start",
-                gap: "12px",
+                gap: "10px",
                 textDecoration: "none",
                 cursor: "pointer",
                 transition: "box-shadow 0.2s",
+                minWidth: 0,
               }}
             >
               <div style={{ marginTop: "2px" }}>
@@ -317,6 +320,7 @@ export default function Contact({
                     fontSize: "13px",
                     color: "#0168FF",
                     fontWeight: 500,
+                    wordBreak: "break-all",
                   }}
                 >
                   {email || "ecodent.web@gmail.com"}
@@ -325,13 +329,14 @@ export default function Contact({
             </a>
 
             <div
+              className="p-4 sm:p-5"
               style={{
                 backgroundColor: "#FFFFFF",
                 borderRadius: "16px",
-                padding: "20px 24px",
                 display: "flex",
                 alignItems: "flex-start",
-                gap: "12px",
+                gap: "10px",
+                minWidth: 0,
               }}
             >
               <div style={{ marginTop: "2px" }}>

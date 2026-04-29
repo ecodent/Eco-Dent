@@ -74,10 +74,12 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  // ── 2. Verify JWT for all API mutation routes (except login) ────────────────
+  // ── 2. Verify JWT for all API mutation routes (except login & contact) ───────
   const isMutation = ["POST", "PUT", "DELETE", "PATCH"].includes(method);
   const isProtectedApi =
-    pathname.startsWith("/api/") && pathname !== "/api/auth/login";
+    pathname.startsWith("/api/") &&
+    pathname !== "/api/auth/login" &&
+    pathname !== "/api/contact";
 
   if (isProtectedApi && isMutation) {
     try {

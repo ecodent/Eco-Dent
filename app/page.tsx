@@ -283,13 +283,11 @@ export default async function Home() {
               />
             )}
             {/* Slider handles transitions for images 2+ and eventually overlays image 1 */}
-            {heroImageUrls.length > 1 && (
-              <HeroSlider images={heroImageUrls} />
-            )}
+            {heroImageUrls.length > 1 && <HeroSlider images={heroImageUrls} />}
 
             {/* Stats Cards */}
             <div
-              className="absolute flex-col sm:flex-row hidden xl:flex"
+              className="absolute hidden xl:flex"
               style={{
                 bottom: "24px",
                 left: "24px",
@@ -302,27 +300,29 @@ export default async function Home() {
                 style={{
                   backgroundColor: "#FFFFFF",
                   borderRadius: "20px",
-                  padding: "18px 22px",
+                  padding: "16px 18px",
                   boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
-                  minWidth: "140px",
-                  flex: "1",
+                  flex: "1 1 0",
+                  minWidth: 0,
                 }}
               >
                 <p
                   style={{
-                    fontSize: "32px",
+                    fontSize: "clamp(14px, 1.6vw, 32px)",
                     fontWeight: 700,
                     color: "#0168FF",
+                    lineHeight: 1.1,
                   }}
                 >
                   {s.stat1Value}
                 </p>
                 <p
                   style={{
-                    fontSize: "13px",
+                    fontSize: "clamp(9px, 0.75vw, 12px)",
                     color: "#878C96",
                     marginTop: "6px",
-                    lineHeight: 1.4,
+                    lineHeight: 1.35,
+                    wordBreak: "break-word",
                   }}
                 >
                   {s.stat1Label}
@@ -334,18 +334,19 @@ export default async function Home() {
                 style={{
                   backgroundColor: "#FFFFFF",
                   borderRadius: "20px",
-                  padding: "18px 22px",
+                  padding: "16px 18px",
                   boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
-                  minWidth: "140px",
-                  flex: "1",
+                  flex: "1 1 0",
+                  minWidth: 0,
                 }}
               >
                 <div className="flex items-center justify-between">
                   <p
                     style={{
-                      fontSize: "32px",
+                      fontSize: "clamp(14px, 1.6vw, 32px)",
                       fontWeight: 700,
                       color: "#0F1A2D",
+                      lineHeight: 1.1,
                     }}
                   >
                     {s.stat2Value}
@@ -353,10 +354,11 @@ export default async function Home() {
                 </div>
                 <p
                   style={{
-                    fontSize: "13px",
+                    fontSize: "clamp(9px, 0.75vw, 12px)",
                     color: "#878C96",
                     marginTop: "6px",
-                    lineHeight: 1.4,
+                    lineHeight: 1.35,
+                    wordBreak: "break-word",
                   }}
                 >
                   {s.stat2Label}
@@ -368,27 +370,29 @@ export default async function Home() {
                 style={{
                   backgroundColor: "#FFFFFF",
                   borderRadius: "20px",
-                  padding: "18px 22px",
+                  padding: "16px 18px",
                   boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
-                  minWidth: "140px",
-                  flex: "1",
+                  flex: "1 1 0",
+                  minWidth: 0,
                 }}
               >
                 <p
                   style={{
-                    fontSize: "32px",
+                    fontSize: "clamp(14px, 1.6vw, 32px)",
                     fontWeight: 700,
                     color: "#0F1A2D",
+                    lineHeight: 1.1,
                   }}
                 >
                   {s.stat3Value}
                 </p>
                 <p
                   style={{
-                    fontSize: "13px",
+                    fontSize: "clamp(9px, 0.75vw, 12px)",
                     color: "#878C96",
                     marginTop: "6px",
-                    lineHeight: 1.4,
+                    lineHeight: 1.35,
+                    wordBreak: "break-word",
                   }}
                 >
                   {s.stat3Label}
@@ -427,12 +431,13 @@ export default async function Home() {
             </h1>
 
             <p
+              className="text-[22px] sm:text-[26px] lg:text-[24px] xl:text-[30px]"
               style={{
                 marginTop: "32px",
-                fontSize: "17px",
-                lineHeight: 1.7,
-                color: "#878C96",
-                maxWidth: "420px",
+                fontWeight: 300,
+                lineHeight: 1.25,
+                color: "#0F1A2D",
+                letterSpacing: "-0.02em",
               }}
             >
               {s.heroDescription}
@@ -495,279 +500,220 @@ export default async function Home() {
           boxSizing: "border-box",
         }}
       >
+        {/* Header: title + description + CTA */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-2"
-          style={{
-            gap: "16px",
-          }}
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between"
+          style={{ gap: "24px", marginBottom: "48px" }}
         >
-          {/* ===== LEFT COLUMN: Text + 1 Service Card ===== */}
-          <div
+          <div style={{ maxWidth: "640px" }}>
+            <span
+              style={{
+                display: "inline-block",
+                fontSize: "12px",
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#0168FF",
+                marginBottom: "16px",
+              }}
+            >
+              {cookieLang === "ru" ? "Наши Услуги" : "Serviciile Noastre"}
+            </span>
+            <h2
+              className="text-[32px] md:text-[42px] lg:text-[52px]"
+              style={{
+                fontWeight: 400,
+                lineHeight: 1.05,
+                color: "#0F1A2D",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {s.servicesTitle || "Serviciile"}{" "}
+              <span style={{ fontStyle: "italic", fontWeight: 700 }}>
+                {s.servicesTitleItalic || "Noastre."}
+              </span>
+            </h2>
+            <p
+              style={{
+                marginTop: "20px",
+                fontSize: "16px",
+                lineHeight: 1.6,
+                color: "#5A6271",
+                maxWidth: "560px",
+              }}
+            >
+              {s.servicesDescription ||
+                "Combinăm experiența clinică, tehnologia modernă și o abordare atentă pentru a oferi rezultate de încredere în stomatologia preventivă, restaurativă și estetică."}
+            </p>
+          </div>
+
+          <a
+            href={`/${cookieLang}/servicii`}
+            className="inline-flex items-center hover:opacity-80 transition-opacity self-start lg:self-end"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "16px",
-              height: "100%",
-              justifyContent: "space-between",
+              gap: "10px",
+              backgroundColor: "#0F1A2D",
+              color: "#FFFFFF",
+              padding: "16px 32px",
+              borderRadius: "9999px",
+              fontSize: "15px",
+              fontWeight: 500,
+              flexShrink: 0,
+              textDecoration: "none",
             }}
           >
-            {/* Text Block — top part */}
-            <div style={{ paddingTop: "8px" }}>
-              <h2
-                className="text-[32px] md:text-[42px] lg:text-[52px]"
-                style={{
-                  fontWeight: 400,
-                  lineHeight: 1.1,
-                  color: "#0F1A2D",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {s.servicesTitle || "Serviciile"}{" "}
-                <span style={{ fontStyle: "italic", fontWeight: 700 }}>
-                  {s.servicesTitleItalic || "Noastre."}
-                </span>
-              </h2>
-              <p
-                style={{
-                  marginTop: "24px",
-                  fontSize: "15px",
-                  lineHeight: 1.7,
-                  color: "#878C96",
-                  maxWidth: "400px",
-                }}
-              >
-                {s.servicesDescription ||
-                  "Combinăm experiența clinică, tehnologia modernă și o abordare atentă pentru a oferi rezultate de încredere în stomatologia preventivă, restaurativă și estetică."}
-              </p>
-              <a
-                href="/servicii"
-                className="inline-flex items-center hover:opacity-80 transition-opacity"
-                style={{
-                  marginTop: "32px",
-                  gap: "10px",
-                  backgroundColor: "#0F1A2D",
-                  color: "#FFFFFF",
-                  padding: "16px 32px",
-                  borderRadius: "9999px",
-                  fontSize: "15px",
-                  fontWeight: 500,
-                  width: "fit-content",
-                }}
-              >
-                {s.servicesCta || "Află Mai Multe"}
-                <ArrowIcon />
-              </a>
-            </div>
+            {s.servicesCta || "Toate Serviciile"}
+            <ArrowIcon />
+          </a>
+        </div>
 
-            {/* Service cards — left column bottom: first 2 from DB */}
-            <div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-              style={{ flexShrink: 0 }}
-            >
-              {services
-                .slice(0, 2)
-                .map(
-                  (svc: {
-                    slug: string;
-                    title: string;
-                    subtitle: string;
-                    image: string;
-                    imagePosition?: string;
-                    cardColor: string;
-                  }) => {
-                    const isDark =
-                      svc.cardColor === "#0F1A2D" ||
-                      svc.cardColor === "#0168FF";
-                    return (
-                      <Link
-                        key={svc.slug}
-                        href={`/${cookieLang}/servicii/${svc.slug}`}
+        {/* Unified card grid: 1 col mobile / 2 cols sm / 3 cols lg */}
+        <div className="grid grid-cols-1 min-[560px]:grid-cols-2 lg:grid-cols-3 gap-5">
+          {services
+            .slice(0, 6)
+            .map(
+              (svc: {
+                slug: string;
+                title: string;
+                subtitle: string;
+                image: string;
+                imagePosition?: string;
+                cardColor: string;
+              }) => {
+                const isDark =
+                  svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
+                return (
+                  <Link
+                    key={svc.slug}
+                    href={`/${cookieLang}/servicii/${svc.slug}`}
+                    className="service-card group"
+                    style={{
+                      backgroundColor: isDark ? svc.cardColor : "#FFFFFF",
+                      borderRadius: "24px",
+                      overflow: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                      textDecoration: "none",
+                      boxShadow: "0 1px 3px rgba(15, 26, 45, 0.04)",
+                      transition: "transform 0.25s ease, box-shadow 0.25s ease",
+                      border: isDark ? "none" : "1px solid #ECEEF1",
+                    }}
+                  >
+                    {/* Image */}
+                    {svc.image && (
+                      <div
                         style={{
-                          backgroundColor: svc.cardColor || "#ECEEF1",
-                          borderRadius: "24px",
+                          position: "relative",
+                          width: "100%",
+                          aspectRatio: "4 / 3",
                           overflow: "hidden",
-                          display: "flex",
-                          flexDirection: "column",
-                          textDecoration: "none",
+                          backgroundColor: isDark
+                            ? "rgba(255,255,255,0.05)"
+                            : "#F4F5F7",
                         }}
-                        className="service-card"
                       >
-                        <div style={{ padding: "20px 20px 0" }}>
-                          <h3
-                            style={{
-                              fontSize: "16px",
-                              fontWeight: 700,
-                              color: isDark ? "#FFFFFF" : "#0F1A2D",
-                            }}
-                          >
-                            {svc.title}
-                          </h3>
-                          <p
-                            style={{
-                              fontSize: "11px",
-                              color: isDark
-                                ? "rgba(255,255,255,0.65)"
-                                : "#878C96",
-                              marginTop: "4px",
-                              lineHeight: 1.4,
-                            }}
-                          >
-                            {svc.subtitle}
-                          </p>
-                        </div>
-                        {svc.image && (
-                          <div
-                            className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                            style={{
-                              flex: 1,
-                              position: "relative",
-                              marginTop: "10px",
-                            }}
-                          >
-                            <Image
-                              src={svc.image}
-                              alt={svc.title}
-                              fill
-                              className="object-cover"
-                              style={{
-                                objectPosition:
-                                  svc.imagePosition || "center 30%",
-                              }}
-                              sizes="15vw"
-                            />
-                          </div>
-                        )}
-                      </Link>
-                    );
-                  },
-                )}
-            </div>
-          </div>
+                        <Image
+                          src={svc.image}
+                          alt={svc.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          style={{
+                            objectPosition: svc.imagePosition || "center 30%",
+                          }}
+                          sizes="(max-width: 560px) 90vw, (max-width: 1024px) 45vw, 30vw"
+                        />
+                      </div>
+                    )}
 
-          {/* ===== RIGHT COLUMN: next 4 services from DB ===== */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {services
-              .slice(2, 6)
-              .map(
-                (svc: {
-                  slug: string;
-                  title: string;
-                  subtitle: string;
-                  image: string;
-                  imagePosition?: string;
-                  cardColor: string;
-                }) => {
-                  const isDark =
-                    svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
-                  return (
-                    <Link
-                      key={svc.slug}
-                      href={`/${cookieLang}/servicii/${svc.slug}`}
+                    {/* Content */}
+                    <div
                       style={{
-                        backgroundColor: svc.cardColor || "#ECEEF1",
-                        borderRadius: "24px",
-                        overflow: "hidden",
+                        padding: "20px 22px 22px",
                         display: "flex",
                         flexDirection: "column",
-                        textDecoration: "none",
+                        gap: "8px",
+                        flex: 1,
                       }}
-                      className="service-card"
                     >
-                      {isDark ? (
-                        <>
-                          {" "}
-                          {svc.image && (
-                            <div
-                              className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                              style={{ flex: 1, position: "relative" }}
-                            >
-                              <Image
-                                src={svc.image}
-                                alt={svc.title}
-                                fill
-                                className="object-cover"
-                                style={{
-                                  objectPosition:
-                                    svc.imagePosition || "center 30%",
-                                }}
-                                sizes="20vw"
-                              />
-                            </div>
-                          )}
-                          <div style={{ padding: "16px 20px 20px" }}>
-                            <h3
-                              style={{
-                                fontSize: "16px",
-                                fontWeight: 700,
-                                color: "#FFFFFF",
-                              }}
-                            >
-                              {svc.title}
-                            </h3>
-                            <p
-                              style={{
-                                fontSize: "11px",
-                                color: "rgba(255,255,255,0.65)",
-                                marginTop: "4px",
-                                lineHeight: 1.4,
-                              }}
-                            >
-                              {svc.subtitle}
-                            </p>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div style={{ padding: "20px 20px 0" }}>
-                            <h3
-                              style={{
-                                fontSize: "16px",
-                                fontWeight: 700,
-                                color: "#0F1A2D",
-                              }}
-                            >
-                              {svc.title}
-                            </h3>
-                            <p
-                              style={{
-                                fontSize: "11px",
-                                color: "#878C96",
-                                marginTop: "4px",
-                                lineHeight: 1.4,
-                              }}
-                            >
-                              {svc.subtitle}
-                            </p>
-                          </div>
-                          {svc.image && (
-                            <div
-                              className="min-h-[300px] sm:min-h-[220px] lg:min-h-[200px] xl:min-h-[280px]"
-                              style={{
-                                flex: 1,
-                                position: "relative",
-                                marginTop: "10px",
-                              }}
-                            >
-                              <Image
-                                src={svc.image}
-                                alt={svc.title}
-                                fill
-                                className="object-cover"
-                                style={{
-                                  objectPosition:
-                                    svc.imagePosition || "center 30%",
-                                }}
-                                sizes="20vw"
-                              />
-                            </div>
-                          )}
-                        </>
+                      <h3
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: 600,
+                          lineHeight: 1.3,
+                          letterSpacing: "-0.01em",
+                          color: isDark ? "#FFFFFF" : "#0F1A2D",
+                          margin: 0,
+                        }}
+                      >
+                        {svc.title}
+                      </h3>
+                      {svc.subtitle && (
+                        <p
+                          style={{
+                            fontSize: "13px",
+                            lineHeight: 1.5,
+                            color: isDark
+                              ? "rgba(255,255,255,0.65)"
+                              : "#878C96",
+                            margin: 0,
+                            flex: 1,
+                          }}
+                        >
+                          {svc.subtitle}
+                        </p>
                       )}
-                    </Link>
-                  );
-                },
-              )}
-          </div>
+
+                      {/* Footer link with arrow */}
+                      <div
+                        className="flex items-center justify-between"
+                        style={{
+                          marginTop: "12px",
+                          paddingTop: "14px",
+                          borderTop: isDark
+                            ? "1px solid rgba(255,255,255,0.12)"
+                            : "1px solid #ECEEF1",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: "13px",
+                            fontWeight: 500,
+                            color: isDark ? "#FFFFFF" : "#0168FF",
+                          }}
+                        >
+                          {cookieLang === "ru" ? "Подробнее" : "Vezi detalii"}
+                        </span>
+                        <span
+                          className="flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1"
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "9999px",
+                            backgroundColor: isDark
+                              ? "rgba(255,255,255,0.12)"
+                              : "#F4F5F7",
+                          }}
+                        >
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke={isDark ? "#FFFFFF" : "#0F1A2D"}
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              },
+            )}
         </div>
       </section>
 
