@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useT } from "./i18n/LanguageProvider";
@@ -29,11 +29,14 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, lang, setLang } = useT();
   const [navServices, setNavServices] = useState<
-    { slug: string; title: string; title_ru?: string }[]
+    { slug: string; title: string; title_ru?: string; showInNavbar?: boolean }[]
   >([]);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    fetch("/api/services?navbar=true")
+    fetch("/api/services")
       .then((r) => r.json())
       .then((data) => Array.isArray(data) && setNavServices(data))
       .catch(() => {});
@@ -107,23 +110,100 @@ export default function Navbar() {
           >
             {t("nav.home")}
           </a>
-          <a
-            href={`/${lang}/servicii`}
-            className="font-medium hover:opacity-70 transition-opacity"
-            style={{ fontSize: "15px", color: "#878C96" }}
+
+          {/* Services Dentare dropdown */}
+          <div
+            style={{ position: "relative" }}
+            onMouseEnter={() => {
+              if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+              setServicesOpen(true);
+            }}
+            onMouseLeave={() => {
+              hoverTimeout.current = setTimeout(() => setServicesOpen(false), 150);
+            }}
           >
-            {t("nav.services")}
-          </a>
-          {navServices.map((svc) => (
             <a
-              key={svc.slug}
-              href={`/${lang}/servicii/${svc.slug}`}
-              className="hidden min-[1090px]:inline font-medium hover:opacity-70 transition-opacity"
-              style={{ fontSize: "15px", color: "#878C96" }}
+              href={`/${lang}/servicii`}
+              className="font-medium hover:opacity-70 transition-opacity"
+              style={{ fontSize: "15px", color: "#878C96", display: "flex", alignItems: "center", gap: "4px" }}
             >
-              {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
+              {t("nav.services")}
+              <svg
+                width="12" height="12" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                style={{ transition: "transform 0.2s", transform: servicesOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#878C96" }}
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
             </a>
-          ))}
+
+            <div
+              style={{
+                position: "absolute",
+                top: "calc(100% + 14px)",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#FFFFFF",
+                borderRadius: "20px",
+                boxShadow: "0 8px 40px rgba(0,0,0,0.13)",
+                padding: "8px",
+                minWidth: "230px",
+                zIndex: 100,
+                opacity: servicesOpen ? 1 : 0,
+                pointerEvents: servicesOpen ? "auto" : "none",
+                transition: "opacity 0.18s ease",
+              }}
+            >
+              <div style={{
+                position: "absolute", top: "-6px", left: "50%",
+                transform: "translateX(-50%) rotate(45deg)",
+                width: "12px", height: "12px",
+                backgroundColor: "#FFFFFF",
+                boxShadow: "-2px -2px 4px rgba(0,0,0,0.04)",
+              }} />
+              <a
+                href={`/${lang}/servicii`}
+                style={{
+                  display: "block", padding: "10px 16px", borderRadius: "12px",
+                  fontSize: "14px", fontWeight: 600, color: "#0168FF",
+                  textDecoration: "none", marginBottom: "4px", backgroundColor: "#EEF4FF",
+                }}
+              >
+                {t("nav.services")} →
+              </a>
+              {navServices
+                .filter((svc) => !svc.showInNavbar)
+                .map((svc) => (
+                  <a
+                    key={svc.slug}
+                    href={`/${lang}/servicii/${svc.slug}`}
+                    style={{
+                      display: "block", padding: "10px 16px", borderRadius: "12px",
+                      fontSize: "14px", fontWeight: 500, color: "#0F1A2D",
+                      textDecoration: "none", transition: "background 0.15s",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F5F5F5")}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+                  >
+                    {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
+                  </a>
+                ))}
+            </div>
+          </div>
+
+          {/* Pinned navbar services */}
+          {navServices
+            .filter((svc) => svc.showInNavbar)
+            .map((svc) => (
+              <a
+                key={svc.slug}
+                href={`/${lang}/servicii/${svc.slug}`}
+                className="font-medium hover:opacity-70 transition-opacity"
+                style={{ fontSize: "15px", color: "#878C96" }}
+              >
+                {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
+              </a>
+            ))}
         </div>
 
         <div
@@ -274,37 +354,71 @@ export default function Navbar() {
         >
           {t("nav.home")}
         </a>
-        <a
-          href={`/${lang}/servicii`}
-          onClick={() => setMenuOpen(false)}
-          style={{
-            padding: "14px 0",
-            fontSize: "17px",
-            fontWeight: 500,
-            color: "#878C96",
-            textDecoration: "none",
-            borderBottom: "1px solid #F3F4F6",
-          }}
-        >
-          {t("nav.services")}
-        </a>
-        {navServices.map((svc) => (
-          <a
-            key={svc.slug}
-            href={`/${lang}/servicii/${svc.slug}`}
-            onClick={() => setMenuOpen(false)}
+        {/* Mobile: Services accordion */}
+        <div style={{ borderBottom: "1px solid #F3F4F6" }}>
+          <button
+            onClick={() => setMobileServicesOpen((v) => !v)}
             style={{
-              padding: "14px 0",
-              fontSize: "17px",
-              fontWeight: 500,
-              color: "#878C96",
-              textDecoration: "none",
-              borderBottom: "1px solid #F3F4F6",
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              width: "100%", padding: "14px 0", fontSize: "17px", fontWeight: 500,
+              color: "#878C96", background: "none", border: "none", cursor: "pointer", textAlign: "left",
             }}
           >
-            {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
-          </a>
-        ))}
+            {t("nav.services")}
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+              style={{ transition: "transform 0.2s", transform: mobileServicesOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          {mobileServicesOpen && (
+            <div style={{ paddingBottom: "8px", display: "flex", flexDirection: "column", gap: "4px" }}>
+              <a
+                href={`/${lang}/servicii`}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  padding: "10px 16px", borderRadius: "10px", fontSize: "15px",
+                  fontWeight: 600, color: "#0168FF", textDecoration: "none", backgroundColor: "#EEF4FF",
+                }}
+              >
+                {t("nav.services")} →
+              </a>
+              {navServices
+                .filter((svc) => !svc.showInNavbar)
+                .map((svc) => (
+                  <a
+                    key={svc.slug}
+                    href={`/${lang}/servicii/${svc.slug}`}
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      padding: "10px 16px", borderRadius: "10px", fontSize: "15px",
+                      fontWeight: 500, color: "#0F1A2D", textDecoration: "none",
+                    }}
+                  >
+                    {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
+                  </a>
+                ))}
+            </div>
+          )}
+        </div>
+        {/* Mobile: pinned services */}
+        {navServices
+          .filter((svc) => svc.showInNavbar)
+          .map((svc) => (
+            <a
+              key={svc.slug}
+              href={`/${lang}/servicii/${svc.slug}`}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                padding: "14px 0", fontSize: "17px", fontWeight: 500,
+                color: "#878C96", textDecoration: "none", borderBottom: "1px solid #F3F4F6",
+              }}
+            >
+              {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
+            </a>
+          ))}
         <div style={{ marginTop: "20px" }}>
           <LangSwitcher lang={lang} setLang={setLang} />
         </div>
