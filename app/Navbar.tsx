@@ -119,19 +119,38 @@ export default function Navbar() {
               setServicesOpen(true);
             }}
             onMouseLeave={() => {
-              hoverTimeout.current = setTimeout(() => setServicesOpen(false), 150);
+              hoverTimeout.current = setTimeout(
+                () => setServicesOpen(false),
+                150,
+              );
             }}
           >
             <a
               href={`/${lang}/servicii`}
               className="font-medium hover:opacity-70 transition-opacity"
-              style={{ fontSize: "15px", color: "#878C96", display: "flex", alignItems: "center", gap: "4px" }}
+              style={{
+                fontSize: "15px",
+                color: "#878C96",
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+              }}
             >
               {t("nav.services")}
               <svg
-                width="12" height="12" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-                style={{ transition: "transform 0.2s", transform: servicesOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#878C96" }}
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{
+                  transition: "transform 0.2s",
+                  transform: servicesOpen ? "rotate(180deg)" : "rotate(0deg)",
+                  color: "#878C96",
+                }}
               >
                 <polyline points="6 9 12 15 18 9" />
               </svg>
@@ -154,19 +173,30 @@ export default function Navbar() {
                 transition: "opacity 0.18s ease",
               }}
             >
-              <div style={{
-                position: "absolute", top: "-6px", left: "50%",
-                transform: "translateX(-50%) rotate(45deg)",
-                width: "12px", height: "12px",
-                backgroundColor: "#FFFFFF",
-                boxShadow: "-2px -2px 4px rgba(0,0,0,0.04)",
-              }} />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "-6px",
+                  left: "50%",
+                  transform: "translateX(-50%) rotate(45deg)",
+                  width: "12px",
+                  height: "12px",
+                  backgroundColor: "#FFFFFF",
+                  boxShadow: "-2px -2px 4px rgba(0,0,0,0.04)",
+                }}
+              />
               <a
                 href={`/${lang}/servicii`}
                 style={{
-                  display: "block", padding: "10px 16px", borderRadius: "12px",
-                  fontSize: "14px", fontWeight: 600, color: "#0168FF",
-                  textDecoration: "none", marginBottom: "4px", backgroundColor: "#EEF4FF",
+                  display: "block",
+                  padding: "10px 16px",
+                  borderRadius: "12px",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  color: "#0168FF",
+                  textDecoration: "none",
+                  marginBottom: "4px",
+                  backgroundColor: "#EEF4FF",
                 }}
               >
                 {t("nav.services")} →
@@ -178,12 +208,21 @@ export default function Navbar() {
                     key={svc.slug}
                     href={`/${lang}/servicii/${svc.slug}`}
                     style={{
-                      display: "block", padding: "10px 16px", borderRadius: "12px",
-                      fontSize: "14px", fontWeight: 500, color: "#0F1A2D",
-                      textDecoration: "none", transition: "background 0.15s",
+                      display: "block",
+                      padding: "10px 16px",
+                      borderRadius: "12px",
+                      fontSize: "14px",
+                      fontWeight: 500,
+                      color: "#0F1A2D",
+                      textDecoration: "none",
+                      transition: "background 0.15s",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#F5F5F5")}
-                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#F5F5F5")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.backgroundColor = "transparent")
+                    }
                   >
                     {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
                   </a>
@@ -359,28 +398,60 @@ export default function Navbar() {
           <button
             onClick={() => setMobileServicesOpen((v) => !v)}
             style={{
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-              width: "100%", padding: "14px 0", fontSize: "17px", fontWeight: 500,
-              color: "#878C96", background: "none", border: "none", cursor: "pointer", textAlign: "left",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+              padding: "14px 0",
+              fontSize: "17px",
+              fontWeight: 500,
+              color: "#878C96",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              textAlign: "left",
             }}
           >
             {t("nav.services")}
             <svg
-              width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-              style={{ transition: "transform 0.2s", transform: mobileServicesOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                transition: "transform 0.2s",
+                transform: mobileServicesOpen
+                  ? "rotate(180deg)"
+                  : "rotate(0deg)",
+              }}
             >
               <polyline points="6 9 12 15 18 9" />
             </svg>
           </button>
           {mobileServicesOpen && (
-            <div style={{ paddingBottom: "8px", display: "flex", flexDirection: "column", gap: "4px" }}>
+            <div
+              style={{
+                paddingBottom: "8px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "4px",
+              }}
+            >
               <a
                 href={`/${lang}/servicii`}
                 onClick={() => setMenuOpen(false)}
                 style={{
-                  padding: "10px 16px", borderRadius: "10px", fontSize: "15px",
-                  fontWeight: 600, color: "#0168FF", textDecoration: "none", backgroundColor: "#EEF4FF",
+                  padding: "10px 16px",
+                  borderRadius: "10px",
+                  fontSize: "15px",
+                  fontWeight: 600,
+                  color: "#0168FF",
+                  textDecoration: "none",
+                  backgroundColor: "#EEF4FF",
                 }}
               >
                 {t("nav.services")} →
@@ -393,8 +464,12 @@ export default function Navbar() {
                     href={`/${lang}/servicii/${svc.slug}`}
                     onClick={() => setMenuOpen(false)}
                     style={{
-                      padding: "10px 16px", borderRadius: "10px", fontSize: "15px",
-                      fontWeight: 500, color: "#0F1A2D", textDecoration: "none",
+                      padding: "10px 16px",
+                      borderRadius: "10px",
+                      fontSize: "15px",
+                      fontWeight: 500,
+                      color: "#0F1A2D",
+                      textDecoration: "none",
                     }}
                   >
                     {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
@@ -412,8 +487,12 @@ export default function Navbar() {
               href={`/${lang}/servicii/${svc.slug}`}
               onClick={() => setMenuOpen(false)}
               style={{
-                padding: "14px 0", fontSize: "17px", fontWeight: 500,
-                color: "#878C96", textDecoration: "none", borderBottom: "1px solid #F3F4F6",
+                padding: "14px 0",
+                fontSize: "17px",
+                fontWeight: 500,
+                color: "#878C96",
+                textDecoration: "none",
+                borderBottom: "1px solid #F3F4F6",
               }}
             >
               {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}

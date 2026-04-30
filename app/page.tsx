@@ -429,13 +429,12 @@ export default async function Home() {
             </h1>
 
             <p
-              className="text-[22px] sm:text-[26px] lg:text-[24px] xl:text-[30px]"
+              className="text-[15px] sm:text-[16px] xl:text-[17px]"
               style={{
-                marginTop: "32px",
-                fontWeight: 300,
-                lineHeight: 1.25,
-                color: "#0F1A2D",
-                letterSpacing: "-0.02em",
+                marginTop: "20px",
+                fontWeight: 400,
+                lineHeight: 1.65,
+                color: "#878C96",
               }}
             >
               {s.heroDescription}
