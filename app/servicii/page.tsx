@@ -1,10 +1,39 @@
 ﻿import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { cookies } from "next/headers";
+import type { Metadata } from "next";
 import { getServices, getSiteSettings } from "@/lib/data";
 import ServicesPageClient from "./ServicesPageClient";
+import JsonLd from "../components/JsonLd";
+import {
+  SEO_COPY,
+  SITE_URL,
+  buildAlternates,
+  breadcrumbSchema,
+  type SiteLang,
+} from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = (((await cookies()).get("ecodent.lang")?.value ?? "ro") as SiteLang);
+  const copy = SEO_COPY[lang].services;
+  return {
+    title: copy.title,
+    description: copy.description,
+    keywords: SEO_COPY[lang].keywords,
+    alternates: buildAlternates("/servicii"),
+    openGraph: {
+      type: "website",
+      url: `${SITE_URL}/${lang}/servicii`,
+      title: copy.title,
+      description: copy.description,
+      locale: lang === "ro" ? "ro_MD" : "ru_MD",
+      images: ["/clinica1.jpg"],
+    },
+    twitter: { card: "summary_large_image", title: copy.title, description: copy.description },
+  };
+}
 
 interface ServiceFeature {
   title: string;
@@ -239,6 +268,30 @@ export default async function ServicesPage() {
         stats={svcStats}
       />
       <Footer />
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            {
+              name: cookieLang === "ru" ? "Главная" : "Acasă",
+              url: `${SITE_URL}/${cookieLang}`,
+            },
+            {
+              name: cookieLang === "ru" ? "Услуги" : "Servicii",
+              url: `${SITE_URL}/${cookieLang}/servicii`,
+            },
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: services.map((svc: any, i: number) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `${SITE_URL}/${cookieLang}/servicii/${svc.slug}`,
+              name: cookieLang === "ru" && svc.title_ru ? svc.title_ru : svc.title,
+            })),
+          },
+        ]}
+      />
     </div>
   );
 }

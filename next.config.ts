@@ -17,13 +17,30 @@ const securityHeaders = [
   { key: "X-XSS-Protection", value: "1; mode=block" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
   { key: "Content-Security-Policy", value: CSP },
+];
+
+const longCache = [
+  {
+    key: "Cache-Control",
+    value: "public, max-age=31536000, immutable",
+  },
 ];
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  poweredByHeader: false,
+  compress: true,
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      { source: "/_next/static/:path*", headers: longCache },
+      { source: "/:path*\\.(?:jpg|jpeg|png|webp|avif|svg|ico|woff2)", headers: longCache },
+    ];
   },
   images: {
     formats: ["image/avif", "image/webp"],

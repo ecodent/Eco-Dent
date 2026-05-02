@@ -2,6 +2,15 @@ import { getServiceBySlug, getServices } from "@/lib/data";
 import ServicePageLayout from "../ServicePageLayout";
 import { notFound } from "next/navigation";
 import { cookies } from "next/headers";
+import type { Metadata } from "next";
+import {
+  SITE_URL,
+  SITE_NAME,
+  buildAlternates,
+  breadcrumbSchema,
+  type SiteLang,
+} from "@/lib/seo";
+import JsonLd from "@/app/components/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -295,6 +304,45 @@ export async function generateStaticParams() {
   }
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const lang = (((await cookies()).get("ecodent.lang")?.value ?? "ro") as SiteLang);
+  let svc: any = null;
+  try {
+    svc = await getServiceBySlug(slug);
+  } catch {
+    svc = fallbackServices.find((s) => s.slug === slug) ?? null;
+  }
+  if (!svc) {
+    return { title: "Serviciu", robots: { index: false, follow: false } };
+  }
+  const title = lang === "ru" && svc.title_ru ? svc.title_ru : svc.title;
+  const description =
+    (lang === "ru" && svc.description_ru ? svc.description_ru : svc.description) ?? "";
+  const image = svc.image?.startsWith("http")
+    ? svc.image
+    : `${SITE_URL}${svc.image ?? "/clinica1.jpg"}`;
+  const fullTitle = `${title} — ${SITE_NAME} Ștefan Vodă`;
+  return {
+    title: fullTitle,
+    description: description.slice(0, 160),
+    alternates: buildAlternates(`/servicii/${slug}`),
+    openGraph: {
+      type: "article",
+      url: `${SITE_URL}/${lang}/servicii/${slug}`,
+      title: fullTitle,
+      description,
+      locale: lang === "ro" ? "ro_MD" : "ru_MD",
+      images: [{ url: image, alt: title }],
+    },
+    twitter: { card: "summary_large_image", title: fullTitle, description, images: [image] },
+  };
+}
+
 export default async function DynamicServicePage({
   params,
 }: {
@@ -340,14 +388,46 @@ export default async function DynamicServicePage({
       : service.benefits || [];
 
   return (
-    <ServicePageLayout
-      title={title}
-      subtitle={subtitle}
-      description={description}
-      image={service.image}
-      imagePosition={service.imagePosition}
-      features={features}
-      benefits={benefits}
-    />
+    <>
+      <ServicePageLayout
+        title={title}
+        subtitle={subtitle}
+        description={description}
+        image={service.image}
+        imagePosition={service.imagePosition}
+        features={features}
+        benefits={benefits}
+      />
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            {
+              name: cookieLang === "ru" ? "Главная" : "Acasă",
+              url: `${SITE_URL}/${cookieLang}`,
+            },
+            {
+              name: cookieLang === "ru" ? "Услуги" : "Servicii",
+              url: `${SITE_URL}/${cookieLang}/servicii`,
+            },
+            {
+              name: title,
+              url: `${SITE_URL}/${cookieLang}/servicii/${slug}`,
+            },
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "MedicalProcedure",
+            name: title,
+            description,
+            url: `${SITE_URL}/${cookieLang}/servicii/${slug}`,
+            image: service.image?.startsWith("http")
+              ? service.image
+              : `${SITE_URL}${service.image}`,
+            procedureType: "https://schema.org/TherapeuticProcedure",
+            provider: { "@id": `${SITE_URL}/#dentalclinic` },
+          },
+        ]}
+      />
+    </>
   );
 }

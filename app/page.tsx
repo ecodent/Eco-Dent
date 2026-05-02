@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import type { Metadata } from "next";
 import TeamCarousel from "./TeamCarousel";
 import BeforeAfter from "./BeforeAfter";
 import PatientReviews from "./PatientReviews";
@@ -8,6 +9,7 @@ import HeroSlider from "./HeroSlider";
 import Footer from "./Footer";
 import Contact from "./Contact";
 import Navbar from "./Navbar";
+import JsonLd from "./components/JsonLd";
 import { T } from "./i18n/LanguageProvider";
 import {
   getTeamMembers,
@@ -17,8 +19,37 @@ import {
   getHeroImages,
   getSiteSettings,
 } from "@/lib/data";
+import {
+  SEO_COPY,
+  SITE_URL,
+  buildAlternates,
+  faqSchema,
+  DEFAULT_FAQS_RO,
+  DEFAULT_FAQS_RU,
+  type SiteLang,
+} from "@/lib/seo";
 
 export const dynamic = "force-dynamic"; // layout reads cookies → route is dynamic; data is cached via unstable_cache in lib/data.ts
+
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = (((await cookies()).get("ecodent.lang")?.value ?? "ro") as SiteLang);
+  const copy = SEO_COPY[lang].home;
+  return {
+    title: copy.title,
+    description: copy.description,
+    keywords: SEO_COPY[lang].keywords,
+    alternates: buildAlternates("/"),
+    openGraph: {
+      type: "website",
+      url: `${SITE_URL}/${lang}`,
+      title: copy.title,
+      description: copy.description,
+      locale: lang === "ro" ? "ro_MD" : "ru_MD",
+      images: ["/clinica1.jpg"],
+    },
+    twitter: { card: "summary_large_image", title: copy.title, description: copy.description },
+  };
+}
 
 function PhoneIcon() {
   return (
@@ -752,6 +783,11 @@ export default async function Home() {
 
       {/* Footer */}
       <Footer />
+
+      {/* SEO: FAQ JSON-LD for voice/AI search & rich results */}
+      <JsonLd
+        data={faqSchema(cookieLang === "ru" ? DEFAULT_FAQS_RU : DEFAULT_FAQS_RO)}
+      />
     </div>
   );
 }
