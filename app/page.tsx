@@ -104,7 +104,7 @@ export default async function Home() {
     {
       name: "Ron B.",
       image: "/patient-3.jpg",
-      grade: 4.5,
+      grade: 5.0,
       text: '"Professional team with great attention to detail. The results exceeded my expectations and the whole process was smooth and well-organized."',
     },
     {

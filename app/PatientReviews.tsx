@@ -80,7 +80,7 @@ export default function PatientReviews({
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const CARD_W = isMobile ? 90 : isTablet ? 65 : 60;
+  const CARD_W = isMobile ? 90 : isTablet ? 70 : 66;
   const SIDE_W = isMobile ? 0 : isTablet ? 14 : 18;
   const SIDE_GAP = isMobile ? 0 : 1.5;
 
@@ -117,7 +117,7 @@ export default function PatientReviews({
         position: "relative",
         zIndex: 10,
         height: isMobile ? "auto" : "auto",
-        minHeight: isMobile ? "560px" : "640px",
+        minHeight: isMobile ? "560px" : "760px",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
@@ -194,7 +194,7 @@ export default function PatientReviews({
                   style={{
                     fontWeight: 600,
                     color: "#0F1A2D",
-                                      }}
+                  }}
                 >
                   {t("reviews.description.bold2")}
                 </span>
@@ -207,7 +207,7 @@ export default function PatientReviews({
                   style={{
                     fontWeight: 600,
                     color: "#0F1A2D",
-                                      }}
+                  }}
                 >
                   {t("reviews.description.bold4")}
                 </span>
@@ -228,40 +228,6 @@ export default function PatientReviews({
           >
             {t("reviews.label")}
           </span>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              gap: "8px",
-              marginTop: "4px",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "56px",
-                fontWeight: 700,
-                color: "#0F1A2D",
-                lineHeight: 1,
-                letterSpacing: "-0.03em",
-              }}
-            >
-              42
-            </span>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#0F1A2D"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </div>
           {/* Nav buttons — visible on desktop only */}
           {!isMobile && (
             <div
@@ -478,7 +444,7 @@ export default function PatientReviews({
             style={{
               position: "relative",
               width: isMobile ? "100%" : "45%",
-              height: isMobile ? "250px" : "auto",
+              height: isMobile ? "300px" : "auto",
               flexShrink: 0,
               overflow: "hidden",
             }}

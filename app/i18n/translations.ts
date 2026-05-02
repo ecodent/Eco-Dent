@@ -3,7 +3,7 @@ export type Lang = "ro" | "ru";
 export const translations = {
   ro: {
     // Navbar
-    "nav.home": "Acasă",
+    "nav.home": "Despre Noi",
     "nav.services": "Servicii Dentare",
     "nav.team": "Echipa",
     "nav.contact": "Contact",
@@ -99,7 +99,7 @@ export const translations = {
     "contact.email": "Email",
     "contact.hours": "Program",
     "contact.hours.value": "Luni – Vineri: 09:00 – 19:00\nSâmbătă: 09:00 – 14:00",
-    "contact.form.title": "Trimite-ne un mesaj",
+    "contact.form.title": "Programează-te",
     "contact.form.subtitle": "Completează formularul și te vom contacta în cel mai scurt timp.",
     "contact.form.name": "Nume complet",
     "contact.form.name.placeholder": "Introdu numele tău",
@@ -164,7 +164,7 @@ export const translations = {
 
   ru: {
     // Navbar
-    "nav.home": "Главная",
+    "nav.home": "О Нас",
     "nav.services": "Услуги",
     "nav.team": "Команда",
     "nav.contact": "Контакты",
@@ -260,7 +260,7 @@ export const translations = {
     "contact.email": "Email",
     "contact.hours": "График работы",
     "contact.hours.value": "Понедельник – Пятница: 09:00 – 19:00\nСуббота: 09:00 – 14:00",
-    "contact.form.title": "Напишите нам",
+    "contact.form.title": "Запишитесь на приём",
     "contact.form.subtitle": "Заполните форму, и мы свяжемся с вами в кратчайшие сроки.",
     "contact.form.name": "Полное имя",
     "contact.form.name.placeholder": "Введите ваше имя",
