@@ -310,7 +310,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const lang = (((await cookies()).get("ecodent.lang")?.value ?? "ro") as SiteLang);
+  const lang = ((await cookies()).get("ecodent.lang")?.value ??
+    "ro") as SiteLang;
   let svc: any = null;
   try {
     svc = await getServiceBySlug(slug);
@@ -322,7 +323,9 @@ export async function generateMetadata({
   }
   const title = lang === "ru" && svc.title_ru ? svc.title_ru : svc.title;
   const description =
-    (lang === "ru" && svc.description_ru ? svc.description_ru : svc.description) ?? "";
+    (lang === "ru" && svc.description_ru
+      ? svc.description_ru
+      : svc.description) ?? "";
   const image = svc.image?.startsWith("http")
     ? svc.image
     : `${SITE_URL}${svc.image ?? "/clinica1.jpg"}`;
@@ -339,7 +342,12 @@ export async function generateMetadata({
       locale: lang === "ro" ? "ro_MD" : "ru_MD",
       images: [{ url: image, alt: title }],
     },
-    twitter: { card: "summary_large_image", title: fullTitle, description, images: [image] },
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description,
+      images: [image],
+    },
   };
 }
 

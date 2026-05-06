@@ -16,7 +16,8 @@ import {
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const lang = (((await cookies()).get("ecodent.lang")?.value ?? "ro") as SiteLang);
+  const lang = ((await cookies()).get("ecodent.lang")?.value ??
+    "ro") as SiteLang;
   const copy = SEO_COPY[lang].services;
   return {
     title: copy.title,
@@ -31,7 +32,11 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: lang === "ro" ? "ro_MD" : "ru_MD",
       images: ["/clinica1.jpg"],
     },
-    twitter: { card: "summary_large_image", title: copy.title, description: copy.description },
+    twitter: {
+      card: "summary_large_image",
+      title: copy.title,
+      description: copy.description,
+    },
   };
 }
 
@@ -287,7 +292,8 @@ export default async function ServicesPage() {
               "@type": "ListItem",
               position: i + 1,
               url: `${SITE_URL}/${cookieLang}/servicii/${svc.slug}`,
-              name: cookieLang === "ru" && svc.title_ru ? svc.title_ru : svc.title,
+              name:
+                cookieLang === "ru" && svc.title_ru ? svc.title_ru : svc.title,
             })),
           },
         ]}

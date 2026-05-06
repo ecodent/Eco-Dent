@@ -86,7 +86,7 @@ export const translations = {
     "reviews.description.mid3": " care arată natural în ",
     "reviews.description.bold4": "viața de zi cu zi",
     "reviews.description.end": ".",
-    "reviews.label": "recenzii/",
+    "reviews.label": "",
     "reviews.grade": "Notă",
 
     // Contact
@@ -247,7 +247,7 @@ export const translations = {
     "reviews.description.mid3": ", естественно выглядящие в ",
     "reviews.description.bold4": "повседневной жизни",
     "reviews.description.end": ".",
-    "reviews.label": "отзывы/",
+    "reviews.label": "",
     "reviews.grade": "Оценка",
 
     // Contact

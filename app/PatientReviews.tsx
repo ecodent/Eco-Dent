@@ -378,7 +378,7 @@ export default function PatientReviews({
                       color: "#0F1A2D",
                     }}
                   >
-                    {leftReview.grade.toFixed(1)}
+                    {Math.round(leftReview.grade)}
                   </span>
                   <Stars rating={leftReview.grade} />
                 </div>
@@ -495,7 +495,7 @@ export default function PatientReviews({
                     color: "#0F1A2D",
                   }}
                 >
-                  {centerReview.grade.toFixed(1)}
+                  {Math.round(centerReview.grade)}
                 </span>
                 <Stars rating={centerReview.grade} />
               </div>
@@ -591,7 +591,7 @@ export default function PatientReviews({
                     color: "#0F1A2D",
                   }}
                 >
-                  {rightReview.grade.toFixed(1)}
+                  {Math.round(rightReview.grade)}
                 </span>
                 <Stars rating={rightReview.grade} />
               </div>
