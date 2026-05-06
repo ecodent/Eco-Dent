@@ -38,12 +38,12 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Content-Security-Policy": [
     "default-src 'self'",
     // unsafe-inline + unsafe-eval are required for Next.js runtime hydration
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net https://www.facebook.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' data: https://fonts.gstatic.com",
-    "img-src 'self' data: blob: https://*.public.blob.vercel-storage.com https://*.vercel-storage.com https://www.google.com https://maps.gstatic.com https://maps.googleapis.com",
-    "frame-src https://www.google.com https://maps.google.com",
-    "connect-src 'self' https://maps.googleapis.com",
+    "img-src 'self' data: blob: https://*.public.blob.vercel-storage.com https://*.vercel-storage.com https://www.google.com https://maps.gstatic.com https://maps.googleapis.com https://www.facebook.com",
+    "frame-src https://www.google.com https://maps.google.com https://www.facebook.com",
+    "connect-src 'self' https://maps.googleapis.com https://connect.facebook.net https://www.facebook.com https://graph.facebook.com",
     "frame-ancestors 'none'",
   ].join("; "),
 };
