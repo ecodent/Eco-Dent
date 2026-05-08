@@ -284,11 +284,31 @@ export default async function Home() {
   const firstHeroUrl = heroImageUrls[0] ?? null;
 
   const partners = [
-    { name: "dLab", icon: "◈" },
-    { name: "Magnolia", icon: "❋" },
-    { name: "Powersurge", icon: "▣" },
-    { name: "Warpspeed", icon: "◆" },
-    { name: "Leapyear", icon: "△" },
+    {
+      ro: "Implant Dentar",
+      ru: "Имплантация зубов",
+      icon: "◈",
+      slug: "implant-dentar",
+    },
+    {
+      ro: "Albire Dentară",
+      ru: "Отбеливание зубов",
+      icon: "❋",
+      slug: "albire-dentara",
+    },
+    { ro: "Ortodonție", ru: "Ортодонтия", icon: "▣", slug: "ortodontie" },
+    {
+      ro: "Proteză Dentară",
+      ru: "Зубное протезирование",
+      icon: "◆",
+      slug: "proteza-dentara",
+    },
+    {
+      ro: "Tratament de Canal",
+      ru: "Лечение каналов",
+      icon: "△",
+      slug: "tratament-de-canal",
+    },
   ];
 
   return (
@@ -497,25 +517,36 @@ export default async function Home() {
             {/* Partners */}
             <div
               className="hidden xl:flex items-center"
-              style={{ marginTop: "100px", gap: "36px", opacity: 0.4 }}
+              style={{
+                marginTop: "100px",
+                gap: "28px",
+                opacity: 0.4,
+                flexWrap: "nowrap",
+              }}
             >
               {partners.map((partner) => (
-                <div
-                  key={partner.name}
-                  className="flex items-center"
-                  style={{ gap: "8px", color: "#878C96" }}
+                <Link
+                  key={partner.ro}
+                  href={`/${cookieLang}/servicii/${partner.slug}`}
+                  className="flex items-center hover:opacity-70 transition-opacity"
+                  style={{
+                    gap: "7px",
+                    color: "#878C96",
+                    textDecoration: "none",
+                  }}
                 >
-                  <span style={{ fontSize: "16px" }}>{partner.icon}</span>
+                  <span style={{ fontSize: "15px" }}>{partner.icon}</span>
                   <span
                     style={{
-                      fontSize: "13px",
+                      fontSize: "12px",
                       fontWeight: 500,
                       letterSpacing: "0.02em",
+                      whiteSpace: "nowrap",
                     }}
                   >
-                    {partner.name}
+                    {cookieLang === "ru" ? partner.ru : partner.ro}
                   </span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -600,7 +631,7 @@ export default async function Home() {
           </a>
         </div>
 
-        {/* Unified card grid: 1 col mobile / 2 cols sm / 3 cols lg */}
+        {/* Unified card row: horizontal scroll on all screen sizes */}
         <div className="grid grid-cols-1 min-[560px]:grid-cols-2 lg:grid-cols-3 gap-5">
           {services
             .slice(0, 6)

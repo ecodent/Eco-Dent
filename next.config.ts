@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/(.*)", headers: securityHeaders },
       { source: "/_next/static/:path*", headers: longCache },
-      { source: "/:path*\\.(?:jpg|jpeg|png|webp|avif|svg|ico|woff2)", headers: longCache },
+      { source: "/images/:path*", headers: longCache },
     ];
   },
   images: {
