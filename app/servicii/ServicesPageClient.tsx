@@ -71,7 +71,7 @@ export default function ServicesPageClient({
   description?: string;
   stats?: { num: string; label: string }[];
 }) {
-  const { t } = useT();
+  const { t, lang } = useT();
 
   const stats = statsProp ?? [
     { num: "6+", label: t("svcPage.stats.specialties") },
