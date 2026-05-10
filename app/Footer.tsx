@@ -375,8 +375,8 @@ export default function Footer() {
           {t("footer.copyright")}
         </p>
         <div style={{ display: "flex", gap: "24px" }}>
-          <a
-            href="#"
+          <Link
+            href="/politica-de-confidentialitate"
             style={{
               fontSize: "13px",
               color: "rgba(255,255,255,0.3)",
@@ -384,9 +384,9 @@ export default function Footer() {
             }}
           >
             {t("footer.privacy")}
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href="/termeni-si-conditii"
             style={{
               fontSize: "13px",
               color: "rgba(255,255,255,0.3)",
@@ -394,7 +394,7 @@ export default function Footer() {
             }}
           >
             {t("footer.terms")}
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
