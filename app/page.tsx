@@ -110,15 +110,11 @@ function Logo() {
 export default async function Home() {
   // Default/fallback data
   const defaultTeam = [
-    {
-      name: "Dr. Emilia Rossi",
-      role: "Cosmetic Dentist",
-      image: "/medic1.png",
-    },
-    { name: "Dr. Adrian Novak", role: "Implantologist", image: "/medic2.png" },
-    { name: "Dr. Lukas Meyer", role: "Lead Dentist", image: "/medic3.jpg" },
-    { name: "Dr. Sofia Chen", role: "Orthodontist", image: "/medic4.jpg" },
-    { name: "Dr. Marcus Reid", role: "Oral Surgeon", image: "/medic 5.jpg" },
+    { name: "Dr. Emilia Rossi",  role: "Cosmetic Dentist",  image: "/medic6.png"  },
+    { name: "Dr. Adrian Novak",  role: "Implantologist",    image: "/medic7.png"  },
+    { name: "Dr. Lukas Meyer",   role: "Lead Dentist",      image: "/medic8.png"  },
+    { name: "Dr. Sofia Chen",    role: "Orthodontist",      image: "/medic9.png"  },
+    { name: "Dr. Marcus Reid",   role: "Oral Surgeon",      image: "/medic10.png" },
   ];
   const defaultHero = [
     { url: "/clinica1.jpg" },
@@ -648,134 +644,143 @@ export default async function Home() {
                 const isDark =
                   svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
                 return (
-                  <Reveal key={svc.slug} delay={Math.min((services.slice(0,6).indexOf(svc) % 3) + 1, 5) as 1|2|3|4|5}>
-                  <Link
-                    href={`/${cookieLang}/servicii/${svc.slug}`}
-                    className="service-card group"
-                    style={{
-                      backgroundColor: isDark ? svc.cardColor : "#FFFFFF",
-                      borderRadius: "24px",
-                      overflow: "hidden",
-                      display: "flex",
-                      flexDirection: "column",
-                      textDecoration: "none",
-                      boxShadow: "0 1px 3px rgba(15, 26, 45, 0.04)",
-                      transition: "transform 0.25s ease, box-shadow 0.25s ease",
-                      border: isDark ? "none" : "1px solid #ECEEF1",
-                    }}
+                  <Reveal
+                    key={svc.slug}
+                    delay={
+                      Math.min(
+                        (services.slice(0, 6).indexOf(svc) % 3) + 1,
+                        5,
+                      ) as 1 | 2 | 3 | 4 | 5
+                    }
                   >
-                    {/* Image */}
-                    {svc.image && (
-                      <div
-                        style={{
-                          position: "relative",
-                          width: "100%",
-                          aspectRatio: "4 / 3",
-                          overflow: "hidden",
-                          backgroundColor: isDark
-                            ? "rgba(255,255,255,0.05)"
-                            : "#F4F5F7",
-                        }}
-                      >
-                        <Image
-                          src={svc.image}
-                          alt={svc.title}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          style={{
-                            objectPosition: svc.imagePosition || "center 30%",
-                          }}
-                          sizes="(max-width: 560px) 90vw, (max-width: 1024px) 45vw, 30vw"
-                        />
-                      </div>
-                    )}
-
-                    {/* Content */}
-                    <div
+                    <Link
+                      href={`/${cookieLang}/servicii/${svc.slug}`}
+                      className="service-card group"
                       style={{
-                        padding: "20px 22px 22px",
+                        backgroundColor: isDark ? svc.cardColor : "#FFFFFF",
+                        borderRadius: "24px",
+                        overflow: "hidden",
                         display: "flex",
                         flexDirection: "column",
-                        gap: "8px",
-                        flex: 1,
+                        textDecoration: "none",
+                        boxShadow: "0 1px 3px rgba(15, 26, 45, 0.04)",
+                        transition:
+                          "transform 0.25s ease, box-shadow 0.25s ease",
+                        border: isDark ? "none" : "1px solid #ECEEF1",
                       }}
                     >
-                      <h3
-                        style={{
-                          fontSize: "17px",
-                          fontWeight: 600,
-                          lineHeight: 1.3,
-                          letterSpacing: "-0.01em",
-                          color: isDark ? "#FFFFFF" : "#0F1A2D",
-                          margin: 0,
-                        }}
-                      >
-                        {svc.title}
-                      </h3>
-                      {svc.subtitle && (
-                        <p
+                      {/* Image */}
+                      {svc.image && (
+                        <div
                           style={{
-                            fontSize: "13px",
-                            lineHeight: 1.5,
-                            color: isDark
-                              ? "rgba(255,255,255,0.65)"
-                              : "#878C96",
-                            margin: 0,
-                            flex: 1,
-                          }}
-                        >
-                          {svc.subtitle}
-                        </p>
-                      )}
-
-                      {/* Footer link with arrow */}
-                      <div
-                        className="flex items-center justify-between"
-                        style={{
-                          marginTop: "12px",
-                          paddingTop: "14px",
-                          borderTop: isDark
-                            ? "1px solid rgba(255,255,255,0.12)"
-                            : "1px solid #ECEEF1",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: "13px",
-                            fontWeight: 500,
-                            color: isDark ? "#FFFFFF" : "#0168FF",
-                          }}
-                        >
-                          {cookieLang === "ru" ? "Подробнее" : "Vezi detalii"}
-                        </span>
-                        <span
-                          className="flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1"
-                          style={{
-                            width: "32px",
-                            height: "32px",
-                            borderRadius: "9999px",
+                            position: "relative",
+                            width: "100%",
+                            aspectRatio: "4 / 3",
+                            overflow: "hidden",
                             backgroundColor: isDark
-                              ? "rgba(255,255,255,0.12)"
+                              ? "rgba(255,255,255,0.05)"
                               : "#F4F5F7",
                           }}
                         >
-                          <svg
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke={isDark ? "#FFFFFF" : "#0F1A2D"}
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                          <Image
+                            src={svc.image}
+                            alt={svc.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            style={{
+                              objectPosition: svc.imagePosition || "center 30%",
+                            }}
+                            sizes="(max-width: 560px) 90vw, (max-width: 1024px) 45vw, 30vw"
+                          />
+                        </div>
+                      )}
+
+                      {/* Content */}
+                      <div
+                        style={{
+                          padding: "20px 22px 22px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "8px",
+                          flex: 1,
+                        }}
+                      >
+                        <h3
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: 600,
+                            lineHeight: 1.3,
+                            letterSpacing: "-0.01em",
+                            color: isDark ? "#FFFFFF" : "#0F1A2D",
+                            margin: 0,
+                          }}
+                        >
+                          {svc.title}
+                        </h3>
+                        {svc.subtitle && (
+                          <p
+                            style={{
+                              fontSize: "13px",
+                              lineHeight: 1.5,
+                              color: isDark
+                                ? "rgba(255,255,255,0.65)"
+                                : "#878C96",
+                              margin: 0,
+                              flex: 1,
+                            }}
                           >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </span>
+                            {svc.subtitle}
+                          </p>
+                        )}
+
+                        {/* Footer link with arrow */}
+                        <div
+                          className="flex items-center justify-between"
+                          style={{
+                            marginTop: "12px",
+                            paddingTop: "14px",
+                            borderTop: isDark
+                              ? "1px solid rgba(255,255,255,0.12)"
+                              : "1px solid #ECEEF1",
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: "13px",
+                              fontWeight: 500,
+                              color: isDark ? "#FFFFFF" : "#0168FF",
+                            }}
+                          >
+                            {cookieLang === "ru" ? "Подробнее" : "Vezi detalii"}
+                          </span>
+                          <span
+                            className="flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1"
+                            style={{
+                              width: "32px",
+                              height: "32px",
+                              borderRadius: "9999px",
+                              backgroundColor: isDark
+                                ? "rgba(255,255,255,0.12)"
+                                : "#F4F5F7",
+                            }}
+                          >
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke={isDark ? "#FFFFFF" : "#0F1A2D"}
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                              <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
                   </Reveal>
                 );
               },
