@@ -212,11 +212,11 @@ export default function ServicesPageClient({
                   boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
                 }}
               >
-                {/* Image */}
+                {/* Image 1:1 */}
                 <div
                   style={{
                     position: "relative",
-                    height: "320px",
+                    aspectRatio: "1 / 1",
                     flexShrink: 0,
                     overflow: "hidden",
                   }}
@@ -261,16 +261,16 @@ export default function ServicesPageClient({
                 {/* Content */}
                 <div
                   style={{
-                    flex: 1,
                     display: "flex",
-                    flexDirection: "column",
-                    padding: "24px",
-                    gap: "10px",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "18px 20px",
+                    gap: "12px",
                   }}
                 >
                   <h2
                     style={{
-                      fontSize: "19px",
+                      fontSize: "16px",
                       fontWeight: 700,
                       color: isDark ? "#FFFFFF" : "#0F1A2D",
                       margin: 0,
@@ -279,109 +279,22 @@ export default function ServicesPageClient({
                   >
                     {service.title}
                   </h2>
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      color: isDark ? "rgba(255,255,255,0.58)" : "#878C96",
-                      lineHeight: 1.65,
-                      margin: 0,
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {service.description}
-                  </p>
-
-                  {/* Feature chips */}
                   <div
                     style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "7px",
-                      marginTop: "4px",
-                      maxHeight: "62px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {service.features.slice(0, 3).map((f, i) => (
-                      <span
-                        key={i}
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: "5px",
-                          fontSize: "12px",
-                          fontWeight: 500,
-                          color: isDark ? "rgba(255,255,255,0.85)" : "#0F1A2D",
-                          backgroundColor: isDark
-                            ? "rgba(255,255,255,0.1)"
-                            : "rgba(0,0,0,0.05)",
-                          padding: "4px 10px",
-                          borderRadius: "9999px",
-                          maxWidth: "100%",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        <CheckIcon dark={isDark} />
-                        {f.title}
-                      </span>
-                    ))}
-                    {service.features.length > 3 && (
-                      <span
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: 500,
-                          color: isDark ? "rgba(255,255,255,0.5)" : "#878C96",
-                          padding: "4px 6px",
-                        }}
-                      >
-                        +{service.features.length - 3}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* CTA row */}
-                  <div
-                    style={{
-                      marginTop: "auto",
-                      paddingTop: "16px",
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      backgroundColor: isDark
+                        ? "rgba(255,255,255,0.15)"
+                        : "#0168FF",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "space-between",
-                      borderTop: isDark
-                        ? "1px solid rgba(255,255,255,0.1)"
-                        : "1px solid rgba(0,0,0,0.07)",
+                      justifyContent: "center",
+                      color: "#FFFFFF",
+                      flexShrink: 0,
                     }}
                   >
-                    <span
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: 600,
-                        color: isDark ? "#FFFFFF" : "#0168FF",
-                      }}
-                    >
-                      {t("svcPage.card.cta")}
-                    </span>
-                    <div
-                      style={{
-                        width: "36px",
-                        height: "36px",
-                        borderRadius: "50%",
-                        backgroundColor: isDark
-                          ? "rgba(255,255,255,0.15)"
-                          : "#0168FF",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#FFFFFF",
-                      }}
-                    >
-                      <ArrowIcon />
-                    </div>
+                    <ArrowIcon />
                   </div>
                 </div>
               </Link>
