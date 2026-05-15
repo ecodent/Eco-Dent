@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, ReactNode, CSSProperties, ElementType } from "react";
+import {
+  useEffect,
+  useRef,
+  ReactNode,
+  CSSProperties,
+  ElementType,
+} from "react";
 
 interface RevealProps {
   children: ReactNode;
@@ -33,7 +39,7 @@ export default function Reveal({
           observer.disconnect();
         }
       },
-      { threshold }
+      { threshold },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -43,8 +49,8 @@ export default function Reveal({
     direction === "left"
       ? "reveal-left"
       : direction === "right"
-      ? "reveal-right"
-      : "reveal";
+        ? "reveal-right"
+        : "reveal";
 
   const delayClass = delay > 0 ? `reveal-d${delay}` : "";
 

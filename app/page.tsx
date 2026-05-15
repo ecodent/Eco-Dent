@@ -110,11 +110,15 @@ function Logo() {
 export default async function Home() {
   // Default/fallback data
   const defaultTeam = [
-    { name: "Dr. Emilia Rossi",  role: "Cosmetic Dentist",  image: "/medic6.png"  },
-    { name: "Dr. Adrian Novak",  role: "Implantologist",    image: "/medic7.png"  },
-    { name: "Dr. Lukas Meyer",   role: "Lead Dentist",      image: "/medic8.png"  },
-    { name: "Dr. Sofia Chen",    role: "Orthodontist",      image: "/medic9.png"  },
-    { name: "Dr. Marcus Reid",   role: "Oral Surgeon",      image: "/medic10.png" },
+    {
+      name: "Dr. Emilia Rossi",
+      role: "Cosmetic Dentist",
+      image: "/medic6.png",
+    },
+    { name: "Dr. Adrian Novak", role: "Implantologist", image: "/medic7.png" },
+    { name: "Dr. Lukas Meyer", role: "Lead Dentist", image: "/medic8.png" },
+    { name: "Dr. Sofia Chen", role: "Orthodontist", image: "/medic9.png" },
+    { name: "Dr. Marcus Reid", role: "Oral Surgeon", image: "/medic10.png" },
   ];
   const defaultHero = [
     { url: "/clinica1.jpg" },
@@ -628,164 +632,138 @@ export default async function Home() {
           </a>
         </Reveal>
 
-        {/* Unified card row: horizontal scroll on all screen sizes */}
-        <div className="grid grid-cols-1 min-[560px]:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services
-            .slice(0, 6)
-            .map(
-              (svc: {
-                slug: string;
-                title: string;
-                subtitle: string;
-                image: string;
-                imagePosition?: string;
-                cardColor: string;
-              }) => {
-                const isDark =
-                  svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
-                return (
-                  <Reveal
-                    key={svc.slug}
-                    delay={
-                      Math.min(
-                        (services.slice(0, 6).indexOf(svc) % 3) + 1,
-                        5,
-                      ) as 1 | 2 | 3 | 4 | 5
-                    }
+        {/* Bento grid */}
+        {(() => {
+          const renderCard = (
+            svc: {
+              slug: string;
+              title: string;
+              subtitle: string;
+              image: string;
+              imagePosition?: string;
+              cardColor: string;
+            },
+            idx: number,
+            sizes: string,
+          ) => {
+            return (
+              <Link
+                key={svc.slug}
+                href={`/${cookieLang}/servicii/${svc.slug}`}
+                className="group"
+                style={{
+                  display: "block",
+                  position: "relative",
+                  borderRadius: "20px",
+                  overflow: "hidden",
+                  textDecoration: "none",
+                  aspectRatio: "1 / 1",
+                  width: "100%",
+                }}
+              >
+                {svc.image && (
+                  <Image
+                    src={svc.image}
+                    alt={svc.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    style={{
+                      objectPosition: svc.imagePosition || "center 30%",
+                    }}
+                    sizes={sizes}
+                  />
+                )}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to top, rgba(10,18,35,0.82) 0%, rgba(10,18,35,0.1) 65%, transparent 100%)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: "18px",
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: 700,
+                      color: "#FFFFFF",
+                      margin: 0,
+                      lineHeight: 1.2,
+                      letterSpacing: "-0.01em",
+                    }}
                   >
-                    <Link
-                      href={`/${cookieLang}/servicii/${svc.slug}`}
-                      className="service-card group"
+                    {svc.title}
+                  </h3>
+                  <div
+                    className="flex items-center"
+                    style={{ marginTop: "10px", gap: "8px" }}
+                  >
+                    <span
                       style={{
-                        backgroundColor: isDark ? svc.cardColor : "#FFFFFF",
-                        borderRadius: "24px",
-                        overflow: "hidden",
-                        display: "flex",
-                        flexDirection: "column",
-                        textDecoration: "none",
-                        boxShadow: "0 1px 3px rgba(15, 26, 45, 0.04)",
-                        transition:
-                          "transform 0.25s ease, box-shadow 0.25s ease",
-                        border: isDark ? "none" : "1px solid #ECEEF1",
+                        fontSize: "13px",
+                        fontWeight: 500,
+                        color: "rgba(255,255,255,0.85)",
                       }}
                     >
-                      {/* Image */}
-                      {svc.image && (
-                        <div
-                          style={{
-                            position: "relative",
-                            width: "100%",
-                            aspectRatio: "4 / 3",
-                            overflow: "hidden",
-                            backgroundColor: isDark
-                              ? "rgba(255,255,255,0.05)"
-                              : "#F4F5F7",
-                          }}
-                        >
-                          <Image
-                            src={svc.image}
-                            alt={svc.title}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            style={{
-                              objectPosition: svc.imagePosition || "center 30%",
-                            }}
-                            sizes="(max-width: 560px) 90vw, (max-width: 1024px) 45vw, 30vw"
-                          />
-                        </div>
-                      )}
+                      {cookieLang === "ru" ? "Подробнее" : "Vezi detalii"}
+                    </span>
+                    <svg
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.85)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            );
+          };
 
-                      {/* Content */}
-                      <div
-                        style={{
-                          padding: "20px 22px 22px",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "8px",
-                          flex: 1,
-                        }}
-                      >
-                        <h3
-                          style={{
-                            fontSize: "17px",
-                            fontWeight: 600,
-                            lineHeight: 1.3,
-                            letterSpacing: "-0.01em",
-                            color: isDark ? "#FFFFFF" : "#0F1A2D",
-                            margin: 0,
-                          }}
-                        >
-                          {svc.title}
-                        </h3>
-                        {svc.subtitle && (
-                          <p
-                            style={{
-                              fontSize: "13px",
-                              lineHeight: 1.5,
-                              color: isDark
-                                ? "rgba(255,255,255,0.65)"
-                                : "#878C96",
-                              margin: 0,
-                              flex: 1,
-                            }}
-                          >
-                            {svc.subtitle}
-                          </p>
-                        )}
+          const svcs = services.slice(0, 6) as {
+            slug: string;
+            title: string;
+            subtitle: string;
+            image: string;
+            imagePosition?: string;
+            cardColor: string;
+          }[];
 
-                        {/* Footer link with arrow */}
-                        <div
-                          className="flex items-center justify-between"
-                          style={{
-                            marginTop: "12px",
-                            paddingTop: "14px",
-                            borderTop: isDark
-                              ? "1px solid rgba(255,255,255,0.12)"
-                              : "1px solid #ECEEF1",
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontSize: "13px",
-                              fontWeight: 500,
-                              color: isDark ? "#FFFFFF" : "#0168FF",
-                            }}
-                          >
-                            {cookieLang === "ru" ? "Подробнее" : "Vezi detalii"}
-                          </span>
-                          <span
-                            className="flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1"
-                            style={{
-                              width: "32px",
-                              height: "32px",
-                              borderRadius: "9999px",
-                              backgroundColor: isDark
-                                ? "rgba(255,255,255,0.12)"
-                                : "#F4F5F7",
-                            }}
-                          >
-                            <svg
-                              width="14"
-                              height="14"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke={isDark ? "#FFFFFF" : "#0F1A2D"}
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <line x1="5" y1="12" x2="19" y2="12" />
-                              <polyline points="12 5 19 12 12 19" />
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  </Reveal>
-                );
-              },
-            )}
-        </div>
+          return (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "12px",
+              }}
+              className="bento-bottom-row"
+            >
+              {svcs.map((svc, i) => (
+                <Reveal
+                  key={svc.slug}
+                  delay={Math.min(i, 5) as 0 | 1 | 2 | 3 | 4 | 5}
+                >
+                  {renderCard(svc, i, "33vw")}
+                </Reveal>
+              ))}
+            </div>
+          );
+        })()}
       </section>
 
       {/* Team Section */}

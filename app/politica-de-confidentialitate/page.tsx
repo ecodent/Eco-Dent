@@ -34,12 +34,19 @@ export default async function PoliticaDeConfidentialitate() {
           }}
         >
           {/* Breadcrumb */}
-          <div style={{ marginBottom: "32px", fontSize: "14px", color: "#878C96" }}>
-            <Link href={`/${cookieLang}`} style={{ color: "#0168FF", textDecoration: "none" }}>
+          <div
+            style={{ marginBottom: "32px", fontSize: "14px", color: "#878C96" }}
+          >
+            <Link
+              href={`/${cookieLang}`}
+              style={{ color: "#0168FF", textDecoration: "none" }}
+            >
               {isRu ? "Главная" : "Acasă"}
             </Link>
             {" › "}
-            {isRu ? "Политика конфиденциальности" : "Politica de Confidențialitate"}
+            {isRu
+              ? "Политика конфиденциальности"
+              : "Politica de Confidențialitate"}
           </div>
 
           <h1
@@ -51,13 +58,21 @@ export default async function PoliticaDeConfidentialitate() {
               letterSpacing: "-0.02em",
             }}
           >
-            {isRu ? "Политика конфиденциальности" : "Politica de Confidențialitate"}
+            {isRu
+              ? "Политика конфиденциальности"
+              : "Politica de Confidențialitate"}
           </h1>
-          <p style={{ fontSize: "14px", color: "#878C96", marginBottom: "48px" }}>
-            {isRu ? "Ultima actualizare: mai 2026" : "Ultima actualizare: mai 2026"}
+          <p
+            style={{ fontSize: "14px", color: "#878C96", marginBottom: "48px" }}
+          >
+            {isRu
+              ? "Ultima actualizare: mai 2026"
+              : "Ultima actualizare: mai 2026"}
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "36px" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "36px" }}
+          >
             <Section
               title={isRu ? "1. Cine suntem" : "1. Cine suntem"}
               body={

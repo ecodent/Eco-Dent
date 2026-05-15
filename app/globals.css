@@ -242,7 +242,39 @@ body {
 .reveal-d4 { transition-delay: 0.4s; }
 .reveal-d5 { transition-delay: 0.5s; }
 
-/* No animations if user prefers reduced motion */
+/* Bento grid layout */
+.bento-grid .bento-featured {
+  grid-column: span 2;
+}
+
+@media (max-width: 640px) {
+  .bento-top-row {
+    flex-direction: column !important;
+  }
+  .bento-top-row > div:first-child > a {
+    height: 260px !important;
+  }
+  .bento-bottom-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .bento-bottom-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Services list row hover */
+.group:hover .svc-row-title {
+  color: #0168FF;
+}
+.group:hover .svc-row-arrow {
+  background-color: #0168FF;
+}
+.group:hover .svc-row-arrow svg {
+  stroke: #FFFFFF;
+}
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-left, .reveal-right {
     opacity: 1;
