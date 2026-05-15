@@ -207,7 +207,8 @@ export default function ServicePageLayout({
           {/* Right: image */}
           <div
             style={{
-              flex: 1,
+              flex: "0 0 auto",
+              width: "min(480px, 100%)",
               position: "relative",
               aspectRatio: "1 / 1",
               borderRadius: "28px",
@@ -360,7 +361,7 @@ export default function ServicePageLayout({
               className="hidden lg:block"
               style={{
                 position: "relative",
-                width: "380px",
+                width: "280px",
                 flexShrink: 0,
                 aspectRatio: "1 / 1",
               }}
