@@ -177,7 +177,7 @@ export default function BeforeAfterPage() {
                       style={{
                         position: "relative",
                         width: "100%",
-                        height: "160px",
+                        aspectRatio: "1 / 1",
                         borderRadius: "12px",
                         overflow: "hidden",
                         marginBottom: "10px",
@@ -189,7 +189,7 @@ export default function BeforeAfterPage() {
                         alt={field}
                         fill
                         className="object-cover"
-                        sizes="300px"
+                        sizes="(max-width: 600px) 90vw, 45vw"
                       />
                     </div>
                   )}
