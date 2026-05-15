@@ -226,7 +226,7 @@ export default function TeamCarousel({
                   fill
                   className="object-cover object-top"
                   sizes="(max-width: 768px) 80vw, (max-width: 1280px) 30vw, 22vw"
-                  quality={90}
+                  quality={100}
                   priority={isCenter}
                 />
                 {/* Gradient overlay at bottom for name */}
