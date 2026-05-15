@@ -372,6 +372,7 @@ export default function Contact({
           id="contact-form"
           style={{
             flex: 1,
+            alignSelf: "flex-start",
             backgroundColor: "#FFFFFF",
             borderRadius: "28px",
             padding: "32px 24px",

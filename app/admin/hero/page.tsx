@@ -52,7 +52,8 @@ export default function HeroPage() {
       method: "DELETE",
       headers: authHeaders(),
     });
-    if (res.ok) show("Ștearsă!"); else show("Eroare", "error");
+    if (res.ok) show("Ștearsă!");
+    else show("Eroare", "error");
     load();
   };
 

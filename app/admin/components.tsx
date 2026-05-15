@@ -4,18 +4,28 @@ import { useState, useCallback } from "react";
 
 /** Toast notification hook */
 export function useToast() {
-  const [toast, setToast] = useState<{ msg: string; type: "success" | "error" } | null>(null);
+  const [toast, setToast] = useState<{
+    msg: string;
+    type: "success" | "error";
+  } | null>(null);
 
-  const show = useCallback((msg: string, type: "success" | "error" = "success") => {
-    setToast({ msg, type });
-    setTimeout(() => setToast(null), 3000);
-  }, []);
+  const show = useCallback(
+    (msg: string, type: "success" | "error" = "success") => {
+      setToast({ msg, type });
+      setTimeout(() => setToast(null), 3000);
+    },
+    [],
+  );
 
   return { toast, show };
 }
 
 /** Toast UI component */
-export function Toast({ toast }: { toast: { msg: string; type: "success" | "error" } | null }) {
+export function Toast({
+  toast,
+}: {
+  toast: { msg: string; type: "success" | "error" } | null;
+}) {
   if (!toast) return null;
   return (
     <div

@@ -49,7 +49,8 @@ export default function BeforeAfterPage() {
       method: "DELETE",
       headers: authHeaders(),
     });
-    if (res.ok) show("Șters!"); else show("Eroare", "error");
+    if (res.ok) show("Șters!");
+    else show("Eroare", "error");
     load();
   };
 

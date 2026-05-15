@@ -32,8 +32,9 @@ export default function ServicePageLayout({
   benefits,
   ctaText,
 }: ServicePageLayoutProps) {
-  const { t } = useT();
+  const { t, lang } = useT();
   const resolvedCta = ctaText || t("svcDetail.cta");
+  const contactHref = `/${lang}#contact-form`;
   return (
     <div style={{ backgroundColor: "#F8F8F8", minHeight: "100vh" }}>
       <Navbar />
@@ -151,7 +152,7 @@ export default function ServicePageLayout({
               style={{ gap: "12px", marginTop: "40px" }}
             >
               <Link
-                href="/#contact-form"
+                href={contactHref}
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -208,7 +209,7 @@ export default function ServicePageLayout({
             style={{
               flex: 1,
               position: "relative",
-              minHeight: "360px",
+              aspectRatio: "1 / 1",
               borderRadius: "28px",
               overflow: "hidden",
             }}
@@ -361,7 +362,7 @@ export default function ServicePageLayout({
                 position: "relative",
                 width: "380px",
                 flexShrink: 0,
-                minHeight: "420px",
+                aspectRatio: "1 / 1",
               }}
             >
               <Image
@@ -529,7 +530,7 @@ export default function ServicePageLayout({
             style={{ gap: "12px", marginTop: "8px" }}
           >
             <Link
-              href="/#contact-form"
+              href={contactHref}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
