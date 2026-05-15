@@ -22,6 +22,6 @@ export async function PUT(request: NextRequest) {
     new: true,
     upsert: true,
   });
-  revalidateTag("settings");
+  revalidateTag("settings", "max");
   return NextResponse.json(doc);
 }

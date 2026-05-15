@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   await dbConnect();
   const body = await request.json();
   const image = await HeroImage.create(body);
-  revalidateTag("hero");
+  revalidateTag("hero", "max");
   return NextResponse.json(image, { status: 201 });
 }
 
@@ -25,6 +25,6 @@ export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   await (HeroImage as any).findByIdAndDelete(id);
-  revalidateTag("hero");
+  revalidateTag("hero", "max");
   return NextResponse.json({ success: true });
 }

@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   await dbConnect();
   const body = await request.json();
   const item = await BeforeAfterCase.create(body);
-  revalidateTag("before-after");
+  revalidateTag("before-after", "max");
   return NextResponse.json(item, { status: 201 });
 }
 
@@ -25,7 +25,7 @@ export async function PUT(request: NextRequest) {
   const body = await request.json();
   const { _id, ...data } = body;
   const item = await BeforeAfterCase.findByIdAndUpdate(_id, data, { new: true } as any);
-  revalidateTag("before-after");
+  revalidateTag("before-after", "max");
   return NextResponse.json(item);
 }
 
@@ -35,6 +35,6 @@ export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   await (BeforeAfterCase as any).findByIdAndDelete(id);
-  revalidateTag("before-after");
+  revalidateTag("before-after", "max");
   return NextResponse.json({ success: true });
 }

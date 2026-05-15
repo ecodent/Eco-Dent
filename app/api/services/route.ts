@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
   await dbConnect();
   const body = await request.json();
   const service = await Service.create(body);
-  revalidateTag("services");
+  revalidateTag("services", "max");
   return NextResponse.json(service, { status: 201 });
 }
 
@@ -28,7 +28,7 @@ export async function PUT(request: NextRequest) {
   const body = await request.json();
   const { _id, ...data } = body;
   const service = await Service.findByIdAndUpdate(_id, data, { new: true } as any);
-  revalidateTag("services");
+  revalidateTag("services", "max");
   return NextResponse.json(service);
 }
 
@@ -38,6 +38,6 @@ export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   await (Service as any).findByIdAndDelete(id);
-  revalidateTag("services");
+  revalidateTag("services", "max");
   return NextResponse.json({ success: true });
 }
