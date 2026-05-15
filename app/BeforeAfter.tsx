@@ -132,8 +132,8 @@ export default function BeforeAfter({
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const CARD_W = isMobile ? 88 : isTablet ? 58 : 52; // vw for center card
-  const SIDE_W = isMobile ? 0 : isTablet ? 16 : 20; // vw for side cards
+  const CARD_W = isMobile ? 88 : isTablet ? 50 : 44; // vw for center card
+  const SIDE_W = isMobile ? 0 : isTablet ? 20 : 25; // vw for side cards — bigger
   const SIDE_GAP = isMobile ? 0 : 1.5; // vw gap between side and center
 
   if (total === 0) return null;
@@ -269,15 +269,27 @@ export default function BeforeAfter({
         style={{
           flex: 1,
           marginTop: "40px",
-          marginBottom: "40px",
+          marginBottom: isMobile ? "0" : "40px",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: `${SIDE_GAP}vw`,
-          paddingLeft: isMobile ? "5vw" : "0",
-          paddingRight: isMobile ? "5vw" : "0",
+          gap: "20px",
+          paddingBottom: isMobile ? "80px" : "0",
         }}
       >
+        {/* Cards row */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: `${SIDE_GAP}vw`,
+            width: "100%",
+            paddingLeft: isMobile ? "5vw" : "0",
+            paddingRight: isMobile ? "5vw" : "0",
+          }}
+        >
         {offsets.map((offset) => {
           const idx = (((currentCase + offset) % total) + total) % total;
           const caseData = cases[idx];
@@ -301,7 +313,7 @@ export default function BeforeAfter({
                   borderRadius: "24px",
                   overflow: "hidden",
                   cursor: "pointer",
-                  opacity: 0.7,
+                  opacity: 0.75,
                   transition: "opacity 0.3s ease",
                   boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
                 }}
@@ -311,13 +323,13 @@ export default function BeforeAfter({
                   alt={caseLabel}
                   fill
                   className="object-cover"
-                  sizes="22vw"
+                  sizes="27vw"
                 />
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
-                    backgroundColor: "rgba(0,0,0,0.18)",
+                    backgroundColor: "rgba(0,0,0,0.15)",
                   }}
                 />
               </div>
@@ -331,7 +343,7 @@ export default function BeforeAfter({
               ref={containerRef}
               style={{
                 position: "relative",
-                width: `${CARD_W}vw`,
+                width: isMobile ? `${CARD_W}vw` : `${CARD_W}vw`,
                 aspectRatio: "1 / 1",
                 flexShrink: 0,
                 borderRadius: "28px",
@@ -348,7 +360,7 @@ export default function BeforeAfter({
                   alt={`${caseLabel} - After`}
                   fill
                   className="object-cover"
-                  sizes="65vw"
+                  sizes="(max-width: 768px) 90vw, 55vw"
                   priority
                 />
               </div>
@@ -366,7 +378,7 @@ export default function BeforeAfter({
                   alt={`${caseLabel} - Before`}
                   fill
                   className="object-cover"
-                  sizes="65vw"
+                  sizes="(max-width: 768px) 90vw, 55vw"
                   style={{
                     filter:
                       "saturate(0.6) sepia(0.25) brightness(0.92) contrast(0.95)",
@@ -455,94 +467,66 @@ export default function BeforeAfter({
             </div>
           );
         })}
+        </div>
 
-        {/* Blue next button — top-right, outside center card */}
-        <button
-          onClick={next}
+        {/* Navigation buttons — centered below cards */}
+        <div
           style={{
-            position: "absolute",
-            top: isMobile ? "auto" : "12px",
-            bottom: isMobile ? "-50px" : "auto",
-            right: isMobile ? "auto" : `calc(${SIDE_W + SIDE_GAP}vw - 60px)`,
-            left: isMobile ? "calc(50% + 8px)" : "auto",
-            width: "52px",
-            height: "52px",
-            borderRadius: "50%",
-            backgroundColor: "#0168FF",
-            border: "none",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            zIndex: 20,
-            boxShadow: "0 6px 24px rgba(1,104,255,0.4)",
-            transition: "transform 0.2s",
+            gap: "12px",
+            position: isMobile ? "absolute" : "relative",
+            bottom: isMobile ? "20px" : "auto",
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.1)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-          }}
-          aria-label="Next case"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#FFFFFF"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          <button
+            onClick={prev}
+            style={{
+              width: "48px",
+              height: "48px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(255,255,255,0.95)",
+              border: "1px solid #E5E7EB",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
+              transition: "transform 0.2s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.08)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            aria-label="Previous case"
           >
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F1A2D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
-        {/* Left arrow — bottom-left, outside center card */}
-        <button
-          onClick={prev}
-          style={{
-            position: "absolute",
-            bottom: isMobile ? "-48px" : "52px",
-            left: isMobile ? "auto" : `calc(${SIDE_W + SIDE_GAP}vw - 56px)`,
-            right: isMobile ? "calc(50% + 8px)" : "auto",
-            width: "48px",
-            height: "48px",
-            borderRadius: "50%",
-            backgroundColor: "rgba(255,255,255,0.9)",
-            border: "1px solid #E5E7EB",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            zIndex: 20,
-            boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-            transition: "transform 0.2s",
-            backdropFilter: "blur(8px)",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.08)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-          }}
-          aria-label="Previous case"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#0F1A2D"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          <button
+            onClick={next}
+            style={{
+              width: "52px",
+              height: "52px",
+              borderRadius: "50%",
+              backgroundColor: "#0168FF",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow: "0 6px 24px rgba(1,104,255,0.4)",
+              transition: "transform 0.2s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.1)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            aria-label="Next case"
           >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
