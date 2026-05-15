@@ -132,9 +132,9 @@ export default function BeforeAfter({
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const CARD_W = isMobile ? 90 : isTablet ? 65 : 60; // vw for center card
-  const SIDE_W = isMobile ? 0 : isTablet ? 14 : 18; // vw for side peek cards
-  const SIDE_GAP = isMobile ? 0 : 1.5; // vw
+  const CARD_W = isMobile ? 88 : isTablet ? 58 : 52; // vw for center card
+  const SIDE_W = isMobile ? 0 : isTablet ? 16 : 20; // vw for side cards
+  const SIDE_GAP = isMobile ? 0 : 1.5; // vw gap between side and center
 
   if (total === 0) return null;
 
@@ -226,7 +226,7 @@ export default function BeforeAfter({
                 {t("ba.description.mid3")}
                 <span
                   style={{
-                                        fontWeight: 600,
+                    fontWeight: 600,
                     color: "#0F1A2D",
                   }}
                 >
@@ -268,11 +268,14 @@ export default function BeforeAfter({
       <div
         style={{
           flex: 1,
-          position: "relative",
           marginTop: "40px",
+          marginBottom: "40px",
           display: "flex",
-          alignItems: "stretch",
+          alignItems: "center",
           justifyContent: "center",
+          gap: `${SIDE_GAP}vw`,
+          paddingLeft: isMobile ? "5vw" : "0",
+          paddingRight: isMobile ? "5vw" : "0",
         }}
       >
         {offsets.map((offset) => {
@@ -286,24 +289,21 @@ export default function BeforeAfter({
 
           if (!isCenter) {
             if (isMobile) return null;
-            // Side peek cards — partially visible, no slider
-            const isLeft = offset === -1;
             return (
               <div
                 key={`side-${offset}`}
                 onClick={() => goTo(currentCase + offset)}
                 style={{
-                  position: "absolute",
-                  ...(isLeft
-                    ? { top: "0", height: "calc(50% - 20px)" }
-                    : { bottom: "40px", height: "calc(50% - 20px)" }),
+                  position: "relative",
                   width: `${SIDE_W}vw`,
-                  ...(isLeft ? { left: 0 } : { right: 0 }),
-                  borderRadius: isLeft ? "0 24px 24px 0" : "24px 0 0 24px",
+                  aspectRatio: "1 / 1",
+                  flexShrink: 0,
+                  borderRadius: "24px",
                   overflow: "hidden",
                   cursor: "pointer",
-                  zIndex: 1,
-                  transition: "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+                  opacity: 0.7,
+                  transition: "opacity 0.3s ease",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
                 }}
               >
                 <Image
@@ -311,17 +311,13 @@ export default function BeforeAfter({
                   alt={caseLabel}
                   fill
                   className="object-cover"
-                  sizes="20vw"
-                  style={{
-                    objectPosition: isLeft ? "right center" : "left center",
-                  }}
+                  sizes="22vw"
                 />
-                {/* Darkening overlay */}
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
-                    backgroundColor: "rgba(0,0,0,0.15)",
+                    backgroundColor: "rgba(0,0,0,0.18)",
                   }}
                 />
               </div>
@@ -336,12 +332,8 @@ export default function BeforeAfter({
               style={{
                 position: "relative",
                 width: `${CARD_W}vw`,
-                marginLeft: `${SIDE_W + SIDE_GAP}vw`,
-                marginRight: `${SIDE_W + SIDE_GAP}vw`,
-                bottom: 0,
-                top: 0,
-                alignSelf: "stretch",
-                marginBottom: "40px",
+                aspectRatio: "1 / 1",
+                flexShrink: 0,
                 borderRadius: "28px",
                 overflow: "hidden",
                 cursor: isDragging ? "ew-resize" : "default",
