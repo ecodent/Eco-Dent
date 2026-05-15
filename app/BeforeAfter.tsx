@@ -132,8 +132,8 @@ export default function BeforeAfter({
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const CARD_W = isMobile ? 88 : isTablet ? 50 : 44; // vw for center card
-  const SIDE_W = isMobile ? 0 : isTablet ? 20 : 25; // vw for side cards — bigger
+  const CARD_W = isMobile ? 88 : isTablet ? 44 : 38; // vw for center card
+  const SIDE_W = isMobile ? 0 : isTablet ? 24 : 28; // vw for side cards — bigger
   const SIDE_GAP = isMobile ? 0 : 1.5; // vw gap between side and center
 
   if (total === 0) return null;
@@ -282,7 +282,7 @@ export default function BeforeAfter({
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-end",
             justifyContent: "center",
             gap: `${SIDE_GAP}vw`,
             width: "100%",
@@ -290,183 +290,186 @@ export default function BeforeAfter({
             paddingRight: isMobile ? "5vw" : "0",
           }}
         >
-        {offsets.map((offset) => {
-          const idx = (((currentCase + offset) % total) + total) % total;
-          const caseData = cases[idx];
-          const caseLabel =
-            lang === "ru" && caseData.label_ru
-              ? caseData.label_ru
-              : caseData.label;
-          const isCenter = offset === 0;
+          {offsets.map((offset) => {
+            const idx = (((currentCase + offset) % total) + total) % total;
+            const caseData = cases[idx];
+            const caseLabel =
+              lang === "ru" && caseData.label_ru
+                ? caseData.label_ru
+                : caseData.label;
+            const isCenter = offset === 0;
 
-          if (!isCenter) {
-            if (isMobile) return null;
+            if (!isCenter) {
+              if (isMobile) return null;
+              const isLeft = offset === -1;
+              return (
+                <div
+                  key={`side-${offset}`}
+                  onClick={() => goTo(currentCase + offset)}
+                  style={{
+                    position: "relative",
+                    width: `${SIDE_W}vw`,
+                    aspectRatio: "1 / 1",
+                    flexShrink: 0,
+                    alignSelf: isLeft ? "flex-end" : "flex-start",
+                    borderRadius: "24px",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    opacity: 0.75,
+                    transition: "opacity 0.3s ease",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+                  }}
+                >
+                  <Image
+                    src={caseData.after}
+                    alt={caseLabel}
+                    fill
+                    className="object-cover"
+                    sizes="27vw"
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      backgroundColor: "rgba(0,0,0,0.15)",
+                    }}
+                  />
+                </div>
+              );
+            }
+
+            // Center card — with before/after slider
             return (
               <div
-                key={`side-${offset}`}
-                onClick={() => goTo(currentCase + offset)}
+                key={`center-${idx}`}
+                ref={containerRef}
                 style={{
                   position: "relative",
-                  width: `${SIDE_W}vw`,
+                  width: `${CARD_W}vw`,
                   aspectRatio: "1 / 1",
                   flexShrink: 0,
-                  borderRadius: "24px",
+                  alignSelf: "center",
+                  borderRadius: "28px",
                   overflow: "hidden",
-                  cursor: "pointer",
-                  opacity: 0.75,
-                  transition: "opacity 0.3s ease",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+                  cursor: isDragging ? "ew-resize" : "default",
+                  zIndex: 5,
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
                 }}
               >
-                <Image
-                  src={caseData.after}
-                  alt={caseLabel}
-                  fill
-                  className="object-cover"
-                  sizes="27vw"
-                />
+                {/* After image — full, underneath */}
+                <div style={{ position: "absolute", inset: 0 }}>
+                  <Image
+                    src={caseData.after}
+                    alt={`${caseLabel} - After`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 90vw, 55vw"
+                    priority
+                  />
+                </div>
+
+                {/* Before image — clipped to sliderPos */}
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
-                    backgroundColor: "rgba(0,0,0,0.15)",
+                    clipPath: `inset(0 ${100 - sliderPos}% 0 0)`,
+                  }}
+                >
+                  <Image
+                    src={caseData.before}
+                    alt={`${caseLabel} - Before`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 90vw, 55vw"
+                    style={{
+                      filter:
+                        "saturate(0.6) sepia(0.25) brightness(0.92) contrast(0.95)",
+                    }}
+                  />
+                </div>
+
+                {/* Slider line */}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    bottom: 0,
+                    left: `${sliderPos}%`,
+                    width: "3px",
+                    backgroundColor: "#FFFFFF",
+                    transform: "translateX(-50%)",
+                    zIndex: 10,
+                    pointerEvents: "none",
                   }}
                 />
+
+                {/* Drag handle */}
+                <div
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    setIsDragging(true);
+                  }}
+                  onTouchStart={() => setIsDragging(true)}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: `${sliderPos}%`,
+                    transform: "translate(-50%, -50%)",
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "50%",
+                    backgroundColor: "#FFFFFF",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "ew-resize",
+                    zIndex: 15,
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
+                    transition: isDragging ? "none" : "left 0.1s ease",
+                  }}
+                >
+                  <CompareIcon />
+                </div>
+
+                {/* BEFORE label */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "24px",
+                    left: "28px",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    letterSpacing: "0.08em",
+                    color: "#FFFFFF",
+                    textTransform: "uppercase",
+                    zIndex: 8,
+                    opacity: 0.9,
+                  }}
+                >
+                  BEFORE
+                </div>
+
+                {/* AFTER label */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "24px",
+                    right: "28px",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    letterSpacing: "0.08em",
+                    color: "#FFFFFF",
+                    textTransform: "uppercase",
+                    zIndex: 8,
+                    opacity: 0.9,
+                  }}
+                >
+                  AFTER
+                </div>
               </div>
             );
-          }
-
-          // Center card — with before/after slider
-          return (
-            <div
-              key={`center-${idx}`}
-              ref={containerRef}
-              style={{
-                position: "relative",
-                width: isMobile ? `${CARD_W}vw` : `${CARD_W}vw`,
-                aspectRatio: "1 / 1",
-                flexShrink: 0,
-                borderRadius: "28px",
-                overflow: "hidden",
-                cursor: isDragging ? "ew-resize" : "default",
-                zIndex: 5,
-                boxShadow: "0 20px 60px rgba(0,0,0,0.15)",
-              }}
-            >
-              {/* After image — full, underneath */}
-              <div style={{ position: "absolute", inset: 0 }}>
-                <Image
-                  src={caseData.after}
-                  alt={`${caseLabel} - After`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 90vw, 55vw"
-                  priority
-                />
-              </div>
-
-              {/* Before image — clipped to sliderPos */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  clipPath: `inset(0 ${100 - sliderPos}% 0 0)`,
-                }}
-              >
-                <Image
-                  src={caseData.before}
-                  alt={`${caseLabel} - Before`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 90vw, 55vw"
-                  style={{
-                    filter:
-                      "saturate(0.6) sepia(0.25) brightness(0.92) contrast(0.95)",
-                  }}
-                />
-              </div>
-
-              {/* Slider line */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  bottom: 0,
-                  left: `${sliderPos}%`,
-                  width: "3px",
-                  backgroundColor: "#FFFFFF",
-                  transform: "translateX(-50%)",
-                  zIndex: 10,
-                  pointerEvents: "none",
-                }}
-              />
-
-              {/* Drag handle */}
-              <div
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  setIsDragging(true);
-                }}
-                onTouchStart={() => setIsDragging(true)}
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: `${sliderPos}%`,
-                  transform: "translate(-50%, -50%)",
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "50%",
-                  backgroundColor: "#FFFFFF",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "ew-resize",
-                  zIndex: 15,
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-                  transition: isDragging ? "none" : "left 0.1s ease",
-                }}
-              >
-                <CompareIcon />
-              </div>
-
-              {/* BEFORE label */}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "24px",
-                  left: "28px",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  color: "#FFFFFF",
-                  textTransform: "uppercase",
-                  zIndex: 8,
-                  opacity: 0.9,
-                }}
-              >
-                BEFORE
-              </div>
-
-              {/* AFTER label */}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "24px",
-                  right: "28px",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  color: "#FFFFFF",
-                  textTransform: "uppercase",
-                  zIndex: 8,
-                  opacity: 0.9,
-                }}
-              >
-                AFTER
-              </div>
-            </div>
-          );
-        })}
+          })}
         </div>
 
         {/* Navigation buttons — centered below cards */}
@@ -494,11 +497,24 @@ export default function BeforeAfter({
               boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
               transition: "transform 0.2s",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.08)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.08)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+            }}
             aria-label="Previous case"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F1A2D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#0F1A2D"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
@@ -518,11 +534,24 @@ export default function BeforeAfter({
               boxShadow: "0 6px 24px rgba(1,104,255,0.4)",
               transition: "transform 0.2s",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.1)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+            }}
             aria-label="Next case"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#FFFFFF"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
