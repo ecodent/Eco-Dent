@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import HeroImage from "@/lib/models/HeroImage";
 import { verifyAuth, unauthorized } from "@/lib/auth";
@@ -14,6 +15,7 @@ export async function POST(request: NextRequest) {
   await dbConnect();
   const body = await request.json();
   const image = await HeroImage.create(body);
+  revalidateTag("hero");
   return NextResponse.json(image, { status: 201 });
 }
 
@@ -23,5 +25,6 @@ export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   await (HeroImage as any).findByIdAndDelete(id);
+  revalidateTag("hero");
   return NextResponse.json({ success: true });
 }

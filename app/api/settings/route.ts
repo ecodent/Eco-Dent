@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import SiteSettings from "@/lib/models/SiteSettings";
 import { verifyAuth, unauthorized } from "@/lib/auth";
@@ -21,5 +22,6 @@ export async function PUT(request: NextRequest) {
     new: true,
     upsert: true,
   });
+  revalidateTag("settings");
   return NextResponse.json(doc);
 }

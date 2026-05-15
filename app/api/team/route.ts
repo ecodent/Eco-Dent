@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import TeamMember from "@/lib/models/TeamMember";
 import { verifyAuth, unauthorized } from "@/lib/auth";
@@ -14,6 +15,7 @@ export async function POST(request: NextRequest) {
   await dbConnect();
   const body = await request.json();
   const member = await TeamMember.create(body);
+  revalidateTag("team");
   return NextResponse.json(member, { status: 201 });
 }
 
@@ -23,6 +25,7 @@ export async function PUT(request: NextRequest) {
   const body = await request.json();
   const { _id, ...data } = body;
   const member = await TeamMember.findByIdAndUpdate(_id, data, { new: true } as any);
+  revalidateTag("team");
   return NextResponse.json(member);
 }
 
@@ -32,5 +35,6 @@ export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   await (TeamMember as any).findByIdAndDelete(id);
+  revalidateTag("team");
   return NextResponse.json({ success: true });
 }

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import Service from "@/lib/models/Service";
 import { verifyAuth, unauthorized } from "@/lib/auth";
@@ -17,6 +18,7 @@ export async function POST(request: NextRequest) {
   await dbConnect();
   const body = await request.json();
   const service = await Service.create(body);
+  revalidateTag("services");
   return NextResponse.json(service, { status: 201 });
 }
 
@@ -26,6 +28,7 @@ export async function PUT(request: NextRequest) {
   const body = await request.json();
   const { _id, ...data } = body;
   const service = await Service.findByIdAndUpdate(_id, data, { new: true } as any);
+  revalidateTag("services");
   return NextResponse.json(service);
 }
 
@@ -35,5 +38,6 @@ export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   await (Service as any).findByIdAndDelete(id);
+  revalidateTag("services");
   return NextResponse.json({ success: true });
 }
