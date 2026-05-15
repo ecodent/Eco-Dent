@@ -225,7 +225,8 @@ export default function TeamCarousel({
                   alt={doctor.name}
                   fill
                   className="object-cover object-top"
-                  sizes="25vw"
+                  sizes="(max-width: 768px) 80vw, (max-width: 1280px) 30vw, 22vw"
+                  quality={90}
                   priority={isCenter}
                 />
                 {/* Gradient overlay at bottom for name */}
