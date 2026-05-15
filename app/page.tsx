@@ -613,7 +613,7 @@ export default async function Home() {
           </div>
 
           <a
-            href={`/${cookieLang}/servicii`}
+            href="#contact"
             className="inline-flex items-center hover:opacity-80 transition-opacity self-start lg:self-end"
             style={{
               gap: "10px",

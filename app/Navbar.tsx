@@ -243,6 +243,14 @@ export default function Navbar() {
                 {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
               </a>
             ))}
+
+          <a
+            href="/contact"
+            className="font-medium hover:opacity-70 transition-opacity"
+            style={{ fontSize: "15px", color: "#0F1A2D" }}
+          >
+            {t("nav.contact")}
+          </a>
         </div>
 
         <div
@@ -498,6 +506,20 @@ export default function Navbar() {
               {lang === "ru" && svc.title_ru ? svc.title_ru : svc.title}
             </a>
           ))}
+        <a
+          href="/contact"
+          onClick={() => setMenuOpen(false)}
+          style={{
+            padding: "14px 0",
+            fontSize: "17px",
+            fontWeight: 600,
+            color: "#0F1A2D",
+            textDecoration: "none",
+            borderBottom: "1px solid #F3F4F6",
+          }}
+        >
+          {t("nav.contact")}
+        </a>
         <div style={{ marginTop: "20px" }}>
           <LangSwitcher lang={lang} setLang={setLang} />
         </div>
