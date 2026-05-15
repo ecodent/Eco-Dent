@@ -185,8 +185,8 @@ export default function TeamCarousel({
                 width: `${CARD_W}vw`,
                 height: isMobile
                   ? isCenter
-                    ? `calc(${CARD_W}vw * 16 / 9)`
-                    : `calc(${CARD_W}vw * 16 / 9 * 0.9)`
+                    ? "420px"
+                    : "380px"
                   : isCenter
                     ? isTablet
                       ? "calc(100% - 60px)"
