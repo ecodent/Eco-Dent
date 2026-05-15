@@ -1,22 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag, unstable_cache } from "next/cache";
+import { revalidateTag } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import HeroImage from "@/lib/models/HeroImage";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
-const getCachedHero = unstable_cache(
-  async () => {
-    await dbConnect();
-    const images = await HeroImage.find().sort({ order: 1 }).lean();
-    return JSON.parse(JSON.stringify(images));
-  },
-  ["hero-api"],
-  { tags: ["hero"], revalidate: 3600 },
-);
-
 export async function GET() {
-  const images = await getCachedHero();
-  return NextResponse.json(images);
+  await dbConnect();
+  const images = await HeroImage.find().sort({ order: 1 }).lean();
+  return NextResponse.json(images, {
+    headers: { "Cache-Control": "no-store" },
+  });
 }
 
 export async function POST(request: NextRequest) {

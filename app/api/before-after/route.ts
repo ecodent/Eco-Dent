@@ -1,22 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag, unstable_cache } from "next/cache";
+import { revalidateTag } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import BeforeAfterCase from "@/lib/models/BeforeAfterCase";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
-const getCachedCases = unstable_cache(
-  async () => {
-    await dbConnect();
-    const cases = await BeforeAfterCase.find().sort({ order: 1 }).lean();
-    return JSON.parse(JSON.stringify(cases));
-  },
-  ["before-after-api"],
-  { tags: ["before-after"], revalidate: 3600 },
-);
-
 export async function GET() {
-  const cases = await getCachedCases();
-  return NextResponse.json(cases);
+  await dbConnect();
+  const cases = await BeforeAfterCase.find().sort({ order: 1 }).lean();
+  return NextResponse.json(cases, {
+    headers: { "Cache-Control": "no-store" },
+  });
 }
 
 export async function POST(request: NextRequest) {
