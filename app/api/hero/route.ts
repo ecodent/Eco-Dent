@@ -5,11 +5,16 @@ import HeroImage from "@/lib/models/HeroImage";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
 export async function GET() {
-  await dbConnect();
-  const images = await HeroImage.find().sort({ order: 1 }).lean();
-  return NextResponse.json(images, {
-    headers: { "Cache-Control": "no-store" },
-  });
+  try {
+    await dbConnect();
+    const images = await HeroImage.find().sort({ order: 1 }).lean();
+    return NextResponse.json(images, {
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch (err) {
+    console.error("GET /api/hero error:", err);
+    return NextResponse.json([], { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {

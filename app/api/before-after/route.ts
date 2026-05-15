@@ -5,11 +5,16 @@ import BeforeAfterCase from "@/lib/models/BeforeAfterCase";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
 export async function GET() {
-  await dbConnect();
-  const cases = await BeforeAfterCase.find().sort({ order: 1 }).lean();
-  return NextResponse.json(cases, {
-    headers: { "Cache-Control": "no-store" },
-  });
+  try {
+    await dbConnect();
+    const cases = await BeforeAfterCase.find().sort({ order: 1 }).lean();
+    return NextResponse.json(cases, {
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch (err) {
+    console.error("GET /api/before-after error:", err);
+    return NextResponse.json([], { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {

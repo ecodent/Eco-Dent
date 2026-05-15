@@ -5,11 +5,16 @@ import TeamMember from "@/lib/models/TeamMember";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
 export async function GET() {
-  await dbConnect();
-  const members = await TeamMember.find().sort({ order: 1 }).lean();
-  return NextResponse.json(members, {
-    headers: { "Cache-Control": "no-store" },
-  });
+  try {
+    await dbConnect();
+    const members = await TeamMember.find().sort({ order: 1 }).lean();
+    return NextResponse.json(members, {
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch (err) {
+    console.error("GET /api/team error:", err);
+    return NextResponse.json([], { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {

@@ -5,14 +5,19 @@ import Service from "@/lib/models/Service";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
-  await dbConnect();
-  const { searchParams } = new URL(request.url);
-  const navbar = searchParams.get("navbar") === "true";
-  const filter = navbar ? { showInNavbar: true } : {};
-  const services = await (Service as any).find(filter).sort({ order: 1 }).lean();
-  return NextResponse.json(services, {
-    headers: { "Cache-Control": "no-store" },
-  });
+  try {
+    await dbConnect();
+    const { searchParams } = new URL(request.url);
+    const navbar = searchParams.get("navbar") === "true";
+    const filter = navbar ? { showInNavbar: true } : {};
+    const services = await (Service as any).find(filter).sort({ order: 1 }).lean();
+    return NextResponse.json(services, {
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch (err) {
+    console.error("GET /api/services error:", err);
+    return NextResponse.json([], { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {

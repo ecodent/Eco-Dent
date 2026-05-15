@@ -8,12 +8,17 @@ import { verifyAuth, unauthorized } from "@/lib/auth";
 const _S = SiteSettings as any;
 
 export async function GET() {
-  await dbConnect();
-  let doc = await _S.findOne().lean();
-  if (!doc) doc = await _S.create({});
-  return NextResponse.json(doc, {
-    headers: { "Cache-Control": "no-store" },
-  });
+  try {
+    await dbConnect();
+    let doc = await _S.findOne().lean();
+    if (!doc) doc = await _S.create({});
+    return NextResponse.json(doc, {
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch (err) {
+    console.error("GET /api/settings error:", err);
+    return NextResponse.json({}, { status: 500 });
+  }
 }
 
 export async function PUT(request: NextRequest) {

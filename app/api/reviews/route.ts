@@ -5,11 +5,16 @@ import Review from "@/lib/models/Review";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
 export async function GET() {
-  await dbConnect();
-  const reviews = await Review.find().sort({ order: 1 }).lean();
-  return NextResponse.json(reviews, {
-    headers: { "Cache-Control": "no-store" },
-  });
+  try {
+    await dbConnect();
+    const reviews = await Review.find().sort({ order: 1 }).lean();
+    return NextResponse.json(reviews, {
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch (err) {
+    console.error("GET /api/reviews error:", err);
+    return NextResponse.json([], { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {

@@ -15,11 +15,12 @@ import {
   labelStyle,
 } from "../lib";
 import { IconCamera, IconSave, IconTrash } from "../icons";
-import { CopyUrlBar } from "../components";
+import { CopyUrlBar, Toast, useToast } from "../components";
 
 export default function EchipaPage() {
   const [items, setItems] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
+  const { toast, show } = useToast();
 
   void getToken;
 
@@ -35,20 +36,23 @@ export default function EchipaPage() {
 
   const handleSave = async (item: TeamMember) => {
     const method = item._id ? "PUT" : "POST";
-    await fetch("/api/team", {
+    const res = await fetch("/api/team", {
       method,
       headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify(item),
     });
+    if (res.ok) show("Salvat cu succes!");
+    else show("Eroare la salvare", "error");
     load();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Sigur vrei să ștergi?")) return;
-    await fetch(`/api/team?id=${id}`, {
+    const res = await fetch(`/api/team?id=${id}`, {
       method: "DELETE",
       headers: authHeaders(),
     });
+    if (res.ok) show("Șters!"); else show("Eroare", "error");
     load();
   };
 
@@ -77,6 +81,7 @@ export default function EchipaPage() {
 
   return (
     <div>
+      <Toast toast={toast} />
       <style>{`
         .echipa-card-grid { display: grid; grid-template-columns: 100px 1fr; gap: 20px; align-items: start; }
         .echipa-fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

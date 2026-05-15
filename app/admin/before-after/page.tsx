@@ -14,11 +14,12 @@ import {
   btnSecondary,
 } from "../lib";
 import { IconCamera, IconSave, IconTrash } from "../icons";
-import { CopyUrlBar } from "../components";
+import { CopyUrlBar, Toast, useToast } from "../components";
 
 export default function BeforeAfterPage() {
   const [items, setItems] = useState<BeforeAfterCase[]>([]);
   const [loading, setLoading] = useState(true);
+  const { toast, show } = useToast();
 
   const load = useCallback(async () => {
     const res = await fetch("/api/before-after");
@@ -32,20 +33,23 @@ export default function BeforeAfterPage() {
 
   const handleSave = async (item: BeforeAfterCase) => {
     const method = item._id ? "PUT" : "POST";
-    await fetch("/api/before-after", {
+    const res = await fetch("/api/before-after", {
       method,
       headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify(item),
     });
+    if (res.ok) show("Salvat cu succes!");
+    else show("Eroare la salvare", "error");
     load();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Sigur vrei să ștergi?")) return;
-    await fetch(`/api/before-after?id=${id}`, {
+    const res = await fetch(`/api/before-after?id=${id}`, {
       method: "DELETE",
       headers: authHeaders(),
     });
+    if (res.ok) show("Șters!"); else show("Eroare", "error");
     load();
   };
 
@@ -79,6 +83,7 @@ export default function BeforeAfterPage() {
 
   return (
     <div>
+      <Toast toast={toast} />
       <style>{`
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .ba-label-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

@@ -11,12 +11,13 @@ import {
   btnDanger,
 } from "../lib";
 import { IconCamera, IconTrash } from "../icons";
-import { CopyUrlBar } from "../components";
+import { CopyUrlBar, Toast, useToast } from "../components";
 
 export default function HeroPage() {
   const [items, setItems] = useState<HeroImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const { toast, show } = useToast();
 
   const load = useCallback(async () => {
     const res = await fetch("/api/hero");
@@ -32,11 +33,13 @@ export default function HeroPage() {
     setUploading(true);
     try {
       const url = await uploadImage(file);
-      await fetch("/api/hero", {
+      const res = await fetch("/api/hero", {
         method: "POST",
         headers: authHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ url, order: items.length }),
       });
+      if (res.ok) show("Imagine adăugată!");
+      else show("Eroare", "error");
       load();
     } finally {
       setUploading(false);
@@ -45,10 +48,11 @@ export default function HeroPage() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Sigur vrei să ștergi această imagine?")) return;
-    await fetch(`/api/hero?id=${id}`, {
+    const res = await fetch(`/api/hero?id=${id}`, {
       method: "DELETE",
       headers: authHeaders(),
     });
+    if (res.ok) show("Ștearsă!"); else show("Eroare", "error");
     load();
   };
 
@@ -60,6 +64,7 @@ export default function HeroPage() {
 
   return (
     <div>
+      <Toast toast={toast} />
       <div
         style={{
           display: "flex",

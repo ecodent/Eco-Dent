@@ -14,13 +14,14 @@ import {
   labelStyle,
 } from "../lib";
 import { IconCamera, IconSave, IconTrash, IconEdit, IconX } from "../icons";
-import { CopyUrlBar } from "../components";
+import { CopyUrlBar, Toast, useToast } from "../components";
 
 export default function ServiciiPage() {
   const [items, setItems] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<number | null>(null);
   const [lang, setLang] = useState<"ro" | "ru">("ro");
+  const { toast, show } = useToast();
 
   const load = useCallback(async () => {
     const res = await fetch("/api/services");
@@ -34,21 +35,28 @@ export default function ServiciiPage() {
 
   const handleSave = async (item: Service) => {
     const method = item._id ? "PUT" : "POST";
-    await fetch("/api/services", {
+    const res = await fetch("/api/services", {
       method,
       headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify(item),
     });
+    if (res.ok) {
+      show("Salvat cu succes!");
+    } else {
+      show("Eroare la salvare", "error");
+    }
     setEditing(null);
     load();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Sigur vrei să ștergi acest serviciu?")) return;
-    await fetch(`/api/services?id=${id}`, {
+    const res = await fetch(`/api/services?id=${id}`, {
       method: "DELETE",
       headers: authHeaders(),
     });
+    if (res.ok) show("Șters cu succes!");
+    else show("Eroare la ștergere", "error");
     load();
   };
 
@@ -104,6 +112,7 @@ export default function ServiciiPage() {
 
   return (
     <div>
+      <Toast toast={toast} />
       <style>{`
         .svc-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
         .svc-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }

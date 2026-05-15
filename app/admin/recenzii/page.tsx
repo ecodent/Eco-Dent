@@ -14,11 +14,12 @@ import {
   labelStyle,
 } from "../lib";
 import { IconCamera, IconSave, IconTrash } from "../icons";
-import { CopyUrlBar } from "../components";
+import { CopyUrlBar, Toast, useToast } from "../components";
 
 export default function RecenziiPage() {
   const [items, setItems] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
+  const { toast, show } = useToast();
 
   const load = useCallback(async () => {
     const res = await fetch("/api/reviews");
@@ -32,20 +33,23 @@ export default function RecenziiPage() {
 
   const handleSave = async (item: Review) => {
     const method = item._id ? "PUT" : "POST";
-    await fetch("/api/reviews", {
+    const res = await fetch("/api/reviews", {
       method,
       headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify(item),
     });
+    if (res.ok) show("Salvat cu succes!");
+    else show("Eroare la salvare", "error");
     load();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Sigur vrei să ștergi?")) return;
-    await fetch(`/api/reviews?id=${id}`, {
+    const res = await fetch(`/api/reviews?id=${id}`, {
       method: "DELETE",
       headers: authHeaders(),
     });
+    if (res.ok) show("Șters!"); else show("Eroare", "error");
     load();
   };
 
@@ -64,6 +68,7 @@ export default function RecenziiPage() {
 
   return (
     <div>
+      <Toast toast={toast} />
       <style>{`
         .rev-card-grid { display: grid; grid-template-columns: 110px 1fr; gap: 20px; align-items: start; }
         .rev-fields-grid { display: grid; grid-template-columns: 1fr 120px; gap: 12px; }
