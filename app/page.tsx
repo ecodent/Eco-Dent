@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import Contact from "./Contact";
 import Navbar from "./Navbar";
 import JsonLd from "./components/JsonLd";
+import Reveal from "./components/Reveal";
 import { T } from "./i18n/LanguageProvider";
 import {
   getTeamMembers,
@@ -565,7 +566,7 @@ export default async function Home() {
         }}
       >
         {/* Header: title + description + CTA */}
-        <div
+        <Reveal
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between"
           style={{ gap: "24px", marginBottom: "48px" }}
         >
@@ -629,7 +630,7 @@ export default async function Home() {
             {s.servicesCta || "Toate Serviciile"}
             <ArrowIcon />
           </a>
-        </div>
+        </Reveal>
 
         {/* Unified card row: horizontal scroll on all screen sizes */}
         <div className="grid grid-cols-1 min-[560px]:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -647,8 +648,8 @@ export default async function Home() {
                 const isDark =
                   svc.cardColor === "#0F1A2D" || svc.cardColor === "#0168FF";
                 return (
+                  <Reveal key={svc.slug} delay={Math.min((services.slice(0,6).indexOf(svc) % 3) + 1, 5) as 1|2|3|4|5}>
                   <Link
-                    key={svc.slug}
                     href={`/${cookieLang}/servicii/${svc.slug}`}
                     className="service-card group"
                     style={{
@@ -775,6 +776,7 @@ export default async function Home() {
                       </div>
                     </div>
                   </Link>
+                  </Reveal>
                 );
               },
             )}
@@ -782,40 +784,48 @@ export default async function Home() {
       </section>
 
       {/* Team Section */}
-      <TeamCarousel
-        doctors={teamMembers}
-        title={s.teamTitle}
-        titleItalic={s.teamTitleItalic}
-        description={s.teamDescription}
-        lang={cookieLang}
-      />
+      <Reveal threshold={0.08}>
+        <TeamCarousel
+          doctors={teamMembers}
+          title={s.teamTitle}
+          titleItalic={s.teamTitleItalic}
+          description={s.teamDescription}
+          lang={cookieLang}
+        />
+      </Reveal>
 
       {/* Before & After Section */}
-      <BeforeAfter
-        cases={beforeAfterCases}
-        title={s.baTitle}
-        titleItalic={s.baTitleItalic}
-        description={s.baDescription}
-        cta={s.baCta}
-        lang={cookieLang}
-      />
+      <Reveal threshold={0.08}>
+        <BeforeAfter
+          cases={beforeAfterCases}
+          title={s.baTitle}
+          titleItalic={s.baTitleItalic}
+          description={s.baDescription}
+          cta={s.baCta}
+          lang={cookieLang}
+        />
+      </Reveal>
 
       {/* Patient Reviews Section */}
-      <PatientReviews
-        reviews={reviews}
-        title={s.reviewsTitle}
-        titleItalic={s.reviewsTitleItalic}
-        description={s.reviewsDescription}
-        lang={cookieLang}
-      />
+      <Reveal threshold={0.08}>
+        <PatientReviews
+          reviews={reviews}
+          title={s.reviewsTitle}
+          titleItalic={s.reviewsTitleItalic}
+          description={s.reviewsDescription}
+          lang={cookieLang}
+        />
+      </Reveal>
 
       {/* Contact Section */}
-      <Contact
-        phone={s.contactPhone}
-        email={s.contactEmail}
-        address={s.contactAddress}
-        hours={s.contactHours}
-      />
+      <Reveal threshold={0.08}>
+        <Contact
+          phone={s.contactPhone}
+          email={s.contactEmail}
+          address={s.contactAddress}
+          hours={s.contactHours}
+        />
+      </Reveal>
 
       {/* Footer */}
       <Footer />
