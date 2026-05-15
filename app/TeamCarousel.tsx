@@ -261,7 +261,7 @@ export default function TeamCarousel({
                       fontSize: "16px",
                       color: "rgba(255,255,255,0.8)",
                       marginTop: "4px",
-                                          }}
+                    }}
                   >
                     {lang === "ru" && doctor.role_ru
                       ? doctor.role_ru
