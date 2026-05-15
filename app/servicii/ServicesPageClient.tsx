@@ -375,7 +375,7 @@ export default function ServicesPageClient({
               +373 69 221 112
             </a>
             <Link
-              href={`/${lang}#contact-form`}
+              href="/contact"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

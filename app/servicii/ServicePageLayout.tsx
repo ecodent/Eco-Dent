@@ -373,9 +373,10 @@ export default function ServicePageLayout({
                 className="hidden lg:block"
                 style={{
                   position: "relative",
-                  width: "280px",
+                  width: "340px",
+                  height: "340px",
                   flexShrink: 0,
-                  aspectRatio: "1 / 1",
+                  overflow: "hidden",
                 }}
               >
                 <Image
