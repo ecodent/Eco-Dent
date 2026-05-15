@@ -31,7 +31,7 @@ export default function HeroSlider({ images }: HeroSliderProps) {
           className="object-cover"
           loading="lazy"
           sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 35vw, 100vw"
-          quality={85}
+          quality={100}
           style={{
             opacity: current === i ? 1 : 0,
             transition: "opacity 1s ease-in-out",

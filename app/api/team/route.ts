@@ -1,12 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidateTag, unstable_cache } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import TeamMember from "@/lib/models/TeamMember";
 import { verifyAuth, unauthorized } from "@/lib/auth";
 
+const getCachedTeam = unstable_cache(
+  async () => {
+    await dbConnect();
+    const members = await TeamMember.find().sort({ order: 1 }).lean();
+    return JSON.parse(JSON.stringify(members));
+  },
+  ["team-api"],
+  { tags: ["team"], revalidate: 3600 },
+);
+
 export async function GET() {
-  await dbConnect();
-  const members = await TeamMember.find().sort({ order: 1 });
+  const members = await getCachedTeam();
   return NextResponse.json(members);
 }
 

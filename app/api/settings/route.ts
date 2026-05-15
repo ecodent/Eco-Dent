@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidateTag, unstable_cache } from "next/cache";
 import dbConnect from "@/lib/mongodb";
 import SiteSettings from "@/lib/models/SiteSettings";
 import { verifyAuth, unauthorized } from "@/lib/auth";
@@ -7,10 +7,19 @@ import { verifyAuth, unauthorized } from "@/lib/auth";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const _S = SiteSettings as any;
 
+const getCachedSettings = unstable_cache(
+  async () => {
+    await dbConnect();
+    let doc = await _S.findOne().lean();
+    if (!doc) doc = await _S.create({});
+    return JSON.parse(JSON.stringify(doc));
+  },
+  ["settings-api"],
+  { tags: ["settings"], revalidate: 3600 },
+);
+
 export async function GET() {
-  await dbConnect();
-  let doc = await _S.findOne().lean();
-  if (!doc) doc = await _S.create({});
+  const doc = await getCachedSettings();
   return NextResponse.json(doc);
 }
 

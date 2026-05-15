@@ -336,7 +336,7 @@ export default async function Home() {
                 fetchPriority="high"
                 className="object-cover"
                 sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 35vw, 100vw"
-                quality={85}
+                quality={100}
               />
             )}
             {/* Slider handles transitions for images 2+ and eventually overlays image 1 */}
